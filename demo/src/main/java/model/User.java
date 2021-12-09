@@ -2,22 +2,55 @@ package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import model.enumeration.UserType;
 
+@Entity
+@Table(name="users")
 public class User {
-	
+	@Id
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="first_name", nullable = false)
 	private String firstName;
+	
+	@Column(name="last_name", nullable = false)
 	private String lastName;
+	
+	@Column(name="user_name",nullable = false)
 	private String userName;
+	
+	@Column(name="password", nullable = false)
 	private String password;
+	
+	@Column(name="date_of_birth", nullable = false)
 	private LocalDate dateOfBirth;
+	
+	@Column(name="email", nullable = false)
 	private String email;
+	
+	@Column(name="phone_number", nullable = false)
 	private String phoneNumber;
+	
+	@Column(name="address", nullable = false)
 	private Address address;
+	
+	@Column(name="jmbg",unique=true)
 	private String jmbg;
+	
+	@Column(name="user_type", nullable = false)
 	private UserType type;
+	@Column(name="description_of_registration")
+	
 	private String descriptionOfRegistration;
+	
+	@Column(name="is_activated", nullable = false)
 	private Boolean isActivated;
 	
 	public User() {

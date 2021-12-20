@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import com.example.demo.model.Address;
@@ -12,7 +13,7 @@ public class UserDTO {
 	private String firstName;
 	private String lastName;
 	private String password;
-	private LocalDate dateOfBirth;
+	private Date dateOfBirth;
 	private String email;
 	private String phoneNumber;
 	private Address address;
@@ -31,7 +32,7 @@ public class UserDTO {
 
 	
 	
-	public UserDTO(Integer id, String firstName, String lastName, String password, LocalDate dateOfBirth, String email,
+	public UserDTO(Integer id, String firstName, String lastName, String password, Date dateOfBirth, String email,
 			String phoneNumber, String jmbg, String descriptionOfRegistration, Boolean isActivated) {
 		super();
 		this.id = id;
@@ -98,13 +99,13 @@ public class UserDTO {
 
 
 
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
 
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

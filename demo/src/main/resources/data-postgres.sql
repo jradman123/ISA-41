@@ -1,2 +1,2 @@
-insert into public.users (first_name,last_name,user_name) values ( 'Marko', 'Marković','jasam');
-insert into public.users (first_name,last_name,user_name) values ( 'Dragan', 'Ilic','dfdij');
+
+INSERT INTO countries(country_id,name) VALUES (1,'Srbija');

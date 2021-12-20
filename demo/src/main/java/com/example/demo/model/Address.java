@@ -1,11 +1,33 @@
 package com.example.demo.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name="address")
 public class Address {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "addressId", unique = true, nullable = false)
+	private Integer addressId;
+	
+	@Column(name = "street_name", unique = true, nullable = false)
 	private String streetName;
+	
+	@Column(name = "street_number", unique = true, nullable = false)
 	private String streetNumber;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "cityId", referencedColumnName = "cityId")
 	private City city;
 	
 	public Address() {

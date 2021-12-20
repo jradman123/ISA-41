@@ -1,11 +1,33 @@
 package com.example.demo.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="cities")
 public class City {
 	
-	private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cityId", unique = true, nullable = false)
+	private Integer cityId;
+	
+	@Column(name = "city_name", unique = true, nullable = false)
 	private String name;
+	
+	@Column(name = "postal_code", unique = true, nullable = false)
 	private String postalCode;
+	
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "countryId", referencedColumnName = "countryId")
 	private Country country;
 	
 	
@@ -13,20 +35,20 @@ public class City {
 		super();
 	}
 
-	public City(String id, String name, String postalCode, Country country) {
+	public City(Integer id, String name, String postalCode, Country country) {
 		super();
-		this.id = id;
+		this.cityId = id;
 		this.name = name;
 		this.postalCode = postalCode;
-		this.country = country;
+	    this.country = country;
 	}
 
-	public String getId() {
-		return id;
+	public Integer getId() {
+		return cityId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(Integer id) {
+		this.cityId = id;
 	}
 
 	public String getName() {

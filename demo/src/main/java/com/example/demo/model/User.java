@@ -1,13 +1,22 @@
 package com.example.demo.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.example.demo.model.enumeration.UserType;
 
 @Entity
 @Table(name="users")
@@ -24,39 +33,40 @@ public class User {
 	@Column(name="userName",nullable = false)
 	private String userName;
 	
-	//@Column(name="password", nullable = false)
+	@Column(name="password", nullable = false)
 	private String password;
 	
-	//@Column(name="dateOfBirth", nullable = false)
-	private LocalDate dateOfBirth;
+	@Column(name="dateOfBirth", nullable = false)
+	private Date dateOfBirth;
 	
-//	@Column(name="email", nullable = false)
+	@Column(name="email", nullable = false)
 	private String email;
 	
-	//@Column(name="phoneNumber", nullable = false)
+	@Column(name="phoneNumber", nullable = false)
 	private String phoneNumber;
 	
-	//@Column(name="address", nullable = false)
-	//private Address address;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "addressId", referencedColumnName = "addressId")
+	private Address address;
 	
-	//@Column(name="jmbg",unique=true)
+	@Column(name="jmbg",unique=true)
 	private String jmbg;
 	
-	//@Column(name="userType", nullable = false)
-//	private UserType userType;
-	//@Column(name="descriptionOfRegistration")
+	@Enumerated(EnumType.STRING)
+	private UserType userType;
 	
+	@Column(name="descriptionOfRegistration")
 	private String descriptionOfRegistration;
 	
-	//@Column(name="is_activated", nullable = false)
+	@Column(name="is_activated", nullable = false)
 	private Boolean isActivated;
 	
 	public User() {
 		super();
 	}
 
-	public User(Integer id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth,
-			String email, String phoneNumber, Address address, String jmbg,
+	public User(Integer id, String firstName, String lastName, String userName, String password, Date dateOfBirth,
+			String email, String phoneNumber, Address address, String jmbg,UserType type,
 			String descriptionOfRegistration, Boolean isActivated) {
 		super();
 		this.id = id;
@@ -67,11 +77,19 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		//this.address = address;
+		this.address = address;
 		this.jmbg = jmbg;
-	//	this.type = type;
+		this.userType = type;
 		this.descriptionOfRegistration = descriptionOfRegistration;
 		this.isActivated = isActivated;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public Integer getId() {
@@ -114,11 +132,11 @@ public class User {
 		this.password = password;
 	}
 
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -138,13 +156,13 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-/*	public Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}*/
+	}
 
 	public String getJmbg() {
 		return jmbg;

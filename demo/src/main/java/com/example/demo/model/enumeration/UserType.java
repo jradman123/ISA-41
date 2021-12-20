@@ -1,4 +1,4 @@
-package model.enumeration;
+package com.example.demo.model.enumeration;
 
 public enum UserType {
 	

@@ -1,6 +1,4 @@
-package model;
-
-import java.util.Set;
+package com.example.demo.model;
 
 public class Pricelist {
 	

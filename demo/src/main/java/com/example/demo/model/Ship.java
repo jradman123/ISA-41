@@ -1,8 +1,8 @@
-package model;
+package com.example.demo.model;
 
 import java.util.Set;
 
-import model.enumeration.EquipmentType;
+import com.example.demo.model.enumeration.EquipmentType;
 
 public class Ship {
 	

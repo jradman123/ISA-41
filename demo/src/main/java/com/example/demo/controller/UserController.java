@@ -19,9 +19,12 @@ import com.example.demo.service.UserService;
 
 public class UserController {
 
-
-	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<UserDTO>> getAllStudents() {

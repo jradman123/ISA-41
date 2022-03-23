@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="address")
 public class Address {
@@ -16,7 +17,7 @@ public class Address {
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Long id;
 	
-	 @Column(name="streeme", nullable = false)
+	 @Column(name="streetName", nullable = false)
 	 private String streetName;
 	 @Column(name="streetNumber", nullable = false)
 	 private String streetNumber;

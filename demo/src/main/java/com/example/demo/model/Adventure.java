@@ -1,43 +1,97 @@
 package com.example.demo.model;
 
+import java.awt.Image;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+
+@Table(name = "adventure")
 public class Adventure {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer instructorId;
+	
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "instructor")
+	private Instructor instructor;
+	
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "address", referencedColumnName = "id")
 	private Address address;
+	
+	@Column(name="description", nullable = false)
 	private String description;
-	private Set<String> images;
+	
+	/*@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "adventure_images",
+            joinColumns = @JoinColumn(name = "adventure_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id"))
+	private Set<Image> images;*/
 	//slobodni termini
-	private Integer maxPersons;
-	private Set<String> rules;
+	
+	
+	 @Column(name = "guestLimit", nullable = false)
+	 private Integer guestLimit;
+	
+	
+	//private Set<String> rules;
+	 
+	 
 	private String fishingEquipment;
+	
+	
 	private Double cancelationConditions;
-	private Double price;
+	
+	
+	@Column(name = "price", nullable = false)
+    private Double price = 0.0;
+	
+	
+	@Column(name = "deleted")
+    private boolean deleted = false;
 	
 
 	public Adventure() {
 		super();
 	}
 
-	public Adventure(Integer id, Integer instructorId, String name, Address address, String description,
-			Set<String> images, Integer maxPersons, Set<String> rules, String fishingEquipment,
-			Double cancelationConditions, Double price) {
+	
+
+	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
+			Integer guestLimit, String fishingEquipment, Double cancelationConditions, Double price, boolean deleted) {
 		super();
 		this.id = id;
-		this.instructorId = instructorId;
+		this.instructor = instructor;
 		this.name = name;
 		this.address = address;
 		this.description = description;
-		this.images = images;
-		this.maxPersons = maxPersons;
-		this.rules = rules;
+		this.guestLimit = guestLimit;
 		this.fishingEquipment = fishingEquipment;
 		this.cancelationConditions = cancelationConditions;
 		this.price = price;
+		this.deleted = deleted;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -47,13 +101,13 @@ public class Adventure {
 		this.id = id;
 	}
 
-	public Integer getInstructorId() {
-		return instructorId;
+/*	public Instructor getInstructor() {
+		return instructor;
 	}
 
-	public void setInstructorId(Integer instructorId) {
-		this.instructorId = instructorId;
-	}
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}*/
 
 	public String getName() {
 		return name;
@@ -79,33 +133,63 @@ public class Adventure {
 		this.description = description;
 	}
 
-	public Set<String> getImages() {
+	/*public Set<Image> getImages() {
 		return images;
 	}
 
-	public void setImages(Set<String> images) {
+	public void setImages(Set<Image> images) {
 		this.images = images;
-	}
+	}*/
 
-	public Integer getMaxPersons() {
-		return maxPersons;
-	}
+	
 
-	public void setMaxPersons(Integer maxPersons) {
-		this.maxPersons = maxPersons;
-	}
-
-	public Set<String> getRules() {
+	/*public Set<String> getRules() {
 		return rules;
 	}
 
 	public void setRules(Set<String> rules) {
 		this.rules = rules;
 	}
-
+*/
 	public String getFishingEquipment() {
 		return fishingEquipment;
 	}
+
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+
+
+
+	public Integer getGuestLimit() {
+		return guestLimit;
+	}
+
+
+
+	public void setGuestLimit(Integer guestLimit) {
+		this.guestLimit = guestLimit;
+	}
+
+
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+
 
 	public void setFishingEquipment(String fishingEquipment) {
 		this.fishingEquipment = fishingEquipment;

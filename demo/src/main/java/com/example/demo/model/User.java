@@ -2,15 +2,22 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.example.demo.model.enumeration.UserType;
 
 @Entity
 @Table(name="users")
+
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,55 +31,58 @@ public class User {
 	@Column(name="userName",nullable = false)
 	private String userName;
 	
-	//@Column(name="password", nullable = false)
-	private String password;
+	@Column(name="password", nullable = false)
+	private String password;	
 	
-	//@Column(name="dateOfBirth", nullable = false)
-	private LocalDate dateOfBirth;
-	
-//	@Column(name="email", nullable = false)
+	@Column(name="email", nullable = false)
 	private String email;
 	
-	//@Column(name="phoneNumber", nullable = false)
+	@Column(name="phoneNumber", nullable = false)
 	private String phoneNumber;
 	
-	//@Column(name="address", nullable = false)
-	//private Address address;
+	 @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	 @JoinColumn(name = "address", referencedColumnName = "id")
+	 private Address address;
 	
-	//@Column(name="jmbg",unique=true)
+	@Column(name="jmbg",unique=true)
 	private String jmbg;
 	
-	//@Column(name="userType", nullable = false)
-//	private UserType userType;
-	//@Column(name="descriptionOfRegistration")
+	@Column(name="userType", nullable = false)
+	private UserType userType;
 	
+	@Column(name="descriptionOfRegistration")
 	private String descriptionOfRegistration;
 	
-	//@Column(name="is_activated", nullable = false)
-	private Boolean isActivated;
+	@Column(name="is_activated")
+	private Boolean isActivated=false;
 	
+	 @Column(name = "deleted")
+	 private boolean deleted = false;
+	 
 	public User() {
-		super();
+	super();
 	}
 
-	public User(Integer id, String firstName, String lastName, String userName, String password, LocalDate dateOfBirth,
-			String email, String phoneNumber, Address address, String jmbg,
-			String descriptionOfRegistration, Boolean isActivated) {
+	
+	public User(Integer id, String firstName, String lastName, String userName, String password, 
+			String email, String phoneNumber, Address address, String jmbg, UserType userType,
+			String descriptionOfRegistration, Boolean isActivated, boolean deleted) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
-		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
-		//this.address = address;
+		this.address = address;
 		this.jmbg = jmbg;
-	//	this.type = type;
+		this.userType = userType;
 		this.descriptionOfRegistration = descriptionOfRegistration;
 		this.isActivated = isActivated;
+		this.deleted = deleted;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -114,14 +124,7 @@ public class User {
 		this.password = password;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -138,13 +141,13 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-/*	public Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}*/
+	}
 
 	public String getJmbg() {
 		return jmbg;
@@ -154,7 +157,13 @@ public class User {
 		this.jmbg = jmbg;
 	}
 
-	
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
 
 	public String getDescriptionOfRegistration() {
 		return descriptionOfRegistration;
@@ -171,9 +180,17 @@ public class User {
 	public void setIsActivated(Boolean isActivated) {
 		this.isActivated = isActivated;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	
-	
-	
+
 	
 	
 	

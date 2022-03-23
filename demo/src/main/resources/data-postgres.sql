@@ -1,2 +1,3 @@
-insert into public.users (first_name,last_name,user_name) values ( 'Marko', 'Marković','jasam');
-insert into public.users (first_name,last_name,user_name) values ( 'Dragan', 'Ilic','dfdij');
+---ADDRESS
+INSERT INTO public.address(city, country, street_name,street_number)	VALUES ('Eastbourne', 'UK', 'Marine Parade','22');
+

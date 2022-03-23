@@ -2,48 +2,43 @@ package com.example.demo.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "instructor")
+@PrimaryKeyJoinColumn(name = "id")
 public class Instructor extends User {
 
-	private Set<String> biography;
-	private Set<Adventure> services;
+	@Column(name = "biography")
+    private String biography = "This user provided no biography.";
 	
-	
-	
-	public Set<String> getBiography() {
+	 @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
+	  private Set<Adventure> adventures;
+
+	public String getBiography() {
 		return biography;
 	}
 
-
-
-	public void setBiography(Set<String> biography) {
+	public void setBiography(String biography) {
 		this.biography = biography;
 	}
 
-
-
-	public Set<Adventure> getServices() {
-		return services;
+	public Set<Adventure> getAdventures() {
+		return adventures;
 	}
 
-
-
-	public void setServices(Set<Adventure> services) {
-		this.services = services;
-	}
-
-
-
-	public Instructor() {
-		super();
-	}
-
-
-
-	public Instructor(Set<String> biography, Set<Adventure> services) {
-		super();
-		this.biography = biography;
-		this.services = services;
+	public void setAdventures(Set<Adventure> adventures) {
+		this.adventures = adventures;
 	}
 	
+	 
 	
+	
+	
+
 }

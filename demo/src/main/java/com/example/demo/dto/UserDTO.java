@@ -24,21 +24,19 @@ public class UserDTO {
 	
 	public UserDTO() {}
 
-
-	public UserDTO(User user) {
-		this(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(),user.getDateOfBirth(),user.getEmail(),user.getPhoneNumber(),user.getJmbg(),user.getDescriptionOfRegistration(),user.getIsActivated());
-	}
+ public UserDTO(User user) {
+		this(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(),user.getEmail(),user.getPhoneNumber(),user.getJmbg(),user.getDescriptionOfRegistration(),user.getIsActivated());
+}
 
 	
 	
-	public UserDTO(Integer id, String firstName, String lastName, String password, LocalDate dateOfBirth, String email,
+	public UserDTO(Integer id, String firstName, String lastName, String password, String email,
 			String phoneNumber, String jmbg, String descriptionOfRegistration, Boolean isActivated) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.jmbg = jmbg;
@@ -98,15 +96,10 @@ public class UserDTO {
 
 
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
+	
 
 
-
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+	
 
 
 

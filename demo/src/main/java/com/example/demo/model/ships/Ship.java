@@ -71,11 +71,11 @@ public class Ship {
     @Column(name = "description", nullable = false)
     private String description;
     
-/*
-    @ManyToMany(cascade = CascadeType.ALL)
+
+ /*   @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "boat_images",
-            joinColumns = @JoinColumn(name = "boat_id"),
+            name = "ship_images",
+            joinColumns = @JoinColumn(name = "ship_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Set<Image> images;
 	*/

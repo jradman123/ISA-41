@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.adventures.AdventureQuickReservation;
 import com.example.demo.model.adventures.AdventureReservation;
@@ -51,12 +52,12 @@ public class Cottage {
     @Column(name = "price", nullable = false)
     private Double price = 0.0;
     
-  /*  @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "cottage_images",
             joinColumns = @JoinColumn(name = "cottage_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Set<Image> images;*/
+    private Set<Image> images;
 	
 	@Column(name = "numberOfPerson", nullable = false)
 	private Integer numberOfPerson;

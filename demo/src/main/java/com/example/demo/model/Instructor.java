@@ -10,6 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.adventures.Adventure;
+import com.example.demo.model.users.User;
 
 @Entity
 @Table(name = "instructor")

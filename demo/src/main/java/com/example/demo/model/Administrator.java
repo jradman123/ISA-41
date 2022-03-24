@@ -5,6 +5,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.enumeration.AdminType;
+import com.example.demo.model.users.User;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.users;
 
 import java.time.LocalDate;
 
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.UserType;
 
 import lombok.Getter;
@@ -65,6 +66,10 @@ public class User {
 	
 	 @Column(name = "deleted")
 	 private boolean deleted = false;
+	 
+	 public String getFullName() {
+	        return this.firstName + " " + this.lastName;
+	    }
 	 
 	public User() {
 	super();

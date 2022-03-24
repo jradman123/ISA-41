@@ -2,7 +2,7 @@ package com.example.demo.model.cottages;
 
 import java.util.Set;
 
-import com.example.demo.model.User;
+import com.example.demo.model.users.User;
 
 public class CottageAdvertiser extends User {
 	private Set<Cottage> cottages;

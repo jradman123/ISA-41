@@ -83,6 +83,8 @@ public class Adventure {
 	            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
 	 private Set<FishingEquipment> fishingEquipments;
 	
+	 
+    @Column(name = "cancelationConditions", nullable = false)
 	private Double cancelationConditions;
 	
 	

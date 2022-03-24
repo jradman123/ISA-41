@@ -2,83 +2,94 @@ package com.example.demo.model.cottages;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.example.demo.model.Address;
+import com.example.demo.model.CottageOwner;
+import com.example.demo.model.Rules;
+import com.example.demo.model.adventures.AdventureQuickReservation;
+import com.example.demo.model.adventures.AdventureReservation;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@Entity
+@Table(name = "cottage")
 public class Cottage {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
+    @Column(name = "name", nullable = false, unique = true)
 	private String name;
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address", referencedColumnName = "id")
 	private Address address;
+    
+    @Column(name = "description", nullable = false)
 	private String description;
-	private Set<String> images;
-	private Integer numberOfRooms;
-	private Integer numberOfBedsPerRoom;
-	private Set<String> rules;
-	//slobodni termini za brze rezervacije
+    
+    @Column(name = "price", nullable = false)
+    private Double price = 0.0;
+    
+  /*  @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cottage_images",
+            joinColumns = @JoinColumn(name = "cottage_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id"))
+    private Set<Image> images;*/
+	
+	@Column(name = "numberOfPerson", nullable = false)
+	private Integer numberOfPerson;
 	
 	
+	@ManyToMany
+	    @JoinTable(
+	            name = "cottage_rules",
+	            joinColumns = @JoinColumn(name = "cottage_id"),
+	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	private Set<Rules> rules;
 	
-	public Cottage(String name, Address address, String description, Set<String> images, Integer numberOfRooms,
-			Integer numberOfBedsPerRoom, Set<String> rules) {
-		super();
-		this.name = name;
-		this.address = address;
-		this.description = description;
-		this.images = images;
-		this.numberOfRooms = numberOfRooms;
-		this.numberOfBedsPerRoom = numberOfBedsPerRoom;
-		this.rules = rules;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Set<String> getImages() {
-		return images;
-	}
-	public void setImages(Set<String> images) {
-		this.images = images;
-	}
-	public Integer getNumberOfRooms() {
-		return numberOfRooms;
-	}
-	public void setNumberOfRooms(Integer numberOfRooms) {
-		this.numberOfRooms = numberOfRooms;
-	}
-	public Integer getNumberOfBedsPerRoom() {
-		return numberOfBedsPerRoom;
-	}
-	public void setNumberOfBedsPerRoom(Integer numberOfBedsPerRoom) {
-		this.numberOfBedsPerRoom = numberOfBedsPerRoom;
-	}
-	public Set<String> getRules() {
-		return rules;
-	}
-	public void setRules(Set<String> rules) {
-		this.rules = rules;
-	}
-	public Cottage() {
-		super();
-	}
+	 @OneToMany
+	    @JoinColumn(name = "cottage_id")
+	    @JsonManagedReference
+	    private Set<CottageUtility> utilities;
 	
 	
-	
-	
-	
-	
-	
-	
+	 
+	 @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<CottageQuickReservation> cottageQuickReservations;
+
+	  @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<CottageReservation> cottageReservations;
+	  
+	  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	    @JoinColumn(name = "cottageOwner")
+	    private CottageOwner cottageOwner;
+
+		
+/*	
+	 @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	    @JsonManagedReference
+	    private Set<Room> rooms;
+	*/
 }

@@ -1,11 +1,10 @@
-package com.example.demo.model;
+package com.example.demo.model.users;
 
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.enumeration.AdminType;
-import com.example.demo.model.users.User;
 
 import lombok.Getter;
 import lombok.Setter;

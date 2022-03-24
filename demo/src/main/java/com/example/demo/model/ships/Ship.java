@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 import com.example.demo.model.Address;
 import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
+import com.example.demo.model.users.ShipOwner;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -107,6 +109,9 @@ public class Ship {
     
     @Column(name = "cancelationConditions", nullable = false)
 	private Double cancelationConditions;// 0% for free
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "shipOwner")
+    private ShipOwner shipOwner;
 	
 	 @Column(name = "deleted")
 	 private boolean deleted = false;

@@ -11,7 +11,12 @@ import javax.persistence.Table;
 
 import com.example.demo.model.adventures.Adventure;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "instructor")
 @PrimaryKeyJoinColumn(name = "id")
 public class Instructor extends User {
@@ -22,21 +27,7 @@ public class Instructor extends User {
 	 @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
 	  private Set<Adventure> adventures;
 
-	public String getBiography() {
-		return biography;
-	}
 
-	public void setBiography(String biography) {
-		this.biography = biography;
-	}
-
-	public Set<Adventure> getAdventures() {
-		return adventures;
-	}
-
-	public void setAdventures(Set<Adventure> adventures) {
-		this.adventures = adventures;
-	}
 	
 	 
 	

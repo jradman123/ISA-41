@@ -3,37 +3,47 @@ package com.example.demo.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@Table(name = "adventureReservation")
+@PrimaryKeyJoinColumn(name = "id")
 public class AdventureReservation extends Reservation {
 	
-	private Address address; //mjesto?
-	//slobodni termini
-	
-/*	
-	public AdventureReservation(LocalDate startDate, Integer duration, Integer numberOfPerson, Set<String> services,
-			double price) {
-		super(startDate, duration, numberOfPerson, services, price);
-	}
+	   @ManyToOne
+	    @JoinColumn(name = "adventure_id")
+	    private Adventure adventure;
 
+	    @Column(name = "instructor_id")
+	    private Long instructorId;
 
-
-	public AdventureReservation(LocalDate startDate, Integer duration, Integer numberOfPerson, Set<String> services,
-			double price, Address address) {
-		super(startDate, duration, numberOfPerson, services, price);
-		this.address = address;
-	}
+	/*  @ManyToOne
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private RegisteredClient reservationClient;
 */
-
-
-	public Address getAddress() {
-		return address;
-	}
-
-
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+	   @ManyToMany
+	   @JoinTable(
+	            name = "adventure_reservation_utilities",
+	            joinColumns = @JoinColumn(name = "adventure_reservation_id"),
+	            inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
+	    private Set<AdventureUtility> utilities;
 	
+	
+
+
+
 	
 	
 	

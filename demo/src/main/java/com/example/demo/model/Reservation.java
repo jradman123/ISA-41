@@ -22,38 +22,39 @@ import lombok.Setter;
 @Table(name = "reservation")
 //@Inheritance(strategy = InheritanceType.JOINED)
 public class Reservation {
+	
 	 @Id
 	 @Column(name = "id")
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	 private Long id;
 	
-    @Column(name = "reservationStart", nullable = false)
-    private LocalDateTime reservationStart;
+     @Column(name = "reservationStart", nullable = false)
+     private LocalDateTime reservationStart;
 
-	@Column(name = "reservationEnd", nullable = false)
-    private LocalDateTime reservationEnd;
+	 @Column(name = "reservationEnd", nullable = false)
+     private LocalDateTime reservationEnd;
 
-    @Column(name = "numberOfPerson", nullable = false)
-	private Integer numberOfPerson;
+     @Column(name = "numberOfPerson", nullable = false)
+	 private Integer numberOfPerson;
     
 //	private Set<String> services;
 	
-	@Column(name = "price", nullable = false)
-    private Double price;
+	 @Column(name = "price", nullable = false)
+     private Double price;
 
 	
-	@Column(name = "isCanceled", nullable = false)
-    private Boolean isCanceled = false;
+	 @Column(name = "isCanceled", nullable = false)
+     private Boolean isCanceled = false;
 	
-	@ManyToOne
-    @JoinColumn(name = "quickReservation_id", nullable = true)
-	private QuickReservation quickReservation;
+	 @ManyToOne
+     @JoinColumn(name = "quickReservation_id", nullable = true)
+	 private QuickReservation quickReservation;
 	
 	
 	
-	public Reservation() {
+	 public Reservation() {
 		super();
-	}
+	 }
 	
 	
 	

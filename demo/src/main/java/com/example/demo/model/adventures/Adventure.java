@@ -18,8 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
-import com.example.demo.model.Instructor;
 import com.example.demo.model.Rules;
+import com.example.demo.model.users.Instructor;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.users;
 
 import java.util.Set;
 
@@ -10,7 +10,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.cottages.Cottage;
-import com.example.demo.model.users.User;
 
 import lombok.Getter;
 import lombok.Setter;

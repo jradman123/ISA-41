@@ -18,10 +18,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
-import com.example.demo.model.CottageOwner;
 import com.example.demo.model.Rules;
 import com.example.demo.model.adventures.AdventureQuickReservation;
 import com.example.demo.model.adventures.AdventureReservation;
+import com.example.demo.model.users.CottageOwner;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;

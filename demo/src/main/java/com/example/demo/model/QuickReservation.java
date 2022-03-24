@@ -40,7 +40,5 @@ public class QuickReservation {
     @Column(name = "isReserved", nullable = false)
     private Boolean isReserved = false;
 
-    @Version
-    @Column(name = "version", nullable = false)
-    private Long version = 1L;
+   
 }

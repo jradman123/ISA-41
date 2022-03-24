@@ -56,6 +56,11 @@ public class Adventure {
 	//private Set<String> rules;
 	 
 	 
+	/* @ManyToMany(cascade = CascadeType.ALL)
+	 @JoinTable(
+	            name = "adventure_fishing_equipment",
+	            joinColumns = @JoinColumn(name = "adventure_id"),
+	            inverseJoinColumns = @JoinColumn(name = "equipment_id"))*/
 	private String fishingEquipment;
 	
 	

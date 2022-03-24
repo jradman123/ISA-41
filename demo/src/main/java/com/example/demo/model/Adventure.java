@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.awt.Image;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,12 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Getter
+@Setter
 @Table(name = "adventure")
 public class Adventure {
 
@@ -112,152 +114,4 @@ public class Adventure {
 	}
 
 
-
-
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-/*	public Instructor getInstructor() {
-		return instructor;
-	}
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
-	}*/
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/*public Set<Image> getImages() {
-		return images;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}*/
-
-	
-
-	/*public Set<String> getRules() {
-		return rules;
-	}
-
-	public void setRules(Set<String> rules) {
-		this.rules = rules;
-	}
-*/
-	
-
-	public Instructor getInstructor() {
-		return instructor;
-	}
-
-
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
-	}
-
-
-
-	public Integer getGuestLimit() {
-		return guestLimit;
-	}
-
-
-
-	public void setGuestLimit(Integer guestLimit) {
-		this.guestLimit = guestLimit;
-	}
-
-
-
-	public boolean isDeleted() {
-		return deleted;
-	}
-
-
-
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}
-
-
-
-
-	public Double getCancelationConditions() {
-		return cancelationConditions;
-	}
-
-	public void setCancelationConditions(Double cancelationConditions) {
-		this.cancelationConditions = cancelationConditions;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-
-
-
-	public Set<Rules> getRules() {
-		return rules;
-	}
-
-
-
-
-	public void setRules(Set<Rules> rules) {
-		this.rules = rules;
-	}
-
-
-
-
-	public Set<FishingEquipment> getFishingEquipments() {
-		return fishingEquipments;
-	}
-
-
-
-
-	public void setFishingEquipments(Set<FishingEquipment> fishingEquipments) {
-		this.fishingEquipments = fishingEquipments;
-	}
-	
-	
-	
-	
 }

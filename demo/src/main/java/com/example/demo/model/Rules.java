@@ -19,4 +19,7 @@ public class Rules {
 
 	 @Column(name = "ruleDescription", nullable = false)
 	    private String ruleDescription;
+	 
+	 
+	 
 }

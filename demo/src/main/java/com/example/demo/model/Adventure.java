@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,23 +47,34 @@ public class Adventure {
             joinColumns = @JoinColumn(name = "adventure_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private Set<Image> images;*/
-	//slobodni termini
-	
+
+
+	/* @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<AdventureQuickReservation> adventureQuickReservations;
+
+	    @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<AdventureReservation> adventureReservations;
+
+	*/
 	
 	 @Column(name = "guestLimit", nullable = false)
 	 private Integer guestLimit;
 	
 	
-	//private Set<String> rules;
+	 @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	    @JoinTable(
+	            name = "adventure_rules",
+	            joinColumns = @JoinColumn(name = "adventure_id"),
+	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	private Set<Rules> rules;
 	 
 	 
-	/* @ManyToMany(cascade = CascadeType.ALL)
+	 @ManyToMany(cascade = CascadeType.ALL)
 	 @JoinTable(
 	            name = "adventure_fishing_equipment",
 	            joinColumns = @JoinColumn(name = "adventure_id"),
-	            inverseJoinColumns = @JoinColumn(name = "equipment_id"))*/
-	private String fishingEquipment;
-	
+	            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
+	 private Set<FishingEquipment> fishingEquipments;
 	
 	private Double cancelationConditions;
 	
@@ -81,8 +93,10 @@ public class Adventure {
 
 	
 
+
 	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
-			Integer guestLimit, String fishingEquipment, Double cancelationConditions, Double price, boolean deleted) {
+			Integer guestLimit, Set<Rules> rules, Set<FishingEquipment> fishingEquipments, Double cancelationConditions,
+			Double price, boolean deleted) {
 		super();
 		this.id = id;
 		this.instructor = instructor;
@@ -90,11 +104,15 @@ public class Adventure {
 		this.address = address;
 		this.description = description;
 		this.guestLimit = guestLimit;
-		this.fishingEquipment = fishingEquipment;
+		this.rules = rules;
+		this.fishingEquipments = fishingEquipments;
 		this.cancelationConditions = cancelationConditions;
 		this.price = price;
 		this.deleted = deleted;
 	}
+
+
+
 
 
 
@@ -156,9 +174,7 @@ public class Adventure {
 		this.rules = rules;
 	}
 */
-	public String getFishingEquipment() {
-		return fishingEquipment;
-	}
+	
 
 	public Instructor getInstructor() {
 		return instructor;
@@ -196,9 +212,6 @@ public class Adventure {
 
 
 
-	public void setFishingEquipment(String fishingEquipment) {
-		this.fishingEquipment = fishingEquipment;
-	}
 
 	public Double getCancelationConditions() {
 		return cancelationConditions;
@@ -214,6 +227,34 @@ public class Adventure {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+
+
+
+	public Set<Rules> getRules() {
+		return rules;
+	}
+
+
+
+
+	public void setRules(Set<Rules> rules) {
+		this.rules = rules;
+	}
+
+
+
+
+	public Set<FishingEquipment> getFishingEquipments() {
+		return fishingEquipments;
+	}
+
+
+
+
+	public void setFishingEquipments(Set<FishingEquipment> fishingEquipments) {
+		this.fishingEquipments = fishingEquipments;
 	}
 	
 	

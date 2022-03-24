@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.reservation.Reservation;
+import com.example.demo.model.users.RegisteredUser;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
@@ -29,7 +30,10 @@ public class CottageReservation extends Reservation {
 	    @JoinColumn(name = "cottage_id")
 	    private Cottage cottage;
 	 
-	   ///klijent
+	    @ManyToOne
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private RegisteredUser registeredUser;
+
 
 	    @ManyToMany
 	    @JoinTable(

@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.reservation.QuickReservation;
+import com.example.demo.model.users.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,10 @@ public class CottageQuickReservation extends QuickReservation {
 	    @JoinColumn(name = "cottage_id")
 	    private Cottage cottage;
 	 
-	   ///klijent
+	   @ManyToOne
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private RegisteredUser registeredUser;
+
 
 	    @ManyToMany
 	    @JoinTable(

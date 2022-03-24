@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.reservation.QuickReservation;
+import com.example.demo.model.users.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,9 +37,9 @@ public class AdventureQuickReservation  extends QuickReservation{
    private Adventure adventure;
    
    
- /*  @ManyToOne
+   @ManyToOne
    @JoinColumn(name = "user_id")
-   private RegisteredClient reservationClient;*/
+   private RegisteredUser registeredUser;
    
    
 

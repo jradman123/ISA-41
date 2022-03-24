@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.reservation.Reservation;
+import com.example.demo.model.users.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+
 @Table(name = "shipReservation")
 public class ShipReservation extends Reservation{
 	
@@ -25,8 +27,9 @@ public class ShipReservation extends Reservation{
     private Ship ship;
 	
 	
-	////klijent
-	
+	 @ManyToOne
+	 @JoinColumn(name = "user_id", nullable = false)
+	 private RegisteredUser registeredUser;
 	
     @ManyToMany
     @JoinTable(

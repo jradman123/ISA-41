@@ -13,6 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.model.reservation.Reservation;
+import com.example.demo.model.users.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +32,6 @@ public class AdventureReservation extends Reservation {
 	    @Column(name = "instructor_id")
 	    private Long instructorId;
 
-	/*  @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
-	    private RegisteredClient reservationClient;
-*/
 	   @ManyToMany
 	   @JoinTable(
 	            name = "adventure_reservation_utilities",
@@ -42,7 +39,10 @@ public class AdventureReservation extends Reservation {
 	            inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
 	    private Set<AdventureUtility> utilities;
 	
-	
+	    @ManyToOne
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private RegisteredUser registeredUser;
+
 
 
 

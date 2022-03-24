@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.example.demo.model.adventures.QuickReservationUtility;
 import com.example.demo.model.reservation.QuickReservation;
+import com.example.demo.model.users.RegisteredUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,8 @@ public class ShipQuickReservation extends QuickReservation {
 	 private Set<QuickReservationUtility> utilities;
 	 
 	 
-	 ////klijent
+	 @ManyToOne
+	    @JoinColumn(name = "user_id", nullable = false)
+	    private RegisteredUser registeredUser;
+
 }

@@ -13,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
 
 import lombok.Getter;
@@ -56,7 +58,9 @@ public class Ship {
 	private Double price = 0.0;
 	
 	
-	//private EquipmentType equipment;
+	 @OneToMany
+	 @JoinColumn(name = "ship_id")
+	 private Set<ShipUtility> utilities;
 	
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "address", referencedColumnName = "id")
@@ -76,11 +80,25 @@ public class Ship {
 	@Column(name = "capacity", nullable = false)
 	private Integer capacity;
 	
-	//slobodni termini za brze rezervacije
-	//private Set<String> rules;
+	 @OneToMany(mappedBy = "ship")
+	 private Set<ShipQuickReservation> shipQuickReservations;
+
+	 @OneToMany(mappedBy = "ship")
+	 private Set<ShipReservation> shipReservations;
+	 
+	 @ManyToMany
+	    @JoinTable(
+	            name = "ship_rules",
+	            joinColumns = @JoinColumn(name = "ship_id"),
+	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	 private Set<Rules> rules;
 	
+    @Column(name = "fishingEquipment", nullable = false)
 	private String fishingEquipment;
-	//cjenovnik i informacije o dodatnim uslugama
+    
+    
+    
+    @Column(name = "cancelationConditions", nullable = false)
 	private Double cancelationConditions;// 0% for free
 	
 	 @Column(name = "deleted")

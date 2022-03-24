@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.users.Instructor;
 
@@ -48,12 +49,12 @@ public class Adventure {
 	@Column(name="description", nullable = false)
 	private String description;
 	
-	/*@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "adventure_images",
             joinColumns = @JoinColumn(name = "adventure_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
-	private Set<Image> images;*/
+	private Set<Image> images;
 
 
 	 @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})

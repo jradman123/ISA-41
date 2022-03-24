@@ -8,7 +8,7 @@ public class AdventureReservation extends Reservation {
 	private Address address; //mjesto?
 	//slobodni termini
 	
-	
+/*	
 	public AdventureReservation(LocalDate startDate, Integer duration, Integer numberOfPerson, Set<String> services,
 			double price) {
 		super(startDate, duration, numberOfPerson, services, price);
@@ -21,7 +21,7 @@ public class AdventureReservation extends Reservation {
 		super(startDate, duration, numberOfPerson, services, price);
 		this.address = address;
 	}
-
+*/
 
 
 	public Address getAddress() {

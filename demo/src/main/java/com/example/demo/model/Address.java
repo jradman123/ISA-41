@@ -24,16 +24,24 @@ public class Address {
 	
 	 @Column(name="streetName", nullable = false)
 	 private String streetName;
+	 
 	 @Column(name="streetNumber", nullable = false)
 	 private String streetNumber;
+	 
 	 @Column(name="city", nullable = false)
 	 private String city;
+	 
 	 @Column(name="country", nullable = false)
      private String country;
 	
 	public Address() {
 		super();
 	}
+
+	  @Override
+	    public String toString() {
+	        return streetName + ", " + streetNumber + ", " + city + ", " + country;
+	    }
 
 	
 	

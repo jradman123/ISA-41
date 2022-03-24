@@ -24,10 +24,7 @@ public class UserDTO {
 	
 	public UserDTO() {}
 
- public UserDTO(User user) {
-		this(user.getId(), user.getFirstName(), user.getLastName(), user.getPassword(),user.getEmail(),user.getPhoneNumber(),user.getJmbg(),user.getDescriptionOfRegistration(),user.getIsActivated());
-}
-
+ 
 	
 	
 	public UserDTO(Integer id, String firstName, String lastName, String password, String email,

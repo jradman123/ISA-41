@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.example.demo.model.adventures.Adventure;
+
 @Entity
 @Table(name = "instructor")
 @PrimaryKeyJoinColumn(name = "id")

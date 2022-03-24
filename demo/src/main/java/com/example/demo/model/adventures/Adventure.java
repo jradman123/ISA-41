@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.adventures;
 
 import java.util.Set;
 
@@ -13,8 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.example.demo.model.Address;
+import com.example.demo.model.Instructor;
+import com.example.demo.model.Rules;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,13 +56,13 @@ public class Adventure {
 	private Set<Image> images;*/
 
 
-	/* @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	 @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	    private Set<AdventureQuickReservation> adventureQuickReservations;
 
-	    @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	  @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	    private Set<AdventureReservation> adventureReservations;
 
-	*/
+	
 	
 	 @Column(name = "guestLimit", nullable = false)
 	 private Integer guestLimit;

@@ -1,6 +1,8 @@
-package com.example.demo.model;
+package com.example.demo.model.cottages;
 
 import java.util.Set;
+
+import com.example.demo.model.Address;
 
 public class Cottage {
 

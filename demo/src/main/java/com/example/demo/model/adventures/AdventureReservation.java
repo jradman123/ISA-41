@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.model.adventures;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.example.demo.model.reservation.Reservation;
 
 import lombok.Getter;
 import lombok.Setter;

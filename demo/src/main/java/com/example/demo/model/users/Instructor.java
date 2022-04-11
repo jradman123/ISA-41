@@ -2,12 +2,7 @@ package com.example.demo.model.users;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.demo.model.adventures.Adventure;
 
@@ -19,6 +14,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "instructor")
 @PrimaryKeyJoinColumn(name = "id")
+@DiscriminatorValue("INSTRUCTOR")
 public class Instructor extends User {
 
 	@Column(name = "biography")

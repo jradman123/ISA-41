@@ -2,16 +2,7 @@ package com.example.demo.model.users;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.UserType;
@@ -23,7 +14,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="users")
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="d_type", discriminatorType = DiscriminatorType.STRING)
 public class User {
 	
 	@Id

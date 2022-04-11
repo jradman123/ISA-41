@@ -2,12 +2,7 @@ package com.example.demo.model.users;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.demo.model.ships.Ship;
 
@@ -19,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "shipOwner")
 @PrimaryKeyJoinColumn(name = "userId")
-
+@DiscriminatorValue("SHIP_OWNER")
 public class ShipOwner  extends User {
 	
     @OneToMany(mappedBy = "shipOwner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -1,5 +1,6 @@
 package com.example.demo.model.users;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "administrator")
 @PrimaryKeyJoinColumn(name = "userId")
+@DiscriminatorValue("ADMIN")
 public class Administrator extends User {
 	private AdminType type;
 }

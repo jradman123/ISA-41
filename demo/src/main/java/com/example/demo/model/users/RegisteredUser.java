@@ -2,13 +2,7 @@ package com.example.demo.model.users;
 
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.cottages.Cottage;
@@ -24,6 +18,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "registeredUser")
 @PrimaryKeyJoinColumn(name = "userId")
+@DiscriminatorValue("REGISTERED_USER")
 public class RegisteredUser extends User{
 	
 	 @OneToMany(mappedBy = "registeredUser")

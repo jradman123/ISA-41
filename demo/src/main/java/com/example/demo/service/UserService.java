@@ -1,22 +1,15 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.RegistrationRequestDto;
+import com.example.demo.model.users.Instructor;
+import com.example.demo.model.users.User;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public interface UserService {
 
-import com.example.demo.model.users.User;
-import com.example.demo.repository.UserRepository;
-
-
-@Service
-public class UserService {
-	@Autowired
-	private UserRepository userRepository;
-
-	public List<User> findAll() {
-		
-		return userRepository.findAll();
-	}
-	
+    List<User> findAll();
+    User findByEmail(String email);
+    User save(User user);
+    Instructor saveInstructor(RegistrationRequestDto request);
 }

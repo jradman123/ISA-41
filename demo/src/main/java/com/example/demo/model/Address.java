@@ -38,7 +38,14 @@ public class Address {
 		super();
 	}
 
-	  @Override
+	public Address(String streetName, String streetNumber, String city, String country) {
+		this.streetName = streetName;
+		this.streetNumber = streetNumber;
+		this.city = city;
+		this.country = country;
+	}
+
+	@Override
 	    public String toString() {
 	        return streetName + ", " + streetNumber + ", " + city + ", " + country;
 	    }

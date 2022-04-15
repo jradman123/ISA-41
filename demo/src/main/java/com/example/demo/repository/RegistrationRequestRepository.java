@@ -1,13 +1,9 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.users.RegistrationRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.users.User;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-
-    User findByEmail(String email);
+public interface RegistrationRequestRepository extends JpaRepository<RegistrationRequest, Long> {
 }
-

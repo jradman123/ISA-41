@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.JwtAuthenticationRequest;
-import com.example.demo.dto.RegistrationRequestDto;
-import com.example.demo.dto.UserDTO;
-import com.example.demo.dto.UserTokenState;
+import com.example.demo.dto.*;
 import com.example.demo.exception.ResourceConflictException;
 import com.example.demo.model.users.Instructor;
 import com.example.demo.model.users.User;
@@ -42,7 +39,7 @@ public class AuthenticationController {
     // Prvi endpoint koji pogadja korisnik kada se loguje.
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
     @PostMapping("/login")
-    public ResponseEntity<UserTokenState> createAuthenticationToken(
+    public ResponseEntity<AuthenticatedUserDto> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
 
         // Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
@@ -53,14 +50,14 @@ public class AuthenticationController {
         // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
         // kontekst
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         // Kreiraj token za tog korisnika
+        String role = userService.findByEmail(authenticationRequest.getEmail()).getUserType().toString();
         UserDetails user = (UserDetails) authentication.getPrincipal();
         String jwt = tokenUtils.generateToken(user.getUser().getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
-
+        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto(authenticationRequest.getEmail(),role, new UserTokenState(jwt,expiresIn));
         // Vrati token kao odgovor na uspesnu autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+        return ResponseEntity.ok(authenticatedUserDto);
     }
 
     // Endpoint za registraciju novog korisnika

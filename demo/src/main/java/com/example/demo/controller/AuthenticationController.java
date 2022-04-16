@@ -65,7 +65,7 @@ public class AuthenticationController {
 
     // Endpoint za registraciju novog korisnika
     @PostMapping("/signup")
-    public ResponseEntity<User> addUser(@RequestBody RegistrationRequestDto userRequest, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<String> addUser(@RequestBody RegistrationRequestDto userRequest, UriComponentsBuilder ucBuilder) {
         User existUser = this.userService.findByEmail(userRequest.getEmail());
 
         if (existUser != null) {
@@ -74,9 +74,9 @@ public class AuthenticationController {
 
         if(userRequest.getTypeOfRegistration().equals("INSTRUCTOR")) {
             Instructor instructor = this.userService.saveInstructor(userRequest);
-            return new ResponseEntity<>(instructor, HttpStatus.CREATED);
+            return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
 
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>("Error!", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

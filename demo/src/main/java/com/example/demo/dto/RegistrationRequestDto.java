@@ -6,7 +6,10 @@ public class RegistrationRequestDto {
 
     private String firstName;
     private String lastName;
-    private Address address;
+    private String streetNumber;
+    private String streetName;
+    private String city;
+    private String country;
     private String phoneNumber;
     private String email;
     private String password;
@@ -17,10 +20,13 @@ public class RegistrationRequestDto {
     public RegistrationRequestDto() {
     }
 
-    public RegistrationRequestDto(String firstName, String lastName, Address address, String phoneNumber, String email,String password, String repeatedPassword, String typeOfRegistration, String descriptionOfRegistration) {
+    public RegistrationRequestDto(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email, String password, String repeatedPassword, String typeOfRegistration, String descriptionOfRegistration) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
+        this.streetNumber = streetNumber;
+        this.streetName = streetName;
+        this.city = city;
+        this.country = country;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
@@ -45,12 +51,36 @@ public class RegistrationRequestDto {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPhoneNumber() {

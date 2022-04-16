@@ -1,0 +1,14 @@
+mat-form-field {
+    width: 60%;
+  }
+
+.separateMe {
+  display: flex;
+  justify-content: center; 
+  flex-direction: column; 
+  width: 100%;
+}
+
+.icon-display {
+  transform: scale(1.34);
+}

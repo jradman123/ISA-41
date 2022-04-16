@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 		Instructor instructor = new Instructor();
 		instructor.setFirstName(userRequest.getFirstName());
 		instructor.setLastName(userRequest.getLastName());
-		instructor.setAddress(userRequest.getAddress());
+		instructor.setAddress(new Address(userRequest.getStreetName(),userRequest.getStreetNumber(),userRequest.getCity(),userRequest.getCountry()));
 		instructor.setEmail(userRequest.getEmail());
 		instructor.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		instructor.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());

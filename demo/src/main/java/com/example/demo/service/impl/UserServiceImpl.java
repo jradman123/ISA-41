@@ -7,11 +7,10 @@ import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.UserType;
 import com.example.demo.model.users.Instructor;
 import com.example.demo.model.users.RegistrationRequest;
+import com.example.demo.model.users.ShipOwner;
 import com.example.demo.repository.RegistrationRequestRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,4 +61,26 @@ public class UserServiceImpl implements UserService {
 		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
 		return saved;
 	}
+
+	@Override
+	public ShipOwner saveShipOwner(RegistrationRequestDto userRequest) {
+		ShipOwner shipOwner = new ShipOwner();
+		shipOwner.setFirstName(userRequest.getFirstName());
+		shipOwner.setLastName(userRequest.getLastName());
+		shipOwner.setAddress(new Address(userRequest.getStreetName(),userRequest.getStreetNumber(),userRequest.getCity(),userRequest.getCountry()));
+		shipOwner.setEmail(userRequest.getEmail());
+		shipOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		shipOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
+		shipOwner.setActivated(true);
+		shipOwner.setDeleted(false);
+		shipOwner.setPhoneNumber(userRequest.getPhoneNumber());
+		shipOwner.setUserType(UserType.Instructor);
+		ShipOwner saved = userRepository.save(shipOwner);
+		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+        return saved;
+
+	}
+
+
+
 }

@@ -27,10 +27,11 @@ export class LoginComponent implements OnInit {
     submit():void{
      const loginObserver = {
        next: (x:any) => {
-          this._snackBar.open("Welcome","Dismiss");
+          this._snackBar.open("     Welcome","Dismiss");
        },
         error: (err:any) => {
-          this._snackBar.open(err.error,"Dismiss");
+          this._snackBar.open("Email or password are incorrect.Try again,please.","Dismiss"); 
+        
         }};
      
      this._service.login(this.form.getRawValue()).subscribe(loginObserver);

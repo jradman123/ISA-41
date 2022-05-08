@@ -87,8 +87,8 @@ public class Cottage {
 	    @JoinColumn(name = "cottageOwner")
 	    private CottageOwner cottageOwner;
 
-		
-/*	
+	/*
+
 	 @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	    @JsonManagedReference
 	    private Set<Room> rooms;

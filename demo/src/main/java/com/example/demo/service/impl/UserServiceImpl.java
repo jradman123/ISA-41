@@ -5,16 +5,13 @@ import java.util.List;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.UserType;
-import com.example.demo.model.users.Instructor;
-import com.example.demo.model.users.RegistrationRequest;
-import com.example.demo.model.users.ShipOwner;
+import com.example.demo.model.users.*;
 import com.example.demo.repository.RegistrationRequestRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.users.User;
 import com.example.demo.repository.UserRepository;
 
 
@@ -81,6 +78,24 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public CottageOwner saveCottageOwner(RegistrationRequestDto userRequest) {
+		CottageOwner cottageOwner = new CottageOwner();
+		cottageOwner.setFirstName(userRequest.getFirstName());
+		cottageOwner.setLastName(userRequest.getLastName());
+		cottageOwner.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry()));
+		cottageOwner.setEmail(userRequest.getEmail());
+		cottageOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		cottageOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
+		cottageOwner.setActivated(true);
+		cottageOwner.setDeleted(false);
+		cottageOwner.setPhoneNumber(userRequest.getPhoneNumber());
+		cottageOwner.setUserType(UserType.Instructor);
+		CottageOwner saved = userRepository.save(cottageOwner);
+		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+		return saved;
+	}
 
 
-}
+
+	}

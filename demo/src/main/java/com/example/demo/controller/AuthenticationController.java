@@ -78,7 +78,6 @@ public class AuthenticationController {
             CottageOwner cottageOwner = this.userService.saveCottageOwner(userRequest);
             return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
-
         return new ResponseEntity<String>("Error!", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

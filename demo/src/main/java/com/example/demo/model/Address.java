@@ -7,17 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name="address")
 public class Address {
 
@@ -38,6 +34,9 @@ public class Address {
 	 @Column(name="country", nullable = false)
      private String country;
 	
+	public Address() {
+		super();
+	}
 
 	public Address(String streetName, String streetNumber, String city, String country) {
 		this.streetName = streetName;

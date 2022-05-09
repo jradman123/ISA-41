@@ -26,79 +26,68 @@ import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.users.CottageOwner;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "cottage")
 public class Cottage {
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "name", nullable = false, unique = true)
+	
+    @Column(name = "name", nullable = false, unique = true)
 	private String name;
-
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "address", referencedColumnName = "id")
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address", referencedColumnName = "id")
 	private Address address;
-
-	@Column(name = "description", nullable = false)
+    
+    @Column(name = "description", nullable = false)
 	private String description;
-
-	@Column(name = "price", nullable = false)
-	private Double price = 0.0;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "cottage_images",
-			joinColumns = @JoinColumn(name = "cottage_id"),
-			inverseJoinColumns = @JoinColumn(name = "image_id"))
-	private Set<Image> images = new HashSet<>();
-
+    
+    @Column(name = "price", nullable = false)
+    private Double price = 0.0;
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "cottage_images",
+            joinColumns = @JoinColumn(name = "cottage_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id"))
+    private Set<Image> images= new HashSet<>();
+	
 	@Column(name = "numberOfPerson", nullable = false)
 	private Integer numberOfPerson;
-
-
-	@ManyToMany
-	@JoinTable(
-			name = "cottage_rules",
-			joinColumns = @JoinColumn(name = "cottage_id"),
-			inverseJoinColumns = @JoinColumn(name = "rule_id"))
-	private Set<Rules> rules;
-
-	@OneToMany
-	@JoinColumn(name = "cottage_id")
-	@JsonManagedReference
-	private Set<CottageUtility> utilities;
-
-
-	@OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
-	private Set<CottageQuickReservation> cottageQuickReservations;
-
-	@OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
-	private Set<CottageReservation> cottageReservations;
-
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "cottageOwner")
-	private CottageOwner cottageOwner;
-
-	public Cottage( String name, String description, Double price, Address address) {
 	
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.address = address;
+	
+	@ManyToMany
+	    @JoinTable(
+	            name = "cottage_rules",
+	            joinColumns = @JoinColumn(name = "cottage_id"),
+	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	private Set<Rules> rules;
+	
+	 @OneToMany
+	    @JoinColumn(name = "cottage_id")
+	    @JsonManagedReference
+	    private Set<CottageUtility> utilities;
+	
+	
+	 
+	 @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<CottageQuickReservation> cottageQuickReservations;
 
-	}
+	  @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	    private Set<CottageReservation> cottageReservations;
+	  
+	  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	    @JoinColumn(name = "cottageOwner")
+	    private CottageOwner cottageOwner;
+
 	/*
 
 	 @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

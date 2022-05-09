@@ -2,12 +2,9 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateCottageDto;
-import com.example.demo.model.cottages.Cottage;
 
 import java.util.List;
 
 public interface CottageService {
     public List<CottageDto> findAll();
-    public Cottage createCottage(CreateCottageDto cottage);
 }

@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserService {
 		return saved;
 	}
 
-
-
+	@Override
+	public void activateAccount(String email) {
+		User user = userRepository.findByEmail(email);
+		user.setActivated(true);
+		userRepository.save(user);
 	}
+
+
+}

@@ -2,13 +2,12 @@ package com.example.demo.security;
 
 import com.example.demo.model.users.UserDetails;
 import com.example.demo.repository.UserRepository;
-import io.jsonwebtoken.ExpiredJwtException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.example.demo.service.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,59 +15,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class TokenAuthenticationFilter extends OncePerRequestFilter {
+public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
     private TokenUtils tokenUtils;
+    private CustomUserDetailsService userDetailsService;
     @Autowired
     private UserRepository userRepository;
 
-    private UserDetailsService userDetailsService;
-
-    protected final Log LOGGER = LogFactory.getLog(getClass());
-
-    public TokenAuthenticationFilter(TokenUtils tokenHelper, UserDetailsService userDetailsService) {
-        this.tokenUtils = tokenHelper;
+    public TokenAuthenticationFilter(TokenUtils tokenHelper,AuthenticationManager authManager, CustomUserDetailsService userDetailsService) {
+        super(authManager);
+        this.tokenUtils= tokenHelper;
         this.userDetailsService = userDetailsService;
     }
 
     @Override
-    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest req,
+                                    HttpServletResponse res,
+                                    FilterChain chain) throws IOException, ServletException {
+        String header = req.getHeader("Authorization");
 
-
-        String email;
-
-        // 1. Preuzimanje JWT tokena iz zahteva
-        String authToken = tokenUtils.getToken(request);
-
-        try {
-
-            if (authToken != null) {
-
-                // 2. Citanje korisnickog imena iz tokena
-                email = tokenUtils.getEmailFromToken(authToken);
-
-                if (email != null) {
-
-                    // 3. Preuzimanje korisnika na osnovu username-a
-                    UserDetails userDetails = (UserDetails) userDetailsService.loadUserByUsername(userRepository.findByEmail(email).getEmail());
-
-                    // 4. Provera da li je prosledjeni token validan
-                    if (tokenUtils.validateToken(authToken, userDetails)) {
-
-                        // 5. Kreiraj autentifikaciju
-                        TokenBasedAuthentication authentication = new TokenBasedAuthentication(userDetails);
-                        authentication.setToken(authToken);
-                        SecurityContextHolder.getContext().setAuthentication(authentication);
-                    }
-                }
-            }
-
-        } catch (ExpiredJwtException ex) {
-            LOGGER.debug("Token expired!");
+        if (header == null || !header.startsWith("Bearer ")) {
+            chain.doFilter(req, res);
+            return;
         }
 
-        // prosledi request dalje u sledeci filter
-        chain.doFilter(request, response);
+        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        chain.doFilter(req, res);
+    }
+
+    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        System.out.println("TOKEN " + token);
+        if (token != null) {
+            // parse the token.
+            String email = tokenUtils.getEmailFromToken(token);
+
+            if (email != null) {
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                return new UsernamePasswordAuthenticationToken(email, null, userDetails.getAuthorities());
+            }
+
+            return null;
+        }
+        return null;
     }
 }

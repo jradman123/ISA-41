@@ -14,6 +14,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
     public UserDetails(User user) {
         this.user = user;
         authorities.add(new SimpleGrantedAuthority(user.getUserType().toString()));
+        System.out.println("ROLAAAAAAAAA" + authorities.toString());
     }
 
     @Override

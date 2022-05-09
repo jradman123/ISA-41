@@ -1,5 +1,6 @@
 package com.example.demo.model.cottages;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,7 +38,7 @@ public class Cottage {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
     @Column(name = "name", nullable = false, unique = true)
 	private String name;
@@ -57,7 +58,7 @@ public class Cottage {
             name = "cottage_images",
             joinColumns = @JoinColumn(name = "cottage_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Set<Image> images;
+    private Set<Image> images= new HashSet<>();
 	
 	@Column(name = "numberOfPerson", nullable = false)
 	private Integer numberOfPerson;

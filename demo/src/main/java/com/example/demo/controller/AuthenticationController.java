@@ -2,9 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.*;
 import com.example.demo.exception.ResourceConflictException;
-import com.example.demo.model.users.Instructor;
-import com.example.demo.model.users.User;
-import com.example.demo.model.users.UserDetails;
+import com.example.demo.model.users.*;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +69,13 @@ public class AuthenticationController {
 
         if(userRequest.getTypeOfRegistration().equals("INSTRUCTOR")) {
             Instructor instructor = this.userService.saveInstructor(userRequest);
+            return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
+        }
+        else if(userRequest.getTypeOfRegistration().equals("SHIP OWNER")) {
+           ShipOwner shipOwner = this.userService.saveShipOwner(userRequest);
+            return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
+        } else if(userRequest.getTypeOfRegistration().equals("COTTAGE OWNER")) {
+            CottageOwner cottageOwner = this.userService.saveCottageOwner(userRequest);
             return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
 

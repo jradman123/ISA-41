@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.RegistrationRequestDto;
-import com.example.demo.model.users.Instructor;
-import com.example.demo.model.users.User;
+import com.example.demo.model.users.*;
 
 import java.util.List;
 
@@ -12,4 +11,6 @@ public interface UserService {
     User findByEmail(String email);
     User save(User user);
     Instructor saveInstructor(RegistrationRequestDto request);
+    ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
+    CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
 }

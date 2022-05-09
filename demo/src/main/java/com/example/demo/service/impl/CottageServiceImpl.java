@@ -46,5 +46,11 @@ public class CottageServiceImpl {
       return null;
 
     }
+
+    public Cottage findCottage(Long id) {
+        return cottageRepository.findById(id).orElse(null);
+    }
+
+   
 }
 

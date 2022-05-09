@@ -27,7 +27,7 @@ public class CottageController {
         return this.cottageService.findAll();
     }
 
-    @PostMapping(value = "/addCottage")
+    @PostMapping(value = "/createCottage")
     public Cottage createCottage(@RequestBody CreateCottageDto newCottage) {
         return this.cottageService.createCottage(newCottage);
     }

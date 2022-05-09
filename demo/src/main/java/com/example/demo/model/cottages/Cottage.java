@@ -88,6 +88,16 @@ public class Cottage {
 	    @JoinColumn(name = "cottageOwner")
 	    private CottageOwner cottageOwner;
 
+	public Cottage(String name, String description, Double price, Address address,CottageOwner owner) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.address = address;
+		this.cottageOwner=owner;
+
+	}
+
 	/*
 
 	 @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -11,6 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateCottageDto {
 
-
+    private String name;
+    private String description;
+    private AddressDto address;
+    private Double price;
+    private String ownerEmail;
 
 }

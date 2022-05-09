@@ -8,13 +8,15 @@ import com.example.demo.model.users.CottageOwner;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageOwnerRepository;
 import com.example.demo.repository.CottageRepository;
-import com.example.demo.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CottageServiceImpl {
     @Autowired
     private CottageRepository cottageRepository;
@@ -51,6 +53,6 @@ public class CottageServiceImpl {
         return cottageRepository.findById(id).orElse(null);
     }
 
-   
+
 }
 

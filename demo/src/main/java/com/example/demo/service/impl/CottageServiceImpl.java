@@ -57,12 +57,13 @@ public class CottageServiceImpl {
     }
 
 
-    public List<Cottage> getCottagesFromOwner(String email) {
-        List<Cottage> cottages = new ArrayList<>();
+    public List<CottageDto> getOwnerCottages(String email) {
+        List<CottageDto> cottages = new ArrayList<>();
         for(Cottage cottage: cottageRepository.findAll()){
             User user= userRepository.findByEmail(cottage.getCottageOwner().getEmail());
             if(user.getEmail().equals(email)){
-                cottages.add(new Cottage(cottage.getName(),cottage.getDescription(),cottage.getPrice(),cottage.getAddress(),cottage.getCottageOwner()));
+                CottageDto cottageDto=new CottageDto(cottage);
+                cottages.add(cottageDto);
             }
         }
         return  cottages;

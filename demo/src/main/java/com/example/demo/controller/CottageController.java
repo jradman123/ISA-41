@@ -39,4 +39,11 @@ public class CottageController {
         return this.cottageService.findCottage(id);
     }
 
+    //isto radi vlasnik vikendice
+    @GetMapping(value="/getOwnerCottages/{email}")
+    public List<CottageDto> getCottagesFromOwner(@PathVariable String email) {
+        return this.cottageService.getOwnerCottages(email);
+    }
+
+
 }

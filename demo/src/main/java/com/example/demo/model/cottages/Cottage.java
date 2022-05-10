@@ -26,13 +26,17 @@ import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.users.CottageOwner;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "cottage")
 public class Cottage {
 	
@@ -97,6 +101,7 @@ public class Cottage {
 		this.cottageOwner=owner;
 
 	}
+
 
 	/*
 

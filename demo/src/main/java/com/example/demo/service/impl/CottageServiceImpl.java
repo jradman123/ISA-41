@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.CreateCottageDto;
+import com.example.demo.dto.ViewCottegeDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.users.CottageOwner;
@@ -54,5 +55,15 @@ public class CottageServiceImpl {
     }
 
 
+    public List<Cottage> getCottagesFromOwner(String email) {
+        List<Cottage> cottages = new ArrayList<>();
+        for(Cottage cottage: cottageRepository.findAll()){
+            User user= userRepository.findByEmail(cottage.getCottageOwner().getEmail());
+            if(user.getEmail().equals(email)){
+                cottages.add(new Cottage(cottage.getName(),cottage.getDescription(),cottage.getPrice(),cottage.getAddress(),cottage.getCottageOwner()));
+            }
+        }
+        return  cottages;
+    }
 }
 

@@ -10,15 +10,18 @@ import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageOwnerRepository;
 import com.example.demo.repository.CottageRepository;
 
+import com.example.demo.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CottageServiceImpl {
+public class CottageServiceImpl implements CottageService {
     @Autowired
     private CottageRepository cottageRepository;
     @Autowired
@@ -28,6 +31,7 @@ public class CottageServiceImpl {
 
 
 
+    @Override
     public List<CottageDto> findAll() {
         List<CottageDto> cottages = new ArrayList<>();
 
@@ -37,6 +41,7 @@ public class CottageServiceImpl {
         return cottages;
     }
 
+    @Override
     public Cottage createCottage(CreateCottageDto newCottage) {
         User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
         for (CottageOwner owner : this.cottageOwnerRepository.findAll()) {
@@ -50,13 +55,14 @@ public class CottageServiceImpl {
 
     }
 
+    @Override
     public CottageDto findCottage(Long id) {
         Cottage cottage= cottageRepository.findById(id).orElse(null);
         CottageDto cottageDto=new CottageDto(cottage);
         return cottageDto;
     }
 
-
+    @Override
     public List<CottageDto> getOwnerCottages(String email) {
         List<CottageDto> cottages = new ArrayList<>();
         for(Cottage cottage: cottageRepository.findAll()){
@@ -67,6 +73,22 @@ public class CottageServiceImpl {
             }
         }
         return  cottages;
+    }
+
+    @Override
+    public ResponseEntity<Long> deleteCottage(Long id) {
+
+        List<Cottage> cottages=this.cottageRepository.findAll();
+        for (Cottage cottage: cottages)
+        {
+           if(cottage.getId()==id) {
+               cottage.setDeleted(true);
+               cottageRepository.save(cottage);
+           }
+
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
     }
 }
 

@@ -7,6 +7,7 @@ import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,9 +40,15 @@ public class CottageController {
         return this.cottageService.findCottage(id);
     }
 
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteCottage/{id}")
+    public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
+        return this.cottageService.deleteCottage(id);
+    }
+
     //isto radi vlasnik vikendice
-    @GetMapping(value="/getOwnerCottages/{email}")
-    public List<CottageDto> getCottagesFromOwner(@PathVariable String email) {
+    @GetMapping(value="/findOwnerCottages/{email}")
+    public List<CottageDto> findCottagesFromOwner(@PathVariable String email) {
         return this.cottageService.getOwnerCottages(email);
     }
 

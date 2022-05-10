@@ -68,7 +68,11 @@ public class Cottage {
 
 	@Column(name = "numberOfPerson", nullable = false)
 	private Integer numberOfPerson;
-	
+
+	@Column(name = "isDeleted", nullable = false)
+	private boolean isDeleted;
+
+
 
 	@ManyToMany
 	    @JoinTable(
@@ -101,6 +105,7 @@ public class Cottage {
 		this.price = price;
 		this.address = address;
 		this.cottageOwner=owner;
+
 
 	}
 

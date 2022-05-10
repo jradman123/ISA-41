@@ -14,10 +14,10 @@ INSERT INTO public.users(d_type, deleted, description_of_registration, email, fi
 VALUES ('COTTAGE_OWNER', false, 'vlasnik vikendica', 'goran@gmail.com', 'Goran', true, '2209998175856', 'Ilic','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066785597', 0, 0, 1);
 
 ---cottage---
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner)
-	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner)
-	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner)
-    	VALUES ('Small  cottage', 'Vila', 50, 1,2,3);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+    	VALUES ('Small  cottage', 'Vila', 50, 1,2,3,false);
 

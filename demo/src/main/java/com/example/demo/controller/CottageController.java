@@ -24,7 +24,7 @@ public class CottageController {
 
 
     @GetMapping()
-    public List<CottageDto> get() {
+    public List<CottageDto> findAll() {
         return this.cottageService.findAll();
     }
 

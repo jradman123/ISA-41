@@ -5,13 +5,13 @@ import com.example.demo.model.cottages.Cottage;
 public class CottageDto {
 
 
-    private Long id;
-    private String name;
-    private String description;
-    private String address;
-    private String price;
-    private String image;
-    private int numberOfPeople;
+    public Long id;
+    public String name;
+    public String description;
+    public String address;
+    public String price;
+    public String image;
+    public int numberOfPeople;
 
     public  CottageDto(Cottage cottage){
         this.id = cottage.getId();

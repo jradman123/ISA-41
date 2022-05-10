@@ -35,7 +35,7 @@ public class CottageController {
 
     //isto radi vlasnik vikendice
     @GetMapping(value = "/findCottage/{id}")
-    public Cottage findCottage(@PathVariable Long id) {
+    public CottageDto findCottage(@PathVariable Long id) {
         return this.cottageService.findCottage(id);
     }
 

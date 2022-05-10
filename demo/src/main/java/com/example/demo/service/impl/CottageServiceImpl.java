@@ -50,8 +50,10 @@ public class CottageServiceImpl {
 
     }
 
-    public Cottage findCottage(Long id) {
-        return cottageRepository.findById(id).orElse(null);
+    public CottageDto findCottage(Long id) {
+        Cottage cottage= cottageRepository.findById(id).orElse(null);
+        CottageDto cottageDto=new CottageDto(cottage);
+        return cottageDto;
     }
 
 

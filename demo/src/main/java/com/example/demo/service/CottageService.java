@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CottageService {
     public List<CottageDto> findAll();
-    public Cottage findCottage(Long id);
+    public CottageDto findCottage(Long id);
 }

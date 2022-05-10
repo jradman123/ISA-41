@@ -63,23 +63,25 @@ public class Cottage {
             joinColumns = @JoinColumn(name = "cottage_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id"))
     private Set<Image> images= new HashSet<>();
-	
+
+
+
 	@Column(name = "numberOfPerson", nullable = false)
 	private Integer numberOfPerson;
 	
-	
+
 	@ManyToMany
 	    @JoinTable(
 	            name = "cottage_rules",
 	            joinColumns = @JoinColumn(name = "cottage_id"),
 	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
 	private Set<Rules> rules;
-	
+
 	 @OneToMany
 	    @JoinColumn(name = "cottage_id")
 	    @JsonManagedReference
 	    private Set<CottageUtility> utilities;
-	
+
 	
 	 
 	 @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})

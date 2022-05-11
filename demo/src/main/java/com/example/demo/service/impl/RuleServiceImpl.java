@@ -11,6 +11,8 @@ import com.example.demo.service.RuleService;
 
 import org.dom4j.rule.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,22 +28,37 @@ public class RuleServiceImpl implements RuleService {
     private CottageRepository cottageRepository;
 
 
-
-/*
     @Override
-    public List<RuleDto> getRulesByCottage(Long id)
-    {
+    public List<RuleDto> getRulesByCottage(Long id) {
         List<RuleDto> ruleDto = new ArrayList<>();
-
-        Cottage cottage = cottageRepository.findById(id).orElse(null);
-        for(Rules rule:cottage.getRules()) {
-            ruleDto.add(new RuleDto(rule));
+        for (Rules rule : ruleRepository.findAll()) {
+            if (rule.getCottage() != null) {
+                if (id.equals(rule.getCottage().getId())) {
+                    ruleDto.add(new RuleDto(rule));
+                }
+            }
         }
         return ruleDto;
 
 
+    }
+
+
+    public RuleDto findRule(Long id) {
+        Rules rule = ruleRepository.findById(id).orElse(null);
+        RuleDto ruleDto = new RuleDto(rule);
+        return ruleDto;
+    }
+
+    public ResponseEntity<Long> deleteRule(Long id) {
+        for (Rules rule : ruleRepository.findAll()) {
+            if (id == rule.getId()) {
+                rule.setDeleted(true);
+                ruleRepository.save(rule);
+            }
+        }
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
 
 
- */
-}
+    }

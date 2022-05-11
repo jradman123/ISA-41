@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RuleService {
 
+    List<RuleDto> getRulesByCottage(Long id);
 }

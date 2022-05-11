@@ -42,14 +42,11 @@ INSERT INTO public.ships(
        	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, false,5.0,'');
 
 ---rules----
-INSERT INTO public.rules(rule_description,is_deleted) VALUES ('No drinking',false);
-INSERT INTO public.rules(rule_description,is_deleted) VALUES ('No smoking',false);
-INSERT INTO public.rules(rule_description,is_deleted) VALUES ('20+',false);
-INSERT INTO public.rules(rule_description,is_deleted) VALUES ('No pets',false);
-INSERT INTO public.rules(rule_description,is_deleted) VALUES ('No noise after 12',false);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No drinking',false,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No smoking',false,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('20+',false,2);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No pets',false,2);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No noise after 12',false,3);
 
-----cottage-rules----
-INSERT INTO public.cottage_rules(cottage_id, rule_id)	VALUES (1, 1);
-INSERT INTO public.cottage_rules(cottage_id, rule_id)	VALUES (1, 2);
-INSERT INTO public.cottage_rules(cottage_id, rule_id)	VALUES (2, 3);
+
 

@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.RuleDto;
 import com.example.demo.service.impl.RuleServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,10 +19,22 @@ public class RuleController {
     @Autowired
     private RuleServiceImpl ruleService;
 
-   /* @GetMapping(value="/getRuleByCottage/{id}")
-    public List<RuleDto> getRuleByCottage(@PathVariable Long id) {
+   @GetMapping(value="/getRulesByCottage/{id}")
+    public List<RuleDto> getRulesByCottage(@PathVariable Long id) {
         return ruleService.getRulesByCottage(id);
     }
-    */
+
+
+    @GetMapping(value = "/findRule/{id}")
+    public RuleDto findCottage(@PathVariable Long id) {
+        return this.ruleService.findRule(id);
+    }
+
+
+
+    @DeleteMapping(value = "/deleteRule/{id}")
+    public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
+        return this.ruleService.deleteRule(id);
+    }
 
 }

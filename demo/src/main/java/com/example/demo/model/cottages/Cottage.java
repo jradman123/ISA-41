@@ -73,18 +73,15 @@ public class Cottage {
 	private boolean isDeleted;
 
 
-
-	@ManyToMany
-	    @JoinTable(
-	            name = "cottage_rules",
-	            joinColumns = @JoinColumn(name = "cottage_id"),
-	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	@OneToMany
+	@JoinColumn(name = "cottage_id")
+	@JsonManagedReference
 	private Set<Rules> rules;
 
 	 @OneToMany
-	    @JoinColumn(name = "cottage_id")
-	    @JsonManagedReference
-	    private Set<CottageUtility> utilities;
+	 @JoinColumn(name = "cottage_id")
+	 @JsonManagedReference
+	 private Set<CottageUtility> utilities;
 
 	
 	 

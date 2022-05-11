@@ -6,6 +6,8 @@ import com.example.demo.repository.ShipRepository;
 import com.example.demo.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -66,21 +68,21 @@ public class ShipServiceImpl  implements ShipService {
         }
         return  ships;
     }
-
+*/
     @Override
     public ResponseEntity<Long> deleteShip(Long id) {
 
         List<Ship> ships=this.shipRepository.findAll();
         for (Ship ship: ships)
         {
-           if(ship.getId()==id) {
-               ship.setDeleted(true);
-               shipRepository.save(ship);
-           }
+            if(ship.getId()==id) {
+                ship.setDeleted(true);
+                shipRepository.save(ship);
+            }
 
         }
         return new ResponseEntity<>(id, HttpStatus.OK);
 
     }
-    */
+
 }

@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
      const loginObserver = {
        next: (x:any) => {
           this._snackBar.open("     Welcome","Dismiss");
+          if(localStorage.getItem('role') == "Admin"){
+             this._router.navigate(['/admin']);
+          }
        },
         error: (err:any) => {
           this._snackBar.open("Email or password are incorrect.Try again,please.","Dismiss"); 
@@ -35,7 +38,6 @@ export class LoginComponent implements OnInit {
         }};
      
      this._service.login(this.form.getRawValue()).subscribe(loginObserver);
-     //this._router.navigate(['/record']);
     }
 
 }

@@ -44,12 +44,11 @@ login(model: any): Observable<AuthenticatedUserDto> {
   return this.http.post(`${this.apiServerUrl}/auth/login`, model).pipe(
     map((response: any) => {
       if (response && response.token) {
-        console.log('ovov' + response.token);
         this.loginStatus.next(true);
         localStorage.setItem('token', response.token.accessToken);
         localStorage.setItem('currentUser', JSON.stringify(response));
+        localStorage.setItem('role' ,response.role)
         this.currentUserSubject.next(response);
-        //this._router.navigate(['/record']);
       }
       return this.user;
     })

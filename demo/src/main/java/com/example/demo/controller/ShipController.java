@@ -2,12 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
+import com.example.demo.model.ships.Ship;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.ShipServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,13 +37,13 @@ public class ShipController {
     public Ship createShip(@RequestBody CreateShipDto newShip) {
         return this.shipService.createShip(newShip);
     }
-
+*/
      //isto radi vlasnik broda
     @GetMapping(value = "/findShip/{id}")
-    public CottageDto findCottage(@PathVariable Long id) {
+    public ShipDto findCottage(@PathVariable Long id) {
         return this.shipService.findShip(id);
     }
-
+/*
     //radi samo vlasnik broda
     @DeleteMapping(value = "/deleteShip/{id}")
     public ResponseEntity<Long> deleteShip(@PathVariable Long id) {

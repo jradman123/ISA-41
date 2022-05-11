@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface ShipService {
     List<ShipDto> findAll();
+
+    ShipDto findShip(Long id);
     /*
-    public List<ShipDto> findAll();
-    public ShipDto findShip(Long id);
+
     public ShipDto createShip(CreateShipDto newShip);
     public List<ShipDto> getOwnerShips(String email);
     public ResponseEntity<Long> deleteShip(Long id);

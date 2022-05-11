@@ -30,9 +30,9 @@ public class ShipServiceImpl  implements ShipService {
 
         return ships;
     }
-   /*
 
 
+/*
     @Override
     public Ship createShip(CreateShipDto newShip) {
         User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
@@ -45,7 +45,7 @@ public class ShipServiceImpl  implements ShipService {
         }
       return null;
 
-    }
+    }*/
 
     @Override
     public ShipDto findShip(Long id) {
@@ -53,7 +53,7 @@ public class ShipServiceImpl  implements ShipService {
         ShipDto shipDto=new ShipDto(ship);
         return shipDto;
     }
-
+/*
     @Override
     public List<ShipDto> getOwnerShips(String email) {
         List<ShipDto> ships = new ArrayList<>();

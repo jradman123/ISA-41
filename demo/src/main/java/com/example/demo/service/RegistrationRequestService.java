@@ -6,11 +6,8 @@ import com.example.demo.model.users.RegistrationRequest;
 import java.util.List;
 
 public interface RegistrationRequestService {
-    List<RegistrationRequest> findAll();
-    List<RegistrationRequestViewDto> findAllAllowed();
-    List<RegistrationRequestViewDto> findAllNotAllowed();
+    List<RegistrationRequestViewDto> findAll();
     void approveRequest(String email);
-    void rejectRequest(String email);
-    List<RegistrationRequestViewDto> findAllPending();
+    void rejectRequest(String email,String reason);
 
 }

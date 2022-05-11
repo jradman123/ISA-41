@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -25,7 +26,15 @@ public class RegistrationRequestController {
     @PutMapping(value = "/approve/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> approveRequest(@PathVariable String email) {
         registrationRequestService.approveRequest(email);
-        return new ResponseEntity<>(registrationRequestService.findAllPending(), HttpStatus.OK);
+        return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @PutMapping(value = "/reject/{email}")
+    public ResponseEntity<List<RegistrationRequestViewDto>> rejectRequest(@PathVariable String email, @RequestBody String reason) {
+        registrationRequestService.rejectRequest(email,reason);
+        return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
 
     }
 

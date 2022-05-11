@@ -21,8 +21,11 @@ public class Rules {
 		private Long id;
 		
 
-	 @Column(name = "ruleDescription", nullable = false)
+	    @Column(name = "ruleDescription", nullable = false)
 	    private String ruleDescription;
+
+		@Column(name = "isDeleted", nullable = false)
+	    private boolean isDeleted;
 	 
 	 
 	 

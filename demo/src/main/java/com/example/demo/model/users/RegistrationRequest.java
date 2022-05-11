@@ -1,5 +1,7 @@
 package com.example.demo.model.users;
 
+import com.example.demo.model.enumeration.RegistrationRequestStatus;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,14 +12,14 @@ public class RegistrationRequest {
     @Column
     private String email;
     @Column
-    private boolean isAllowed;
+    private RegistrationRequestStatus requestStatus;
 
     public RegistrationRequest() {
     }
 
     public RegistrationRequest(String email) {
         this.email = email;
-        this.isAllowed = false;
+        this.requestStatus = RegistrationRequestStatus.Pending;
     }
 
     public String getEmail() {
@@ -28,11 +30,11 @@ public class RegistrationRequest {
         this.email = email;
     }
 
-    public boolean isAllowed() {
-        return isAllowed;
+    public RegistrationRequestStatus getRequestStatus() {
+        return requestStatus;
     }
 
-    public void setAllowed(boolean allowed) {
-        isAllowed = allowed;
+    public void setRequestStatus(RegistrationRequestStatus status) {
+        requestStatus = status;
     }
 }

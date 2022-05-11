@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.RegistrationRequestViewDto;
 import com.example.demo.service.RegistrationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegistrationRequestController {
@@ -20,9 +23,9 @@ public class RegistrationRequestController {
 
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/approve/{email}")
-    public ResponseEntity<HttpStatus> approveRequest(@PathVariable String email) {
+    public ResponseEntity<List<RegistrationRequestViewDto>> approveRequest(@PathVariable String email) {
         registrationRequestService.approveRequest(email);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(registrationRequestService.findAllPending(), HttpStatus.OK);
 
     }
 

@@ -1,7 +1,15 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.cottages.Cottage;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CottageDto {
 
 
@@ -18,7 +26,7 @@ public class CottageDto {
         this.name = cottage.getName();
         this.description = cottage.getDescription();
         this.address= cottage.getAddress().toString();
-       this.price = Double.toString(cottage.getPrice());
+        this.price = Double.toString(cottage.getPrice());
         this.numberOfPeople = cottage.getNumberOfPerson();
     }
 

@@ -1,11 +1,15 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.repository.CottageOwnerRepository;
-import com.example.demo.repository.CottageRepository;
+import com.example.demo.dto.ShipDto;
+import com.example.demo.model.ships.Ship;
 import com.example.demo.repository.ShipRepository;
 import com.example.demo.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -15,17 +19,18 @@ public class ShipServiceImpl  implements ShipService {
     @Autowired
     private UserServiceImpl userRepository;
 
-    /*
+
 
     @Override
     public List<ShipDto> findAll() {
         List<ShipDto> ships = new ArrayList<>();
 
         for(Ship ship : shipRepository.findAll((Sort.by(Sort.Direction.ASC, "price")))){
-            ships.add(new Ships(ship));}
+            ships.add(new ShipDto(ship));}
 
         return ships;
     }
+   /*
 
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.ShipDto;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.ShipServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -21,12 +22,14 @@ public class ShipController {
     @Autowired
     private ShipServiceImpl shipService;
 
-/*
+
     @GetMapping()
     public List<ShipDto> findAll() {
+
         return this.shipService.findAll();
     }
 
+    /*
      //ovo samo moze da radi vlasnik broda
     @PostMapping(value = "/createShip")
     public Ship createShip(@RequestBody CreateShipDto newShip) {
@@ -45,7 +48,7 @@ public class ShipController {
         return this.shipService.deleteShip(id);
     }
 
-    //isto radi vlasnik vikendice
+    //isto radi vlasnik broda
     @GetMapping(value="/findOwnerShip{email}")
     public List<ShipDto> findShipFromOwner(@PathVariable String email) {
         return this.shipService.getOwnerShips(email);

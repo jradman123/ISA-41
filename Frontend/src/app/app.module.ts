@@ -9,15 +9,22 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LandingComponent } from './components/landing/landing.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
+import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
+import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LandingComponent,
-    LoginComponent
+    LoginComponent,
+    AdminDashboardComponent,
+    AdminNavbarComponent,
+    RegistrationRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +35,8 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     HttpClientModule 
   ],
-  providers: [],
+  providers: [HttpClientModule,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

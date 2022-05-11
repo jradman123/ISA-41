@@ -8,10 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,7 @@ public class RegistrationRequestController {
     @Autowired
     private RegistrationRequestService registrationRequestService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/approve/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> approveRequest(@PathVariable String email) {
@@ -34,6 +32,13 @@ public class RegistrationRequestController {
     @PutMapping(value = "/reject/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> rejectRequest(@PathVariable String email, @RequestBody String reason) {
         registrationRequestService.rejectRequest(email,reason);
+        return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping(value = "/getAll")
+    public ResponseEntity<List<RegistrationRequestViewDto>> getAll() {
         return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
 
     }

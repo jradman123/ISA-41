@@ -48,16 +48,16 @@ public class ShipController {
         return this.shipService.deleteShip(id);
     }
 
-/*
+
     //isto radi vlasnik broda
-    @GetMapping(value="/findOwnerShip{email}")
-    public List<ShipDto> findShipFromOwner(@PathVariable String email) {
+    @GetMapping(value="/findOwnerShips/{email}")
+    public List<ShipDto> findOwnerShips(@PathVariable String email) {
         return this.shipService.getOwnerShips(email);
     }
 
 
 
-*/
+
 
 
 }

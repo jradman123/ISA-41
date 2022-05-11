@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.users.User;
 import com.example.demo.repository.ShipRepository;
 import com.example.demo.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +56,12 @@ public class ShipServiceImpl  implements ShipService {
         ShipDto shipDto=new ShipDto(ship);
         return shipDto;
     }
-/*
+
     @Override
     public List<ShipDto> getOwnerShips(String email) {
         List<ShipDto> ships = new ArrayList<>();
         for(Ship ship: shipRepository.findAll()){
-            User user= userRepository.findByEmail(cottage.getCottageOwner().getEmail());
+            User user= userRepository.findByEmail(ship.getShipOwner().getEmail());
             if(user.getEmail().equals(email)){
                 ShipDto shipDto=new ShipDto(ship);
                 ships.add(shipDto);
@@ -68,7 +69,7 @@ public class ShipServiceImpl  implements ShipService {
         }
         return  ships;
     }
-*/
+
     @Override
     public ResponseEntity<Long> deleteShip(Long id) {
 

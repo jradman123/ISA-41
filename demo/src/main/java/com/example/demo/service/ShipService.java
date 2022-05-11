@@ -11,6 +11,8 @@ public interface ShipService {
 
     ShipDto findShip(Long id);
 
+    List<ShipDto> getOwnerShips(String email);
+
     public ResponseEntity<Long> deleteShip(Long id);
 
 

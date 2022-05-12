@@ -27,7 +27,7 @@ export class RegRequestsService {
 
   rejectRequest(email : string,reason : string): Observable<RegistrationRequestViewDto[]> {
     return this.http.put<RegistrationRequestViewDto[]>(
-      `${this.apiServerUrl}/requests/reject/${email}`,{reason}
+      `${this.apiServerUrl}/requests/reject/${email}`,reason
     );
   }
 }

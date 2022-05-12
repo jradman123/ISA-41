@@ -8,13 +8,14 @@ import { MaterialModule } from './material-module';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
+import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-for-reason.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
     LoginComponent,
     AdminDashboardComponent,
     AdminNavbarComponent,
-    RegistrationRequestsComponent
+    RegistrationRequestsComponent,
+    DialogForReasonComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
     MaterialModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    FormsModule
   ],
   providers: [HttpClientModule,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],

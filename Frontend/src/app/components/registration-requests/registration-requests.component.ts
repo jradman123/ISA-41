@@ -1,10 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { RegistrationRequestViewDto } from 'src/app/interfaces/registration-request-view-dto';
 import { RegRequestsService } from 'src/app/services/RegistrationRequestsService/reg-requests.service';
+import { DialogForReasonComponent } from '../dialog-for-reason/dialog-for-reason.component';
+
+export interface DialogData {
+  reason: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-registration-requests',
@@ -30,7 +37,11 @@ export class RegistrationRequestsComponent implements OnInit {
     'Buttons'
   ];
 
-  constructor(private requestService : RegRequestsService,private changeDetectorRefs: ChangeDetectorRef,private _snackBar: MatSnackBar) {
+  reason!: string;
+  email!: string;
+
+  constructor(private requestService : RegRequestsService,private changeDetectorRefs: ChangeDetectorRef,
+    private _snackBar: MatSnackBar,public dialog: MatDialog) {
     this.requests = new MatTableDataSource<RegistrationRequestViewDto>();
   
    }
@@ -62,6 +73,18 @@ export class RegistrationRequestsComponent implements OnInit {
 
     }
 
+    openDialog(email : string): void {
+      const dialogRef = this.dialog.open(DialogForReasonComponent, {
+        width: '250px',
+        data: {reason: this.reason, email: email},
+      });
   
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.reason = result;
+        this.refresh();
+      });
+    }
+  }
 
-}
+

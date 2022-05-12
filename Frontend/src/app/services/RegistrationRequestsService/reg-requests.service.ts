@@ -24,4 +24,10 @@ export class RegRequestsService {
       `${this.apiServerUrl}/requests/approve/${email}`,{}
     );
   }
+
+  rejectRequest(email : string,reason : string): Observable<RegistrationRequestViewDto[]> {
+    return this.http.put<RegistrationRequestViewDto[]>(
+      `${this.apiServerUrl}/requests/reject/${email}`,{reason}
+    );
+  }
 }

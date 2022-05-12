@@ -55,6 +55,9 @@ INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('20+',fals
 INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No pets',false,2);
 INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No noise after 12',false,1);
 
+---image---
 
-
-
+INSERT INTO public.image(url, cottage_id, is_deleted)
+	VALUES ('cottage.jpg', 1, false);
+INSERT INTO public.image(url, cottage_id, is_deleted)
+	VALUES ('cottage2.jpg', 1, false);

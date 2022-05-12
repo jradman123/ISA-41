@@ -56,14 +56,12 @@ public class Cottage {
     
     @Column(name = "price", nullable = false)
     private Double price = 0.0;
-    
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "cottage_images",
-            joinColumns = @JoinColumn(name = "cottage_id"),
-            inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Set<Image> images= new HashSet<>();
 
+
+	@OneToMany
+	@JoinColumn(name = "cottage_id")
+	@JsonManagedReference
+	private Set<Image> images= new HashSet<>();
 
 
 	@Column(name = "numberOfPerson", nullable = false)
@@ -107,10 +105,5 @@ public class Cottage {
 	}
 
 
-	/*
 
-	 @OneToMany(mappedBy = "cottage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	    @JsonManagedReference
-	    private Set<Room> rooms;
-	*/
 }

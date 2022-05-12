@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +20,6 @@ public class CottageDto {
     public String description;
     public String address;
     public String price;
-    public String image;
     public int numberOfPeople;
 
     public  CottageDto(Cottage cottage){
@@ -28,6 +29,7 @@ public class CottageDto {
         this.address= cottage.getAddress().toString();
         this.price = Double.toString(cottage.getPrice());
         this.numberOfPeople = cottage.getNumberOfPerson();
+
     }
 
 }

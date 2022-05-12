@@ -30,11 +30,11 @@ public class Rules {
 
 
 	    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	    @JoinColumn(name = "cottage_id")
+	    @JoinColumn(name = "cottage_id",nullable = true)
 	    private Cottage cottage;
 
 	    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	    @JoinColumn(name = "ship_id")
+	    @JoinColumn(name = "ship_id",nullable = true)
 	    private Ship ship;
 	 
 	 

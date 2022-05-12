@@ -13,9 +13,9 @@ export class CottageService {
   constructor(private http: HttpClient, private router : Router) {}
 
     
-    findAll(): Observable<CottageDto[]> {
+    findByEmail(): Observable<CottageDto[]> {
       return this.http.get<CottageDto[]>(
-        `${this.apiServerUrl}/cottages`);
+        `${this.apiServerUrl}/cottages/findOwnerCottages/${ localStorage.getItem('email')}`);
       }
 
 }

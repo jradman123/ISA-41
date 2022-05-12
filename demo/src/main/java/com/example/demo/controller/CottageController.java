@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.CreateCottageDto;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,10 @@ public class CottageController {
     private UserServiceImpl userService;
     @Autowired
     private CottageServiceImpl cottageService;
+    @Autowired
+    private TokenUtils tokenUtils;
+
+
 
 
     @GetMapping()
@@ -46,6 +51,7 @@ public class CottageController {
         return this.cottageService.deleteCottage(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     //isto radi vlasnik vikendice
     @GetMapping(value="/findOwnerCottages/{email}")
     public List<CottageDto> findCottagesFromOwner(@PathVariable String email) {

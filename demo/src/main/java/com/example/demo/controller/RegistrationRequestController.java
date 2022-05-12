@@ -7,12 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RegistrationRequestController {
 
@@ -28,6 +27,7 @@ public class RegistrationRequestController {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/reject/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> rejectRequest(@PathVariable String email, @RequestBody String reason) {

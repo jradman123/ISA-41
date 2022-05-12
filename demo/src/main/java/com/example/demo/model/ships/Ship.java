@@ -23,6 +23,7 @@ import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
 import com.example.demo.model.users.ShipOwner;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -87,12 +88,10 @@ public class Ship {
 
 	 @OneToMany(mappedBy = "ship")
 	 private Set<ShipReservation> shipReservations;
-	 
-	 @ManyToMany
-	    @JoinTable(
-	            name = "ship_rules",
-	            joinColumns = @JoinColumn(name = "ship_id"),
-	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+
+	@OneToMany
+	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
 	 private Set<Rules> rules;
 	
     @Column(name = "fishingEquipment", nullable = false)

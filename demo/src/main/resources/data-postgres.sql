@@ -41,12 +41,20 @@ INSERT INTO public.ships(
        	 name, capacity, ship_type, ship_length, number_of_engine, strength_of_engine, max_speed, price,address,description, ship_owner, deleted,cancelation_conditions,fishing_equipment)
        	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, false,5.0,'');
 
----rules----
+---cottage-rules----
 INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No drinking',false,1);
 INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No smoking',false,1);
 INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('20+',false,2);
 INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No pets',false,2);
 INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No noise after 12',false,3);
+
+---cottage-rules----
+INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No drinking',false,1);
+INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No smoking',false,1);
+INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('20+',false,2);
+INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No pets',false,2);
+INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No noise after 12',false,1);
+
 
 
 

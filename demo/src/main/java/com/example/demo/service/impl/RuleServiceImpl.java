@@ -57,8 +57,34 @@ public class RuleServiceImpl implements RuleService {
                 ruleRepository.save(rule);
             }
         }
-            return new ResponseEntity<>(id, HttpStatus.OK);
-        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
 
+
+    public List<RuleDto> getRulesByBoat(Long id) {
+        List<RuleDto> ruleDto = new ArrayList<>();
+        for (Rules rule : ruleRepository.findAll()) {
+            if (rule.getShip() != null) {
+                if (id.equals(rule.getShip().getId())) {
+                    ruleDto.add(new RuleDto(rule));
+                }
+            }
+        }
+        return ruleDto;
 
     }
+
+    public Rules createCottageRule(RuleDto newRule) {
+        for(Cottage cottage: this.cottageRepository.findAll()){
+            if(newRule.getId().equals(cottage.getId())){
+                Rules rule = new Rules();
+                rule.setCottage(cottage);
+                rule.setRuleDescription(newRule.getRuleDescription());
+                rule.setDeleted(newRule.isDeleted());
+                this.ruleRepository.save(rule);
+                return rule;
+            }
+        }
+        return null;
+    }
+}

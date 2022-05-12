@@ -15,6 +15,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.component';
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
+import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
     LoginComponent,
     AdminDashboardComponent,
     AdminNavbarComponent,
-    RegistrationRequestsComponent
+    RegistrationRequestsComponent,
+    CottageOwnerDashboardComponent
   ],
   imports: [
     BrowserModule,

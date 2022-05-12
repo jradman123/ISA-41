@@ -5,7 +5,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-
+import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -13,6 +13,16 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    children: [
+      {
+        path: '',
+        component: RegistrationRequestsComponent,
+      },
+    ],
+  },
+  {
+    path: 'cottageOwner',
+    component: CottageOwnerDashboardComponent,
     children: [
       {
         path: '',

@@ -1,0 +1,56 @@
+package com.example.demo.controller;
+
+import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.CreateCottageDto;
+import com.example.demo.model.cottages.Cottage;
+import com.example.demo.service.impl.CottageServiceImpl;
+import com.example.demo.service.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/cottages")
+public class CottageController {
+
+    @Autowired
+    private UserServiceImpl userService;
+    @Autowired
+    private CottageServiceImpl cottageService;
+
+
+    @GetMapping()
+    public List<CottageDto> findAll() {
+        return this.cottageService.findAll();
+    }
+
+    //ovo samo moze da radi vlasnik vikendice
+    @PostMapping(value = "/createCottage")
+    public Cottage createCottage(@RequestBody CreateCottageDto newCottage) {
+        return this.cottageService.createCottage(newCottage);
+    }
+
+    //isto radi vlasnik vikendice
+    @GetMapping(value = "/findCottage/{id}")
+    public CottageDto findCottage(@PathVariable Long id) {
+        return this.cottageService.findCottage(id);
+    }
+
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteCottage/{id}")
+    public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
+        return this.cottageService.deleteCottage(id);
+    }
+
+    //isto radi vlasnik vikendice
+    @GetMapping(value="/findOwnerCottages/{email}")
+    public List<CottageDto> findCottagesFromOwner(@PathVariable String email) {
+        return this.cottageService.getOwnerCottages(email);
+    }
+
+
+}

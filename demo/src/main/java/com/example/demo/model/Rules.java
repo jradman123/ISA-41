@@ -1,19 +1,20 @@
 package com.example.demo.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.ships.Ship;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "rules")
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Rules {
 	
 		@Id
@@ -21,9 +22,20 @@ public class Rules {
 		private Long id;
 		
 
-	 @Column(name = "ruleDescription", nullable = false)
+	    @Column(name = "ruleDescription", nullable = false)
 	    private String ruleDescription;
-	 
+
+		@Column(name = "isDeleted", nullable = false)
+	    private boolean isDeleted;
+
+
+	    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	    @JoinColumn(name = "cottage_id",nullable = true)
+	    private Cottage cottage;
+
+	    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	    @JoinColumn(name = "ship_id",nullable = true)
+	    private Ship ship;
 	 
 	 
 }

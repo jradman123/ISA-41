@@ -16,6 +16,8 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
+import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
+import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashb
     AdminDashboardComponent,
     AdminNavbarComponent,
     RegistrationRequestsComponent,
-    CottageOwnerDashboardComponent
+    CottageOwnerDashboardComponent,
+    CottageOwnerNavbarComponent,
+    CottageListComponent
   ],
   imports: [
     BrowserModule,

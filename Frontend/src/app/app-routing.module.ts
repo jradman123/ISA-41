@@ -23,12 +23,7 @@ const routes: Routes = [
   {
     path: 'cottageOwner',
     component: CottageOwnerDashboardComponent,
-    children: [
-      {
-        path: '',
-        component: RegistrationRequestsComponent,
-      },
-    ],
+    
   },
 ];
 

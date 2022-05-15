@@ -18,7 +18,6 @@ export class CottageListComponent implements OnInit {
   sub!: Subscription;
   columnsToDisplayRegistrationRequests: string[] = [
     'No.',
-    'Image',
     'Name',
     'Description',
     'Address',

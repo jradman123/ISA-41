@@ -26,12 +26,12 @@ VALUES ('SHIP_OWNER', false, 'imam vise brodova na izdavanje', 'milica@gmail.com
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,address) VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', false, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2, 3);
 INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com');
 ---cottage---
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,image)
-	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false,'../Images/cottage1.png');
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,image)
-	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false,'../Images/cottage2.png');
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,image)
-    	VALUES ('Small  cottage', 'Vila', 50, 1,2,3,false,'cottage2.png');
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
+    	VALUES ('Small  cottage', 'Vila', 50, 1,2,3,false);
 
 ---ships---
 
@@ -62,6 +62,6 @@ INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No noise 
 ---image---
 
 INSERT INTO public.image(url, cottage_id, is_deleted)
-	VALUES ('cottage1.jpg', 1, false);
+	VALUES ('cottage.jpg', 1, false);
 INSERT INTO public.image(url, cottage_id, is_deleted)
 	VALUES ('cottage2.jpg', 1, false);

@@ -9,13 +9,6 @@ class="mat-elevation-z8"
     {{ i + 1 }}
   </td>
 </ng-container>
-<ng-container matColumnDef="Image">
-  <th mat-header-cell *matHeaderCellDef>Picture od cottage </th>
-  <td mat-cell *matCellDef="let element; let i = index">
-    <img [src]="element.image" [alt]="'picture of cottage'" 
-    />
-  </td>
-</ng-container>
 <ng-container matColumnDef="Name">
   <th mat-header-cell *matHeaderCellDef>Name of cottage</th>
   <td mat-cell *matCellDef="let element; let i = index">

@@ -1,10 +1,34 @@
-.table tr td button {
-    color: #18128f;
-    cursor: pointer;
-    border: 4px;
-    background-color:teal;
-    font-size: large;
-  }
-.table tbody tr td button:hover{
-    color: #4e50c6;
-  }
+table {
+  width: 100%;
+}
+
+th {
+  width: 100px;
+  color: rgb(1, 1, 114);
+  font-size: 15px;
+  font-style: bold;
+ 
+}
+
+tr {
+  font-style: italic;
+  height: 20px;
+}
+table {
+  align-self: center;
+}
+
+
+button {
+  width: 70;
+}
+
+mat-card {
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  width: 500px;
+  text-size-adjust: 10px;
+  font-size: 10px;
+  font-style: italic;
+}

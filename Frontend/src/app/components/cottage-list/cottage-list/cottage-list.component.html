@@ -1,33 +1,70 @@
-<div class="content is-medium">
+<table *ngIf="cottages.data.length != 0; else emptyTable"
+mat-table
+[dataSource]="cottages"
+class="mat-elevation-z8"
+>
+<ng-container matColumnDef="No.">
+  <th mat-header-cell *matHeaderCellDef>No.</th>
+  <td mat-cell *matCellDef="let element; let i = index">
+    {{ i + 1 }}
+  </td>
+</ng-container>
+<ng-container matColumnDef="Name">
+  <th mat-header-cell *matHeaderCellDef>Name of cottage</th>
+  <td mat-cell *matCellDef="let element; let i = index">
+    {{ element.name }}
+  </td>
+</ng-container>
+<ng-container matColumnDef="Description">
+  <th mat-header-cell *matHeaderCellDef>Description of cottage </th>
+  <td mat-cell *matCellDef="let element; let i = index">
+   {{element.description}}
+  </td>
+</ng-container>
+<ng-container matColumnDef="Address">
+  <th mat-header-cell *matHeaderCellDef>Address of cottage</th>
+  <td mat-cell *matCellDef="let element; let i = index">
+    {{ element.address }}
+  </td>
+</ng-container>
+<ng-container matColumnDef="Price">
+  <th mat-header-cell *matHeaderCellDef> Price of cottage  </th>
+ <td mat-cell *matCellDef="let element; let i = index">
+    {{ element.price}}
+  </td>
+</ng-container>
+<ng-container matColumnDef="NumberOfPeople">
+  <th mat-header-cell *matHeaderCellDef>Number of people </th>
+  <td mat-cell *matCellDef="let element; let i = index">
+    {{ element.numberOfPeople }}
+  </td>
+</ng-container>
+<ng-container matColumnDef="Buttons">
+  <th mat-header-cell *matHeaderCellDef> Options</th>
+  <td mat-cell *matCellDef="let element; let i = index">
+    <button mat-raised-button color="" style="width: 80px; " (click)="load">View</button>
+    <button mat-raised-button color="" style="width: 80px;" >Delete   </button>
+  
+  </td>
+ 
+</ng-container>
+<tr
+  mat-header-row
+  *matHeaderRowDef="columnsToDisplayRegistrationRequests"
+></tr>
+<tr
+  mat-row
+  *matRowDef="
+    let element;
+    columns: columnsToDisplayRegistrationRequests
+  "
+></tr>
+</table>
 
-    <hr />
-    <div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><abbr title="Cottage name">Cottage name</abbr></th>
-            <th><abbr title="Address">Address</abbr></th>
-            <th><abbr title="Price">Price</abbr></th>
-            <th><abbr title="Description">Description</abbr></th>
-            <th><abbr title="Number of people">Number of people</abbr></th>
-           
-           
-            
-          </tr>
-        </thead>
-        
-            <tbody>
-                <tr *ngFor="let cottage of cottages">
-                    <td>{{cottage.name}}</td>
-                    <td>{{cottage.address}}</td>
-                    <td>{{cottage.price}}</td>
-                    <td>{{cottage.description}}</td>
-                    <td>{{cottage.numberOfPeople}}</td>
-                 
-                                 
-            </tbody>
-            <hr />
-        
-      </table>
-    </div>
-  </div>
+<ng-template #emptyTable>
+<br><br><br><br>
+<div class="d-flex justify-content-center">
+<mat-card>No cottages.Please add!</mat-card>
+</div>
+</ng-template
+>

@@ -57,6 +57,9 @@ public class Cottage {
     @Column(name = "price", nullable = false)
     private Double price = 0.0;
 
+	@Column(name = "image", nullable = false)
+	private String image;
+
 
 	@OneToMany
 	@JoinColumn(name = "cottage_id")

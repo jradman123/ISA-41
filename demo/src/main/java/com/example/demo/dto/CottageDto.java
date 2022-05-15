@@ -20,8 +20,9 @@ public class CottageDto {
     public String description;
     public String address;
     public String price;
+    public String image;
     public String numberOfPeople;
-    private String ownerEmail;
+    public String ownerEmail;
 
     public  CottageDto(Cottage cottage){
         this.id = Long.toString(cottage.getId());
@@ -29,6 +30,7 @@ public class CottageDto {
         this.description = cottage.getDescription();
         this.address= cottage.getAddress().toString();
         this.price = Double.toString(cottage.getPrice());
+        this.image=cottage.getImage();
         this.numberOfPeople = Integer.toString(cottage.getNumberOfPerson());
         this.ownerEmail=cottage.getCottageOwner().getEmail();
     }

@@ -65,3 +65,20 @@ INSERT INTO public.image(url, cottage_id, is_deleted)
 	VALUES ('cottage.jpg', 1, false);
 INSERT INTO public.image(url, cottage_id, is_deleted)
 	VALUES ('cottage2.jpg', 1, false);
+
+-----utilities---
+INSERT INTO public.utility(name)	VALUES ('TV');
+INSERT INTO public.utility(name)	VALUES ('Free food');
+INSERT INTO public.utility(name)	VALUES ('Free drinks');
+INSERT INTO public.utility(name)	VALUES ('Wifi');
+INSERT INTO public.utility(name)	VALUES ('Washing machine');
+INSERT INTO public.utility(name)	VALUES ('Speakers');
+INSERT INTO public.utility(name)	VALUES ('Sauna');
+
+---cottage utilities---
+
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 1);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 2);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 3);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (10.0, 2, 5);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 2, 4);

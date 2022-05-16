@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
-import { StringLiteralLike } from 'typescript';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'app-cottage-list',
   templateUrl: './cottage-list.component.html',
@@ -13,16 +13,18 @@ export class CottageListComponent implements OnInit {
   cottages: CottageDto[] = [];
   cottagesAll: CottageDto[] = [];
   email!: string | null;
-  constructor(private cottageService:CottageService) { }
+  constructor(private cottageService:CottageService,  private router: Router,) { }
  
 
   ngOnInit(): void {
-    this.email = localStorage.getItem('email'); 
-    console.log(this.email);
     this.cottageService.findByEmail().subscribe((data) => {
       this.cottages = data;
       this.cottagesAll = data;
     });
+  }
+
+  view(id:string){
+    this.router.navigate(['cottageOwner/cottage-profile/'+id]);
   }
 
 }

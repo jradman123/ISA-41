@@ -1,33 +1,23 @@
-<div class="content is-medium">
+<div>
+  <div class="card-holder" style="margin-left: 15px;">
+  <div class="row"> 
+          <div class="card" style="margin: 10px; " *ngFor="let cottage of cottages">
+              <img :src="assets/Images/{{cottage.name}}" class="card-img-top" sty alt="image of cottage">
+              <ul class="list-group list-group-flush">
+                  <li class = "list-group-item">
+                  <strong>{{cottage.name}}</strong>
+                  </li>
+                  <li style="height: 70px;" class="list-group-item">{{cottage.address}}</li>  
+                  <li style="height: 70px;" class="list-group-item">{{cottage.description}}</li> 
+                  <li class="list-group-item">
+                      <button  class="btn btn-primary" (click)="view(cottage.id)"  >View</button> 
+                      <button  class="btn btn-primary" >Delete</button> 
 
-    <hr />
-    <div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><abbr title="Cottage name">Cottage name</abbr></th>
-            <th><abbr title="Address">Address</abbr></th>
-            <th><abbr title="Price">Price</abbr></th>
-            <th><abbr title="Description">Description</abbr></th>
-            <th><abbr title="Number of people">Number of people</abbr></th>
-           
-           
-            
-          </tr>
-        </thead>
-        
-            <tbody>
-                <tr *ngFor="let cottage of cottages">
-                    <td>{{cottage.name}}</td>
-                    <td>{{cottage.address}}</td>
-                    <td>{{cottage.price}}</td>
-                    <td>{{cottage.description}}</td>
-                    <td>{{cottage.numberOfPeople}}</td>
-                 
-                                 
-            </tbody>
-            <hr />
-        
-      </table>
-    </div>
+                  </li>
+              </ul> 
+             
+          </div>
   </div>
+
+ 
+</div>

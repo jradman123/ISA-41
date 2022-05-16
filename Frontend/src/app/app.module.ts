@@ -18,6 +18,7 @@ import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
 import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
+import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CottageListComponent } from './components/cottage-list/cottage-list/cot
     RegistrationRequestsComponent,
     CottageOwnerDashboardComponent,
     CottageOwnerNavbarComponent,
-    CottageListComponent
+    CottageListComponent,
+    CottageProfileComponent
   ],
   imports: [
     BrowserModule,

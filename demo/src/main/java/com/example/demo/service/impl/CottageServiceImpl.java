@@ -51,7 +51,7 @@ public class CottageServiceImpl implements CottageService {
                 return this.cottageRepository.save(cottage);
             }
         }
-      return null;
+        return null;
 
     }
 

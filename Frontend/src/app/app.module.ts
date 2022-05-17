@@ -19,6 +19,7 @@ import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashb
 import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
 import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
+import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CottageProfileComponent } from './components/cottage-profile/cottage-pr
     CottageOwnerDashboardComponent,
     CottageOwnerNavbarComponent,
     CottageListComponent,
-    CottageProfileComponent
+    CottageProfileComponent,
+    AddCottageComponent
   ],
   imports: [
     BrowserModule,

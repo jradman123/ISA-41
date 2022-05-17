@@ -8,6 +8,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
 import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
+import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -35,6 +36,11 @@ const routes: Routes = [
         {
           path:'cottage-profile/:id',
           component: CottageProfileComponent,
+        
+        },
+        {
+          path:'add-cottage',
+          component: AddCottageComponent,
         
         },
     

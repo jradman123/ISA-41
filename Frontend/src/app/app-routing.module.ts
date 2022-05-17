@@ -13,7 +13,7 @@ import { CottageProfileComponent } from './components/cottage-profile/cottage-pr
 import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
 import { ShipOwnerDashboardComponent } from './components/ship-owner-dashboard/ship-owner-dashboard/ship-owner-dashboard.component';
 import { ShipListComponent } from './components/ship-list/ship-list/ship-list.component';
-
+import { ShipProfileComponent } from './components/ship-profile/ship-profile/ship-profile.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -74,7 +74,12 @@ const routes: Routes = [
         canActivate: [AuthGuard]
        
       
-      }
+      },
+      {
+        path: 'ship-profile/:id',
+        component: ShipProfileComponent,
+        canActivate: [AuthGuard]
+      },
     ]
   },
 

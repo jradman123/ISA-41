@@ -1,0 +1,55 @@
+<div style="margin-left: 220px; margin-top: 20px;" class="container" >
+    <h1 class="h1"> {{this.ship.name }}</h1>
+    
+    
+        <div class="row">
+            <div class="card1">
+                <div class="col">
+                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Address of cottage:</h4>
+                    <h6 class="text-white row" style="margin-top: 40px; margin-left: 10px; font-size: 18px; margin-right: 10px;">{{this.ship.streetName}},{{this.ship.streetNumber}},{{this.ship.city}},{{this.ship.country}}</h6>
+                </div>
+            </div>
+    
+            <div class="card2">
+                <div class="col">
+                    <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Short description:</h4>
+                    <h6 class="text-white row" style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;"> {{this.ship.description}}</h6>
+                </div>  
+            </div>
+            
+            <div class="card1">
+                <div class="col">
+                     <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;">Price of cottage for one day:</h4>
+                    <h6 class="text-white row" style="margin-top: 20px; font-size: 18px; margin-left: 10px; margin-right: 10px;">{{this.ship.price}}  € </h6>
+                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">If you cancel reservation, you pay  {{this.ship.cancelationConditions}}%  of price. </h4>
+      
+                   
+                </div>
+            </div>
+
+            <div class="card2">
+                <div class="col">
+                    <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Type of boat: {{this.ship.type}}</h4>
+
+                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Number of people who can be in ship:  {{this.ship.capacity}}</h4>
+      
+                </div>  
+            </div>
+            <div class="card1">
+                <div class="col" >
+                    <h4 class="text-white row" style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rules of boat:</h4>
+                  <div *ngFor="let rule of rules">
+                    <h6 class="text-white row" style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;"> -{{this.rule.ruleDescription}}</h6>
+         
+                  </div>
+               </div>  
+            </div>
+    
+            
+            
+    
+           
+          
+        </div> 
+    </div>
+    

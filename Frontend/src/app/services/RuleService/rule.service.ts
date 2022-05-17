@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RuleService {
- 
+  
   
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
@@ -18,4 +18,11 @@ export class RuleService {
       `${this.apiServerUrl}/rules/findRulesByCottage/${ id}`);
     }
 
+    findShipRulebyId(id: string): Observable<RuleDto[]>{
+      return this.http.get<RuleDto[]>(
+        `${this.apiServerUrl}/rules/findRulesByBoat/${ id}`);
+      }
+  
+  
+   
 }

@@ -10,6 +10,7 @@ export interface ShipDto {
     price:string;
     capacity:string;
     type:string;
+    cancelationConditions:string;
 
 
   

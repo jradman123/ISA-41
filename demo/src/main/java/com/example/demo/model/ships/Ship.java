@@ -107,7 +107,7 @@ public class Ship {
     
     
     @Column(name = "cancelationConditions", nullable = false)
-	private Double cancelationConditions;// 0% for free
+	private Integer cancelationConditions;// 0% for free
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "shipOwner")

@@ -9,6 +9,7 @@ import { ShipDto } from 'src/app/interfaces/ship-list-view';
 })
 export class ShipService {
  
+ 
 
   private apiServerUrl = environment.apiBaseUrl;
  
@@ -18,6 +19,11 @@ export class ShipService {
   findByEmail() : Observable<ShipDto[]> {
     return this.http.get<ShipDto[]>(
       `${this.apiServerUrl}/ships/findOwnerShips/${ localStorage.getItem('email')}`);
+    }
+
+  findbyId(id: string) {
+    return this.http.get<ShipDto>(
+      `${this.apiServerUrl}/ships/findShip/${ id}`);
     }
 }
 

@@ -24,6 +24,7 @@ public class ShipDto {
     private String image;
     private String capacity;
     private String type;
+    private String cancelationConditions;
 
 
     public ShipDto(Ship ship) {
@@ -37,5 +38,6 @@ public class ShipDto {
         this.price = Double.toString(ship.getPrice());
         this.capacity = Integer.toString(ship.getCapacity());
         this.type=ship.getType();
+        this.cancelationConditions=Integer.toString(ship.getCancelationConditions());
     }
 }

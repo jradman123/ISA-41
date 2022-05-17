@@ -22,7 +22,7 @@ export class ShipListComponent implements OnInit {
 
   view(id:string){
     this.router.navigate(['shipOwner/ship-profile/'+id]);
-    console.log(id);
+
   }
 
 }

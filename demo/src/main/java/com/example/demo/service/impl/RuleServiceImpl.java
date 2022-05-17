@@ -31,10 +31,13 @@ public class RuleServiceImpl implements RuleService {
     @Override
     public List<RuleDto> getRulesByCottage(Long id) {
         List<RuleDto> ruleDto = new ArrayList<>();
+        System.out.println("Enter your name: ");
         for (Rules rule : ruleRepository.findAll()) {
+
             if (rule.getCottage() != null) {
                 if (id.equals(rule.getCottage().getId())) {
                     ruleDto.add(new RuleDto(rule));
+
                 }
             }
         }

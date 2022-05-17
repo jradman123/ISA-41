@@ -39,6 +39,7 @@ public class CottageController {
         return this.cottageService.createCottage(newCottage);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     //isto radi vlasnik vikendice
     @GetMapping(value = "/findCottage/{id}")
     public CottageDto findCottage(@PathVariable Long id) {

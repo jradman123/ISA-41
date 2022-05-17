@@ -9,22 +9,22 @@ import {  Router } from '@angular/router';
 })
 export class CottageListComponent implements OnInit {
 
-  @Input() cottageOwner: any;
+  
   cottages: CottageDto[] = [];
-  cottagesAll: CottageDto[] = [];
-  email!: string | null;
-  constructor(private cottageService:CottageService,  private router: Router,) { }
+ 
+  constructor(private cottageService:CottageService,  private router: Router) { }
  
 
   ngOnInit(): void {
     this.cottageService.findByEmail().subscribe((data) => {
       this.cottages = data;
-      this.cottagesAll = data;
+   
     });
   }
 
   view(id:string){
     this.router.navigate(['cottageOwner/cottage-profile/'+id]);
+    console.log(id);
   }
 
 }

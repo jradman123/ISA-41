@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CottageService } from 'src/app/services/CottageService/cottage.service';
+import { CottageDto } from 'src/app/interfaces/cottage-list-view';
+import { ActivatedRoute } from '@angular/router';
+import { AsyncKeyword } from 'typescript';
+import { RuleDto } from 'src/app/interfaces/rule-dto';
+import { RuleService } from 'src/app/services/RuleService/rule.service';
 
 @Component({
   selector: 'app-cottage-profile',
@@ -7,9 +13,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CottageProfileComponent implements OnInit {
 
-  constructor() { }
+ 
+  cottage!: CottageDto;
+  id:any;
+  rules:RuleDto[]=[];
+  
+  constructor(private cottageService:CottageService,private router:ActivatedRoute,private ruleService:RuleService) {
+    
+   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit():void {
+    this.id = +this.router.snapshot.paramMap.get('id')!;
+    this.cottageService.findbyId(this.id).subscribe((data) => {
+      this.cottage = data;});
+    
+      this.ruleService.findRulebyId(this.id).subscribe((data) => {
+        this.rules = data;
+        console.log(this.rules);
+      });
 
+
+
+}
 }

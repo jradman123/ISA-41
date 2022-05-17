@@ -15,18 +15,18 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RuleDto {
-    private Long id;
+    private String id;
     private String ruleDescription;
     private boolean isDeleted;
-    private String cottageOwnerId;
-    private String shipOwnerId;
+    private String cottageId;
+    private String shipId;
 
     public RuleDto(Rules rules) {
-            this.id=rules.getId();
+            this.id=Long.toString(rules.getId());
             this.ruleDescription=rules.getRuleDescription();
             this.isDeleted=rules.isDeleted();
-            this.shipOwnerId=Long.toString(rules.getShip().getId());
-            this.cottageOwnerId=Long.toString(rules.getCottage().getId());
+            this.shipId=Long.toString(rules.getShip().getId());
+            this.cottageId=Long.toString(rules.getCottage().getId());
 
     }
 }

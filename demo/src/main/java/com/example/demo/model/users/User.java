@@ -81,6 +81,23 @@ public class User {
 		this.deleted = deleted;
 	}
 
+	public User(Integer id, String firstName, String lastName,String password,
+				String email, String phoneNumber, Address address, String jmbg, UserType userType,
+				Boolean isActivated, boolean deleted) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.jmbg = jmbg;
+		this.userType = userType;
+		this.isActivated = isActivated;
+		this.deleted = deleted;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

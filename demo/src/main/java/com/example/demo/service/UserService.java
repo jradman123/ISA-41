@@ -13,5 +13,6 @@ public interface UserService {
     Instructor saveInstructor(RegistrationRequestDto request);
     ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
     CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
+    RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest);
     void activateAccount(String email);
 }

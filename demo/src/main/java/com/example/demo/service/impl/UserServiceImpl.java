@@ -97,6 +97,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) {
+		RegisteredUser registeredUser = new RegisteredUser();
+		registeredUser.setFirstName(userRequest.getFirstName());
+		registeredUser.setLastName(userRequest.getLastName());
+		registeredUser.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry()));
+		registeredUser.setEmail(userRequest.getEmail());
+		registeredUser.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		registeredUser.setActivated(true);
+		registeredUser.setDeleted(false);
+		registeredUser.setPhoneNumber(userRequest.getPhoneNumber());
+		registeredUser.setUserType(UserType.Client);
+		RegisteredUser saved = userRepository.save(registeredUser);
+		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+
+		return saved;
+	}
+
+	@Override
 	public void activateAccount(String email) {
 		User user = userRepository.findByEmail(email);
 		user.setActivated(true);

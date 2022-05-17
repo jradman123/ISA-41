@@ -77,6 +77,9 @@ public class AuthenticationController {
         } else if(userRequest.getTypeOfRegistration().equals("COTTAGE OWNER")) {
             CottageOwner cottageOwner = this.userService.saveCottageOwner(userRequest);
             return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
+        } else if(userRequest.getTypeOfRegistration().equals("CLIENT")) {
+            RegisteredUser registeredUser = this.userService.saveRegisteredUser(userRequest);
+            return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
         return new ResponseEntity<String>("Error!", HttpStatus.INTERNAL_SERVER_ERROR);
     }

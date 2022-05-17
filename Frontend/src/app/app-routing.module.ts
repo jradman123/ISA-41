@@ -11,6 +11,9 @@ import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashb
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
 import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
 import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
+import { ShipOwnerDashboardComponent } from './components/ship-owner-dashboard/ship-owner-dashboard/ship-owner-dashboard.component';
+import { ShipListComponent } from './components/ship-list/ship-list/ship-list.component';
+
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -35,27 +38,45 @@ const routes: Routes = [
   {
     path: 'cottageOwner',
     component: CottageOwnerDashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: CottageListComponent,
+        canActivate: [AuthGuard]
        
       
       }, 
         {
           path:'cottage-profile/:id',
           component: CottageProfileComponent,
+          canActivate: [AuthGuard]
         
         },
         {
           path:'add-cottage',
           component: AddCottageComponent,
+          canActivate: [AuthGuard]
         
         },
     
     ],
    
   }, 
+  {
+    path: 'shipOwner',
+    component: ShipOwnerDashboardComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ShipListComponent,
+        canActivate: [AuthGuard]
+       
+      
+      }
+    ]
+  },
 
  
 ];

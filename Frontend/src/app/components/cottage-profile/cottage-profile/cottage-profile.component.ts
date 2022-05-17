@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AsyncKeyword } from 'typescript';
 import { RuleDto } from 'src/app/interfaces/rule-dto';
 import { RuleService } from 'src/app/services/RuleService/rule.service';
+import { UtilityDto } from 'src/app/interfaces/utility-dto';
+import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 
 @Component({
   selector: 'app-cottage-profile',
@@ -17,8 +19,9 @@ export class CottageProfileComponent implements OnInit {
   cottage!: CottageDto;
   id:any;
   rules:RuleDto[]=[];
+  utilities:UtilityDto[]=[];
   
-  constructor(private cottageService:CottageService,private router:ActivatedRoute,private ruleService:RuleService) {
+  constructor(private cottageService:CottageService,private router:ActivatedRoute,private ruleService:RuleService,private utilityService:UtilityService) {
     
    }
 
@@ -29,8 +32,15 @@ export class CottageProfileComponent implements OnInit {
     
       this.ruleService.findRulebyId(this.id).subscribe((data) => {
         this.rules = data;
-        console.log(this.rules);
+       
       });
+
+      this.utilityService.findUtilityById(this.id).subscribe((data) => {
+        this.utilities = data;
+        console.log(this.utilities);
+      });
+
+      
 
 
 

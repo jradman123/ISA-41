@@ -33,6 +33,8 @@ public class CottageController {
         return this.cottageService.findAll();
     }
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
     //ovo samo moze da radi vlasnik vikendice
     @PostMapping(value = "/createCottage")
     public Cottage createCottage(@RequestBody CreateCottageDto newCottage) {

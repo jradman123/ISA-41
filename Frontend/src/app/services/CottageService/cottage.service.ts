@@ -8,6 +8,7 @@ import { CottageDto } from 'src/app/interfaces/cottage-list-view';
   providedIn: 'root'
 })
 export class CottageService {
+  
 
  
 
@@ -24,5 +25,11 @@ export class CottageService {
         return this.http.get<CottageDto>(
           `${this.apiServerUrl}/cottages/findCottage/${ id}`);
         }
+      
+    saveCottage(newCottage: CottageDto) {
+        return this.http.post(`${this.apiServerUrl}/cottages/createCottage`, newCottage, {
+          responseType: 'text',
+        });
       }
 
+    }

@@ -7,7 +7,7 @@
                   <li class = "list-group-item">
                   <strong>{{cottage.name}}</strong>
                   </li>
-                  <li style="height: 70px;" class="list-group-item">{{cottage.address}}</li>  
+                  <li style="height: 70px;" class="list-group-item">{{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}</li>  
                   <li style="height: 70px;" class="list-group-item">{{cottage.description}}</li> 
                   <li class="list-group-item">
                       <button  class="btn btn-primary" (click)="view(cottage.id)"  >View</button> 

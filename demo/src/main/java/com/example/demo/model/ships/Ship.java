@@ -96,14 +96,11 @@ public class Ship {
 	
     @Column(name = "fishingEquipment", nullable = false)
 	private String fishingEquipment;
-    
-    
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "ship_navigational_equipment",
-            joinColumns = @JoinColumn(name = "ship_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-    private Set<NavigationalEquipment> navigationalEquipments;
+
+
+	@OneToMany
+	@JoinColumn(name = "ship_id")
+	private Set<NavigationalEquipment> navigationalEquipments;
     
     
     @Column(name = "cancelationConditions", nullable = false)

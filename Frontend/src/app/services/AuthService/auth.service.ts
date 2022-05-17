@@ -54,4 +54,24 @@ login(model: any): Observable<AuthenticatedUserDto> {
     })
   );
 }
+
+logout() {
+  this.loginStatus.next(false);
+  localStorage.removeItem('token');
+  localStorage.removeItem('role');
+  localStorage.removeItem('currentUser');
+  this.router.navigate(['/login']);
+}
+
+loggedIn(): boolean {
+  const token = localStorage.getItem('token');
+  return true;
+}
+
+get isLoggedIn() {
+  return this.loginStatus.asObservable();
+}
+
+
+
 }

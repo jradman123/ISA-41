@@ -16,6 +16,7 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-for-reason.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-
     AdminDashboardComponent,
     AdminNavbarComponent,
     RegistrationRequestsComponent,
-    DialogForReasonComponent
+    DialogForReasonComponent,
+    AdminProfileComponent
   ],
   imports: [
     BrowserModule,

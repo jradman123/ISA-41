@@ -9,9 +9,18 @@
       <span class="menu-spacer"></span>
       <div>
         <a mat-button  class="nav-link" routerLinkActive="active" [routerLink]="['/admin']"> Registration requests </a>
-        <a mat-button class="nav-link"  [routerLink]="['/requests']"> Profile </a>
+        <a mat-button class="nav-link"  [routerLink]="['/admin/profile']"> Profile </a>
         <a mat-button class="nav-link"  [routerLink]="['/requests']"> Add other administrator </a>
         
+          <button
+            mat-button
+            *ngIf="loginStatus$"
+            class="btn btn-primary btn-md"
+            (click)="onLogout()"
+          >
+            Log out
+          </button>
+          
   
       </div>
     </mat-toolbar-row>

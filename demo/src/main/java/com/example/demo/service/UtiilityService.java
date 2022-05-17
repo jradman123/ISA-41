@@ -8,4 +8,6 @@ public interface UtiilityService {
 
 
     List<UtilityDto> getUtilityByCottage(Long id);
+
+    List<UtilityDto> getUtilitiesbyBoat(Long id);
 }

@@ -5,19 +5,24 @@ import { ActivatedRoute } from '@angular/router';
 import { AsyncKeyword } from 'typescript';
 import { RuleDto } from 'src/app/interfaces/rule-dto';
 import { RuleService } from 'src/app/services/RuleService/rule.service';
+import { UtilityDto } from 'src/app/interfaces/utility-dto';
+import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 
 
 @Component({
   selector: 'app-ship-profile',
   templateUrl: './ship-profile.component.html',
   styleUrls: ['./ship-profile.component.css']
+
 })
 export class ShipProfileComponent implements OnInit {
 
   ship!: ShipDto;
   id:any;
   rules:RuleDto[]=[];
-  constructor(private shipService:ShipService,private router:ActivatedRoute,private  ruleService:RuleService) {
+  utilities:UtilityDto[]=[];
+ 
+  constructor(private shipService:ShipService,private router:ActivatedRoute,private  ruleService:RuleService,private utilityService:UtilityService) {
   }
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
@@ -29,6 +34,10 @@ export class ShipProfileComponent implements OnInit {
        
       });
     
+      this.utilityService.findShipUtilityById(this.id).subscribe((data) => {
+        this.utilities = data;
+       
+      });
   }
 
 }

@@ -26,5 +26,13 @@ public class UtilityController {
         return utilityService.getUtilityByCottage(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/findUtilitiesByBoat/{id}")
+    public List<UtilityDto> getUtilitiesbyBoat(@PathVariable Long id) {
+
+
+        return utilityService.getUtilitiesbyBoat(id);
+    }
+
 
 }

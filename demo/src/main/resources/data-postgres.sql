@@ -77,3 +77,9 @@ INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 3);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (10.0, 2, 5);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 2, 4);
+
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 1);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 5);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 4);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (10.0, 2, 5);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 2, 4);

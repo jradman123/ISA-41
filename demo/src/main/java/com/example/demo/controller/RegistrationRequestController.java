@@ -18,7 +18,6 @@ public class RegistrationRequestController {
     @Autowired
     private RegistrationRequestService registrationRequestService;
 
-   // @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/approve/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> approveRequest(@PathVariable String email) {
@@ -27,7 +26,6 @@ public class RegistrationRequestController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/reject/{email}")
     public ResponseEntity<List<RegistrationRequestViewDto>> rejectRequest(@PathVariable String email, @RequestBody String reason) {

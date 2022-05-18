@@ -30,8 +30,7 @@ public class UserController {
                     HttpStatus.OK);
 
     }
-
-    @CrossOrigin(origins = "http://localhost:4200")
+    
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/updatePersonalData")
     public ResponseEntity<PersonalData> updatePersonalData(@RequestBody PersonalData personalData, HttpServletRequest request) {

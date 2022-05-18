@@ -102,17 +102,31 @@ export class RegistrationComponent implements OnInit {
   }
 
   createUser(): void {
-    this.newUser.firstName = this.createForm.value.firstName;
-    this.newUser.lastName = this.createForm.value.lastName;
-    this.newUser.streetName = this.createForm.value.street;
-    this.newUser.streetNumber = this.createForm.value.streetNumber;
-    this.newUser.city = this.createForm.value.city;
-    this.newUser.country = this.createForm.value.country;
-    this.newUser.phoneNumber = this.createForm.value.phone;
-    this.newUser.email = this.createForm.value.email;
-    this.newUser.password = this.createForm.value.password;
-    this.newUser.typeOfRegistration = this.createForm.value.type;
-    this.newUser.descriptionOfRegistration = this.createForm.value.description;
+    /*let role = this.createForm.get('role')?.value;
+    if(role == "CLIENT"){
+      this.newUser.firstName = this.createForm.value.firstName;
+      this.newUser.lastName = this.createForm.value.lastName;
+      this.newUser.streetName = this.createForm.value.street;
+      this.newUser.streetNumber = this.createForm.value.streetNumber;
+      this.newUser.city = this.createForm.value.city;
+      this.newUser.country = this.createForm.value.country;
+      this.newUser.phoneNumber = this.createForm.value.phone;
+      this.newUser.email = this.createForm.value.email;
+      this.newUser.password = this.createForm.value.password;
+      this.newUser.typeOfRegistration = this.createForm.value.type;
+    } else {*/
+      this.newUser.firstName = this.createForm.value.firstName;
+      this.newUser.lastName = this.createForm.value.lastName;
+      this.newUser.streetName = this.createForm.value.street;
+      this.newUser.streetNumber = this.createForm.value.streetNumber;
+      this.newUser.city = this.createForm.value.city;
+      this.newUser.country = this.createForm.value.country;
+      this.newUser.phoneNumber = this.createForm.value.phone;
+      this.newUser.email = this.createForm.value.email;
+      this.newUser.password = this.createForm.value.password;
+      this.newUser.typeOfRegistration = this.createForm.value.type;
+      this.newUser.descriptionOfRegistration = this.createForm.value.description;
+    //}
   }
 
 }

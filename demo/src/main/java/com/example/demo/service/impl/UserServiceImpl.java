@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import com.example.demo.dto.RegistrationRequestDto;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RegistrationRequestRepository registrationRequestRepository;
+
+	@Autowired
+	private RegistrationForClientsServiceImpl registrationForClientsService;
 
 	@Override
 	public List<User> findAll() {
@@ -97,7 +101,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) {
+	public RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) throws UnknownHostException {
 		RegisteredUser registeredUser = new RegisteredUser();
 		registeredUser.setFirstName(userRequest.getFirstName());
 		registeredUser.setLastName(userRequest.getLastName());
@@ -108,8 +112,10 @@ public class UserServiceImpl implements UserService {
 		registeredUser.setDeleted(false);
 		registeredUser.setPhoneNumber(userRequest.getPhoneNumber());
 		registeredUser.setUserType(UserType.Client);
+		registeredUser.setDescriptionOfRegistration("---");
 		RegisteredUser saved = userRepository.save(registeredUser);
-		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+		RegisteredUser saved2 = registrationForClientsService.sendVerificationEmail(saved);
+		//RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
 
 		return saved;
 	}

@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.users.*;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public interface UserService {
@@ -13,6 +14,6 @@ public interface UserService {
     Instructor saveInstructor(RegistrationRequestDto request);
     ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
     CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
-    RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest);
+    RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) throws UnknownHostException;
     void activateAccount(String email);
 }

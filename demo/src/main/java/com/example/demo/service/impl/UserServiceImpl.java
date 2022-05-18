@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
+import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.UserType;
@@ -101,6 +102,29 @@ public class UserServiceImpl implements UserService {
 		User user = userRepository.findByEmail(email);
 		user.setActivated(true);
 		userRepository.save(user);
+	}
+
+	@Override
+	public PersonalData getPersonalData(String email) {
+		User user = findByEmail(email);
+		return new PersonalData(user.getFirstName(),user.getLastName(),user.getAddress().getStreetNumber(),
+				user.getAddress().getStreetName(),user.getAddress().getCity(),user.getAddress().getCountry(),
+				user.getPhoneNumber(),user.getEmail());
+	}
+
+	@Override
+	public PersonalData updatePersonalData(PersonalData data,String email) {
+		User user = findByEmail(email);
+		user.setFirstName(data.getFirstName());
+		user.setLastName(data.getLastName());
+		user.setPhoneNumber(data.getPhoneNumber());
+		user.getAddress().setStreetName(data.getStreetName());
+		user.getAddress().setStreetNumber(data.getStreetNumber());
+		user.getAddress().setCity(data.getCity());
+		user.getAddress().setCountry(data.getCountry());
+		User saved = save(user);
+		return new PersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
+				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail());
 	}
 
 

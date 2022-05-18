@@ -29,7 +29,8 @@ export class CottageProfileComponent implements OnInit {
   ngOnInit():void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.cottageService.findbyId(this.id).subscribe((data) => {
-      this.cottage = data;});
+      this.cottage = data;
+    });
     
       this.ruleService.findRulebyId(this.id).subscribe((data) => {
         this.rules = data;
@@ -47,6 +48,13 @@ editCottage() {
   this.route.navigate(['cottageOwner/edit-cottage/'+this.id]);
 }
 
-deleteCottage() {}
+deleteCottage() {
+  this.cottageService.deleteCottage(this.id)
+    .subscribe(data => {
+  
+      this.route.navigate(['cottageOwner']);
+
+    });
+}
 
 }

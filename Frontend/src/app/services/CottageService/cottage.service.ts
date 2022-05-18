@@ -8,9 +8,9 @@ import { CottageDto } from 'src/app/interfaces/cottage-list-view';
   providedIn: 'root'
 })
 export class CottageService {
+  
  
 
- 
 
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient, private router : Router,private route:ActivatedRoute) {}
@@ -33,11 +33,17 @@ export class CottageService {
       }
 
       editCottage(cottage: CottageDto) {
-       console.log(cottage)
+     
         return this.http.put(`${this.apiServerUrl}/cottages/editCottage`, cottage, {
           responseType: 'text',
          
         });
       }
       
-    }
+      deleteCottage(id: any) {
+        return this.http.delete<CottageDto>(
+          `${this.apiServerUrl}/cottages/deleteCottage/${ id}`);
+        }
+       }
+     
+    

@@ -48,6 +48,7 @@ public class CottageController {
         return this.cottageService.findCottage(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     //radi samo vlasnik vikendice
     @DeleteMapping(value = "/deleteCottage/{id}")
     public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {

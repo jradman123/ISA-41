@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
           if(localStorage.getItem('role') == "Admin"){
              this._router.navigate(['/admin']);
           }
+          else if(localStorage.getItem('role') == "CottageAdvertiser"){
+            this._router.navigate(['/cottageOwner']);
+         }
        },
         error: (err:any) => {
           this._snackBar.open("Email or password are incorrect.Try again,please.","Dismiss"); 
@@ -40,4 +43,4 @@ export class LoginComponent implements OnInit {
      this._service.login(this.form.getRawValue()).subscribe(loginObserver);
     }
 
-}
+} 

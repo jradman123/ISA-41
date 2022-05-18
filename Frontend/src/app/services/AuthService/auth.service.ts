@@ -48,10 +48,31 @@ login(model: any): Observable<AuthenticatedUserDto> {
         localStorage.setItem('token', response.token.accessToken);
         localStorage.setItem('currentUser', JSON.stringify(response));
         localStorage.setItem('role' ,response.role)
+        localStorage.setItem('email' ,response.email)
         this.currentUserSubject.next(response);
       }
       return this.user;
     })
   );
 }
+
+logout() {
+  this.loginStatus.next(false);
+  localStorage.removeItem('token');
+  localStorage.removeItem('role');
+  localStorage.removeItem('currentUser');
+  this.router.navigate(['/login']);
+}
+
+loggedIn(): boolean {
+  const token = localStorage.getItem('token');
+  return true;
+}
+
+get isLoggedIn() {
+  return this.loginStatus.asObservable();
+}
+
+
+
 }

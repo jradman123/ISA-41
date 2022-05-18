@@ -16,6 +16,13 @@ import { AdminNavbarComponent } from './components/admin-navbar/admin-navbar.com
 import { RegistrationRequestsComponent } from './components/registration-requests/registration-requests.component';
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-for-reason.component';
+import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
+import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
+import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
+import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
+import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +33,16 @@ import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-
     AdminDashboardComponent,
     AdminNavbarComponent,
     RegistrationRequestsComponent,
-    DialogForReasonComponent
+
+    DialogForReasonComponent,
+    AdminProfileComponent,
+
+    CottageOwnerDashboardComponent,
+    CottageOwnerNavbarComponent,
+    CottageListComponent,
+    CottageProfileComponent,
+    AddCottageComponent
+ 
   ],
   imports: [
     BrowserModule,

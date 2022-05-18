@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
+import { RuleDto } from 'src/app/interfaces/rule-dto';
 import { HttpClient } from '@angular/common/http';
-import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UtilityService {
+export class RuleService {
+ 
   
-
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  findUtilityById(id: string):Observable<UtilityDto[]> {
-    return this.http.get<UtilityDto[]>(
-      `${this.apiServerUrl}/utilities/findUtilitiesByCottage/${ id}`);
+  findRulebyId(id: string): Observable<RuleDto[]>{
+    return this.http.get<RuleDto[]>(
+      `${this.apiServerUrl}/rules/findRulesByCottage/${ id}`);
     }
 
-
-  }
-
+}

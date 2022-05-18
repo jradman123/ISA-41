@@ -15,21 +15,28 @@ import java.util.Set;
 public class CottageDto {
 
 
-    public Long id;
+    public String id;
     public String name;
     public String description;
-    public String address;
+    private String streetNumber;
+    private String streetName;
+    private String city;
+    private String country;
     public String price;
-    public int numberOfPeople;
+    public String numberOfPeople;
+    private String ownerEmail;
 
     public  CottageDto(Cottage cottage){
-        this.id = cottage.getId();
+        this.id = Long.toString(cottage.getId());
         this.name = cottage.getName();
         this.description = cottage.getDescription();
-        this.address= cottage.getAddress().toString();
+        this.streetName= cottage.getAddress().getStreetName();
+        this.streetNumber=cottage.getAddress().getStreetNumber();
+        this.city=cottage.getAddress().getCity();
+        this.country=cottage.getAddress().getCountry();
         this.price = Double.toString(cottage.getPrice());
-        this.numberOfPeople = cottage.getNumberOfPerson();
-
+        this.numberOfPeople = Integer.toString(cottage.getNumberOfPerson());
+        this.ownerEmail=cottage.getCottageOwner().getEmail();
     }
 
 }

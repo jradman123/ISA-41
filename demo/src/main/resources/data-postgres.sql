@@ -46,18 +46,13 @@ INSERT INTO public.ships(
        	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, false,5.0,'');
 
 ---cottage-rules----
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No drinking',false,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No smoking',false,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('20+',false,2);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No pets',false,2);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id) VALUES ('No noise after 12',false,3);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No drinking',false,1,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No smoking',false,1,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('20+',false,2,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No pets',false,2,1);
+INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No noise after 12',false,3,1);
 
----cottage-rules----
-INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No drinking',false,1);
-INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No smoking',false,1);
-INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('20+',false,2);
-INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No pets',false,2);
-INSERT INTO public.rules(rule_description,is_deleted,ship_id) VALUES ('No noise after 12',false,1);
+
 
 ---image---
 
@@ -65,3 +60,20 @@ INSERT INTO public.image(url, cottage_id, is_deleted)
 	VALUES ('cottage.jpg', 1, false);
 INSERT INTO public.image(url, cottage_id, is_deleted)
 	VALUES ('cottage2.jpg', 1, false);
+
+-----utilities---
+INSERT INTO public.utility(name)	VALUES ('TV');
+INSERT INTO public.utility(name)	VALUES ('Free food');
+INSERT INTO public.utility(name)	VALUES ('Free drinks');
+INSERT INTO public.utility(name)	VALUES ('Wifi');
+INSERT INTO public.utility(name)	VALUES ('Washing machine');
+INSERT INTO public.utility(name)	VALUES ('Speakers');
+INSERT INTO public.utility(name)	VALUES ('Sauna');
+
+---cottage utilities---
+
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 1);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 2);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 3);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (10.0, 2, 5);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 2, 4);

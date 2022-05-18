@@ -61,5 +61,12 @@ public class CottageController {
         return this.cottageService.getOwnerCottages(email);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    //ovo samo moze da radi vlasnik vikendice
+    @PutMapping(value = "/editCottage")
+    public CottageDto editCottage(@RequestBody CottageDto newCottage) {
+        return this.cottageService.editCottage(newCottage);
+
+    }
 
 }

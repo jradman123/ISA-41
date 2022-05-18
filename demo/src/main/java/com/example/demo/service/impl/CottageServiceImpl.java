@@ -90,5 +90,25 @@ public class CottageServiceImpl implements CottageService {
         return new ResponseEntity<>(id, HttpStatus.OK);
 
     }
+
+    public CottageDto editCottage(CottageDto cottageDto) {
+
+        for (Cottage cottage: cottageRepository.findAll()){
+            if(cottageDto.getId().equals(cottage.getId())){
+                cottage.setName(cottageDto.getName());
+                cottage.setDescription(cottageDto.getDescription());
+                cottage.setPrice(Double.parseDouble(cottageDto.getPrice()));
+                cottage.getAddress().setStreetNumber(cottageDto.getStreetNumber());
+                cottage.getAddress().setStreetName(cottageDto.getStreetName());
+                cottage.getAddress().setCity(cottageDto.getCity());
+                cottage.getAddress().setCountry(cottageDto.getCountry());
+
+                cottageRepository.save(cottage);
+                return new CottageDto(cottage);
+
+            }
+        }
+        return null;
+    }
 }
 

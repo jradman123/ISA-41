@@ -8,7 +8,7 @@ import { CottageDto } from 'src/app/interfaces/cottage-list-view';
   providedIn: 'root'
 })
 export class CottageService {
-  
+ 
 
  
 
@@ -32,4 +32,12 @@ export class CottageService {
         });
       }
 
+      editCottage(cottage: CottageDto) {
+       console.log(cottage)
+        return this.http.put(`${this.apiServerUrl}/cottages/editCottage`, cottage, {
+          responseType: 'text',
+         
+        });
+      }
+      
     }

@@ -48,4 +48,5 @@ editCottage() {
 }
 
 deleteCottage() {}
+
 }

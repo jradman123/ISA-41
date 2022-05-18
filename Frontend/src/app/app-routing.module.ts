@@ -14,6 +14,7 @@ import { AddCottageComponent } from './components/add-cottage/add-cottage/add-co
 import { ShipOwnerDashboardComponent } from './components/ship-owner-dashboard/ship-owner-dashboard/ship-owner-dashboard.component';
 import { ShipListComponent } from './components/ship-list/ship-list/ship-list.component';
 import { ShipProfileComponent } from './components/ship-profile/ship-profile/ship-profile.component';
+import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -56,6 +57,12 @@ const routes: Routes = [
         {
           path:'add-cottage',
           component: AddCottageComponent,
+          canActivate: [AuthGuard]
+        
+        },
+        {
+          path:'edit-cottage/:id',
+          component: EditCottageComponent,
           canActivate: [AuthGuard]
         
         },

@@ -26,6 +26,7 @@ import { ShipOwnerDashboardComponent } from './components/ship-owner-dashboard/s
 import { ShipOwnerNavbarComponent } from './components/ship-owner-navbar/ship-owner-navbar/ship-owner-navbar.component';
 import { ShipListComponent } from './components/ship-list/ship-list/ship-list.component';
 import { ShipProfileComponent } from './components/ship-profile/ship-profile/ship-profile.component';
+import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ShipProfileComponent } from './components/ship-profile/ship-profile/shi
     ShipOwnerDashboardComponent,
     ShipOwnerNavbarComponent,
     ShipListComponent,
-    ShipProfileComponent
+    ShipProfileComponent,
+    EditCottageComponent
  
   ],
   imports: [

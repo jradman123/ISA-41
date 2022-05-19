@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class RuleService {
  
+ 
   
   
   
@@ -30,6 +31,11 @@ export class RuleService {
           `${this.apiServerUrl}/rules/deleteRyleByCottage/${ id}/${idCottage}`);
      
       }
-  
+      addRule(rule: RuleDto) {
+        return this.http.post(`${this.apiServerUrl}/rules/createCottageRule`, rule, {
+          responseType: 'text',
+        });
+     
+      }
    
 }

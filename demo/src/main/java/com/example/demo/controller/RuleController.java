@@ -52,6 +52,7 @@ public class RuleController {
         return ruleService.getRulesByBoat(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     //ovo samo moze da radi vlasnik vikendice
     @PostMapping(value = "/createCottageRule")
     public Rules createCottageRule(@RequestBody RuleDto newRule) {

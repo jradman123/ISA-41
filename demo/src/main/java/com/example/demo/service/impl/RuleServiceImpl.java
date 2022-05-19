@@ -77,12 +77,13 @@ public class RuleServiceImpl implements RuleService {
 
     public Rules createCottageRule(RuleDto newRule) {
         for(Cottage cottage: this.cottageRepository.findAll()){
-            if(newRule.getId().equals(cottage.getId())){
+            if(newRule.getCottageId().equals(cottage.getId())){
                 Rules rule = new Rules();
                 rule.setCottage(cottage);
                 rule.setRuleDescription(newRule.getRuleDescription());
-                rule.setDeletedbyCottages(newRule.isDeletedbyCottage());
-                rule.setDeletedByShip(newRule.isDeletedbyShip());
+                rule.setDeletedbyCottages(false);
+                rule.setDeletedByShip(false);
+                rule.setShip(null);
 
                 this.ruleRepository.save(rule);
                 return rule;

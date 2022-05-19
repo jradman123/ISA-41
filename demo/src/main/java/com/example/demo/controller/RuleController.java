@@ -22,7 +22,8 @@ public class RuleController {
     @Autowired
     private RuleServiceImpl ruleService;
 
-   @GetMapping(value="/findRulesByCottage/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/findRulesByCottage/{id}")
     public List<RuleDto> getRulesByCottage(@PathVariable Long id) {
         return ruleService.getRulesByCottage(id);
     }
@@ -30,14 +31,14 @@ public class RuleController {
 
 
     @GetMapping(value = "/findRule/{id}")
-    public RuleDto findCottage(@PathVariable Long id) {
+    public RuleDto findRule(@PathVariable Long id) {
         return this.ruleService.findRule(id);
     }
 
 
 
     @DeleteMapping(value = "/deleteRule/{id}")
-    public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
+    public ResponseEntity<Long> deleteRule(@PathVariable Long id) {
         return this.ruleService.deleteRule(id);
     }
 

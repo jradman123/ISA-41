@@ -19,6 +19,12 @@ import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { DialogForChangingPasswordComponent } from './components/dialog-for-changing-password/dialog-for-changing-password.component';
 import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
+import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
+import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
+import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
+import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
+import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +38,13 @@ import { AdminRegistrationComponent } from './components/admin-registration/admi
     DialogForReasonComponent,
     AdminProfileComponent,
     DialogForChangingPasswordComponent,
-    AdminRegistrationComponent
+    AdminRegistrationComponent,
+    CottageOwnerDashboardComponent,
+    CottageOwnerNavbarComponent,
+    CottageListComponent,
+    CottageProfileComponent,
+    AddCottageComponent
+ 
   ],
   imports: [
     BrowserModule,

@@ -124,6 +124,9 @@ public class UserServiceImpl implements UserService {
 		RegisteredUser saved2 = registrationForClientsService.sendVerificationEmail(saved);
 		//RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
 
+		return saved;
+	}
+
 	public Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto) {
 		Administrator administrator = new Administrator();
 		administrator.setFirstName(administratorRegistrationDto.getFirstName());

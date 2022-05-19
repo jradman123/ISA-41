@@ -1,5 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AdministratorRegistrationDto;
+import com.example.demo.dto.ChangePasswordDto;
+import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.users.*;
 
@@ -15,5 +18,9 @@ public interface UserService {
     ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
     CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
     RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) throws UnknownHostException;
+    Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto);
     void activateAccount(String email);
+    PersonalData getPersonalData(String email);
+    PersonalData updatePersonalData(PersonalData data,String email);
+    void changePassword(String email, ChangePasswordDto changePasswordDto);
 }

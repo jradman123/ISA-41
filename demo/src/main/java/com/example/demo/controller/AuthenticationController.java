@@ -98,4 +98,13 @@ public class AuthenticationController {
         return new ResponseEntity<>("Successfully registered!", HttpStatus.OK);
 
     }
+    @PreAuthorize("hasAuthority('Admin')")
+    @PostMapping(value = "/addNewAdmin")
+    public ResponseEntity<String> addNewAdmin(@RequestBody AdministratorRegistrationDto administratorRegistrationDto) {
+        userService.saveAdministrator(administratorRegistrationDto);
+        return new ResponseEntity<>("Success",HttpStatus.OK);
+
+
+    }
+
 }

@@ -1,9 +1,9 @@
-<div class="container" style="align-items: center;">
-    <div class="col-12 text-center">
-      <h2>Registration</h2>
-    </div>
+<div class="container" >
+  <mat-card>
+    <mat-card-title>Registration</mat-card-title>
     <br/><br/>
-    <div class="container" [formGroup]="createForm" style="width: 70%">
+    <mat-card-content>
+    <div class="container" [formGroup]="createForm" >
       <br />
       <div class="separateMe">
         <div style="width: 100%; display: flex">
@@ -221,15 +221,18 @@
         </div>
 
       <br /><br />
-      <div style="align-self: left;">
+      <div >
         <button
           mat-raised-button
           (click)="onSubmit()"
-          color="accent"
+          color="primary"
           class="icon-display"
         >
           Register
         </button>
       </div>
+      </div>
+    </mat-card-content>
+    </mat-card>
     <br />
   

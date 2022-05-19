@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/AuthService/auth.service';
 export class AdminNavbarComponent implements OnInit {
 
   loginStatus$: Observable<boolean>;
-  constructor(private authService : AuthService , private router : Router) {
+  constructor(public authService : AuthService , private router : Router) {
     this.loginStatus$ = this.authService.isLoggedIn;
     console.log(this.loginStatus$);
    }

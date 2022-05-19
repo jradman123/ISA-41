@@ -17,6 +17,8 @@ import { RegistrationRequestsComponent } from './components/registration-request
 import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-for-reason.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
+import { DialogForChangingPasswordComponent } from './components/dialog-for-changing-password/dialog-for-changing-password.component';
+import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 import { CottageOwnerDashboardComponent } from './components/cottage-owner-dashboard/cottage-owner-dashboard/cottage-owner-dashboard.component';
 import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/cottage-owner-navbar/cottage-owner-navbar.component';
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
@@ -33,10 +35,10 @@ import { AddCottageComponent } from './components/add-cottage/add-cottage/add-co
     AdminDashboardComponent,
     AdminNavbarComponent,
     RegistrationRequestsComponent,
-
     DialogForReasonComponent,
     AdminProfileComponent,
-
+    DialogForChangingPasswordComponent,
+    AdminRegistrationComponent,
     CottageOwnerDashboardComponent,
     CottageOwnerNavbarComponent,
     CottageListComponent,

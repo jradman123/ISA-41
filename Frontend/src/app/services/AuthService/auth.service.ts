@@ -73,6 +73,12 @@ get isLoggedIn() {
   return this.loginStatus.asObservable();
 }
 
-
+addAdmin(model: any) {
+  return this.http.post(`${this.apiServerUrl}/auth/addNewAdmin`, model,{
+    responseType: 'text',
+  });
+}
 
 }
+
+

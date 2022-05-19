@@ -25,4 +25,5 @@ public interface UserService {
     void changePassword(String email, ChangePasswordDto changePasswordDto);
     boolean isFirstLogin(String email);
     boolean isPredefAdmin(String email);
+    void deleteUser(User user);
 }

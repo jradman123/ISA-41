@@ -24,7 +24,13 @@ INSERT INTO public.users(d_type, deleted, description_of_registration, email, fi
 VALUES ('SHIP_OWNER', false, 'imam vise brodova na izdavanje', 'milica@gmail.com', 'Milica', true, '2244488175856', 'Milivojevic','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '0667555597', 1, 0, 1);
 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address) VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', false, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2,0, 3);
+
+--registration requests
 INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com');
+
+--requests for deleting account
+INSERT INTO public.request_for_deleting_account(email,reason) VALUES ('raandmjenale@gmail.com','Ne želim više koristiti usluge vašeg sajta.');
+
 ---cottage---
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
 	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false);

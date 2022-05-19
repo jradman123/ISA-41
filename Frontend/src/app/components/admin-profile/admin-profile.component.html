@@ -1,7 +1,4 @@
 <div class="container">
-    <div class="menu-container">
-        <button class="change-password-button" mat-flat-button color="primary" (click)="changePassword()">Change Password</button>
-      </div>
       <h1>Personal informations</h1>
     <form class="form-container" [formGroup]="detailsForm">
       <mat-form-field appearance="standard">
@@ -38,6 +35,9 @@
       </mat-form-field>
       <div class="button-container" *ngIf ="!editMode else editIsOn">
       <button mat-flat-button color="primary"  class="button" (click)="editMode = true">Edit</button>
+      <div class="menu-container">
+        <button class="button" mat-flat-button color="primary" (click)="changePassword()">Change Password</button>
+      </div>
     </div>
     <ng-template #editIsOn>
       <div class="button-container" *ngIf="editMode">

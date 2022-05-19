@@ -10,11 +10,11 @@
       <div>
         <a mat-button  class="nav-link" routerLinkActive="active" [routerLink]="['/admin']"> Registration requests </a>
         <a mat-button class="nav-link"  [routerLink]="['/admin/profile']"> Profile </a>
-        <a mat-button class="nav-link"  [routerLink]="['/requests']"> Add other administrator </a>
+        <a mat-button class="nav-link"  [routerLink]="['/admin/addNewAdmin']"> Add other administrator </a>
         
           <button
             mat-button
-            *ngIf="loginStatus$"
+            *ngIf="authService.isLoggedIn"
             class="btn btn-primary btn-md"
             (click)="onLogout()"
           >

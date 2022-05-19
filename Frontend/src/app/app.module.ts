@@ -18,6 +18,7 @@ import { JwtInterceptor } from './JwtInterceptor/jwt-interceptor';
 import { DialogForReasonComponent } from './components/dialog-for-reason/dialog-for-reason.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { DialogForChangingPasswordComponent } from './components/dialog-for-changing-password/dialog-for-changing-password.component';
+import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DialogForChangingPasswordComponent } from './components/dialog-for-chan
     RegistrationRequestsComponent,
     DialogForReasonComponent,
     AdminProfileComponent,
-    DialogForChangingPasswordComponent
+    DialogForChangingPasswordComponent,
+    AdminRegistrationComponent
   ],
   imports: [
     BrowserModule,

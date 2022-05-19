@@ -1,12 +1,8 @@
 package com.example.demo.model.ships;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.enumeration.EquipmentType;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +17,7 @@ import lombok.Setter;
 	@Setter
 	@RequiredArgsConstructor
 	@AllArgsConstructor
-	@Table(name = "navigationalEquipment")
+	@Table(name = "navigationEquipment")
 
 	public class NavigationalEquipment {
 		
@@ -31,6 +27,11 @@ import lombok.Setter;
 		
 		@Column(name = "name", nullable = false)
 	    private EquipmentType name;
+
+		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+		@JoinColumn(name = "ship_id",nullable = true)
+		private Ship ship;
+
 
 	}
 

@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.CreateCottageDto;
-import com.example.demo.dto.ViewCottegeDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.users.CottageOwner;
@@ -67,7 +66,7 @@ public class CottageServiceImpl implements CottageService {
         List<CottageDto> cottages = new ArrayList<>();
         for(Cottage cottage: cottageRepository.findAll()){
             User user= userRepository.findByEmail(cottage.getCottageOwner().getEmail());
-            if(user.getEmail().equals(email)){
+            if(user.getEmail().equals(email) & cottage.isDeleted()==false){
                 CottageDto cottageDto=new CottageDto(cottage);
                 cottages.add(cottageDto);
             }
@@ -89,6 +88,26 @@ public class CottageServiceImpl implements CottageService {
         }
         return new ResponseEntity<>(id, HttpStatus.OK);
 
+    }
+
+    @Override
+    public CottageDto editCottage(CottageDto cottageDto) {
+        for (Cottage cottage: cottageRepository.findAll()){
+            if(cottageDto.getId()==cottage.getId().toString()){
+                cottage.setName(cottageDto.getName());
+                cottage.setDescription(cottageDto.getDescription());
+                cottage.setPrice(Double.parseDouble(cottageDto.getPrice()));
+                cottage.getAddress().setStreetNumber(cottageDto.getStreetNumber());
+                cottage.getAddress().setStreetName(cottageDto.getStreetName());
+                cottage.getAddress().setCity(cottageDto.getCity());
+                cottage.getAddress().setCountry(cottageDto.getCountry());
+
+                cottageRepository.save(cottage);
+                return new CottageDto(cottage);
+
+            }
+        }
+        return null;
     }
 }
 

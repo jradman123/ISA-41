@@ -6,6 +6,7 @@ import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.users.*;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public interface UserService {
@@ -16,6 +17,7 @@ public interface UserService {
     Instructor saveInstructor(RegistrationRequestDto request);
     ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
     CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
+    RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) throws UnknownHostException;
     Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto);
     void activateAccount(String email);
     PersonalData getPersonalData(String email);

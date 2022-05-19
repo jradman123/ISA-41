@@ -17,14 +17,16 @@ import java.util.Set;
 public class RuleDto {
     private String id;
     private String ruleDescription;
-    private boolean isDeleted;
+    private boolean isDeletedbyCottage;
+    private boolean isDeletedbyShip;
     private String cottageId;
     private String shipId;
 
     public RuleDto(Rules rules) {
             this.id=Long.toString(rules.getId());
             this.ruleDescription=rules.getRuleDescription();
-            this.isDeleted=rules.isDeleted();
+            this.isDeletedbyCottage=rules.isDeletedbyCottages();
+            this.isDeletedbyShip=rules.isDeletedByShip();
             this.shipId=Long.toString(rules.getShip().getId());
             this.cottageId=Long.toString(rules.getCottage().getId());
 

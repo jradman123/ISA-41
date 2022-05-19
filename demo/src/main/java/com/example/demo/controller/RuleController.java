@@ -22,6 +22,16 @@ public class RuleController {
     @Autowired
     private RuleServiceImpl ruleService;
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteRyleByCottage/{id}/{idCottage}")
+    public ResponseEntity<Long> deleteRuleByCottage(@PathVariable Long id,@PathVariable Long idCottage) {
+        return this.ruleService.deleteRuleByCottage(id,idCottage);
+    }
+
+
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/findRulesByCottage/{id}")
     public List<RuleDto> getRulesByCottage(@PathVariable Long id) {
@@ -37,8 +47,7 @@ public class RuleController {
 
 
 
-    @DeleteMapping(value = "/deleteRule/{id}")
-    public ResponseEntity<Long> deleteRule(@PathVariable Long id) {
+   public ResponseEntity<Long> deleteRule(@PathVariable Long id) {
         return this.ruleService.deleteRule(id);
     }
 

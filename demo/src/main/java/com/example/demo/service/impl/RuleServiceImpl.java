@@ -1,15 +1,14 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.RuleDto;
 
 import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.repository.CottageRepository;
 import com.example.demo.repository.RuleRepository;
 import com.example.demo.service.RuleService;
 
-import org.dom4j.rule.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class RuleServiceImpl implements RuleService {
         List<RuleDto> ruleDto = new ArrayList<>();
         for (Rules rule : ruleRepository.findAll()) {
 
-            if (rule.getCottage() != null) {
+            if (rule.getCottage() != null & rule.isDeletedbyCottages()==false) {
                 if (id.equals(rule.getCottage().getId())) {
                     ruleDto.add(new RuleDto(rule));
 
@@ -55,7 +54,7 @@ public class RuleServiceImpl implements RuleService {
     public ResponseEntity<Long> deleteRule(Long id) {
         for (Rules rule : ruleRepository.findAll()) {
             if (id == rule.getId()) {
-                rule.setDeleted(true);
+                rule.setDeletedbyCottages(true);
                 ruleRepository.save(rule);
             }
         }
@@ -82,11 +81,29 @@ public class RuleServiceImpl implements RuleService {
                 Rules rule = new Rules();
                 rule.setCottage(cottage);
                 rule.setRuleDescription(newRule.getRuleDescription());
-                rule.setDeleted(newRule.isDeleted());
+                rule.setDeletedbyCottages(newRule.isDeletedbyCottage());
+                rule.setDeletedByShip(newRule.isDeletedbyShip());
+
                 this.ruleRepository.save(rule);
                 return rule;
             }
         }
         return null;
     }
+
+     @Override
+    public ResponseEntity<Long> deleteRuleByCottage(Long id, Long idCottage) {
+
+         List<Rules> rules=this.ruleRepository.findAll();
+         for (Rules rule: rules)
+         {
+             if(rule.getCottage().getId()==idCottage & rule.getId()==id) {
+                 rule.setDeletedbyCottages(true);
+                 ruleRepository.save(rule);
+             }
+
+         }
+         return new ResponseEntity<>(id, HttpStatus.OK);
+
+     }
 }

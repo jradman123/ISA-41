@@ -39,7 +39,11 @@ export class LoginComponent implements OnInit {
           }
           else if(localStorage.getItem('role') == "CottageAdvertiser"){
             this._router.navigate(['/cottageOwner']);
+
          }
+         else if(localStorage.getItem('role') == "ShipAdvertiser"){
+          this._router.navigate(['/shipOwner']);
+       }
        },
         error: (err:any) => {
           this._snackBar.open("Email or password are incorrect.Try again,please.","Dismiss"); 

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import com.example.demo.dto.AdministratorRegistrationDto;
@@ -32,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RegistrationRequestRepository registrationRequestRepository;
+
+	@Autowired
+	private RegistrationForClientsServiceImpl registrationForClientsService;
 
 	@Override
 	public List<User> findAll() {
@@ -75,7 +79,7 @@ public class UserServiceImpl implements UserService {
 		shipOwner.setEmail(userRequest.getEmail());
 		shipOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		shipOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
-		shipOwner.setActivated(true);
+		shipOwner.setActivated(false);
 		shipOwner.setDeleted(false);
 		shipOwner.setPhoneNumber(userRequest.getPhoneNumber());
 		shipOwner.setUserType(UserType.Instructor);
@@ -94,7 +98,7 @@ public class UserServiceImpl implements UserService {
 		cottageOwner.setEmail(userRequest.getEmail());
 		cottageOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		cottageOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
-		cottageOwner.setActivated(true);
+		cottageOwner.setActivated(false);
 		cottageOwner.setDeleted(false);
 		cottageOwner.setPhoneNumber(userRequest.getPhoneNumber());
 		cottageOwner.setUserType(UserType.Instructor);
@@ -104,6 +108,25 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public RegisteredUser saveRegisteredUser(RegistrationRequestDto userRequest) throws UnknownHostException {
+		RegisteredUser registeredUser = new RegisteredUser();
+		registeredUser.setFirstName(userRequest.getFirstName());
+		registeredUser.setLastName(userRequest.getLastName());
+		registeredUser.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry()));
+		registeredUser.setEmail(userRequest.getEmail());
+		registeredUser.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		registeredUser.setActivated(false);
+		registeredUser.setDeleted(false);
+		registeredUser.setPhoneNumber(userRequest.getPhoneNumber());
+		registeredUser.setUserType(UserType.Client);
+		registeredUser.setDescriptionOfRegistration("---");
+		RegisteredUser saved = userRepository.save(registeredUser);
+		RegisteredUser saved2 = registrationForClientsService.sendVerificationEmail(saved);
+		//RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+
+		return saved;
+	}
+
 	public Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto) {
 		Administrator administrator = new Administrator();
 		administrator.setFirstName(administratorRegistrationDto.getFirstName());

@@ -38,7 +38,7 @@ public class ShipController {
 */
      //isto radi vlasnik broda
     @GetMapping(value = "/findShip/{id}")
-    public ShipDto findCottage(@PathVariable Long id) {
+    public ShipDto findShip(@PathVariable Long id) {
         return this.shipService.findShip(id);
     }
 
@@ -49,6 +49,7 @@ public class ShipController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
     //isto radi vlasnik broda
     @GetMapping(value="/findOwnerShips/{email}")
     public List<ShipDto> findOwnerShips(@PathVariable String email) {

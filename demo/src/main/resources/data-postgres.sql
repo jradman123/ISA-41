@@ -46,11 +46,11 @@ INSERT INTO public.ships(
        	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, false,5.0,'');
 
 ---cottage-rules----
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No drinking',false,1,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No smoking',false,1,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('20+',false,2,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No pets',false,2,1);
-INSERT INTO public.rules(rule_description,is_deleted,cottage_id,ship_id) VALUES ('No noise after 12',false,3,1);
+INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No drinking',false,false,1,1);
+INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No smoking',false,false,1,1);
+INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('20+',false,false,2,1);
+INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No pets',false,false,2,1);
+INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No noise after 12',false,false,3,1);
 
 
 
@@ -72,8 +72,20 @@ INSERT INTO public.utility(name)	VALUES ('Sauna');
 
 ---cottage utilities---
 
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 1);
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 2);
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 1, 3);
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (10.0, 2, 5);
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id)	VALUES (0.0, 2, 4);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 1,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 2,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 3,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (10.0, 2, 5,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 2, 4,false);
+
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 1);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 5);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 4);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (10.0, 2, 5);
+INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 2, 4);
+
+INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1 , 1);
+INSERT INTO public.navigation_equipment( name, ship_id)	VALUES (2,1);
+INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (0,2);
+INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1,2);
+INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (3,1);

@@ -26,7 +26,8 @@ public class UserController {
     @Autowired
     private TokenUtils tokenUtils;
 
-    @PreAuthorize("hasAuthority('Admin')")
+
+
     @GetMapping(value = "/getPersonalData")
     public ResponseEntity<PersonalData> getPersonalData(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
@@ -35,7 +36,7 @@ public class UserController {
 
     }
     
-    @PreAuthorize("hasAuthority('Admin')")
+
     @PutMapping(value = "/updatePersonalData")
     public ResponseEntity<PersonalData> updatePersonalData(@RequestBody PersonalData personalData, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('Admin')")
+   
     @PutMapping(value = "/changePassword")
     public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordDto changePasswordDto, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);

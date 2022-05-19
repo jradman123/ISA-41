@@ -25,11 +25,15 @@ public class Rules {
 	    @Column(name = "ruleDescription", nullable = false)
 	    private String ruleDescription;
 
-		@Column(name = "isDeleted", nullable = false)
-	    private boolean isDeleted;
+		@Column(name = "is_deleted_by_cottage", nullable = false)
+	    private boolean isDeletedbyCottages;
+
+	@Column(name = "is_deleted_by_ship", nullable = false)
+	private boolean isDeletedByShip;
 
 
-	    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	    @JoinColumn(name = "cottage_id",nullable = true)
 	    private Cottage cottage;
 

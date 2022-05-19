@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RuleService {
+ 
+  
   
   
   private apiServerUrl = environment.apiBaseUrl;
@@ -23,6 +25,11 @@ export class RuleService {
         `${this.apiServerUrl}/rules/findRulesByBoat/${ id}`);
       }
   
+      deleteRule(id: any, idCottage: any) {
+        return this.http.delete<RuleDto>(
+          `${this.apiServerUrl}/rules/deleteRyleByCottage/${ id}/${idCottage}`);
+     
+      }
   
    
 }

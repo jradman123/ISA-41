@@ -12,14 +12,14 @@ import { RuleService } from 'src/app/services/RuleService/rule.service';
 export class EditRulesComponent implements OnInit {
 
   rule:any;
-  id:any;
+  idCottage:any;
   rules:RuleDto[]=[];
 
   constructor(private ruleService:RuleService,private router:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = +this.router.snapshot.paramMap.get('id')!;
-    this.ruleService.findRulebyId(this.id).subscribe((data) => {
+    this.idCottage = +this.router.snapshot.paramMap.get('id')!;
+    this.ruleService.findRulebyId(this.idCottage).subscribe((data) => {
       this.rules = data;
      
     });
@@ -29,14 +29,19 @@ export class EditRulesComponent implements OnInit {
   
   }
   deleteRule(id:any) {
-    let index = 0;
-    for (let rule of this.rules) {
-      if (rule.id == id) {
-        this.rules.splice(index, 1);
-      }
-      index++;
-    }
+
+    this.ruleService.deleteRule(id,this.idCottage)
+    .subscribe(data => {
+      window.location.reload();
+      
+  
+  
+     
+
+    });
+  
 
 
   }
+
 }

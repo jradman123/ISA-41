@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-   
+
     @PutMapping(value = "/changePassword")
     public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordDto changePasswordDto, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);

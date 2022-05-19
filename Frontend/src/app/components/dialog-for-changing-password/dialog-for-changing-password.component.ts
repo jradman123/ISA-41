@@ -10,7 +10,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogForChangingPasswordComponent implements OnInit {
 
   error : any;
-  constructor(private dialogRef: MatDialogRef<DialogForChangingPasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  firstLogin! : boolean;
+  constructor(private dialogRef: MatDialogRef<DialogForChangingPasswordComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+    if(localStorage.getItem('firstLogin') === 'true'){
+      this.firstLogin = true;
+    }else{
+      this.firstLogin = false;
+    }
+  }
 
   ngOnInit(): void {
   }

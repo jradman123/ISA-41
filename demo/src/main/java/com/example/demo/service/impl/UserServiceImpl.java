@@ -155,6 +155,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void changePassword(String email, ChangePasswordDto changePasswordDto) {
 		User user = findByEmail(email);
+		if(user.getUserType().equals(UserType.Admin)){
+			Administrator admin = (Administrator) user;
+			admin.setFirstLogin(false);
+		}
 		if (passwordEncoder.matches(changePasswordDto.getCurrentPassword(),user.getPassword())) {
 			user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
 		}

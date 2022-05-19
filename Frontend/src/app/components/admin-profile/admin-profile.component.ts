@@ -27,6 +27,9 @@ export class AdminProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPersonalData();
+    if(localStorage.getItem('firstLogin') === 'true'){
+      this.changePassword();
+    }
   }
 
   getPersonalData() {

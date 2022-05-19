@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.UtilityDto;
 import com.example.demo.model.Utility;
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -9,6 +10,8 @@ import com.example.demo.repository.ShipUtilityRepository;
 import com.example.demo.repository.UtilityRepository;
 import com.example.demo.service.UtiilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,5 +61,20 @@ public class UtilityServiceImpl implements UtiilityService {
         }
 
         return utilityDto;
+    }
+
+    @Override
+    public ResponseEntity<Long> deleteUtiliry(Long id, Long idCottage) {
+        List<CottageUtility> cottageUtilities=this.cottageUtilityRepositoty.findAll();
+        for (CottageUtility utility: cottageUtilities)
+        {
+            if(utility.getCottage().getId()==idCottage & utility.getId()==id) {
+                utility.setDeleted(true);
+                cottageUtilityRepositoty.save(utility);
+            }
+
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
     }
 }

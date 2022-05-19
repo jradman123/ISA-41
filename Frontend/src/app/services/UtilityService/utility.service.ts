@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilityService {
+ 
 
   
 
@@ -24,5 +25,10 @@ export class UtilityService {
         `${this.apiServerUrl}/utilities/findUtilitiesByBoat/${ id}`);
       }
 
+      deleteUtility(id: any, idCottage: any) {
+        return this.http.delete<UtilityDto>(
+          `${this.apiServerUrl}/utilities/deleteUtilityByCottage/${ id}/${idCottage}`);
+     
+      }
   }
 

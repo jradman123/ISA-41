@@ -18,7 +18,14 @@ public class UtilityController {
     @Autowired
     private UtilityServiceImpl utilityService;
 
-    
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteUtilityByCottage/{id}/{idCottage}")
+    public ResponseEntity<Long> deleteUtility(@PathVariable Long id,@PathVariable Long idCottage) {
+        return this.utilityService.deleteUtiliry(id,idCottage);
+    }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/findUtilitiesByCottage/{id}")

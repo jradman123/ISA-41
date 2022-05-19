@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { windowTime } from 'rxjs/operators';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 
@@ -13,14 +14,14 @@ export class EditUtilitiesComponent implements OnInit {
 
   utility:any;
 
-  id:any;
+  idCottage:any;
   utilities:UtilityDto[]=[];
 
-  constructor(private unilityService:UtilityService,private router:ActivatedRoute) { }
+  constructor(private utilityService:UtilityService,private router:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.id = +this.router.snapshot.paramMap.get('id')!;
-    this.unilityService.findUtilityById(this.id).subscribe((data) => {
+    this.idCottage = +this.router.snapshot.paramMap.get('id')!;
+    this.utilityService.findUtilityById(this.idCottage).subscribe((data) => {
       this.utilities = data;
      
     });
@@ -30,13 +31,24 @@ export class EditUtilitiesComponent implements OnInit {
   
   }
   deleteUtility(id:any) {
-    let index = 0;
+   /* let index = 0;
     for (let utility of this.utilities) {
       if (utility.id == id) {
         this.utilities.splice(index, 1);
       }
       index++;
-    }
+    }*/
+
+    this.utilityService.deleteUtility(id,this.idCottage)
+    .subscribe(data => {
+      window.location.reload();
+      
+      console.log(id);
+      console.log(this.idCottage)
+  
+     
+
+    });
   
 
 

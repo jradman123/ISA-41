@@ -5,4 +5,5 @@ export interface AuthenticatedUserDto {
     role : string;
     token : UserStateToken;
     firstLogin : boolean;
+    predefAdmin : boolean;
 }

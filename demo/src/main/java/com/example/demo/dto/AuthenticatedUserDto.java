@@ -5,6 +5,15 @@ public class AuthenticatedUserDto {
     private String role;
     private UserTokenState token;
     private boolean firstLogin;
+    private boolean predefAdmin;
+
+    public boolean isPredefAdmin() {
+        return predefAdmin;
+    }
+
+    public void setPredefAdmin(boolean predefAdmin) {
+        this.predefAdmin = predefAdmin;
+    }
 
     public String getEmail() {
         return email;

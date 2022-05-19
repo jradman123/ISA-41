@@ -14,6 +14,7 @@ import com.example.demo.model.users.*;
 import com.example.demo.repository.RegistrationRequestRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -193,6 +194,15 @@ public class UserServiceImpl implements UserService {
 	public boolean isFirstLogin(String email) {
 		Administrator admin = (Administrator) findByEmail(email);
 		return admin.isFirstLogin();
+	}
+
+	@Override
+	public boolean isPredefAdmin(String email) {
+		Administrator admin = (Administrator) findByEmail(email);
+		if(admin.getType().equals(AdminType.Predef)){
+			return true;
+		}
+		return false;
 	}
 
 

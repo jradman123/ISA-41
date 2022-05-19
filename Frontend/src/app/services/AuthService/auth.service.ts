@@ -50,6 +50,7 @@ login(model: any): Observable<AuthenticatedUserDto> {
         localStorage.setItem('role' ,response.role)
         localStorage.setItem('email' ,response.email)
         localStorage.setItem('firstLogin',response.firstLogin)
+        localStorage.setItem('predefAdmin',response.predefAdmin)
         this.currentUserSubject.next(response);
       }
       return this.user;
@@ -64,6 +65,7 @@ logout() {
   localStorage.removeItem('currentUser');
   localStorage.removeItem('email');
   localStorage.removeItem('firstLogin');
+  localStorage.removeItem('predefAdmin');
   this.router.navigate(['/login']);
 }
 

@@ -58,8 +58,10 @@ public class AuthenticationController {
         UserType role = userService.findByEmail(authenticationRequest.getEmail()).getUserType();
         AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto();
         boolean firstLogin = false;
+        boolean predefAdmin = false;
         if(role.equals(UserType.Admin)){
             firstLogin= userService.isFirstLogin(authenticationRequest.getEmail());
+            predefAdmin = userService.isPredefAdmin(authenticationRequest.getEmail());
         }
         UserDetails user = (UserDetails) authentication.getPrincipal();
         String jwt = tokenUtils.generateToken(user.getUser().getEmail());
@@ -68,6 +70,7 @@ public class AuthenticationController {
         authenticatedUserDto.setEmail(authenticationRequest.getEmail());
         authenticatedUserDto.setToken(new UserTokenState(jwt,expiresIn));
         authenticatedUserDto.setFirstLogin(firstLogin);
+        authenticatedUserDto.setPredefAdmin(predefAdmin);
         // Vrati token kao odgovor na uspesnu autentifikaciju
         return ResponseEntity.ok(authenticatedUserDto);
     }

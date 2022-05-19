@@ -24,4 +24,8 @@ export class UserService {
       `${this.apiServerUrl}/users/updatePersonalData`, data
     );
   }
+
+  changePassword(data: any) {
+    return this.http.put(`${this.apiServerUrl}/users/changePassword`, data)
+  }
 }

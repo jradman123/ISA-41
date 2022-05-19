@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.users.*;
@@ -17,4 +18,5 @@ public interface UserService {
     void activateAccount(String email);
     PersonalData getPersonalData(String email);
     PersonalData updatePersonalData(PersonalData data,String email);
+    void changePassword(String email, ChangePasswordDto changePasswordDto);
 }

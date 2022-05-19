@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.UserService;
@@ -38,6 +39,15 @@ public class UserController {
         return new ResponseEntity<>(userService.updatePersonalData(personalData,tokenUtils.getEmailFromToken(token)),
                 HttpStatus.OK);
 
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @PutMapping(value = "/changePassword")
+    public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordDto changePasswordDto, HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        userService.changePassword(tokenUtils.getEmailFromToken(token), changePasswordDto);
+        return ResponseEntity.noContent().build();
     }
 
 

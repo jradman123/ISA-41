@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { PersonalData } from 'src/app/interfaces/personal-data';
 import { UserService } from 'src/app/services/UserService/user.service';
+import { DialogForChangingPasswordComponent } from '../dialog-for-changing-password/dialog-for-changing-password.component';
 
 @Component({
   selector: 'app-admin-profile',
@@ -13,7 +15,7 @@ export class AdminProfileComponent implements OnInit {
 
   personalData! : PersonalData;
   sub!: Subscription;
-  constructor(private userService : UserService) {
+  constructor(private userService : UserService,public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
    }
 
@@ -83,6 +85,25 @@ export class AdminProfileComponent implements OnInit {
       this.initialDetails = JSON.parse(JSON.stringify(data));
       this.editMode = false
     })
+  }
+
+  changePassword() {
+    const dialogConfig = new MatDialogConfig();
+ 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+ 
+    const dialogRef = this.dialog.open(DialogForChangingPasswordComponent, dialogConfig);
+ 
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.userService.changePassword(data).subscribe((result:any) => {
+            void(0) 
+          })
+        }
+      }
+    );
   }
 
 

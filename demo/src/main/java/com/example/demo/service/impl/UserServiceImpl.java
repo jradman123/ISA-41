@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
+import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.Address;
@@ -10,6 +11,8 @@ import com.example.demo.model.users.*;
 import com.example.demo.repository.RegistrationRequestRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -125,6 +129,16 @@ public class UserServiceImpl implements UserService {
 		User saved = save(user);
 		return new PersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
 				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail());
+	}
+
+	@Override
+	public void changePassword(String email, ChangePasswordDto changePasswordDto) {
+		User user = findByEmail(email);
+		if (passwordEncoder.matches(changePasswordDto.getCurrentPassword(),user.getPassword())) {
+			user.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+		}
+
+		userRepository.save(user);
 	}
 
 

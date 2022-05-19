@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		instructor.setEmail(userRequest.getEmail());
 		instructor.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		instructor.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
-		instructor.setActivated(true);
+		instructor.setActivated(false);
 		instructor.setDeleted(false);
 		instructor.setPhoneNumber(userRequest.getPhoneNumber());
 		instructor.setUserType(UserType.Instructor);

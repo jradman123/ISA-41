@@ -2,10 +2,12 @@ package com.example.demo.service.impl;
 
 import java.util.List;
 
+import com.example.demo.dto.AdministratorRegistrationDto;
 import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
 import com.example.demo.model.Address;
+import com.example.demo.model.enumeration.AdminType;
 import com.example.demo.model.enumeration.UserType;
 import com.example.demo.model.users.*;
 import com.example.demo.repository.RegistrationRequestRepository;
@@ -98,6 +100,25 @@ public class UserServiceImpl implements UserService {
 		cottageOwner.setUserType(UserType.Instructor);
 		CottageOwner saved = userRepository.save(cottageOwner);
 		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+		return saved;
+	}
+
+	@Override
+	public Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto) {
+		Administrator administrator = new Administrator();
+		administrator.setFirstName(administratorRegistrationDto.getFirstName());
+		administrator.setLastName(administratorRegistrationDto.getLastName());
+		administrator.setAddress(new Address(administratorRegistrationDto.getStreetName(), administratorRegistrationDto.getStreetNumber(),
+								administratorRegistrationDto.getCity(), administratorRegistrationDto.getCountry()));
+		administrator.setEmail(administratorRegistrationDto.getEmail());
+		administrator.setPassword(passwordEncoder.encode(administratorRegistrationDto.getPassword()));
+		administrator.setActivated(true);
+		administrator.setDeleted(false);
+		administrator.setPhoneNumber(administratorRegistrationDto.getPhoneNumber());
+		administrator.setUserType(UserType.Admin);
+		administrator.setType(AdminType.Ordinary);
+		administrator.setFirstLogin(true);
+		Administrator saved = userRepository.save(administrator);
 		return saved;
 	}
 

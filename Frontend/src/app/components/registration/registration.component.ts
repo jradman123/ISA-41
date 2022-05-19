@@ -40,8 +40,6 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
       ]),
-      gender: new FormControl(null, [Validators.required]),
-      dateOfBirth: new FormControl(null, [Validators.required]),
       street: new FormControl(null, [
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),

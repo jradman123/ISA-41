@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -80,4 +81,14 @@ public class AuthenticationController {
         }
         return new ResponseEntity<String>("Error!", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @PostMapping(value = "/addNewAdmin")
+    public ResponseEntity<String> addNewAdmin(@RequestBody AdministratorRegistrationDto administratorRegistrationDto) {
+        userService.saveAdministrator(administratorRegistrationDto);
+        return new ResponseEntity<>("Success",HttpStatus.OK);
+
+
+    }
+
 }

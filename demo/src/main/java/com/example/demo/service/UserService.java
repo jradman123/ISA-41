@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AdministratorRegistrationDto;
 import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
 import com.example.demo.dto.RegistrationRequestDto;
@@ -15,6 +16,7 @@ public interface UserService {
     Instructor saveInstructor(RegistrationRequestDto request);
     ShipOwner saveShipOwner(RegistrationRequestDto userRequest);
     CottageOwner saveCottageOwner(RegistrationRequestDto userRequest);
+    Administrator saveAdministrator(AdministratorRegistrationDto administratorRegistrationDto);
     void activateAccount(String email);
     PersonalData getPersonalData(String email);
     PersonalData updatePersonalData(PersonalData data,String email);

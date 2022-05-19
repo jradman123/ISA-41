@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AdministratorRegistrationDto;
 import com.example.demo.dto.ChangePasswordDto;
 import com.example.demo.dto.PersonalData;
+import com.example.demo.dto.RegistrationRequestDto;
+import com.example.demo.model.users.Administrator;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

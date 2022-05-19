@@ -40,6 +40,7 @@ public class AuthenticationController {
 
     // Prvi endpoint koji pogadja korisnik kada se loguje.
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public ResponseEntity<AuthenticatedUserDto> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
@@ -63,6 +64,7 @@ public class AuthenticationController {
     }
 
     // Endpoint za registraciju novog korisnika
+    @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public ResponseEntity<String> addUser(@RequestBody RegistrationRequestDto userRequest, UriComponentsBuilder ucBuilder) throws UnknownHostException {
         User existUser = this.userService.findByEmail(userRequest.getEmail());
@@ -89,7 +91,7 @@ public class AuthenticationController {
     }
 
     @CrossOrigin(origins = "*")
-    @PutMapping(value = "/verify-client/{email}")
+    @GetMapping(value = "/verify-client/{email}")
     public ResponseEntity<String> confirmClient(@PathVariable String email) {
         User user = userService.findByEmail(email);
         registrationForClientsService.registerClient(user);

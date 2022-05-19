@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 		registeredUser.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry()));
 		registeredUser.setEmail(userRequest.getEmail());
 		registeredUser.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-		registeredUser.setActivated(true);
+		registeredUser.setActivated(false);
 		registeredUser.setDeleted(false);
 		registeredUser.setPhoneNumber(userRequest.getPhoneNumber());
 		registeredUser.setUserType(UserType.Client);

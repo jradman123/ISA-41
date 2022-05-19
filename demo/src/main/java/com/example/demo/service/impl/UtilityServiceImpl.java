@@ -30,7 +30,7 @@ public class UtilityServiceImpl implements UtiilityService {
     public List<UtilityDto> getUtilityByCottage(Long id) {
         List<UtilityDto> utilityDto=new ArrayList<>();
         for(CottageUtility cottageUtility: cottageUtilityRepositoty.findAll()) {
-            if(id.equals(cottageUtility.getCottage().getId())) {
+            if(id.equals(cottageUtility.getCottage().getId()) & cottageUtility.isDeleted()==false) {
                for(Utility utility:utilityRepository.findAll()) {
                     if(cottageUtility.getUtility().getId().equals(utility.getId())) {
                         utilityDto.add(new UtilityDto(utility));

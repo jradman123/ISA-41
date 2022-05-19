@@ -38,6 +38,8 @@ public class ShipUtility {
 	 private Ship ship;
 
 
+
+
 	 @Column(name = "price", nullable = false)
 	 private Double price;
 

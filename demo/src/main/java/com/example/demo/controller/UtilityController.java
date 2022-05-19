@@ -6,6 +6,7 @@ import com.example.demo.service.impl.UserServiceImpl;
 import com.example.demo.service.impl.UtilityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class UtilityController {
     @Autowired
     private UtilityServiceImpl utilityService;
 
+    
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/findUtilitiesByCottage/{id}")

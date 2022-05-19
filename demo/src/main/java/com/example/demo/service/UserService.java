@@ -21,4 +21,5 @@ public interface UserService {
     PersonalData getPersonalData(String email);
     PersonalData updatePersonalData(PersonalData data,String email);
     void changePassword(String email, ChangePasswordDto changePasswordDto);
+    boolean isFirstLogin(String email);
 }

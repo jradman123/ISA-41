@@ -4,4 +4,5 @@ export interface AuthenticatedUserDto {
     email : string;
     role : string;
     token : UserStateToken;
+    firstLogin : boolean;
 }

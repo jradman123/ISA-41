@@ -162,5 +162,11 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 	}
 
+	@Override
+	public boolean isFirstLogin(String email) {
+		Administrator admin = (Administrator) findByEmail(email);
+		return admin.isFirstLogin();
+	}
+
 
 }

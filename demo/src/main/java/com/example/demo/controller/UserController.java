@@ -53,5 +53,15 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping(value = "/isFirstLogin")
+    public ResponseEntity<?> isFirstLogin(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        Administrator admin = (Administrator) userService.findByEmail(tokenUtils.getEmailFromToken(token));
+        System.out.println(admin.isFirstLogin());
+        return new ResponseEntity<>(admin.isFirstLogin(), HttpStatus.OK);
+    }
+
 
 }

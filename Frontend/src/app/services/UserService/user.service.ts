@@ -29,5 +29,11 @@ export class UserService {
     return this.http.put(`${this.apiServerUrl}/users/changePassword`, data)
   }
 
+  isFirstLogin() {
+    return this.http.get(`${this.apiServerUrl}/users/isFirstLogin`, {
+      responseType : 'text'
+    });
+  }
+
 
 }

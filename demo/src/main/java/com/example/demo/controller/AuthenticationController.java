@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.*;
 import com.example.demo.exception.ResourceConflictException;
+import com.example.demo.model.enumeration.UserType;
 import com.example.demo.model.users.*;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -50,11 +51,19 @@ public class AuthenticationController {
         // kontekst
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // Kreiraj token za tog korisnika
-        String role = userService.findByEmail(authenticationRequest.getEmail()).getUserType().toString();
+        UserType role = userService.findByEmail(authenticationRequest.getEmail()).getUserType();
+        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto();
+        boolean firstLogin = false;
+        if(role.equals(UserType.Admin)){
+            firstLogin= userService.isFirstLogin(authenticationRequest.getEmail());
+        }
         UserDetails user = (UserDetails) authentication.getPrincipal();
         String jwt = tokenUtils.generateToken(user.getUser().getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
-        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto(authenticationRequest.getEmail(),role, new UserTokenState(jwt,expiresIn));
+        authenticatedUserDto.setRole(role.toString());
+        authenticatedUserDto.setEmail(authenticationRequest.getEmail());
+        authenticatedUserDto.setToken(new UserTokenState(jwt,expiresIn));
+        authenticatedUserDto.setFirstLogin(firstLogin);
         // Vrati token kao odgovor na uspesnu autentifikaciju
         return ResponseEntity.ok(authenticatedUserDto);
     }
@@ -87,8 +96,8 @@ public class AuthenticationController {
     public ResponseEntity<String> addNewAdmin(@RequestBody AdministratorRegistrationDto administratorRegistrationDto) {
         userService.saveAdministrator(administratorRegistrationDto);
         return new ResponseEntity<>("Success",HttpStatus.OK);
-
-
     }
+
+
 
 }

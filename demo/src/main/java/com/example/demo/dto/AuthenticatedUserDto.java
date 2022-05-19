@@ -4,6 +4,7 @@ public class AuthenticatedUserDto {
     private String email;
     private String role;
     private UserTokenState token;
+    private boolean firstLogin;
 
     public String getEmail() {
         return email;
@@ -27,6 +28,14 @@ public class AuthenticatedUserDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 
     public AuthenticatedUserDto() {

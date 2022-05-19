@@ -49,6 +49,7 @@ login(model: any): Observable<AuthenticatedUserDto> {
         localStorage.setItem('currentUser', JSON.stringify(response));
         localStorage.setItem('role' ,response.role)
         localStorage.setItem('email' ,response.email)
+        localStorage.setItem('firstLogin',response.firstLogin)
         this.currentUserSubject.next(response);
       }
       return this.user;
@@ -61,6 +62,8 @@ logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('role');
   localStorage.removeItem('currentUser');
+  localStorage.removeItem('email');
+  localStorage.removeItem('firstLogin');
   this.router.navigate(['/login']);
 }
 

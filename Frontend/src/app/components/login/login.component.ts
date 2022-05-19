@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/AuthService/auth.service';
+import { UserService } from 'src/app/services/UserService/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor( private formBuilder: FormBuilder,
     private _router: Router,
     private _service: AuthService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private userService : UserService) { }
 
     ngOnInit(): void {
       this.form = this.formBuilder.group({
@@ -29,7 +31,11 @@ export class LoginComponent implements OnInit {
        next: (x:any) => {
           this._snackBar.open("     Welcome","Dismiss");
           if(localStorage.getItem('role') == "Admin"){
-             this._router.navigate(['/admin']);
+            if(localStorage.getItem('firstLogin')=== 'true'){
+              this._router.navigate(['/admin/profile']);
+            }else{
+              this._router.navigate(['/admin']);
+            }
           }
           else if(localStorage.getItem('role') == "CottageAdvertiser"){
             this._router.navigate(['/cottageOwner']);

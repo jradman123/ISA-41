@@ -92,7 +92,6 @@ public class CottageServiceImpl implements CottageService {
 
     @Override
     public CottageDto editCottage(CottageDto cottageDto) {
-
         for (Cottage cottage: cottageRepository.findAll()){
             if(cottageDto.getId().equals(cottage.getId())){
                 cottage.setName(cottageDto.getName());

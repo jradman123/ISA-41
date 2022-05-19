@@ -56,5 +56,12 @@ deleteCottage() {
 
     });
 }
+editRules()  {
+  this.route.navigate(['cottageOwner/edit-rules/'+this.id]);
+}
 
+editUtilities() {
+  this.route.navigate(['cottageOwner/edit-utilities/'+this.id]);
+
+}
 }

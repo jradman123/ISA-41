@@ -34,10 +34,7 @@ export class CottageService {
 
       editCottage(cottage: CottageDto) {
      
-        return this.http.put(`${this.apiServerUrl}/cottages/editCottage`, cottage, {
-          responseType: 'text',
-         
-        });
+        return this.http.put<CottageDto>(`${this.apiServerUrl}/cottages/editCottage`, cottage);
       }
       
       deleteCottage(id: any) {

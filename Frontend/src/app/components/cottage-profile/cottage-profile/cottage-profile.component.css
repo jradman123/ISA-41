@@ -24,8 +24,9 @@
 .btn {
   transform: scale(1.10);
   width: 120px;
-  margin-left: 40%;
-  margin-right: 15%;
+  height: 50px;
+  margin-left: 20%;
+  margin-right: 10%;
   color: white;
   background:  rgb(201, 243, 63);
   font-size: 14px;

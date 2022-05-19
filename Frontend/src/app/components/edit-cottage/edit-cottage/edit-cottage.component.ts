@@ -42,6 +42,7 @@ export class EditCottageComponent implements OnInit {
   submit() {
     this.cottageService.editCottage(this.cottage).subscribe((data) =>{
      
+     console.log(this.cottage)
       this.route.navigate(['cottageOwner/cottage-profile/'+this.id]);
     });
   }

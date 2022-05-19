@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 		shipOwner.setEmail(userRequest.getEmail());
 		shipOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		shipOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
-		shipOwner.setActivated(true);
+		shipOwner.setActivated(false);
 		shipOwner.setDeleted(false);
 		shipOwner.setPhoneNumber(userRequest.getPhoneNumber());
 		shipOwner.setUserType(UserType.Instructor);
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
 		cottageOwner.setEmail(userRequest.getEmail());
 		cottageOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		cottageOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
-		cottageOwner.setActivated(true);
+		cottageOwner.setActivated(false);
 		cottageOwner.setDeleted(false);
 		cottageOwner.setPhoneNumber(userRequest.getPhoneNumber());
 		cottageOwner.setUserType(UserType.Instructor);

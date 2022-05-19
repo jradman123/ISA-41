@@ -24,6 +24,13 @@ import { CottageOwnerNavbarComponent } from './components/cottage-owner-navbar/c
 import { CottageListComponent } from './components/cottage-list/cottage-list/cottage-list.component';
 import { CottageProfileComponent } from './components/cottage-profile/cottage-profile/cottage-profile.component';
 import { AddCottageComponent } from './components/add-cottage/add-cottage/add-cottage.component';
+import { ShipOwnerDashboardComponent } from './components/ship-owner-dashboard/ship-owner-dashboard/ship-owner-dashboard.component';
+import { ShipOwnerNavbarComponent } from './components/ship-owner-navbar/ship-owner-navbar/ship-owner-navbar.component';
+import { ShipListComponent } from './components/ship-list/ship-list/ship-list.component';
+import { ShipProfileComponent } from './components/ship-profile/ship-profile/ship-profile.component';
+import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
+import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
+import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
 
 
 @NgModule({
@@ -43,7 +50,14 @@ import { AddCottageComponent } from './components/add-cottage/add-cottage/add-co
     CottageOwnerNavbarComponent,
     CottageListComponent,
     CottageProfileComponent,
-    AddCottageComponent
+    AddCottageComponent,
+    ShipOwnerDashboardComponent,
+    ShipOwnerNavbarComponent,
+    ShipListComponent,
+    ShipProfileComponent,
+    EditCottageComponent,
+    EditRulesComponent,
+    EditUtilitiesComponent
  
   ],
   imports: [

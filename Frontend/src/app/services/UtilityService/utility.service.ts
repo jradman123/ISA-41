@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilityService {
+ 
+
   
 
   private apiServerUrl = environment.apiBaseUrl;
@@ -18,6 +20,15 @@ export class UtilityService {
       `${this.apiServerUrl}/utilities/findUtilitiesByCottage/${ id}`);
     }
 
+    findShipUtilityById(id: string):Observable<UtilityDto[]> {
+      return this.http.get<UtilityDto[]>(
+        `${this.apiServerUrl}/utilities/findUtilitiesByBoat/${ id}`);
+      }
 
+      deleteUtility(id: any, idCottage: any) {
+        return this.http.delete<UtilityDto>(
+          `${this.apiServerUrl}/utilities/deleteUtilityByCottage/${ id}/${idCottage}`);
+     
+      }
   }
 

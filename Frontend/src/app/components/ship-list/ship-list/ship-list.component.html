@@ -1,0 +1,23 @@
+<div>
+    <div class="card-holder" style="margin-left: 15px;">
+    <div class="row"> 
+            <div class="card" style="margin: 10px; " *ngFor="let ship of ships">
+                <img :src="assets/Images/{{ship.name}}" class="card-img-top" sty alt="image of ship">
+                <ul class="list-group list-group-flush">
+                    <li class = "list-group-item">
+                    <strong>{{ship.name}}</strong>
+                    </li>
+                    <li style="height: 70px;" class="list-group-item">{{this.ship.streetName}},{{this.ship.streetNumber}},{{this.ship.city}},{{this.ship.country}}</li>  
+                    <li style="height: 70px;" class="list-group-item">{{ship.description}}</li> 
+                    <li class="list-group-item">
+                        <button  class="btn btn-primary" (click)="view(ship.id)"  >View</button> 
+                        <button  class="btn btn-primary" >Delete</button> 
+  
+                    </li>
+                </ul> 
+               
+            </div>
+    </div>
+  
+   
+  </div>

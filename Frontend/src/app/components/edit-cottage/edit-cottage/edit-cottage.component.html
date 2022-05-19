@@ -1,0 +1,108 @@
+<h2 class="title" color="blue">Edit basic informaation of cottage</h2>
+    <hr />
+<div class="columns">
+      <form>
+          <div class="container" style="margin-bottom: 20px;">
+              <label>Name:</label>
+              <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your name"
+              [(ngModel)]="this.cottage.name" name="name"
+              />
+          </div>
+          <div class="container" style="margin-bottom: 20px;">
+              <label>Description:</label>
+              <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your description"
+              [(ngModel)]="this.cottage.description" name="description"
+              />
+          </div>
+          <div class="container" style="margin-bottom: 10px;">
+              <label>Price for one day in euro:</label>
+              <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your price"
+              [(ngModel)]="this.cottage.price"  name="price"
+  
+              />
+          </div>
+          <div class="container" style="margin-bottom: 20px;">
+            <label>Number of people:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your number"
+              [(ngModel)]="this.cottage.numberOfPeople" name="numberOfPeople"
+    
+            />
+        </div>
+  
+ 
+         
+          
+          <div class="container" style="margin-bottom: 20px;">
+            <label>Street:</label>
+            <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your street"
+            [(ngModel)]="this.cottage.streetName" name="street"
+  
+            />
+        </div>
+      </form>
+ 
+  
+    <form> 
+      <div class="container"  style="margin-bottom: 20px;">
+        <label>Street number:</label>
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Enter your street number"
+        [(ngModel)]="this.cottage.streetNumber" name="streetNumber"
+  
+        />
+      </div>
+     
+  
+      <div class="container" style="margin-bottom: 20px;">
+          <label>City:</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your city"
+            [(ngModel)]="this.cottage.city" name="cityName"
+  
+          />
+      </div>
+  
+      <div class="container" style="margin-bottom: 20px;">
+          <label>Country:</label>
+          <input
+            type="text"
+            class="form-control"
+            background="gray"
+            placeholder="Enter your country"
+            [(ngModel)]="this.cottage.country" name="countryName"
+  
+          />
+      </div>
+      
+      <hr />
+  
+
+      <div>
+          <button type="submit" style="margin-left: 500px;" class="btn" (click)= "submit()">Submit</button>
+          <button type="submit" style="margin-left: 20px;" class="btn" (click)= "cancel()">Cancel</button> 
+      </div>
+     
+  
+    </form>
+ 
+  
+  </div>

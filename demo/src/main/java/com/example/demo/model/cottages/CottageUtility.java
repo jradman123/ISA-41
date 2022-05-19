@@ -47,5 +47,8 @@ public class CottageUtility {
 	 @Column(name = "price", nullable = false)
 	 private Double price;
 
+	@Column(name = "isDeleted", nullable = false)
+	private boolean isDeleted;
+
 
 }

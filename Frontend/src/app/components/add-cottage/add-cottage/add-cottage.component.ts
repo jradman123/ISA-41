@@ -18,12 +18,14 @@ export class AddCottageComponent implements OnInit {
   createForm!: FormGroup;
   formData!: FormData;
   newCottage!:CottageDto;
-
+  email:any;
 
   constructor(private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     private router: Router,private cottageService:CottageService) {
       this.newCottage={} as CottageDto;
+      this.email=localStorage.getItem('email')
+     
      
      }
 
@@ -72,13 +74,14 @@ export class AddCottageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     this.createCottage();
     console.log(this.createCottage);
     this.cottageService.saveCottage(this.newCottage).subscribe(
       (res) => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/cottageOwner']);
         this._snackBar.open(
-          'Your registration request has been sumbitted. Please check your email and confirm your email adress to activate your account.',
+          'You have successfully added a new cottage',
           'Dismiss'
         );
       },
@@ -102,6 +105,7 @@ createCottage(): void {
   this.newCottage.country = this.createForm.value.country;
   this.newCottage.price = this.createForm.value.price;
   this.newCottage.numberOfPeople = this.createForm.value.numberOfPeople;
+  this.newCottage.ownerEmail=this.email;
   
 }
 }

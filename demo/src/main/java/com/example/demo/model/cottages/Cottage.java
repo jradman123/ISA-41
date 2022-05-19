@@ -58,7 +58,7 @@ public class Cottage {
     private Double price = 0.0;
 
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cottage_id")
 	@JsonManagedReference
 	private Set<Image> images= new HashSet<>();
@@ -71,12 +71,12 @@ public class Cottage {
 	private boolean isDeleted;
 
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cottage_id")
 	@JsonManagedReference
 	private Set<Rules> rules;
 
-	 @OneToMany
+	 @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	 @JoinColumn(name = "cottage_id")
 	 @JsonManagedReference
 	 private Set<CottageUtility> utilities;
@@ -89,16 +89,17 @@ public class Cottage {
 	  @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	    private Set<CottageReservation> cottageReservations;
 	  
-	  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	    @JoinColumn(name = "cottageOwner")
 	    private CottageOwner cottageOwner;
 
-	public Cottage(String name, String description, Double price, Address address,CottageOwner owner) {
+	public Cottage(String name, String description, Double price, Address address,CottageOwner owner,int numberOfPerson) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.address = address;
+		this.numberOfPerson=numberOfPerson;
 		this.cottageOwner=owner;
 
 

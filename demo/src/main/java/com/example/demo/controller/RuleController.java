@@ -1,12 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateCottageDto;
 import com.example.demo.dto.RuleDto;
 import com.example.demo.model.Rules;
-import com.example.demo.model.cottages.Cottage;
 import com.example.demo.service.impl.RuleServiceImpl;
-import com.example.demo.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

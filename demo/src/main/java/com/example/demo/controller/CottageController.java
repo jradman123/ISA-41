@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateCottageDto;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.CottageServiceImpl;
@@ -37,7 +36,7 @@ public class CottageController {
     @CrossOrigin(origins = "http://localhost:4200")
     //ovo samo moze da radi vlasnik vikendice
     @PostMapping(value = "/createCottage")
-    public Cottage createCottage(@RequestBody CreateCottageDto newCottage) {
+    public Cottage createCottage(@RequestBody CottageDto newCottage) {
         return this.cottageService.createCottage(newCottage);
     }
 

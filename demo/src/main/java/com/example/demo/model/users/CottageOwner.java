@@ -17,7 +17,7 @@ import lombok.Setter;
 @DiscriminatorValue("COTTAGE_OWNER")
 public class CottageOwner  extends User{
 	
-	 @OneToMany(mappedBy = "cottageOwner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	 @OneToMany(mappedBy = "cottageOwner", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	 private Set<Cottage> cottages;
 
 

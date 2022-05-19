@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateCottageDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.users.CottageOwner;
@@ -41,12 +40,12 @@ public class CottageServiceImpl implements CottageService {
     }
 
     @Override
-    public Cottage createCottage(CreateCottageDto newCottage) {
+    public Cottage createCottage(CottageDto newCottage) {
         User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
         for (CottageOwner owner : this.cottageOwnerRepository.findAll()) {
             if (owner.getEmail().equals(user.getEmail())) {
-                Address address = new Address(newCottage.getAddress().getStreetName(), newCottage.getAddress().getStreetNumber(), newCottage.getAddress().getCity(), newCottage.getAddress().getCountry());
-                Cottage cottage = new Cottage(newCottage.getName(), newCottage.getDescription(), newCottage.getPrice(), address, owner);
+                Address address = new Address(newCottage.getStreetName(), newCottage.getStreetNumber(), newCottage.getCity(), newCottage.getCountry());
+                Cottage cottage = new Cottage(newCottage.getName(),newCottage.getDescription(),Double.parseDouble(newCottage.getPrice()),address,owner,Integer.parseInt(newCottage.getNumberOfPeople()));
                 return this.cottageRepository.save(cottage);
             }
         }

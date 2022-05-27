@@ -71,7 +71,7 @@ public class ShipServiceImpl  implements ShipService {
         List<ShipDto> ships = new ArrayList<>();
         for(Ship ship: shipRepository.findAll()){
             User user= userRepository.findByEmail(ship.getShipOwner().getEmail());
-            if(user.getEmail().equals(email)){
+            if(user.getEmail().equals(email) & ship.isDeleted()==false){
                 ShipDto shipDto=new ShipDto(ship);
                 ships.add(shipDto);
             }

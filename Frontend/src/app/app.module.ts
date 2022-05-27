@@ -33,6 +33,7 @@ import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rule
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
 import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
+import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-
     EditRulesComponent,
     EditUtilitiesComponent,
     CottageOwnerProfileComponent,
-    ShipOwnerProfileComponent
+    ShipOwnerProfileComponent,
+    AddShipComponent
  
   ],
   imports: [

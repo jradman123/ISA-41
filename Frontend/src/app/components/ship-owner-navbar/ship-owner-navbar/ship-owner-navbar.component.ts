@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/AuthService/auth.service';
+
 
 @Component({
   selector: 'app-ship-owner-navbar',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShipOwnerNavbarComponent implements OnInit {
 
-  constructor() { }
+  loginStatus$: Observable<boolean>;
+  constructor(public authService: AuthService, private router: Router) {
+    this.loginStatus$ = this.authService.isLoggedIn;
+
+  }
 
   ngOnInit(): void {
+  }
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

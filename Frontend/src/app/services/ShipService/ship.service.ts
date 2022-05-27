@@ -21,6 +21,11 @@ export class ShipService {
       `${this.apiServerUrl}/ships/findOwnerShips/${localStorage.getItem('email')}`);
   }
 
+  deleteShip(id: any) {
+    return this.http.delete<ShipDto>(
+      `${this.apiServerUrl}/ships/deleteShip/${id}`);
+  }
+
   findbyId(id: string) {
     return this.http.get<ShipDto>(
       `${this.apiServerUrl}/ships/findShip/${id}`);

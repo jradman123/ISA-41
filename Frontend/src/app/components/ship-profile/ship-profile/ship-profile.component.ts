@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShipService } from 'src/app/services/ShipService/ship.service';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsyncKeyword } from 'typescript';
 import { RuleDto } from 'src/app/interfaces/rule-dto';
 import { RuleService } from 'src/app/services/RuleService/rule.service';
@@ -18,26 +18,48 @@ import { UtilityService } from 'src/app/services/UtilityService/utility.service'
 export class ShipProfileComponent implements OnInit {
 
   ship!: ShipDto;
-  id:any;
-  rules:RuleDto[]=[];
-  utilities:UtilityDto[]=[];
- 
-  constructor(private shipService:ShipService,private router:ActivatedRoute,private  ruleService:RuleService,private utilityService:UtilityService) {
+  id: any;
+  rules: RuleDto[] = [];
+  utilities: UtilityDto[] = [];
+
+  constructor(private shipService: ShipService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
   }
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.shipService.findbyId(this.id).subscribe((data) => {
-      this.ship = data;});
+      this.ship = data;
+    });
 
-      this.ruleService.findShipRulebyId(this.id).subscribe((data) => {
-        this.rules = data;
-       
+    this.ruleService.findShipRulebyId(this.id).subscribe((data) => {
+      this.rules = data;
+
+    });
+
+    this.utilityService.findShipUtilityById(this.id).subscribe((data) => {
+      this.utilities = data;
+
+    });
+  }
+
+  editShip() {
+    this.route.navigate(['shipOwner/edit-ship/' + this.id]);
+  }
+
+  deleteShip() {
+    this.shipService.deleteShip(this.id)
+      .subscribe(data => {
+
+        this.route.navigate(['shipOwner']);
+
       });
-    
-      this.utilityService.findShipUtilityById(this.id).subscribe((data) => {
-        this.utilities = data;
-       
-      });
+  }
+  editRules() {
+    this.route.navigate(['shipOwner/edit-rules/' + this.id]);
+  }
+
+  editUtilities() {
+    this.route.navigate(['shipOwner/edit-utilities/' + this.id]);
+
   }
 
 }

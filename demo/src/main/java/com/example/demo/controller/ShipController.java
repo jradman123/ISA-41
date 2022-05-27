@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/ships")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ShipController {
     @Autowired
     private UserServiceImpl userService;
@@ -56,6 +57,7 @@ public class ShipController {
     public List<ShipDto> findOwnerShips(@PathVariable String email) {
         return this.shipService.getOwnerShips(email);
     }
+
 
 
 

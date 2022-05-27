@@ -19,10 +19,11 @@ import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edi
 import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
+import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
-  {path: 'registration', component: RegistrationComponent},
-  {path: 'login', component: LoginComponent},
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'admin',
     component: AdminDashboardComponent,
@@ -54,49 +55,49 @@ const routes: Routes = [
         path: '',
         component: CottageListComponent,
         canActivate: [AuthGuard]
-       
-      
-      }, 
+
+
+      },
       {
         path: 'profile',
         component: CottageOwnerProfileComponent,
         canActivate: [AuthGuard]
       },
-        {
-          path:'cottage-profile/:id',
-          component: CottageProfileComponent,
-          canActivate: [AuthGuard]
-        
-        },
-        {
-          path:'add-cottage',
-          component: AddCottageComponent,
-          canActivate: [AuthGuard]
-        
-        },
-        {
-          path:'edit-cottage/:id',
-          component: EditCottageComponent,
-          canActivate: [AuthGuard]
-        
-        },
-        {
-          path:'edit-rules/:id',
-          component: EditRulesComponent,
-          canActivate: [AuthGuard]
-        
-        },
-        {
-          path:'edit-utilities/:id',
-          component: EditUtilitiesComponent,
-          canActivate: [AuthGuard]
-        
-        },
+      {
+        path: 'cottage-profile/:id',
+        component: CottageProfileComponent,
+        canActivate: [AuthGuard]
 
-    
+      },
+      {
+        path: 'add-cottage',
+        component: AddCottageComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edit-cottage/:id',
+        component: EditCottageComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edit-rules/:id',
+        component: EditRulesComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edit-utilities/:id',
+        component: EditUtilitiesComponent,
+        canActivate: [AuthGuard]
+
+      },
+
+
     ],
-   
-  }, 
+
+  },
   {
     path: 'shipOwner',
     component: ShipOwnerDashboardComponent,
@@ -106,18 +107,23 @@ const routes: Routes = [
         path: '',
         component: ShipListComponent,
         canActivate: [AuthGuard]
-       
-      
+
+
       },
       {
         path: 'ship-profile/:id',
         component: ShipProfileComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'profile',
+        component: ShipOwnerProfileComponent,
+        canActivate: [AuthGuard]
+      },
     ]
   },
 
- 
+
 ];
 
 @NgModule({

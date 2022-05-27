@@ -8,34 +8,34 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RuleService {
- 
- 
-  
-  
-  
+
+
+
+
+
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  findRulebyId(id: string): Observable<RuleDto[]>{
+  findRulebyId(id: string): Observable<RuleDto[]> {
     return this.http.get<RuleDto[]>(
-      `${this.apiServerUrl}/rules/findRulesByCottage/${ id}`);
-    }
+      `${this.apiServerUrl}/rules/findRulesByCottage/${id}`);
+  }
 
-    findShipRulebyId(id: string): Observable<RuleDto[]>{
-      return this.http.get<RuleDto[]>(
-        `${this.apiServerUrl}/rules/findRulesByBoat/${ id}`);
-      }
-  
-      deleteRule(id: any, idCottage: any) {
-        return this.http.delete<RuleDto>(
-          `${this.apiServerUrl}/rules/deleteRyleByCottage/${ id}/${idCottage}`);
-     
-      }
-      addRule(rule: RuleDto) {
-        return this.http.post(`${this.apiServerUrl}/rules/createCottageRule`, rule, {
-          responseType: 'text',
-        });
-     
-      }
-   
+  findShipRulebyId(id: string): Observable<RuleDto[]> {
+    return this.http.get<RuleDto[]>(
+      `${this.apiServerUrl}/rules/findRulesByBoat/${id}`);
+  }
+
+  deleteRule(id: any, idCottage: any) {
+    return this.http.delete<RuleDto>(
+      `${this.apiServerUrl}/rules/deleteRyleByCottage/${id}/${idCottage}`);
+
+  }
+  addRule(rule: RuleDto) {
+    return this.http.post(`${this.apiServerUrl}/rules/createCottageRule`, rule, {
+      responseType: 'text',
+    });
+
+  }
+
 }

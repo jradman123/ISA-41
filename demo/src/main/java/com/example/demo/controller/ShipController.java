@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.ShipServiceImpl;
@@ -57,6 +58,11 @@ public class ShipController {
     }
 
 
+
+    @PostMapping(value = "/createShips")
+    public Ship createCottage(@RequestBody ShipDto newShip) {
+        return this.shipService.createShip(newShip);
+    }
 
 
 

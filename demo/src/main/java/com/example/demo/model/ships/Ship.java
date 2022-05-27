@@ -24,13 +24,17 @@ import com.example.demo.model.enumeration.EquipmentType;
 import com.example.demo.model.users.ShipOwner;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ships")
 public class Ship {
 	
@@ -59,10 +63,10 @@ public class Ship {
 	
 	@Column(name = "price", nullable = false)
 	private Double price = 0.0;
-	
-	
-	 @OneToMany
-	 @JoinColumn(name = "ship_id")
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
 	 private Set<ShipUtility> utilities;
 	
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -89,7 +93,7 @@ public class Ship {
 	 @OneToMany(mappedBy = "ship")
 	 private Set<ShipReservation> shipReservations;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ship_id")
 	@JsonManagedReference
 	 private Set<Rules> rules;
@@ -112,5 +116,21 @@ public class Ship {
 	
 	 @Column(name = "deleted")
 	 private boolean deleted = false;
-	
+
+	public Ship(String name, String description, double price, Address address, ShipOwner owner, int capacity, double maxSpeed, int cancelationConditions, double length, double strengthOfEngine, String fishingEquipment, String numberOfEngine, String type) {
+	this.name=name;
+	this.description=description;
+	this.price=price;
+	this.address=address;
+	this.shipOwner=owner;
+	this.capacity=capacity;
+	this.maxSpeed=maxSpeed;
+	this.cancelationConditions=cancelationConditions;
+	this.length=length;
+	this.strengthOfEngine=strengthOfEngine;
+	this.fishingEquipment=fishingEquipment;
+	this.numberOfEngine=numberOfEngine;
+	this.type=type;
+
+	}
 }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.RoomDto;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.CottageServiceImpl;
@@ -46,6 +47,17 @@ public class CottageController {
     public CottageDto findCottage(@PathVariable Long id) {
         return this.cottageService.findCottage(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //isto radi vlasnik vikendice
+    @GetMapping(value = "/findRoomsById/{id}")
+    public List<RoomDto> findRoomsByCotttage(@PathVariable Long id) {
+        return this.cottageService.findRoomsByCottage(id);
+    }
+
+
+
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     //radi samo vlasnik vikendice

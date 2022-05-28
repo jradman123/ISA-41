@@ -1,13 +1,18 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.RoomDto;
+import com.example.demo.dto.RuleDto;
 import com.example.demo.model.Address;
+import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.Room;
 import com.example.demo.model.users.CottageOwner;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageOwnerRepository;
 import com.example.demo.repository.CottageRepository;
 
+import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,6 +27,8 @@ import java.util.List;
 public class CottageServiceImpl implements CottageService {
     @Autowired
     private CottageRepository cottageRepository;
+    @Autowired
+    private RoomRepository roomRepository;
     @Autowired
     private UserServiceImpl userRepository;
     @Autowired
@@ -108,6 +115,19 @@ public class CottageServiceImpl implements CottageService {
 
         }
         return null;
+    }
+
+    @Override
+    public List<RoomDto> findRoomsByCottage(Long id) {
+        List<RoomDto> roomdtos = new ArrayList<>();
+        for (Room room : roomRepository.findAll()) {
+            if (room.getCottage() != null) {
+                if (id.equals(room.getCottage().getId())) {
+                    roomdtos.add(new RoomDto(room));
+                }
+            }
+        }
+        return roomdtos;
     }
 }
 

@@ -1,52 +1,81 @@
-<div style="margin-left: 220px; margin-top: 20px;" class="container" >
-<h1 class="h1"> {{this.cottage.name }}</h1>
+<div style="margin-left: 220px; margin-top: 20px;" class="container">
+    <h1 class="h1"> {{this.cottage.name }}</h1>
 
-<button class="btn" (click)="editCottage()">Edit basic information</button>
-<button class="btn" (click)="deleteCottage()">Delete cottage</button>
-<button class="btn" (click)="editRules()">Edit rules of cottage</button>
-<button class="btn" (click)="editUtilities()">Edit utilities of cottage</button>
+    <button class="btn" (click)="editCottage()">Edit basic information</button>
+    <button class="btn" (click)="deleteCottage()">Delete cottage</button>
+    <button class="btn" (click)="editRules()">Edit rules of cottage</button>
+    <button class="btn" (click)="editUtilities()">Edit utilities of cottage</button>
     <div class="row">
         <div class="card1">
             <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Address of cottage:</h4>
-                <h6 class="text-white row" style="margin-top: 40px; margin-left: 10px; font-size: 18px; margin-right: 10px;">{{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}</h6>
+                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Address of
+                    cottage:</h4>
+                <h6 class="text-white row"
+                    style="margin-top: 40px; margin-left: 10px; font-size: 18px; margin-right: 10px;">
+                    {{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}
+                </h6>
             </div>
         </div>
 
         <div class="card2">
             <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Short description:</h4>
-                <h6 class="text-white row" style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;"> {{this.cottage.description}}</h6>
-            </div>  
-        </div>
-        
-        <div class="card1">
-            <div class="col">
-                 <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;">Price of cottage for one day:</h4>
-                <h6 class="text-white row" style="margin-top: 20px; font-size: 18px; margin-left: 10px; margin-right: 10px;">{{this.cottage.price}}  € </h6>
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Number of people who may be in cottage:  {{this.cottage.numberOfPeople}}</h4>
-  
-               
+                <h4 class="text-white row"
+                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rooms of cottage:
+                </h4>
+                <div *ngFor="let room of rooms">
+                    <h6 class="text-white row"
+                        style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
+                        -{{this.room.number}} beds</h6>
+
+                </div>
+
+
             </div>
-        </div>
-        <div class="card2">
-            <div class="col" >
-                <h4 class="text-white row" style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rules of cottages:</h4>
-              <div *ngFor="let rule of rules">
-                <h6 class="text-white row" style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;"> -{{this.rule.ruleDescription}}</h6>
-     
-              </div>
-           </div>  
         </div>
 
         <div class="card1">
             <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Utilities of cottage:</h4>
-                <div *ngFor="let utility of utilities">
-                <h6 class="text-white row" style="margin-top: 40px; margin-left: 10px; font-size:18px; margin-right: 10px;"> - {{this.utility.name}}</h6>
+                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;">Price of
+                    cottage for one day: {{this.cottage.price}} €</h4>
+
+                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Number of people
+                    who may be in cottage: {{this.cottage.numberOfPeople}}</h4>
+                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Short
+                    description: {{this.cottage.description}}</h4>
+
+
+
+            </div>
+        </div>
+        <div class="card2">
+            <div class="col">
+                <h4 class="text-white row"
+                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rules of cottages:
+                </h4>
+                <div *ngFor="let rule of rules">
+                    <h6 class="text-white row"
+                        style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
+                        -{{this.rule.ruleDescription}}</h6>
+
                 </div>
             </div>
         </div>
-      
-    </div> 
+
+        <div class="card1">
+            <div class="col">
+                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Utilities of
+                    cottage:</h4>
+                <div *ngFor="let utility of utilities">
+                    <h6 class="text-white row"
+                        style="margin-top: 40px; margin-left: 10px; font-size:18px; margin-right: 10px;"> -
+                        {{this.utility.name}}</h6>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
 </div>

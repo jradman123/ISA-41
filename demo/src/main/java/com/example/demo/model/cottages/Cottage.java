@@ -81,6 +81,13 @@ public class Cottage {
 	 @JsonManagedReference
 	 private Set<CottageUtility> utilities;
 
+
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "cottage_id")
+	@JsonManagedReference
+	private Set<Room> rooms;
+
 	
 	 
 	 @OneToMany(mappedBy = "cottage", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})

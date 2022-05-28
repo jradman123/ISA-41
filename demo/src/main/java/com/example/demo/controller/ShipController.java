@@ -60,6 +60,13 @@ public class ShipController {
 
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    //ovo samo moze da radi vlasnik vikendice
+    @PutMapping(value = "/editShip")
+    public ShipDto editShip(@RequestBody ShipDto newShip) {
+        return this.shipService.editShip(newShip);
+
+    }
 
     @PostMapping(value = "/createShips")
     public Ship createCottage(@RequestBody ShipDto newShip) {

@@ -36,5 +36,11 @@ export class ShipService {
       responseType: 'text',
     });
   }
+
+  editShip(ship: ShipDto) {
+
+    return this.http.put<ShipDto>(`${this.apiServerUrl}/ships/editShip`, ship);
+  }
+
 }
 

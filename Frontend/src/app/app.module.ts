@@ -34,6 +34,7 @@ import { EditUtilitiesComponent } from './components/edit-utilities/edit-utiliti
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
 import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
 import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
+import { EditShipComponent } from './components/edit-ship/edit-ship/edit-ship.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { AddShipComponent } from './components/add-ship/add-ship/add-ship.compon
     EditUtilitiesComponent,
     CottageOwnerProfileComponent,
     ShipOwnerProfileComponent,
-    AddShipComponent
+    AddShipComponent,
+    EditShipComponent
  
   ],
   imports: [

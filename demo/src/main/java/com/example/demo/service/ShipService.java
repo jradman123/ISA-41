@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.ships.Ship;
@@ -19,4 +20,7 @@ public interface ShipService {
 
 
     Ship createShip(ShipDto newShip);
+
+
+    ShipDto editShip(ShipDto newShip);
 }

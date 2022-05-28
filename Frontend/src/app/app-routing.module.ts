@@ -21,6 +21,7 @@ import { EditUtilitiesComponent } from './components/edit-utilities/edit-utiliti
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
 import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
 import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
+import { EditShipComponent } from './components/edit-ship/edit-ship/edit-ship.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'registration', component: RegistrationComponent },
@@ -127,6 +128,26 @@ const routes: Routes = [
         canActivate: [AuthGuard]
 
       },
+      {
+        path: 'edit-ship/:id',
+        component: EditShipComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edit-rules/:id',
+        component: EditRulesComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edit-utilities/:id',
+        component: EditUtilitiesComponent,
+        canActivate: [AuthGuard]
+
+      },
+
+
     ]
   },
 

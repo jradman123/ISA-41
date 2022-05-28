@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.cottages.Cottage;
@@ -28,6 +29,42 @@ public class ShipServiceImpl  implements ShipService {
 
     @Autowired
     private ShipOwnerRepository shipOwnerRepository;
+
+
+
+
+
+    @Override
+    public ShipDto editShip(ShipDto shipDto) {
+        for (Ship ship : shipRepository.findAll()) {
+            if (shipDto.getId().equals(ship.getId().toString())) {
+                ship.setName(shipDto.getName());
+                ship.setDescription(shipDto.getDescription());
+                ship.setPrice(Double.parseDouble(shipDto.getPrice()));
+                ship.getAddress().setStreetNumber(shipDto.getStreetNumber());
+                ship.getAddress().setStreetName(shipDto.getStreetName());
+                ship.getAddress().setCity(shipDto.getCity());
+                ship.getAddress().setCountry(shipDto.getCountry());
+                ship.setCapacity(Integer.parseInt(shipDto.getCapacity()));
+                ship.setLength(Double.parseDouble(shipDto.getLength()));
+                ship.setNumberOfEngine(shipDto.getNumberOfEngine());
+                ship.setStrengthOfEngine(Double.parseDouble(shipDto.getStrengthOfEngine()));
+                ship.setMaxSpeed(Double.parseDouble(shipDto.getMaxSpeed()));
+                ship.setType(shipDto.getType());
+                ship.setCancelationConditions(Integer.parseInt(shipDto.getCancelationConditions()));
+                ship.setFishingEquipment(shipDto.getFishingEquipment());
+
+
+
+
+                shipRepository.save(ship);
+                return new ShipDto(ship);
+
+            }
+
+        }
+        return null;
+    }
 
 
     @Override

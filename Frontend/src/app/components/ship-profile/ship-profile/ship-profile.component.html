@@ -77,6 +77,9 @@
 
 
 
+
+
+
         <div class="card2">
             <div class="col">
                 <h4 class="text-white row"
@@ -91,6 +94,20 @@
             </div>
         </div>
 
+
+        <div class="card1">
+            <div class="col">
+                <h4 class="text-white row"
+                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Navigation
+                    equipment of boat:</h4>
+                <div *ngFor="let navigation of navigations">
+                    <h6 class="text-white row"
+                        style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
+                        -{{this.navigation.name}}</h6>
+
+                </div>
+            </div>
+        </div>
 
 
 

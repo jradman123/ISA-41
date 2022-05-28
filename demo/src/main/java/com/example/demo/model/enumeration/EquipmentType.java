@@ -4,5 +4,6 @@ public enum EquipmentType {
 	VHFRadio,
 	GPS,
 	Radar,
-	Fishfinder
+	Fishfinder,
+	CAMPAS
 }

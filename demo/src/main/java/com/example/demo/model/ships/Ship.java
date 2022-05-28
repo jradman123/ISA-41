@@ -104,6 +104,7 @@ public class Ship {
 
 	@OneToMany
 	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
 	private Set<NavigationalEquipment> navigationalEquipments;
     
     

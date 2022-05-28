@@ -54,6 +54,7 @@ INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_sh
 
 
 
+
 ---image---
 
 INSERT INTO public.image(url, cottage_id, is_deleted)

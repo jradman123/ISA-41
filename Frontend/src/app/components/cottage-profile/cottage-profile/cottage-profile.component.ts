@@ -58,13 +58,8 @@ export class CottageProfileComponent implements OnInit {
     this.route.navigate(['cottageOwner/edit-cottage/' + this.id]);
   }
 
-  deleteCottage() {
-    this.cottageService.deleteCottage(this.id)
-      .subscribe(data => {
-
-        this.route.navigate(['cottageOwner']);
-
-      });
+  editRooms() {
+    this.route.navigate(['cottageOwner/edit-rooms/' + this.id]);
   }
   editRules() {
     this.route.navigate(['cottageOwner/edit-rules/' + this.id]);

@@ -55,8 +55,8 @@ export class ShipProfileComponent implements OnInit {
     this.shipService.deleteShip(this.id)
       .subscribe(data => {
 
-        this.route.navigate(['shipOwner']);
 
+        window.location.reload();
       });
   }
   editRules() {

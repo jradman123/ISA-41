@@ -92,10 +92,10 @@ INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1,2);
 INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (3,1);
 
 
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (2, 1);
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (2, 1);
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (3, 1);
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (3, 2);
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (2, 2);
-INSERT INTO public.rooms(number_of_beds, cottage_id)	VALUES (4, 2);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (3, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (3, 2,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 2,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,false);
 

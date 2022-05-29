@@ -28,4 +28,8 @@ public class Room {
     @JoinColumn(name = "cottage_id", nullable = false)
     private Cottage cottage;
 
+
+    @Column(name = "isDeleted", nullable = false)
+    private boolean isDeleted;
+
 }

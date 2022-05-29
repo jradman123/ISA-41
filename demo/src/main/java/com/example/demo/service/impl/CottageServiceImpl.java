@@ -122,12 +122,46 @@ public class CottageServiceImpl implements CottageService {
         List<RoomDto> roomdtos = new ArrayList<>();
         for (Room room : roomRepository.findAll()) {
             if (room.getCottage() != null) {
-                if (id.equals(room.getCottage().getId())) {
+                if (id.equals(room.getCottage().getId()) & room.isDeleted()==false) {
                     roomdtos.add(new RoomDto(room));
                 }
             }
         }
         return roomdtos;
+    }
+
+    @Override
+    public ResponseEntity<Long> deleteRoomByCottage(Long id, Long idCottage) {
+        List<Room> rooms=this.roomRepository.findAll();
+        for (Room room: rooms)
+        {
+            if(room.getCottage().getId()==idCottage & room.getId()==id) {
+                room.setDeleted(true);
+                roomRepository.save(room);
+            }
+
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+
+    }
+
+
+
+    @Override
+    public Room createRoom(RoomDto newRoom) {
+        for(Cottage cottage: this.cottageRepository.findAll()){
+            if(newRoom.getCottageId().equals(cottage.getId())){
+                Room room = new Room();
+                room.setCottage(cottage);
+                room.setNumberOfBeds(Integer.parseInt(newRoom.getNumber()));
+                room.setDeleted(false);
+
+
+                this.roomRepository.save(room);
+                return room;
+            }
+        }
+        return null;
     }
 }
 

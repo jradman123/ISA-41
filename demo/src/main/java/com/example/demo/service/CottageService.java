@@ -4,7 +4,9 @@ package com.example.demo.service;
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.dto.RuleDto;
+import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.Room;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -20,4 +22,10 @@ public interface CottageService {
 
 
     public List<RoomDto> findRoomsByCottage(Long id);
+
+    ResponseEntity<Long> deleteRoomByCottage(Long id, Long idCottage);
+
+    Room createRoom(RoomDto newRoom);
+
+
 }

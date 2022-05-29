@@ -45,6 +45,7 @@ export class EditRoomsComponent implements OnInit {
 
   }
   deleteRoom(id: any) {
+    console.log("fefefeef" + id);
 
     this.roomService.deleteRoom(id, this.idCottage)
       .subscribe(data => {

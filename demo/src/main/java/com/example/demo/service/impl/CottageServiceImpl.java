@@ -163,5 +163,12 @@ public class CottageServiceImpl implements CottageService {
         }
         return null;
     }
+
+    @Override
+    public List<CottageDto> search(CottageDto dto) {
+        List<CottageDto> ret = new ArrayList<>();
+
+        return ret;
+    }
 }
 

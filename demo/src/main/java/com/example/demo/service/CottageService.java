@@ -28,4 +28,5 @@ public interface CottageService {
     Room createRoom(RoomDto newRoom);
 
 
+    List<CottageDto> search(CottageDto dto);
 }

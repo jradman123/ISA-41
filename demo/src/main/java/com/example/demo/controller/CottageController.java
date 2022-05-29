@@ -68,6 +68,11 @@ public class CottageController {
     }
 
 
+    @GetMapping(value = "/search")
+    public List<CottageDto> search(CottageDto dto) {
+        return this.cottageService.search(dto);
+    }
+
 
 
     @CrossOrigin(origins = "http://localhost:4200")

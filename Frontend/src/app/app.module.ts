@@ -36,6 +36,10 @@ import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-
 import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
 import { EditShipComponent } from './components/edit-ship/edit-ship/edit-ship.component';
 import { EditRoomsComponent } from './components/edit-rooms/edit-rooms/edit-rooms.component';
+import { AddActionComponent } from './components/add-action/add-action/add-action.component';
+import { ReservationHistoryComponent } from './components/reservation-history/reservation-history/reservation-history.component';
+import { AddReservationComponent } from './components/add-reservation/add-reservation/add-reservation.component';
+import { CottageAvailabilityComponent } from './components/cottage-availability/cottage-availability/cottage-availability.component';
 
 
 @NgModule({
@@ -67,7 +71,11 @@ import { EditRoomsComponent } from './components/edit-rooms/edit-rooms/edit-room
     ShipOwnerProfileComponent,
     AddShipComponent,
     EditShipComponent,
-    EditRoomsComponent
+    EditRoomsComponent,
+    AddActionComponent,
+    ReservationHistoryComponent,
+    AddReservationComponent,
+    CottageAvailabilityComponent
  
   ],
   imports: [

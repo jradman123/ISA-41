@@ -60,6 +60,26 @@ export class CottageProfileComponent implements OnInit {
 
 
 
+
+  }
+  reservationHistory() {
+    this.route.navigate(['cottageOwner/reservation-history/' + this.id]);
+
+
+  }
+  addReservation() {
+    this.route.navigate(['cottageOwner/add-reservation/' + this.id]);
+
+
+  }
+
+  viewAvailability() {
+
+  }
+
+  addAction() {
+    this.route.navigate(['cottageOwner/add-action/' + this.id]);
+
   }
 
   editCottage() {

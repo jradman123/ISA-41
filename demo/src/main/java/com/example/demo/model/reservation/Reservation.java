@@ -45,12 +45,20 @@ public class Reservation {
 	
 	 @Column(name = "isCanceled", nullable = false)
      private Boolean isCanceled = false;
+
+	 /*
 	
 	 @ManyToOne
      @JoinColumn(name = "quickReservation_id", nullable = true)
 	 private QuickReservation quickReservation;
 	
-	
+	*/
+
+	@Column(name = "isreserved", nullable = false)
+	private Boolean isreserved;
+
+	@Column(name = "isdeleted",nullable = false)
+	private boolean isdeleted;
 	
 	 public Reservation() {
 		super();

@@ -57,10 +57,25 @@ INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_sh
 
 ---image---
 
-INSERT INTO public.image(url, cottage_id, is_deleted)
-	VALUES ('cottage.jpg', 1, false);
-INSERT INTO public.image(url, cottage_id, is_deleted)
-	VALUES ('cottage2.jpg', 1, false);
+INSERT INTO public.image(url)
+	VALUES ('assets/images/cottage.jpg');
+INSERT INTO public.image(url)
+	VALUES ('assets/images/cottage1.jpg');
+INSERT INTO public.image(url)
+    	VALUES ('assets/images/cottage2.jpg');
+
+
+
+----cottage_images-----
+INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (1, 1,false);
+INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (2, 2,false);
+
+
+
+----ship_images-----
+INSERT INTO public.ship_images(ship_id, image_id)	VALUES (1, 1);
+
+
 
 -----utilities---
 INSERT INTO public.utility(name)	VALUES ('TV');

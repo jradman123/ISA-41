@@ -57,11 +57,11 @@ public class Cottage {
     @Column(name = "price", nullable = false)
     private Double price = 0.0;
 
-
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "cottage_id")
 	@JsonManagedReference
-	private Set<Image> images= new HashSet<>();
+	private Set<CottageImage> images;
+
 
 
 	@Column(name = "numberOfPerson", nullable = false)

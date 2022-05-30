@@ -1,6 +1,6 @@
 package com.example.demo.model.ships;
 
-import java.awt.Image;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
 import com.example.demo.model.users.ShipOwner;
@@ -75,15 +76,13 @@ public class Ship {
     
     @Column(name = "description", nullable = false)
     private String description;
-    
 
- /*   @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "ship_images",
-            joinColumns = @JoinColumn(name = "ship_id"),
-            inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Set<Image> images;
-	*/
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
+	private Set<Image> images;
+
+
 	@Column(name = "capacity", nullable = false)
 	private Integer capacity;
 	

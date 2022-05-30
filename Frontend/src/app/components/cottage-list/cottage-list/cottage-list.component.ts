@@ -39,5 +39,14 @@ export class CottageListComponent implements OnInit {
     this.router.navigate(['cottageOwner/cottage-profile/' + id]);
     console.log(id);
   }
+  delete(id: string) {
+    this.cottageService.deleteCottage(id)
+      .subscribe(data => {
+
+        window.location.reload();
+
+      });
+
+  }
 
 }

@@ -15,6 +15,7 @@ export class CottageListComponent implements OnInit {
   cottages: CottageDto[] = [];
   images: ImageDto[] = [];
   id: any;
+  image!: ImageDto;
 
   constructor(private cottageService: CottageService, private route: ActivatedRoute, private imageService: ImageService, private router: Router) { }
 
@@ -29,6 +30,7 @@ export class CottageListComponent implements OnInit {
     this.imageService.findImageByCottageId(this.id).subscribe((data) => {
       this.images = data;
       console.log(this.images);
+
     });
 
   }

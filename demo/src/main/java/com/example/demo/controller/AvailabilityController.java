@@ -21,7 +21,9 @@ public class AvailabilityController {
     @Autowired
     AvailabilityServiceImpl availabilityService;
 
-    @GetMapping(value="/getByCottage{id}")
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/getByCottage/{id}")
     public List<CottageAvailabilityDto> getByCottage(@PathVariable Long id) {
         return availabilityService.findByCottage(id);
     }

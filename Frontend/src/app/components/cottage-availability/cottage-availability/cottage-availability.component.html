@@ -1,1 +1,14 @@
-<p>cottage-availability works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th><abbr title="Start Date">Start Date</abbr></th>
+            <th><abbr title="End Date">End Date</abbr></th>
+        </tr>
+    </thead>
+
+    <tr *ngFor="let availability of availabilities">
+
+        <td>{{ availability.startDate }}</td>
+        <td>{{availability.endDate}}</td>
+    </tr>
+</table>

@@ -74,6 +74,8 @@ export class CottageProfileComponent implements OnInit {
   }
 
   viewAvailability() {
+    this.route.navigate(['cottageOwner/cottage-availability/' + this.id]);
+
 
   }
 

@@ -9,6 +9,8 @@ import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { Router } from '@angular/router';
 import { RoomDto } from 'src/app/interfaces/room-dto';
+import { ImageService } from 'src/app/services/ImageService/image.service';
+import { ImageDto } from 'src/app/interfaces/image-dto';
 
 @Component({
   selector: 'app-cottage-profile',
@@ -24,8 +26,9 @@ export class CottageProfileComponent implements OnInit {
   rules: RuleDto[] = [];
   utilities: UtilityDto[] = [];
   rooms: RoomDto[] = [];
+  images: ImageDto[] = [];
 
-  constructor(private route: Router, private cottageService: CottageService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService) {
+  constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService) {
 
   }
 
@@ -48,6 +51,10 @@ export class CottageProfileComponent implements OnInit {
     this.cottageService.findRoomsById(this.id).subscribe((data) => {
       this.rooms = data;
       console.log(this.utilities);
+    });
+    this.imageService.findImageByCottageId(this.id).subscribe((data) => {
+      this.images = data;
+      console.log(this.images);
     });
 
 

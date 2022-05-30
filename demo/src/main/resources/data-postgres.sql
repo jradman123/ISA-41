@@ -68,7 +68,7 @@ INSERT INTO public.image(url)
 
 ----cottage_images-----
 INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (1, 1,false);
-INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (2, 2,false);
+INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (1, 2,false);
 
 
 

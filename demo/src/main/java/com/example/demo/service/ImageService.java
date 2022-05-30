@@ -12,5 +12,6 @@ public interface ImageService {
 
     String addImage(ImageDto dto);
 
-    ResponseEntity<Long> deleteImage(String path);
+
+    ResponseEntity<Long> deleteImage(Long idP, Long id);
 }

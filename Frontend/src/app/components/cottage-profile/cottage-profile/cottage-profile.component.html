@@ -80,6 +80,7 @@
 
                 <div *ngFor="let image of images">
                     <img src="{{image.url}}" alt="..." style="width:980px">
+                    <button class="btn2" (click)=deletePicture(image.id)>Delete</button>
 
                 </div>
             </div>

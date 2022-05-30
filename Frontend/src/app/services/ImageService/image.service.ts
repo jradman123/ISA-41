@@ -18,4 +18,11 @@ export class ImageService {
       `${this.apiServerUrl}/picture/getPicturesByCottage/${id}`);
   }
 
+
+  deletePicture(idP: any, id: any) {
+    return this.http.delete<ImageDto>(
+      `${this.apiServerUrl}/picture/deletePicture/${idP}/${id}`);
+
+  }
+
 }

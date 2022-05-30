@@ -21,6 +21,7 @@ export class CottageProfileComponent implements OnInit {
 
 
 
+
   cottage!: CottageDto;
   id: any;
   rules: RuleDto[] = [];
@@ -74,6 +75,20 @@ export class CottageProfileComponent implements OnInit {
 
   editUtilities() {
     this.route.navigate(['cottageOwner/edit-utilities/' + this.id]);
+
+  }
+  deletePicture(idP: any) {
+
+
+    this.imageService.deletePicture(idP, this.id)
+      .subscribe(data => {
+        window.location.reload();
+
+
+
+
+
+      });
 
   }
 }

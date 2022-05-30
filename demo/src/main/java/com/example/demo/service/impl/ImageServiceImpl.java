@@ -12,6 +12,7 @@ import com.example.demo.repository.CottageImageRepository;
 import com.example.demo.repository.ImageRepository;
 import com.example.demo.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -59,9 +60,17 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public ResponseEntity<Long> deleteImage(String path) {
-        return null;
-    }
+    public ResponseEntity<Long> deleteImage(Long idP, Long id) {
+        List<CottageImage> cottageImages=this.cottageImageRepository.findAll();
+        for (CottageImage cottageImage: cottageImages)
+        {
+            if(cottageImage.getCottage().getId()==id & cottageImage.getId()==idP) {
+                cottageImage.setDeleted(true);
+                cottageImageRepository.save(cottageImage);
+            }
 
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
 
 }

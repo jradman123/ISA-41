@@ -33,9 +33,9 @@ public class ImageController {
         return this.imageService.addImage(dto);
     }
 
-    @DeleteMapping(value="/deletePicture/{path}")
-    public ResponseEntity<Long> deletePicture(@PathVariable String path) {
-        return this.imageService.deleteImage(path);
+    @DeleteMapping(value="/deletePicture/{idP}/{id}")
+    public ResponseEntity<Long> deletePicture(@PathVariable Long idP,@PathVariable Long id) {
+        return this.imageService.deleteImage(idP,id);
     }
 
 

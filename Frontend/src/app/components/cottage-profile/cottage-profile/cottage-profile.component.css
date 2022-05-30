@@ -37,6 +37,18 @@
 
 }
 
+.btn2 {
+  transform: scale(1.10);
+  width: 50;
+  height: 20;
+
+  color: white;
+  background: rgb(71, 102, 241);
+  font-size: 14px;
+
+
+}
+
 
 .card2 {
   z-index: 1;

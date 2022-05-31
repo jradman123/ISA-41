@@ -4,6 +4,7 @@ import com.example.demo.dto.RuleDto;
 
 import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.repository.CottageRepository;
 import com.example.demo.repository.RuleRepository;
@@ -25,6 +26,9 @@ public class RuleServiceImpl implements RuleService {
 
     @Autowired
     private CottageRepository cottageRepository;
+
+    @Autowired
+    private CottageServiceImpl cottageService;
 
 
     @Override
@@ -76,20 +80,22 @@ public class RuleServiceImpl implements RuleService {
     }
 
     public Rules createCottageRule(RuleDto newRule) {
-        for(Cottage cottage: this.cottageRepository.findAll()){
-            if(newRule.getCottageId().equals(cottage.getId())){
-                Rules rule = new Rules();
-                rule.setCottage(cottage);
-                rule.setRuleDescription(newRule.getRuleDescription());
-                rule.setDeletedbyCottages(false);
-                rule.setDeletedByShip(false);
-                rule.setShip(null);
 
-                this.ruleRepository.save(rule);
-                return rule;
-            }
-        }
-        return null;
+
+        System.out.print("dsdsds"+newRule);
+        Cottage cottage=cottageService.findCottageById(newRule.getCottageId());
+        Rules rule=new Rules();
+
+        rule.setCottage(cottage);
+        rule.setRuleDescription(newRule.getRuleDescription());
+        rule.setDeletedbyCottages(false);
+        rule.setDeletedByShip(false);
+        rule.setShip(null);
+
+        this.ruleRepository.save(rule);
+        return rule;
+
+
     }
 
      @Override

@@ -18,6 +18,12 @@ export class AvailabilityService {
 
   }
 
+  addAvailabilityCottage(newAvailability: CottageAvailability) {
+    console.log(newAvailability)
+    return this.http.post(`${this.apiServerUrl}/availability/addCottageAvailability`, newAvailability, {
+      responseType: 'text',
+    });
+  }
 
 }
 

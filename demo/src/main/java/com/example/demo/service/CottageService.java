@@ -18,6 +18,7 @@ public interface CottageService {
     public List<CottageDto> getOwnerCottages(String email);
     public ResponseEntity<Long> deleteCottage(Long id);
 
+    public Cottage findCottageById(Long id);
     CottageDto editCottage(CottageDto cottageDto);
 
 

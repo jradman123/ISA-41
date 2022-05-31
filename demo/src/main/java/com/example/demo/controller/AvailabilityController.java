@@ -28,7 +28,8 @@ public class AvailabilityController {
         return availabilityService.findByCottage(id);
     }
 
-    @PostMapping(value="/addAvailability")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value="/addCottageAvailability")
     public CottageAvailability addCottageAvailability(@RequestBody CottageAvailabilityDto cottageAvailabilityDto) {
         return availabilityService.add(cottageAvailabilityDto);
     }

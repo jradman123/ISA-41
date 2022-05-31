@@ -38,6 +38,7 @@ public class CottageAvailability {
 
 
     public CottageAvailability(LocalDateTime startDate, LocalDateTime endDate, Cottage cottage) {
+        this.id = id;
         this.startDate=startDate;
         this.endDate=endDate;
         this.cottage=cottage;

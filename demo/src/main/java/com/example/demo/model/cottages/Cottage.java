@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
@@ -114,4 +115,8 @@ public class Cottage {
 
 
 
-}
+
+	}
+
+
+

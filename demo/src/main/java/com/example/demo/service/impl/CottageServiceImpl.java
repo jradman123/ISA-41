@@ -97,6 +97,14 @@ public class CottageServiceImpl implements CottageService {
     }
 
     @Override
+    public Cottage findCottageById(Long id) {
+        Cottage cottage= cottageRepository.findById(id).orElse(null);
+         return cottage;
+
+    }
+
+
+    @Override
     public CottageDto editCottage(CottageDto cottageDto) {
         for (Cottage cottage : cottageRepository.findAll()) {
             if (cottageDto.getId().equals(cottage.getId().toString())) {

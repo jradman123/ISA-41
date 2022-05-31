@@ -13,13 +13,17 @@ import { CottageService } from 'src/app/services/CottageService/cottage.service'
 })
 export class CottageAvailabilityComponent implements OnInit {
 
+  newAvailability!: CottageAvailability;
   id: any;
   cottage!: CottageDto;
   startDate: any = null;
   endDate: any = null;
   pipe = new DatePipe('en-US');
   availabilities: CottageAvailability[] = [];
-  constructor(private availabilityService: AvailabilityService, private route: ActivatedRoute, private cottageService: CottageService, private router: Router) { }
+  constructor(private availabilityService: AvailabilityService, private route: ActivatedRoute, private cottageService: CottageService, private router: Router) {
+
+    this.newAvailability = {} as CottageAvailability;
+  }
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!;
@@ -38,6 +42,22 @@ export class CottageAvailabilityComponent implements OnInit {
   clickHome() {
     this.router.navigate(['cottageOwner/cottage-profile/' + this.id]);
 
+
+  }
+  addAvailability() {
+
+    let startDate = new Date(this.startDate);
+    let endDate = new Date(this.endDate);
+    this.newAvailability.cottageId = this.cottage.id;
+    this.newAvailability.startDate = startDate;
+    this.newAvailability.endDate = endDate;
+    console.log("fedfefdfdf0" + this.newAvailability.startDate)
+
+    this.availabilityService.addAvailabilityCottage(this.newAvailability).subscribe((data) => {
+
+      console.log(this.cottage)
+      this.router.navigate(['cottageOwner/cottage-availability/' + this.id]);
+    });
 
   }
 }

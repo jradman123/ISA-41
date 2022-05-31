@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageAvailabilityDto;
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.RuleDto;
 import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
@@ -24,6 +25,11 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Autowired
     private CottageRepository cottageRepository;
+
+
+    @Autowired
+    private CottageServiceImpl cottageService;
+
     @Override
     public List<CottageAvailabilityDto> findByCottage(Long id)
     {
@@ -40,9 +46,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         return cottageAvailabilityDtos;
     }
 
+
+
+
+
     @Override
     public CottageAvailability add(CottageAvailabilityDto cottageAvailabilityDto) {
-        Cottage cottage=this.cottageRepository.findById(cottageAvailabilityDto.getCottageId());
+        System.out.print("dsdsds"+cottageAvailabilityDto);
+        Cottage cottage=cottageService.findCottageById(cottageAvailabilityDto.getCottageId());
         CottageAvailability ca=new CottageAvailability(cottageAvailabilityDto.getStartDate(),cottageAvailabilityDto.getEndDate(),cottage);
         return  this.cottageAvailabilityRepository.save(ca);
     }

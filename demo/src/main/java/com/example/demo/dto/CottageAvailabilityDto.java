@@ -14,13 +14,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CottageAvailabilityDto {
 
+    public String id;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private String cottageId;
+    private Long cottageId;
 
     public CottageAvailabilityDto(CottageAvailability ca) {
+        this.id = Long.toString(ca.getId());
         this.startDate=ca.getStartDate();
         this.endDate=ca.getEndDate();
-        this.cottageId=ca.getCottage().getId().toString();
+        this.cottageId=ca.getCottage().getId();
     }
 }

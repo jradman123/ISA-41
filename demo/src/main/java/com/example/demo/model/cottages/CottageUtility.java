@@ -22,6 +22,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
@@ -44,11 +46,17 @@ public class CottageUtility {
 	 @JoinColumn(name = "utility_id")
 	 private Utility utility;
 	 
-	 @Column(name = "price", nullable = false)
+	 @Column(name = "price")
 	 private Double price;
 
 	@Column(name = "isDeleted", nullable = false)
 	private boolean isDeleted;
 
 
+	public CottageUtility(String price, Cottage cottage, Utility utility) {
+		this.cottage=cottage;
+		this.utility=utility;
+		this.price=null;
+		this.isDeleted=false;
+	}
 }

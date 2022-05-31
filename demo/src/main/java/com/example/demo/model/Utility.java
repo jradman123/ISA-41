@@ -29,4 +29,8 @@ public class Utility {
 	 @Column(name = "name", nullable = false)
 	 private String name;
 
+    public Utility(String name) {
+		this.id=id;
+		this.name=name;
+    }
 }

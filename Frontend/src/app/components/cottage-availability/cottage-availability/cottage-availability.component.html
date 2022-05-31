@@ -6,14 +6,20 @@
 
             <h1>Availability of cottage {{cottage.name}}</h1>
             <hr />
-            <div *ngFor="let availability of availabilities" class="containter">
-                <h2>Start date</h2>
-                <h3> {{ availability.startDate}} </h3>
-                <h2>End date</h2>
-                <h3> {{ availability.endDate}} </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Start date</th>
+                        <th>End date</th>
+                    </tr>
+                </thead>
 
+                <tr *ngFor="let availability of availabilities">
 
-            </div>
+                    <td>{{ availability.startDate }}</td>
+                    <td>{{ availability.endDate }}</td>
+                </tr>
+            </table>
 
         </div>
     </div>

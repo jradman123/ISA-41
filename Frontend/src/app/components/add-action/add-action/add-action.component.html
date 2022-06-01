@@ -1,1 +1,22 @@
-<p>add-action works!</p>
+<button class="btn" (click)="clickHome()">Home</button>
+<h1 style="margin-left: 210px"> Appointments of cottage {{cottage.name}}</h1>
+
+<div class="card">
+    <div class="container">
+        <div class="card" style="margin-top: 20px;" *ngFor="let a of appointments">
+            <ul class="list-group">
+
+                <li style="height: 60px;" class="list-group-item">Start date: {{a.startDate}} </li>
+                <li style="height: 60px;" class="list-group-item">End date: {{a.endDate}} </li>
+                <li style="height: 60px;" class="list-group-item">Duration: {{a.startDate}} - {{a.endDate}}</li>
+                <li style="height: 60px;" class="list-group-item">Max persons: {{a.capacity}}</li>
+                <li style="height: 60px;" class="list-group-item">Price: {{a.price}}</li>
+                <li class="list-group-item">
+
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

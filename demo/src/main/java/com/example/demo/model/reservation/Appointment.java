@@ -1,8 +1,10 @@
 package com.example.demo.model.reservation;
 
-import com.example.demo.model.AdditionalService;
+import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.Ship;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,13 +39,10 @@ public class Appointment {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "appointment_additional_service",
-            joinColumns = {@JoinColumn(name = "appointment_id")},
-            inverseJoinColumns = {@JoinColumn(name = "service_id")}
-    )
-    private List<AdditionalService> additionalServices;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "cottage_id")
+    @JsonManagedReference
+    private Set<Utility> utilities;
 
 
     @Column(name = "isReserved", nullable = false)

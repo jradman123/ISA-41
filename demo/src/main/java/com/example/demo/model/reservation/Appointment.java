@@ -1,6 +1,8 @@
 package com.example.demo.model.reservation;
 
 import com.example.demo.model.AdditionalService;
+import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.ships.Ship;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +34,7 @@ public class Appointment {
     private Integer capacity;
 
     @Column(name = "price", nullable = false)
-    private Integer price;
+    private Double price;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -48,4 +50,12 @@ public class Appointment {
 
     @Column(name = "isDeleted", nullable = false)
     private boolean isDeleted;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "cottage_id",nullable = true)
+    private Cottage cottage;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "ship_id",nullable = true)
+    private Ship ship;
 }

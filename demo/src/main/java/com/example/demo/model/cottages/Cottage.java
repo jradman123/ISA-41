@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.example.demo.model.Address;
 import com.example.demo.model.Rules;
+import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.users.CottageOwner;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -74,6 +75,11 @@ public class Cottage {
 	 @JoinColumn(name = "cottage_id")
 	 @JsonManagedReference
 	 private Set<CottageUtility> utilities;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "cottage_id")
+	@JsonManagedReference
+	private Set<Appointment> cottageAppointments;
 
 
 

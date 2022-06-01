@@ -32,8 +32,8 @@ public class CottageAvailability {
     private LocalDateTime endDate;
 
     @ManyToOne
-    @JoinColumn(name = "cottageId", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "cottage_id", nullable = false)
+
     private Cottage cottage;
 
 

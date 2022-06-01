@@ -86,8 +86,6 @@ public class Ship {
 	@Column(name = "capacity", nullable = false)
 	private Integer capacity;
 	
-	 @OneToMany(mappedBy = "ship")
-	 private Set<ShipQuickReservation> shipQuickReservations;
 
 	 @OneToMany(mappedBy = "ship")
 	 private Set<ShipReservation> shipReservations;

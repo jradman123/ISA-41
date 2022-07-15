@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
     }
     
     submit():void{
+      if(this.form.invalid){
+        return;
+      }
      const loginObserver = {
        next: (x:any) => {
           if(localStorage.getItem('role') == "Admin"){

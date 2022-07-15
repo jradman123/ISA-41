@@ -81,12 +81,15 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if(this.createForm.invalid){
+      return;
+    }
       this.createUser();
       this.authService.registerUser(this.newUser).subscribe(
         (res) => {
           this.router.navigate(['/login']);
           this._snackBar.open(
-            'Your registration request has been sumbitted. Please check your email and confirm your email adress to activate your account.',
+            'Your registration request has been sumbitted. You need to wait for approval by admin.',
             '',
             {duration : 3000,panelClass: ['snack-bar']}
           );

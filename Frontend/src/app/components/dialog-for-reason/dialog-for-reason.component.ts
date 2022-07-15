@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { RegistrationRequestViewDto } from 'src/app/interfaces/registration-request-view-dto';
 import { RegRequestsService } from 'src/app/services/RegistrationRequestsService/reg-requests.service';
@@ -16,7 +17,7 @@ export class DialogForReasonComponent implements OnInit {
   sub!: Subscription;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogForReasonComponent>,
+    public dialogRef: MatDialogRef<DialogForReasonComponent>,private _snackBar : MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private requestService : RegRequestsService
   ) {}
 
@@ -28,6 +29,13 @@ export class DialogForReasonComponent implements OnInit {
   }
 
   reject() {
+    if(this.data.reason===undefined){
+      this._snackBar.open(
+        'You have to write reason!',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
+    }
     console.log(this.data.reason)
     this.sub = this.requestService
     .rejectRequest(this.data.email,this.data.reason)

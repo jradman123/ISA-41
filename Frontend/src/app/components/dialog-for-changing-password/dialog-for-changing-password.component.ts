@@ -29,6 +29,9 @@ export class DialogForChangingPasswordComponent implements OnInit {
   })
 
   submit() {
+    if(this.form.invalid){
+      return;
+    }
     if (this.form.get('newPassword')?.value !== this.form.get('repeatedPassword')?.value) {
       this.error = true
       return

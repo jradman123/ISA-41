@@ -36,8 +36,7 @@ export class RequestsForDeletingAccountComponent implements OnInit {
   email!: string;
   approve! : boolean;
 
-  constructor(private requestService : RequestForDeletingAccountServiceService,private changeDetectorRefs: ChangeDetectorRef,
-    private _snackBar: MatSnackBar,public dialog: MatDialog) {
+  constructor(private requestService : RequestForDeletingAccountServiceService,private changeDetectorRefs: ChangeDetectorRef,public dialog: MatDialog) {
     this.requests = new MatTableDataSource<RequestForDeletingAccountDto>();
   
    }

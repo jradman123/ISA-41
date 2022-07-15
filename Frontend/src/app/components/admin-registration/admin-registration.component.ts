@@ -86,7 +86,8 @@ export class AdminRegistrationComponent implements OnInit {
     this.authService.addAdmin(this.adminInformations).subscribe((res) => {
       this._snackBar.open(
         'Admin is added',
-        'Dismiss'
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
       );
       this.router.navigate(['/admin']);
     },
@@ -94,7 +95,8 @@ export class AdminRegistrationComponent implements OnInit {
       let parts = err.error.split(':');
       let mess = parts[parts.length - 1];
       let description = mess.substring(1, mess.length - 4);
-      this._snackBar.open(description, 'Dismiss');
+      this._snackBar.open(description, '',
+      {duration : 3000,panelClass: ['snack-bar']});
     }
   );
   }

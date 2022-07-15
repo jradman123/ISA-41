@@ -27,9 +27,11 @@ export class LoginComponent implements OnInit {
     }
     
     submit():void{
+      if(this.form.invalid){
+        return;
+      }
      const loginObserver = {
        next: (x:any) => {
-          this._snackBar.open("     Welcome","Dismiss");
           if(localStorage.getItem('role') == "Admin"){
             if(localStorage.getItem('firstLogin')=== 'true'){
               this._router.navigate(['/admin/profile']);
@@ -44,9 +46,18 @@ export class LoginComponent implements OnInit {
          else if(localStorage.getItem('role') == "ShipAdvertiser"){
           this._router.navigate(['/shipOwner']);
        }
+       this._snackBar.open(
+        'Welcome!',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
        },
         error: (err:any) => {
-          this._snackBar.open("Email or password are incorrect.Try again,please.","Dismiss"); 
+          this._snackBar.open(
+            'Email or password are incorrect.Try again,please.',
+            '',
+            {duration : 3000,panelClass: ['snack-bar']}
+          );
         
         }};
      

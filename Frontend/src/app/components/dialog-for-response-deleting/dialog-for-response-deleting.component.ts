@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { RequestForDeletingAccountDto } from 'src/app/interfaces/request-for-deleting-account-dto';
 import { RequestForDeletingAccountServiceService } from 'src/app/services/RequestForDeletingAccountService/request-for-deleting-account-service.service';
@@ -15,7 +16,7 @@ export class DialogForResponseDeletingComponent implements OnInit {
   requests!: RequestForDeletingAccountDto[];
   sub!: Subscription;
 
-  constructor( public dialogRef: MatDialogRef<DialogForResponseDeletingComponent>,
+  constructor( public dialogRef: MatDialogRef<DialogForResponseDeletingComponent>,private _snackBar : MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DataForDialog,private requestService : RequestForDeletingAccountServiceService) { }
 
   ngOnInit(): void {
@@ -35,6 +36,14 @@ export class DialogForResponseDeletingComponent implements OnInit {
   }
 
   rejectDeleting() {
+    if(this.data.reason===undefined){
+      this._snackBar.open(
+        'You have to write reason!',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
+      return;
+    }
     console.log(this.data.reason)
     this.sub = this.requestService
     .rejectRequest(this.data.email,this.data.reason)
@@ -47,6 +56,14 @@ export class DialogForResponseDeletingComponent implements OnInit {
   }
 
   approveDeleting() {
+    if(this.data.reason===undefined){
+      this._snackBar.open(
+        'You have to write reason!',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
+      return;
+    }
     console.log(this.data.reason)
     this.sub = this.requestService
     .approveRequest(this.data.email,this.data.reason)

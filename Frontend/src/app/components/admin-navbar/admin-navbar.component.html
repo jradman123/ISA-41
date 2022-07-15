@@ -15,7 +15,6 @@
         </mat-menu>
         <a mat-button class="nav-link"  [routerLink]="['/admin/profile']"> Profile </a>
         <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/addNewAdmin']"> Add new administrator </a>
-        
           <button
             mat-button
             *ngIf="authService.isLoggedIn"
@@ -24,8 +23,6 @@
           >
             Log out
           </button>
-          
-  
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

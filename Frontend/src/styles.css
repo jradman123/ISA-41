@@ -2,8 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .snack-bar {
     background: black;
     font-weight: 500;
     color: white !important;
-  }
+}
+
+.image{
+  height:-webkit-fill-available; 
+  background-size:cover;
+  width:auto;
+  background-image:url("assets/images/background1.jpg"); 
+}

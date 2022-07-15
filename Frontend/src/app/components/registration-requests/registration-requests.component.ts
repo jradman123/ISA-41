@@ -40,8 +40,7 @@ export class RegistrationRequestsComponent implements OnInit {
   reason!: string;
   email!: string;
 
-  constructor(private requestService : RegRequestsService,private changeDetectorRefs: ChangeDetectorRef,
-    private _snackBar: MatSnackBar,public dialog: MatDialog) {
+  constructor(private requestService : RegRequestsService,private changeDetectorRefs: ChangeDetectorRef,public dialog: MatDialog) {
     this.requests = new MatTableDataSource<RegistrationRequestViewDto>();
   
    }

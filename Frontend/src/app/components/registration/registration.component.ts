@@ -84,17 +84,19 @@ export class RegistrationComponent implements OnInit {
       this.createUser();
       this.authService.registerUser(this.newUser).subscribe(
         (res) => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/login']);
           this._snackBar.open(
             'Your registration request has been sumbitted. Please check your email and confirm your email adress to activate your account.',
-            'Dismiss'
+            '',
+            {duration : 3000,panelClass: ['snack-bar']}
           );
         },
         (err) => {
           let parts = err.error.split(':');
           let mess = parts[parts.length - 1];
           let description = mess.substring(1, mess.length - 4);
-          this._snackBar.open(description, 'Dismiss');
+          this._snackBar.open(description,  '',
+          {duration : 3000,panelClass: ['snack-bar']});
         }
       );
   }

@@ -15,22 +15,22 @@ export class UserService {
 
   getPersonalData(): Observable<PersonalData> {
     return this.http.get<PersonalData>(
-      `${this.apiServerUrl}/users/getPersonalData`
+      `${this.apiServerUrl}/users/personal-data`
     );
   }
 
   updatePersonalData( data : PersonalData): Observable<PersonalData> {
     return this.http.put<PersonalData>(
-      `${this.apiServerUrl}/users/updatePersonalData`, data
+      `${this.apiServerUrl}/users/update-personal-data`, data
     );
   }
 
   changePassword(data: any) {
-    return this.http.put(`${this.apiServerUrl}/users/changePassword`, data)
+    return this.http.put(`${this.apiServerUrl}/users/change-password`, data)
   }
 
   isFirstLogin() {
-    return this.http.get(`${this.apiServerUrl}/users/isFirstLogin`, {
+    return this.http.get(`${this.apiServerUrl}/users/is-first-login`, {
       responseType : 'text'
     });
   }

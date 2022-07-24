@@ -15,7 +15,7 @@ export class RegRequestsService {
 
   getAll(): Observable<RegistrationRequestViewDto[]> {
     return this.http.get<RegistrationRequestViewDto[]>(
-      `${this.apiServerUrl}/requests/getAll`
+      `${this.apiServerUrl}/requests`
     );
   }
 

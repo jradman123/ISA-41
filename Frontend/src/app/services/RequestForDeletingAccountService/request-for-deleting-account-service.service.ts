@@ -14,7 +14,7 @@ export class RequestForDeletingAccountServiceService {
 
   getAll(): Observable<RequestForDeletingAccountDto[]> {
     return this.http.get<RequestForDeletingAccountDto[]>(
-      `${this.apiServerUrl}/account/getAll`
+      `${this.apiServerUrl}/account`
     );
   }
 

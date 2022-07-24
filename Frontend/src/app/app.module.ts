@@ -33,6 +33,7 @@ import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rule
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
 import { RequestsForDeletingAccountComponent } from './components/requests-for-deleting-account/requests-for-deleting-account.component';
 import { DialogForResponseDeletingComponent } from './components/dialog-for-response-deleting/dialog-for-response-deleting.component';
+import { InstructorDashboardComponent } from './components/instructor-dashboard/instructor-dashboard.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { DialogForResponseDeletingComponent } from './components/dialog-for-resp
     EditRulesComponent,
     EditUtilitiesComponent,
     RequestsForDeletingAccountComponent,
-    DialogForResponseDeletingComponent
+    DialogForResponseDeletingComponent,
+    InstructorDashboardComponent
  
   ],
   imports: [

@@ -102,6 +102,7 @@ export class AdminProfileComponent implements OnInit {
       data => {
         if (data) {
           this.userService.changePassword(data).subscribe((result:any) => {
+            localStorage.setItem('firstLogin','false')
             void(0) 
           })
         }

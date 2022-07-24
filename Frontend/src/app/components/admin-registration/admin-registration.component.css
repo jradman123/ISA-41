@@ -20,3 +20,13 @@ mat-form-field {
   align-items: center;
   margin-top: 20px;
 }
+
+mat-card-title {
+  text-align: center;
+}
+
+.button {
+  width: 145px;
+  height: 40px;
+  font-size: 15px;
+}

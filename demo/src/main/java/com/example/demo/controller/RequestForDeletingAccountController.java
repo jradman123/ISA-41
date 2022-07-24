@@ -35,7 +35,7 @@ public class RequestForDeletingAccountController {
     }
 
     @PreAuthorize("hasAuthority('Admin')")
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = "")
     public ResponseEntity<List<RequestForDeletingAccountDto>> getAll() {
         return new ResponseEntity<>(requestForDeletingAccountService.findAll(), HttpStatus.OK);
 

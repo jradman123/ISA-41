@@ -207,7 +207,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(User user) {
-		userRepository.deleteById(user.getId());
+		User userDb = userRepository.findByEmail(user.getEmail());
+		userDb.setDeleted(true);
+		userRepository.save(userDb);
+
 	}
 
 

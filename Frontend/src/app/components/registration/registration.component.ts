@@ -36,10 +36,6 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
       ]),
-      middleName: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
-      ]),
       street: new FormControl(null, [
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
@@ -82,6 +78,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
     if(this.createForm.invalid){
+      console.log('nevalidno')
       return;
     }
       this.createUser();
@@ -97,7 +94,7 @@ export class RegistrationComponent implements OnInit {
         (err) => {
           let parts = err.error.split(':');
           let mess = parts[parts.length - 1];
-          let description = mess.substring(1, mess.length - 4);
+          let description = mess.substring(0, mess.length);
           this._snackBar.open(description,  '',
           {duration : 3000,panelClass: ['snack-bar']});
         }

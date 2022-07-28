@@ -79,10 +79,11 @@ public class AuthenticationController {
     @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public ResponseEntity<String> addUser(@RequestBody RegistrationRequestDto userRequest, UriComponentsBuilder ucBuilder) throws UnknownHostException {
+
         User existUser = this.userService.findByEmail(userRequest.getEmail());
 
         if (existUser != null) {
-            throw new ResourceConflictException(userRequest.getEmail(), "Email already exists");
+            return new ResponseEntity<String>("Email already exists!", HttpStatus.BAD_REQUEST);
         }
 
         if(userRequest.getTypeOfRegistration().equals("INSTRUCTOR")) {

@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 		instructor.setPhoneNumber(userRequest.getPhoneNumber());
 		instructor.setUserType(UserType.Instructor);
 		Instructor saved = userRepository.save(instructor);
-		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
+		registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
 		return saved;
 	}
 

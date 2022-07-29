@@ -87,7 +87,7 @@ public class AuthenticationController {
         }
 
         if(userRequest.getTypeOfRegistration().equals("INSTRUCTOR")) {
-            Instructor instructor = this.userService.saveInstructor(userRequest);
+            this.userService.saveInstructor(userRequest);
             return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
         else if(userRequest.getTypeOfRegistration().equals("SHIP OWNER")) {

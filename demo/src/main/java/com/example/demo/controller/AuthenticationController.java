@@ -43,7 +43,7 @@ public class AuthenticationController {
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
-    public ResponseEntity<AuthenticatedUserDto> createAuthenticationToken(
+    public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
 
         // Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
@@ -51,6 +51,10 @@ public class AuthenticationController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 
+        User userDb = userService.findByEmail(authenticationRequest.getEmail());
+        if(userDb.isDeleted()) {
+            return new ResponseEntity<>("Profile is deleted!", HttpStatus.BAD_REQUEST);
+        }
         // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
         // kontekst
         SecurityContextHolder.getContext().setAuthentication(authentication);

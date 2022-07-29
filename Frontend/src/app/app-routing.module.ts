@@ -19,6 +19,8 @@ import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edi
 import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
 import { RequestsForDeletingAccountComponent } from './components/requests-for-deleting-account/requests-for-deleting-account.component';
+import { InstructorDashboardComponent } from './components/instructor-dashboard/instructor-dashboard.component';
+import { InstructorProfileComponent } from './components/instructor-profile/instructor-profile.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   {path: 'registration', component: RegistrationComponent},
@@ -115,6 +117,28 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
     ]
+  },
+  {
+    path: 'instructor',
+    component: InstructorDashboardComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'services',
+        component: RegistrationRequestsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'reservations',
+        component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
+      },
+    ],
   },
 
  

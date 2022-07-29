@@ -41,11 +41,13 @@ export class LoginComponent implements OnInit {
           }
           else if(localStorage.getItem('role') == "CottageAdvertiser"){
             this._router.navigate(['/cottageOwner']);
-
-         }
-         else if(localStorage.getItem('role') == "ShipAdvertiser"){
-          this._router.navigate(['/shipOwner']);
-       }
+           }
+          else if(localStorage.getItem('role') == "ShipAdvertiser"){
+            this._router.navigate(['/shipOwner']);
+          }
+          else{
+            this._router.navigate(['instructor']);
+          }
        this._snackBar.open(
         'Welcome!',
         '',

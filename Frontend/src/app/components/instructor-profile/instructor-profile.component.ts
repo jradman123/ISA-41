@@ -9,11 +9,11 @@ import { UserService } from 'src/app/services/UserService/user.service';
 import { DialogForChangingPasswordComponent } from '../dialog-for-changing-password/dialog-for-changing-password.component';
 
 @Component({
-  selector: 'app-admin-profile',
-  templateUrl: './admin-profile.component.html',
-  styleUrls: ['./admin-profile.component.css']
+  selector: 'app-instructor-profile',
+  templateUrl: './instructor-profile.component.html',
+  styleUrls: ['./instructor-profile.component.css']
 })
-export class AdminProfileComponent implements OnInit {
+export class InstructorProfileComponent implements OnInit {
 
   personalData! : PersonalData;
   sub!: Subscription;
@@ -127,7 +127,7 @@ export class AdminProfileComponent implements OnInit {
       data => {
         if (data) {
           this.userService.changePassword(data).subscribe((result:any) => {
-            localStorage.setItem('firstLogin','false')
+            //localStorage.setItem('firstLogin','false')
             this.authService.logout();
             this.router.navigate(['/login']);
             void(0) 
@@ -136,6 +136,5 @@ export class AdminProfileComponent implements OnInit {
       }
     );
   }
-
 
 }

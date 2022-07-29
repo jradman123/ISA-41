@@ -1,0 +1,79 @@
+<div class="container" >
+    <mat-card>
+      <mat-card-title>Personal data</mat-card-title>
+      <br/>
+      <mat-card-content>
+    <form class="form-container" [formGroup]="detailsForm">
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="firstName"  [readonly]="!editMode" />
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="lastName" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" readonly />
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Phone Number</mat-label>
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Street name</mat-label>
+            <input matInput placeholder="Street name" formControlName="streetName" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Street number</mat-label>
+            <input matInput placeholder="Street number" formControlName="streetNumber" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" formControlName="city" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Country</mat-label>
+            <input matInput placeholder="Country" formControlName="country" [readonly]="!editMode" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="button-container" *ngIf ="!editMode else editIsOn">
+      <button mat-flat-button color="primary"  class="button" (click)="editMode = true">Edit</button>
+      <div class="menu-container">
+        <button class="button" mat-flat-button color="primary" (click)="changePassword()">Change Password</button>
+      </div>
+    </div>
+    <ng-template #editIsOn>
+      <div class="button-container" *ngIf="editMode">
+        <button mat-flat-button color="primary" class="button" (click)="edit()">Save</button>
+        <button mat-flat-button color="warn"  class="button" (click)="cancel()">Cancel</button>
+      </div>
+    </ng-template>
+    </form>
+      </mat-card-content>
+      </mat-card>
+  </div>
+  

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.DeleteAccountRequest;
 import com.example.demo.dto.RequestForDeletingAccountDto;
 import com.example.demo.model.users.RegistrationRequest;
 import com.example.demo.model.users.RequestForDeletingAccount;
@@ -56,5 +57,17 @@ public class RequestForDeletingAccountServiceImpl implements RequestForDeletingA
     @Override
     public void deleteRequest(RequestForDeletingAccount request) {
         requestForDeletingAccountRepository.deleteById(request.getId());
+    }
+
+    @Override
+    public RequestForDeletingAccount saveRequest(DeleteAccountRequest deleteAccountRequest) {
+        RequestForDeletingAccount existRequest = requestForDeletingAccountRepository.findByEmail(deleteAccountRequest.getEmail());
+        if(existRequest != null){
+            requestForDeletingAccountRepository.delete(existRequest);
+        }
+        RequestForDeletingAccount request = new RequestForDeletingAccount();
+        request.setReason(deleteAccountRequest.getReason());
+        request.setEmail(deleteAccountRequest.getEmail());
+        return requestForDeletingAccountRepository.save(request);
     }
 }

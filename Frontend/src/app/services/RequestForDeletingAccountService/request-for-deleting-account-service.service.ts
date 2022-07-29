@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DeleteAccountRequest } from 'src/app/interfaces/delete-account-request';
 import { RequestForDeletingAccountDto } from 'src/app/interfaces/request-for-deleting-account-dto';
 import { environment } from 'src/environments/environment';
 
@@ -28,5 +29,9 @@ export class RequestForDeletingAccountServiceService {
     return this.http.put<RequestForDeletingAccountDto[]>(
       `${this.apiServerUrl}/account/reject/${email}`,response
     );
+  }
+
+  addNewRequest(request : DeleteAccountRequest): Observable<any> {
+    return this.http.post(`${this.apiServerUrl}/account`,request);
   }
 }

@@ -36,6 +36,7 @@ import { DialogForResponseDeletingComponent } from './components/dialog-for-resp
 import { InstructorDashboardComponent } from './components/instructor-dashboard/instructor-dashboard.component';
 import { InstructorNavbarComponent } from './components/instructor-navbar/instructor-navbar.component';
 import { InstructorProfileComponent } from './components/instructor-profile/instructor-profile.component';
+import { DialogForDeletingAccountComponent } from './components/dialog-for-deleting-account/dialog-for-deleting-account.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { InstructorProfileComponent } from './components/instructor-profile/inst
     DialogForResponseDeletingComponent,
     InstructorDashboardComponent,
     InstructorNavbarComponent,
-    InstructorProfileComponent
+    InstructorProfileComponent,
+    DialogForDeletingAccountComponent
  
   ],
   imports: [

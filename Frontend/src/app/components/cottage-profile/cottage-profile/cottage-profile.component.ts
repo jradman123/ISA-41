@@ -8,6 +8,9 @@ import { RuleService } from 'src/app/services/RuleService/rule.service';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { Router } from '@angular/router';
+import { RoomDto } from 'src/app/interfaces/room-dto';
+import { ImageService } from 'src/app/services/ImageService/image.service';
+import { ImageDto } from 'src/app/interfaces/image-dto';
 
 @Component({
   selector: 'app-cottage-profile',
@@ -16,52 +19,98 @@ import { Router } from '@angular/router';
 })
 export class CottageProfileComponent implements OnInit {
 
- 
-  cottage!: CottageDto;
-  id:any;
-  rules:RuleDto[]=[];
-  utilities:UtilityDto[]=[];
-  
-  constructor(private route:Router,private cottageService:CottageService,private router:ActivatedRoute,private ruleService:RuleService,private utilityService:UtilityService) {
-    
-   }
 
-  ngOnInit():void {
+
+
+  cottage!: CottageDto;
+  id: any;
+  rules: RuleDto[] = [];
+  utilities: UtilityDto[] = [];
+  rooms: RoomDto[] = [];
+  images: ImageDto[] = [];
+
+  constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService) {
+
+  }
+
+  ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.cottageService.findbyId(this.id).subscribe((data) => {
       this.cottage = data;
     });
-    
-      this.ruleService.findRulebyId(this.id).subscribe((data) => {
-        this.rules = data;
-       
-      });
 
-      this.utilityService.findUtilityById(this.id).subscribe((data) => {
-        this.utilities = data;
-        console.log(this.utilities);
-      });
-
-}
-
-editCottage() {
-  this.route.navigate(['cottageOwner/edit-cottage/'+this.id]);
-}
-
-deleteCottage() {
-  this.cottageService.deleteCottage(this.id)
-    .subscribe(data => {
-  
-      this.route.navigate(['cottageOwner']);
+    this.ruleService.findRulebyId(this.id).subscribe((data) => {
+      this.rules = data;
 
     });
-}
-editRules()  {
-  this.route.navigate(['cottageOwner/edit-rules/'+this.id]);
-}
 
-editUtilities() {
-  this.route.navigate(['cottageOwner/edit-utilities/'+this.id]);
+    this.utilityService.findUtilityById(this.id).subscribe((data) => {
+      this.utilities = data;
+      console.log(this.utilities);
+    });
 
-}
+    this.cottageService.findRoomsById(this.id).subscribe((data) => {
+      this.rooms = data;
+      console.log(this.utilities);
+    });
+    this.imageService.findImageByCottageId(this.id).subscribe((data) => {
+      this.images = data;
+      console.log(this.images);
+    });
+
+
+
+
+  }
+  reservationHistory() {
+    this.route.navigate(['cottageOwner/reservation-history/' + this.id]);
+
+
+  }
+  addReservation() {
+    this.route.navigate(['cottageOwner/add-reservation/' + this.id]);
+
+
+  }
+
+  viewAvailability() {
+    this.route.navigate(['cottageOwner/cottage-availability/' + this.id]);
+
+
+  }
+
+  addAction() {
+    this.route.navigate(['cottageOwner/add-action/' + this.id]);
+
+  }
+
+  editCottage() {
+    this.route.navigate(['cottageOwner/edit-cottage/' + this.id]);
+  }
+
+  editRooms() {
+    this.route.navigate(['cottageOwner/edit-rooms/' + this.id]);
+  }
+  editRules() {
+    this.route.navigate(['cottageOwner/edit-rules/' + this.id]);
+  }
+
+  editUtilities() {
+    this.route.navigate(['cottageOwner/edit-utilities/' + this.id]);
+
+  }
+  deletePicture(idP: any) {
+
+
+    this.imageService.deletePicture(idP, this.id)
+      .subscribe(data => {
+        window.location.reload();
+
+
+
+
+
+      });
+
+  }
 }

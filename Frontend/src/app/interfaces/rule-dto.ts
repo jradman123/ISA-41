@@ -1,7 +1,8 @@
 export interface RuleDto {
     id:string;
     ruleDescription:string;
-    isDeleted:boolean;
+    isDeletedbyCottage:boolean;
+    isDeletedbyShip:boolean;
     cottageId:string;
     shipId:string;
 

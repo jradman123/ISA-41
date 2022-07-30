@@ -1,0 +1,23 @@
+.btn {
+    transform: scale(1.10);
+    width: 120px;
+    margin-left: 40%;
+    margin-right: 15%;
+    color: white;
+    background: rgb(81, 63, 243);
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.deletebtn {
+    transform: scale(1.10);
+    width: 120px;
+    margin-left: 40%;
+    margin-right: 15%;
+    color: white;
+    background: rgb(81, 63, 243);
+    font-size: 14px;
+    margin-top: 30px;
+
+
+}

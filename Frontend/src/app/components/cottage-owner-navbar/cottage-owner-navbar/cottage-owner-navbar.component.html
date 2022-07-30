@@ -9,9 +9,22 @@
       <span class="menu-spacer"></span>
       <div>
       
+        <a mat-button class="nav-link" [routerLink]="['/cottageOwner/profile']"> Your personal profile </a>
         <a mat-button class="nav-link" [routerLink]="['/cottageOwner']"> Cottages </a>
+       
+        
         <a mat-button class="nav-link"  [routerLink]="['/cottageOwner/add-cottage']"> Add new cottage </a>
-        <a mat-button class="nav-link"  [routerLink]="['/cottages']">  Sign out</a>
+
+      
+        
+        <button
+        mat-button
+        *ngIf="authService.isLoggedIn"
+        class="btn btn-primary btn-md"
+        (click)="onLogout()"
+      >
+        Log out
+      </button>
         
   
       </div>

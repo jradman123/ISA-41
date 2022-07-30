@@ -1,8 +1,13 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
+import com.example.demo.model.Address;
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.users.ShipOwner;
 import com.example.demo.model.users.User;
+import com.example.demo.repository.ShipOwnerRepository;
 import com.example.demo.repository.ShipRepository;
 import com.example.demo.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +27,44 @@ public class ShipServiceImpl  implements ShipService {
     @Autowired
     private UserServiceImpl userRepository;
 
+    @Autowired
+    private ShipOwnerRepository shipOwnerRepository;
+
+
+
+
+
+    @Override
+    public ShipDto editShip(ShipDto shipDto) {
+        for (Ship ship : shipRepository.findAll()) {
+            if (shipDto.getId().equals(ship.getId().toString())) {
+                ship.setName(shipDto.getName());
+                ship.setDescription(shipDto.getDescription());
+                ship.setPrice(Double.parseDouble(shipDto.getPrice()));
+                ship.getAddress().setStreetNumber(shipDto.getStreetNumber());
+                ship.getAddress().setStreetName(shipDto.getStreetName());
+                ship.getAddress().setCity(shipDto.getCity());
+                ship.getAddress().setCountry(shipDto.getCountry());
+                ship.setCapacity(Integer.parseInt(shipDto.getCapacity()));
+                ship.setLength(Double.parseDouble(shipDto.getLength()));
+                ship.setNumberOfEngine(shipDto.getNumberOfEngine());
+                ship.setStrengthOfEngine(Double.parseDouble(shipDto.getStrengthOfEngine()));
+                ship.setMaxSpeed(Double.parseDouble(shipDto.getMaxSpeed()));
+                ship.setType(shipDto.getType());
+                ship.setCancelationConditions(Integer.parseInt(shipDto.getCancelationConditions()));
+                ship.setFishingEquipment(shipDto.getFishingEquipment());
+
+
+
+
+                shipRepository.save(ship);
+                return new ShipDto(ship);
+
+            }
+
+        }
+        return null;
+    }
 
 
     @Override
@@ -35,20 +78,23 @@ public class ShipServiceImpl  implements ShipService {
     }
 
 
-/*
+
     @Override
-    public Ship createShip(CreateShipDto newShip) {
-        User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
+    public Ship createShip(ShipDto newShip) {
+        System.out.print("fjedsjfsjfdj"+newShip.getOwnerEmail());
+        User user = this.userRepository.findByEmail(newShip.getOwnerEmail());
+        System.out.print("a sad"+user.getEmail());
         for (ShipOwner owner : this.shipOwnerRepository.findAll()) {
+
             if (owner.getEmail().equals(user.getEmail())) {
-                Address address = new Address(newShip.getAddress().getStreetName(), newShip.getAddress().getStreetNumber(), newShip.getAddress().getCity(), newCottage.getAddress().getCountry());
-                Cottage cottage = new Cottage(newCottage.getName(), newCottage.getDescription(), newCottage.getPrice(), address, owner);
+                Address address = new Address(newShip.getStreetName(), newShip.getStreetNumber(), newShip.getCity(), newShip.getCountry());
+                Ship ship = new Ship(newShip.getName(), newShip.getDescription(), Double.parseDouble(newShip.getPrice()),address, owner,Integer.parseInt(newShip.getCapacity()),Double.parseDouble(newShip.getMaxSpeed()),Integer.parseInt(newShip.getCancelationConditions()),Double.parseDouble(newShip.getLength()),Double.parseDouble(newShip.getStrengthOfEngine()),newShip.getFishingEquipment(),newShip.getNumberOfEngine(),newShip.getType());
                 return this.shipRepository.save(ship);
             }
         }
       return null;
 
-    }*/
+    }
 
     @Override
     public ShipDto findShip(Long id) {
@@ -62,7 +108,7 @@ public class ShipServiceImpl  implements ShipService {
         List<ShipDto> ships = new ArrayList<>();
         for(Ship ship: shipRepository.findAll()){
             User user= userRepository.findByEmail(ship.getShipOwner().getEmail());
-            if(user.getEmail().equals(email)){
+            if(user.getEmail().equals(email) & ship.isDeleted()==false){
                 ShipDto shipDto=new ShipDto(ship);
                 ships.add(shipDto);
             }

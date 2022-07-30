@@ -1,44 +1,38 @@
+<div class="container" style="margin-top:20px">
+  <div class="container">
+    <div class="containter">
 
-      <div class="container"  style="margin-top:20px"> 
-        <div class="container">
-          <div class="containter">
+      <h1>Utilities of cottage</h1>
+      <hr />
+      <div *ngFor="let utility of utilities" class="containter">
+        <h3> {{ utility.name}} <button style="margin-left:900px" class="btn"
+            (click)="deleteUtility(utility.id)">Delete</button>
+          <hr />
+        </h3>
 
-            <h1 >Utilities of cottage</h1>
-            <hr/>
-            <div *ngFor="let utility of utilities" class="containter">
-            <h3 > {{ utility.name}}    <button style="margin-left:900px" class="btn" (click)="deleteUtility(utility.id)">Delete</button>
-            <hr/></h3>
-            
-            </div>
-              
-              </div>  
-          </div>
-      
       </div>
+
+    </div>
+  </div>
+
+</div>
 
 
 
 <div class="container" style="margin-top:20px">
-    <div class="containter">
+  <div class="containter">
+    <div>
+      <h1> Add utility of cottage</h1>
+      <hr />
       <div>
-        <h1> Add utility of cottage</h1>
-        <hr />
-        <div>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Enter your utility"
-            [(ngModel)]="utility"
-          />
-        </div>
+        <input class="form-control" type="text" placeholder="Enter your utility" [(ngModel)]="utilityy.name" />
       </div>
-      
     </div>
-    <div class="container"> 
-        <div>
-            <button class="btn" (click)="addUtility">Add</button>
-        </div>
+
+  </div>
+  <div class="container">
+    <div>
+      <button class="btn" (click)="addUtility()">Add</button>
     </div>
   </div>
-
- 
+</div>

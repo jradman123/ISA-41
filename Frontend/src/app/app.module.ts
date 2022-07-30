@@ -31,8 +31,20 @@ import { ShipProfileComponent } from './components/ship-profile/ship-profile/shi
 import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
 import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
+
 import { RequestsForDeletingAccountComponent } from './components/requests-for-deleting-account/requests-for-deleting-account.component';
 import { DialogForResponseDeletingComponent } from './components/dialog-for-response-deleting/dialog-for-response-deleting.component';
+
+import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
+import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
+import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
+import { EditShipComponent } from './components/edit-ship/edit-ship/edit-ship.component';
+import { EditRoomsComponent } from './components/edit-rooms/edit-rooms/edit-rooms.component';
+import { AddActionComponent } from './components/add-action/add-action/add-action.component';
+import { ReservationHistoryComponent } from './components/reservation-history/reservation-history/reservation-history.component';
+import { AddReservationComponent } from './components/add-reservation/add-reservation/add-reservation.component';
+import { CottageAvailabilityComponent } from './components/cottage-availability/cottage-availability/cottage-availability.component';
+
 
 
 @NgModule({
@@ -60,9 +72,20 @@ import { DialogForResponseDeletingComponent } from './components/dialog-for-resp
     EditCottageComponent,
     EditRulesComponent,
     EditUtilitiesComponent,
+
     RequestsForDeletingAccountComponent,
-    DialogForResponseDeletingComponent
- 
+
+    CottageOwnerProfileComponent,
+    ShipOwnerProfileComponent,
+    AddShipComponent,
+    EditShipComponent,
+    EditRoomsComponent,
+    AddActionComponent,
+    ReservationHistoryComponent,
+    AddReservationComponent,
+    CottageAvailabilityComponent
+
+
   ],
   imports: [
     BrowserModule,
@@ -75,7 +98,7 @@ import { DialogForResponseDeletingComponent } from './components/dialog-for-resp
     FormsModule
   ],
   providers: [HttpClientModule,
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

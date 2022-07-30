@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateCottageDto;
+import com.example.demo.dto.RoomDto;
+import com.example.demo.dto.RuleDto;
+import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.Room;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.UserServiceImpl;
@@ -37,7 +40,7 @@ public class CottageController {
     @CrossOrigin(origins = "http://localhost:4200")
     //ovo samo moze da radi vlasnik vikendice
     @PostMapping(value = "/createCottage")
-    public Cottage createCottage(@RequestBody CreateCottageDto newCottage) {
+    public Cottage createCottage(@RequestBody CottageDto newCottage) {
         return this.cottageService.createCottage(newCottage);
     }
 
@@ -47,6 +50,45 @@ public class CottageController {
     public CottageDto findCottage(@PathVariable Long id) {
         return this.cottageService.findCottage(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //isto radi vlasnik vikendice
+    @GetMapping(value = "/findRoomsById/{id}")
+    public List<RoomDto> findRoomsByCotttage(@PathVariable Long id) {
+        return this.cottageService.findRoomsByCottage(id);
+    }
+
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteRoomByCottage/{id}/{idCottage}")
+    public ResponseEntity<Long> deleteRoomByCottage(@PathVariable Long id,@PathVariable Long idCottage) {
+        return this.cottageService.deleteRoomByCottage(id,idCottage);
+    }
+
+
+    @GetMapping(value = "/search")
+    public List<CottageDto> search(CottageDto dto) {
+        return this.cottageService.search(dto);
+    }
+
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //ovo samo moze da radi vlasnik vikendice
+    @PostMapping(value = "/createRoomByCottage")
+    public Room createRoom(@RequestBody RoomDto newRoom) {
+        return this.cottageService.createRoom(newRoom);
+    }
+
+
+
+
+
+
+
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     //radi samo vlasnik vikendice

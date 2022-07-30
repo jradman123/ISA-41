@@ -23,11 +23,6 @@ public class Image {
 	@Column(name = "url", unique = false, nullable = false)
 	String url;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "cottage_id", nullable = true)
-	private Cottage cottage;
 
-	@Column(name = "isDeleted", nullable = false)
-	private boolean isDeleted;
 
 }

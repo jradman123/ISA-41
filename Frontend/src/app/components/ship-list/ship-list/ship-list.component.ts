@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ShipService } from 'src/app/services/ShipService/ship.service';
 
 @Component({
@@ -11,17 +12,26 @@ import { ShipService } from 'src/app/services/ShipService/ship.service';
 export class ShipListComponent implements OnInit {
 
   ships: ShipDto[] = [];
-  constructor(private shipService:ShipService,  private router: Router) { }
+  constructor(private shipService: ShipService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.shipService.findByEmail().subscribe((data) => {
       this.ships = data;
-   
+
     });
   }
 
-  view(id:string){
-    this.router.navigate(['shipOwner/ship-profile/'+id]);
+  view(id: string) {
+    this.router.navigate(['shipOwner/ship-profile/' + id]);
+
+  }
+  delete(id: string) {
+    this.shipService.deleteShip(id)
+      .subscribe(data => {
+
+        window.location.reload();
+
+      });
 
   }
 

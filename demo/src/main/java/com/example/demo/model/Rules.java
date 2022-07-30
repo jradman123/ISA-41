@@ -33,7 +33,7 @@ public class Rules {
 
 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	 @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	    @JoinColumn(name = "cottage_id",nullable = true)
 	    private Cottage cottage;
 

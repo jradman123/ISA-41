@@ -30,6 +30,7 @@ public class ShipDto {
     private String type;
     private String cancelationConditions;
     private String fishingEquipment;
+    private String ownerEmail;
 
 
     public ShipDto(Ship ship) {
@@ -49,5 +50,6 @@ public class ShipDto {
         this.type=ship.getType();
         this.cancelationConditions=Integer.toString(ship.getCancelationConditions());
         this.fishingEquipment=ship.getFishingEquipment();
+        this.ownerEmail=ship.getShipOwner().getEmail();
     }
 }

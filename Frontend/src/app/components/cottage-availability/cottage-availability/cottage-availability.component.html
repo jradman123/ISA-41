@@ -1,0 +1,49 @@
+<div class="container" style="margin-top:20px">
+    <div class="container">
+        <div class="containter">
+
+            <button class="btn" (click)="clickHome()">Home</button>
+
+            <h1>Availability of cottage {{cottage.name}}</h1>
+            <hr />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Start date</th>
+                        <th>End date</th>
+                    </tr>
+                </thead>
+
+                <tr *ngFor="let availability of availabilities">
+
+                    <td>{{ availability.startDate }}</td>
+                    <td>{{ availability.endDate }}</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<hr />
+
+
+<div class="container" style="margin-top:50px">
+    <div class="containter">
+        <div>
+            <h1> Add availability of cottage</h1>
+            <hr />
+            <div>
+                <input class="form-control" type="date" placeholder="Enter startDate" [(ngModel)]="startDate" />
+                <input class="form-control" type="date" placeholder="Enter endDate" [(ngModel)]="endDate" />
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div>
+            <button class="btn" (click)="addAvailability()">Add</button>
+        </div>
+    </div>
+</div>

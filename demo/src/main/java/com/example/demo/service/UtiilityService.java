@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.UtilityDto;
+import com.example.demo.model.cottages.CottageUtility;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,4 +15,6 @@ public interface UtiilityService {
     List<UtilityDto> getUtilitiesbyBoat(Long id);
 
     ResponseEntity<Long> deleteUtiliry(Long id, Long idCottage);
+
+    CottageUtility add(CottageUtilityDto cottageUtilityDto);
 }

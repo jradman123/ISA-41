@@ -18,13 +18,13 @@ public class CottageDto {
     public String id;
     public String name;
     public String description;
-    private String streetNumber;
-    private String streetName;
-    private String city;
-    private String country;
+    public String streetNumber;
+    public String streetName;
+    public String city;
+    public String country;
     public String price;
     public String numberOfPeople;
-    private String ownerEmail;
+    public String ownerEmail;
 
     public  CottageDto(Cottage cottage){
         this.id = Long.toString(cottage.getId());

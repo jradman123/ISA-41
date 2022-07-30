@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.service.impl.CottageServiceImpl;
 import com.example.demo.service.impl.ShipServiceImpl;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/ships")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ShipController {
     @Autowired
     private UserServiceImpl userService;
@@ -57,6 +59,19 @@ public class ShipController {
     }
 
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //ovo samo moze da radi vlasnik vikendice
+    @PutMapping(value = "/editShip")
+    public ShipDto editShip(@RequestBody ShipDto newShip) {
+        return this.shipService.editShip(newShip);
+
+    }
+
+    @PostMapping(value = "/createShips")
+    public Ship createCottage(@RequestBody ShipDto newShip) {
+        return this.shipService.createShip(newShip);
+    }
 
 
 

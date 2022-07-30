@@ -8,27 +8,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilityService {
- 
 
-  
+
+
 
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  findUtilityById(id: string):Observable<UtilityDto[]> {
+  findUtilityById(id: string): Observable<UtilityDto[]> {
     return this.http.get<UtilityDto[]>(
-      `${this.apiServerUrl}/utilities/findUtilitiesByCottage/${ id}`);
-    }
-
-    findShipUtilityById(id: string):Observable<UtilityDto[]> {
-      return this.http.get<UtilityDto[]>(
-        `${this.apiServerUrl}/utilities/findUtilitiesByBoat/${ id}`);
-      }
-
-      deleteUtility(id: any, idCottage: any) {
-        return this.http.delete<UtilityDto>(
-          `${this.apiServerUrl}/utilities/deleteUtilityByCottage/${ id}/${idCottage}`);
-     
-      }
+      `${this.apiServerUrl}/utilities/findUtilitiesByCottage/${id}`);
   }
+
+  findShipUtilityById(id: string): Observable<UtilityDto[]> {
+    return this.http.get<UtilityDto[]>(
+      `${this.apiServerUrl}/utilities/findUtilitiesByBoat/${id}`);
+  }
+
+  deleteUtility(id: any, idCottage: any) {
+    return this.http.delete<UtilityDto>(
+      `${this.apiServerUrl}/utilities/deleteUtilityByCottage/${id}/${idCottage}`);
+
+  }
+
+  addCottageUtility(newUtility: UtilityDto) {
+    console.log(newUtility)
+    return this.http.post(`${this.apiServerUrl}/utilities/addCottageUtility`, newUtility, {
+      responseType: 'text',
+    });
+
+  }
+}
 

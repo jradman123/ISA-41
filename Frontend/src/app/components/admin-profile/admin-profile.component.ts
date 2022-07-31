@@ -127,9 +127,11 @@ export class AdminProfileComponent implements OnInit {
       data => {
         if (data) {
           this.userService.changePassword(data).subscribe((result:any) => {
+            if(localStorage.getItem('firstLogin') == 'false'){
+              this.authService.logout();
+              this.router.navigate(['/login']);
+            }
             localStorage.setItem('firstLogin','false')
-            this.authService.logout();
-            this.router.navigate(['/login']);
             void(0) 
           })
         }

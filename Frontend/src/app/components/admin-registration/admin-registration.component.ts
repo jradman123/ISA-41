@@ -94,7 +94,7 @@ export class AdminRegistrationComponent implements OnInit {
     (err) => {
       let parts = err.error.split(':');
       let mess = parts[parts.length - 1];
-      let description = mess.substring(1, mess.length - 4);
+      let description = mess.substring(0, mess.length);
       this._snackBar.open(description, '',
       {duration : 3000,panelClass: ['snack-bar']});
     }

@@ -118,6 +118,10 @@ public class AuthenticationController {
     @PreAuthorize("hasAuthority('Admin')")
     @PostMapping(value = "/addNewAdmin")
     public ResponseEntity<String> addNewAdmin(@RequestBody AdministratorRegistrationDto administratorRegistrationDto) {
+        User existUser = this.userService.findByEmail(administratorRegistrationDto.getEmail());
+        if (existUser != null) {
+            return new ResponseEntity<String>("Email already exists!", HttpStatus.BAD_REQUEST);
+        }
         userService.saveAdministrator(administratorRegistrationDto);
         return new ResponseEntity<>("Success",HttpStatus.OK);
     }

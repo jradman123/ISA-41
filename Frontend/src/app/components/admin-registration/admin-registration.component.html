@@ -6,51 +6,60 @@
       <div class="container" [formGroup]="createForm" >
         <br />
         <div class="separateMe">
-          <div style="width: 100%; display: flex">
-            <mat-form-field appearance="fill">
-              <mat-label>First Name</mat-label>
-              <input matInput formControlName="firstName" />
-              <mat-error
-                *ngIf="
-                  createForm?.get('firstName')?.valid &&
-                  createForm?.get('firstName')?.touched &&
-                  createForm?.get('firstName')?.errors?.required
-                "
-                >First name is required.</mat-error
-              >
-              <mat-error>Invalid input</mat-error>
-            </mat-form-field>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="firstName" />
+                  <mat-error
+                    *ngIf="
+                      createForm?.get('firstName')?.valid &&
+                      createForm?.get('firstName')?.touched &&
+                      createForm?.get('firstName')?.errors?.required
+                    "
+                    >First name is required.</mat-error
+                  >
+                  <mat-error>Invalid input</mat-error>
+                </mat-form-field>
+                </div>
             </div>
-            <div style="width: 100%; display: flex"></div>
-            <mat-form-field appearance="fill">
-              <mat-label>Last Name</mat-label>
-              <input matInput formControlName="lastName" />
-              <mat-error
-                *ngIf="
-                  createForm?.get('lastName')?.valid &&
-                  createForm?.get('lastName')?.touched &&
-                  createForm?.get('lastName')?.errors?.required
-                "
-                >Last name is required.</mat-error
-              >
-              <mat-error>Invalid input</mat-error>
-            </mat-form-field>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex"></div>
+              <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" />
+                <mat-error
+                  *ngIf="
+                    createForm?.get('lastName')?.valid &&
+                    createForm?.get('lastName')?.touched &&
+                    createForm?.get('lastName')?.errors?.required
+                  "
+                  >Last name is required.</mat-error
+                >
+                <mat-error>Invalid input</mat-error>
+              </mat-form-field>
+            </div>
           </div>
-    
-          <div style="width: 100%; display: flex">
-            <mat-form-field appearance="fill">
-              <mat-label>Street Name</mat-label>
-              <input matInput formControlName="streetName" />
-              <mat-error
-                *ngIf="
-                  !createForm?.get('street')?.valid &&
-                  createForm?.get('street')?.touched &&
-                  createForm?.get('street')?.errors?.required
-                "
-                >Street is required</mat-error
-              >
-            </mat-form-field>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div style="width: 100%; display: flex">
+              <mat-form-field appearance="fill">
+                <mat-label>Street Name</mat-label>
+                <input matInput formControlName="streetName" />
+                <mat-error
+                  *ngIf="
+                    !createForm?.get('street')?.valid &&
+                    createForm?.get('street')?.touched &&
+                    createForm?.get('street')?.errors?.required
+                  "
+                  >Street is required</mat-error
+                >
+              </mat-form-field>
             </div>
+            </div>
+            <div class="col-sm">
             <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>Street Number</mat-label>
@@ -65,6 +74,10 @@
               >
             </mat-form-field>
             </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
             <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>City</mat-label>
@@ -79,6 +92,8 @@
               >
             </mat-form-field>
             </div>
+          </div>
+          <div class="col-sm">
             <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>Country</mat-label>
@@ -93,6 +108,10 @@
               >
             </mat-form-field>
           </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
           <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
@@ -115,6 +134,8 @@
               >
             </mat-form-field>
             </div>
+            </div>
+            <div class="col-sm">
             <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>Phone Number</mat-label>
@@ -129,6 +150,10 @@
               >
             </mat-form-field>
           </div>
+        </div>
+          </div>
+          <div class="row">
+          <div class="col-sm">
           <div style="width: 100%; display: flex">
           <mat-form-field appearance="fill">
             <mat-label>Password</mat-label>
@@ -156,6 +181,8 @@
             >
           </mat-form-field>
           </div>
+          </div>
+          <div class="col-sm">
           <div style="width: 100%; display: flex">
           <mat-form-field appearance="fill">
             <mat-label>Confirm Password</mat-label>
@@ -176,19 +203,19 @@
             <mat-error *ngIf="!passMatch">Passwords does not match! </mat-error>
           </mat-form-field>
         </div>
-       
-  
-        <br /><br />
-        <div >
+        </div>
+       </div>
+        <br />
+   
           <button
-            mat-raised-button
+            mat-flat-button
             (click)="onSubmit()"
             color="primary"
             class="icon-display"
           >
             Register
           </button>
-        </div>
+     
         </div>
       </mat-card-content>
       </mat-card>

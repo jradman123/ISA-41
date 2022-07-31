@@ -43,7 +43,7 @@ public class AuthenticationController {
     // Tada zna samo svoje korisnicko ime i lozinku i to prosledjuje na backend.
     @CrossOrigin(origins = "*")
     @PostMapping("/login")
-    public ResponseEntity<AuthenticatedUserDto> createAuthenticationToken(
+    public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
 
         // Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
@@ -51,6 +51,10 @@ public class AuthenticationController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 
+        User userDb = userService.findByEmail(authenticationRequest.getEmail());
+        if(userDb.isDeleted()) {
+            return new ResponseEntity<>("Profile is deleted!", HttpStatus.BAD_REQUEST);
+        }
         // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
         // kontekst
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -79,14 +83,15 @@ public class AuthenticationController {
     @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public ResponseEntity<String> addUser(@RequestBody RegistrationRequestDto userRequest, UriComponentsBuilder ucBuilder) throws UnknownHostException {
+
         User existUser = this.userService.findByEmail(userRequest.getEmail());
 
         if (existUser != null) {
-            throw new ResourceConflictException(userRequest.getEmail(), "Email already exists");
+            return new ResponseEntity<String>("Email already exists!", HttpStatus.BAD_REQUEST);
         }
 
         if(userRequest.getTypeOfRegistration().equals("INSTRUCTOR")) {
-            Instructor instructor = this.userService.saveInstructor(userRequest);
+            this.userService.saveInstructor(userRequest);
             return new ResponseEntity<String>("Success!", HttpStatus.CREATED);
         }
         else if(userRequest.getTypeOfRegistration().equals("SHIP OWNER")) {
@@ -113,6 +118,10 @@ public class AuthenticationController {
     @PreAuthorize("hasAuthority('Admin')")
     @PostMapping(value = "/addNewAdmin")
     public ResponseEntity<String> addNewAdmin(@RequestBody AdministratorRegistrationDto administratorRegistrationDto) {
+        User existUser = this.userService.findByEmail(administratorRegistrationDto.getEmail());
+        if (existUser != null) {
+            return new ResponseEntity<String>("Email already exists!", HttpStatus.BAD_REQUEST);
+        }
         userService.saveAdministrator(administratorRegistrationDto);
         return new ResponseEntity<>("Success",HttpStatus.OK);
     }

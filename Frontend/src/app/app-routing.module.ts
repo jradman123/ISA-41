@@ -18,9 +18,9 @@ import { ShipProfileComponent } from './components/ship-profile/ship-profile/shi
 import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
 import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
-
 import { RequestsForDeletingAccountComponent } from './components/requests-for-deleting-account/requests-for-deleting-account.component';
-
+import { InstructorDashboardComponent } from './components/instructor-dashboard/instructor-dashboard.component';
+import { InstructorProfileComponent } from './components/instructor-profile/instructor-profile.component';
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
 import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
 import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
@@ -196,6 +196,28 @@ const routes: Routes = [
 
 
     ]
+  },
+  {
+    path: 'instructor',
+    component: InstructorDashboardComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'services',
+        component: RegistrationRequestsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'reservations',
+        component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
+      },
+    ],
   },
 
 

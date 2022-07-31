@@ -31,10 +31,12 @@ import { ShipProfileComponent } from './components/ship-profile/ship-profile/shi
 import { EditCottageComponent } from './components/edit-cottage/edit-cottage/edit-cottage.component';
 import { EditRulesComponent } from './components/edit-rules/edit-rules/edit-rules.component';
 import { EditUtilitiesComponent } from './components/edit-utilities/edit-utilities/edit-utilities.component';
-
 import { RequestsForDeletingAccountComponent } from './components/requests-for-deleting-account/requests-for-deleting-account.component';
 import { DialogForResponseDeletingComponent } from './components/dialog-for-response-deleting/dialog-for-response-deleting.component';
-
+import { InstructorDashboardComponent } from './components/instructor-dashboard/instructor-dashboard.component';
+import { InstructorNavbarComponent } from './components/instructor-navbar/instructor-navbar.component';
+import { InstructorProfileComponent } from './components/instructor-profile/instructor-profile.component';
+import { DialogForDeletingAccountComponent } from './components/dialog-for-deleting-account/dialog-for-deleting-account.component';
 import { CottageOwnerProfileComponent } from './components/cottage-owner-profile/cottage-owner-profile/cottage-owner-profile.component';
 import { ShipOwnerProfileComponent } from './components/ship-owner-profile/ship-owner-profile/ship-owner-profile.component';
 import { AddShipComponent } from './components/add-ship/add-ship/add-ship.component';
@@ -72,9 +74,12 @@ import { CottageAvailabilityComponent } from './components/cottage-availability/
     EditCottageComponent,
     EditRulesComponent,
     EditUtilitiesComponent,
-
     RequestsForDeletingAccountComponent,
-
+    DialogForResponseDeletingComponent,
+    InstructorDashboardComponent,
+    InstructorNavbarComponent,
+    InstructorProfileComponent,
+    DialogForDeletingAccountComponent,
     CottageOwnerProfileComponent,
     ShipOwnerProfileComponent,
     AddShipComponent,

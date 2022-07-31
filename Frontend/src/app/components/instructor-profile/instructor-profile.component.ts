@@ -3,22 +3,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DeleteAccountRequest } from 'src/app/interfaces/delete-account-request';
 import { PersonalData } from 'src/app/interfaces/personal-data';
 import { AuthService } from 'src/app/services/AuthService/auth.service';
+import { RequestForDeletingAccountServiceService } from 'src/app/services/RequestForDeletingAccountService/request-for-deleting-account-service.service';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { DialogForChangingPasswordComponent } from '../dialog-for-changing-password/dialog-for-changing-password.component';
+import { DialogForDeletingAccountComponent } from '../dialog-for-deleting-account/dialog-for-deleting-account.component';
 
 @Component({
-  selector: 'app-admin-profile',
-  templateUrl: './admin-profile.component.html',
-  styleUrls: ['./admin-profile.component.css']
+  selector: 'app-instructor-profile',
+  templateUrl: './instructor-profile.component.html',
+  styleUrls: ['./instructor-profile.component.css']
 })
-export class AdminProfileComponent implements OnInit {
+export class InstructorProfileComponent implements OnInit {
 
   personalData! : PersonalData;
   sub!: Subscription;
-  constructor(private userService : UserService,public dialog: MatDialog,private authService : AuthService,private router : Router) {
+  request! : DeleteAccountRequest;
+
+
+  constructor(private userService : UserService,public dialog: MatDialog,private authService : AuthService,private router : Router,
+    private requestForDeletingAccountService : RequestForDeletingAccountServiceService) {
     this.personalData = {} as PersonalData;
+    this.request = {} as DeleteAccountRequest;
    }
 
    @Input() 
@@ -127,11 +135,9 @@ export class AdminProfileComponent implements OnInit {
       data => {
         if (data) {
           this.userService.changePassword(data).subscribe((result:any) => {
-            if(localStorage.getItem('firstLogin') == 'false'){
-              this.authService.logout();
-              this.router.navigate(['/login']);
-            }
-            localStorage.setItem('firstLogin','false')
+            //localStorage.setItem('firstLogin','false')
+            this.authService.logout();
+            this.router.navigate(['/login']);
             void(0) 
           })
         }
@@ -139,5 +145,29 @@ export class AdminProfileComponent implements OnInit {
     );
   }
 
+  deleteAccount() {
+    const dialogConfig = new MatDialogConfig();
+ 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+ 
+    const dialogRef = this.dialog.open(DialogForDeletingAccountComponent, dialogConfig);
+ 
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.createDeleteAccountRequest(data);
+          this.requestForDeletingAccountService.addNewRequest(this.request).subscribe((result:any) => {
+           void(0)
+          })
+        }
+      }
+    );
+  }
+
+  createDeleteAccountRequest(data : any) {
+    this.request.reason = data.reason;
+    this.request.email = localStorage.getItem('email');
+  }
 
 }

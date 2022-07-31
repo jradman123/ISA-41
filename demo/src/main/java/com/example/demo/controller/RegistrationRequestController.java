@@ -35,7 +35,7 @@ public class RegistrationRequestController {
     }
 
     @PreAuthorize("hasAuthority('Admin')")
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = "")
     public ResponseEntity<List<RegistrationRequestViewDto>> getAll() {
         return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
 

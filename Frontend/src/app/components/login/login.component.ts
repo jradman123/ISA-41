@@ -41,11 +41,13 @@ export class LoginComponent implements OnInit {
           }
           else if(localStorage.getItem('role') == "CottageAdvertiser"){
             this._router.navigate(['/cottageOwner']);
-
-         }
-         else if(localStorage.getItem('role') == "ShipAdvertiser"){
-          this._router.navigate(['/shipOwner']);
-       }
+           }
+          else if(localStorage.getItem('role') == "ShipAdvertiser"){
+            this._router.navigate(['/shipOwner']);
+          }
+          else{
+            this._router.navigate(['instructor']);
+          }
        this._snackBar.open(
         'Welcome!',
         '',
@@ -53,12 +55,11 @@ export class LoginComponent implements OnInit {
       );
        },
         error: (err:any) => {
-          this._snackBar.open(
-            'Email or password are incorrect.Try again,please.',
-            '',
-            {duration : 3000,panelClass: ['snack-bar']}
-          );
-        
+            let parts = err.error.split(':');
+            let mess = parts[parts.length - 1];
+            let description = mess.substring(0, mess.length);
+            this._snackBar.open(description,  '',
+            {duration : 3000,panelClass: ['snack-bar']});
         }};
      
      this._service.login(this.form.getRawValue()).subscribe(loginObserver);

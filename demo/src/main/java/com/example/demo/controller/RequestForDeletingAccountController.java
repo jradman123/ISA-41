@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DeleteAccountRequest;
 import com.example.demo.dto.RequestForDeletingAccountDto;
 import com.example.demo.service.RequestForDeletingAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,17 @@ public class RequestForDeletingAccountController {
     }
 
     @PreAuthorize("hasAuthority('Admin')")
-    @GetMapping(value = "/getAll")
+    @GetMapping(value = "")
     public ResponseEntity<List<RequestForDeletingAccountDto>> getAll() {
         return new ResponseEntity<>(requestForDeletingAccountService.findAll(), HttpStatus.OK);
+
+    }
+
+    //samo admin ne moze da pristupi
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PostMapping(value = "")
+    public ResponseEntity<?> addNewRequest(@RequestBody DeleteAccountRequest deleteAccountRequest) {
+        return new ResponseEntity<>(requestForDeletingAccountService.saveRequest(deleteAccountRequest), HttpStatus.CREATED);
 
     }
 

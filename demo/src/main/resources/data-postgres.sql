@@ -23,7 +23,8 @@ VALUES ('SHIP_OWNER', false, 'vlasnik broda', 'milan@gmail.com', 'Milan', true, 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type, type,address)
 VALUES ('SHIP_OWNER', false, 'imam vise brodova na izdavanje', 'milica@gmail.com', 'Milica', true, '2244488175856', 'Milivojevic','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '0667555597', 1, 0, 1);
 
-INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address) VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', false, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2,0, 3);
+INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
+VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', false, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2,0, 3);
 
 --registration requests
 INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com');
@@ -129,8 +130,8 @@ INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,fal
 INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',1);
 
 ----appointments-----
-INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
-	VALUES (5, '06-13-2022 10:00',false,false,40.0, '06-01-2022 10:00', 1);
+--INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
+--	VALUES (5, '06-13-2022 10:00',false,false,40.0, '06-01-2022 10:00', 1);
 
-INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
-	VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1);
+--INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
+	--VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1);

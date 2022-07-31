@@ -26,9 +26,8 @@ public class UserController {
     @Autowired
     private TokenUtils tokenUtils;
 
-
-
-    @GetMapping(value = "/getPersonalData")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor')")
+    @GetMapping(value = "/personal-data")
     public ResponseEntity<PersonalData> getPersonalData(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         return new ResponseEntity<>(userService.getPersonalData(tokenUtils.getEmailFromToken(token)),
@@ -36,8 +35,8 @@ public class UserController {
 
     }
     
-
-    @PutMapping(value = "/updatePersonalData")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor')")
+    @PutMapping(value = "/update-personal-data")
     public ResponseEntity<PersonalData> updatePersonalData(@RequestBody PersonalData personalData, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         return new ResponseEntity<>(userService.updatePersonalData(personalData,tokenUtils.getEmailFromToken(token)),
@@ -46,8 +45,8 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-
-    @PutMapping(value = "/changePassword")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor')")
+    @PutMapping(value = "/change-password")
     public ResponseEntity<HttpStatus> changePassword(@RequestBody ChangePasswordDto changePasswordDto, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         userService.changePassword(tokenUtils.getEmailFromToken(token), changePasswordDto);
@@ -56,7 +55,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
-    @GetMapping(value = "/isFirstLogin")
+    @GetMapping(value = "/is-first-login")
     public ResponseEntity<?> isFirstLogin(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         Administrator admin = (Administrator) userService.findByEmail(tokenUtils.getEmailFromToken(token));

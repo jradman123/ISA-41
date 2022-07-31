@@ -57,8 +57,6 @@ public class Adventure {
 	private Set<Image> images;
 
 
-	 @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
-	    private Set<AdventureQuickReservation> adventureQuickReservations;
 
 	  @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	    private Set<AdventureReservation> adventureReservations;

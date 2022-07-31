@@ -20,7 +20,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "reservation")
-//@Inheritance(strategy = InheritanceType.JOINED)
 public class Reservation {
 	
 	 @Id
@@ -37,7 +36,7 @@ public class Reservation {
      @Column(name = "numberOfPerson", nullable = false)
 	 private Integer numberOfPerson;
     
-//	private Set<String> services;
+
 	
 	 @Column(name = "price", nullable = false)
      private Double price;
@@ -45,12 +44,15 @@ public class Reservation {
 	
 	 @Column(name = "isCanceled", nullable = false)
      private Boolean isCanceled = false;
-	
-	 @ManyToOne
-     @JoinColumn(name = "quickReservation_id", nullable = true)
-	 private QuickReservation quickReservation;
-	
-	
+
+
+
+	@Column(name = "isreserved", nullable = false)
+	private Boolean isreserved;
+
+
+	@Column(name = "isdeleted",nullable = false)
+	private boolean isdeleted;
 	
 	 public Reservation() {
 		super();

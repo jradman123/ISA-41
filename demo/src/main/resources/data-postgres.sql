@@ -56,17 +56,35 @@ INSERT INTO public.ships(
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No drinking',false,false,1,1);
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No smoking',false,false,1,1);
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('20+',false,false,2,1);
+
+
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No pets',false,false,2,1);
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No noise after 12',false,false,3,1);
 
 
 
+
 ---image---
 
-INSERT INTO public.image(url, cottage_id, is_deleted)
-	VALUES ('cottage.jpg', 1, false);
-INSERT INTO public.image(url, cottage_id, is_deleted)
-	VALUES ('cottage2.jpg', 1, false);
+INSERT INTO public.image(url)
+	VALUES ('assets/images/cottage.jpg');
+INSERT INTO public.image(url)
+	VALUES ('assets/images/cottage1.jpg');
+INSERT INTO public.image(url)
+    	VALUES ('assets/images/cottage2.jpg');
+
+
+
+----cottage_images-----
+INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (1, 1,false);
+INSERT INTO public.cottage_images(cottage_id, image_id,is_deleted)	VALUES (1, 2,false);
+
+
+
+----ship_images-----
+INSERT INTO public.ship_images(ship_id, image_id)	VALUES (1, 1);
+
+
 
 -----utilities---
 INSERT INTO public.utility(name)	VALUES ('TV');
@@ -96,3 +114,24 @@ INSERT INTO public.navigation_equipment( name, ship_id)	VALUES (2,1);
 INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (0,2);
 INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1,2);
 INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (3,1);
+
+
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (3, 1,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (3, 2,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 2,false);
+INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,false);
+
+
+
+----cottage-availability-----
+
+INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',1);
+
+----appointments-----
+INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
+	VALUES (5, '06-13-2022 10:00',false,false,40.0, '06-01-2022 10:00', 1);
+
+INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
+	VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1);

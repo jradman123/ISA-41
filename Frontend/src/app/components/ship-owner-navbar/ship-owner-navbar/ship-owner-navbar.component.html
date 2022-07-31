@@ -1,19 +1,21 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
+  <mat-toolbar-row>
 
-      <img
-        src="../../assets/images/logo.png"
-        style="height: 32px"
-    />
-    <h1 >A D V E N T U R E</h1>
-      <span class="menu-spacer"></span>
-      <div>
-      
-        <a mat-button class="nav-link" [routerLink]="['/shipOwner']"> Ships </a>
-        <a mat-button class="nav-link"  [routerLink]="['/cottageOwner/add-cottage']"> Add new ships </a>
-        <a mat-button class="nav-link"  [routerLink]="['/cottages']">  Sign out</a>
-        
-  
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
+    <img src="../../assets/images/logo.png" style="height: 32px" />
+    <h1>A D V E N T U R E</h1>
+    <span class="menu-spacer"></span>
+    <div>
+
+      <a mat-button class="nav-link" [routerLink]="['/shipOwner/profile']"> Your personal profile </a>
+
+      <a mat-button class="nav-link" [routerLink]="['/shipOwner']"> Ships </a>
+      <a mat-button class="nav-link" [routerLink]="['/shipOwner/add-ship']"> Add new ship </a>
+
+
+      <button mat-button *ngIf="authService.isLoggedIn" class="btn btn-primary btn-md" (click)="onLogout()">
+        Log out
+      </button>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -19,16 +19,15 @@ public class RuleDto {
     private String ruleDescription;
     private boolean isDeletedbyCottage;
     private boolean isDeletedbyShip;
-    private String cottageId;
-    private String shipId;
+    private Long cottageId;
+    private Long shipId;
 
     public RuleDto(Rules rules) {
             this.id=Long.toString(rules.getId());
             this.ruleDescription=rules.getRuleDescription();
             this.isDeletedbyCottage=rules.isDeletedbyCottages();
             this.isDeletedbyShip=rules.isDeletedByShip();
-            this.shipId=Long.toString(rules.getShip().getId());
-            this.cottageId=Long.toString(rules.getCottage().getId());
+            this.cottageId=rules.getCottage().getId();
 
     }
 }

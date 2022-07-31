@@ -1,6 +1,6 @@
 package com.example.demo.model.ships;
 
-import java.awt.Image;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,18 +19,23 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
 import com.example.demo.model.users.ShipOwner;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ships")
 public class Ship {
 	
@@ -59,10 +64,10 @@ public class Ship {
 	
 	@Column(name = "price", nullable = false)
 	private Double price = 0.0;
-	
-	
-	 @OneToMany
-	 @JoinColumn(name = "ship_id")
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
 	 private Set<ShipUtility> utilities;
 	
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -71,25 +76,21 @@ public class Ship {
     
     @Column(name = "description", nullable = false)
     private String description;
-    
 
- /*   @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "ship_images",
-            joinColumns = @JoinColumn(name = "ship_id"),
-            inverseJoinColumns = @JoinColumn(name = "image_id"))
-    private Set<Image> images;
-	*/
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
+	private Set<Image> images;
+
+
 	@Column(name = "capacity", nullable = false)
 	private Integer capacity;
 	
-	 @OneToMany(mappedBy = "ship")
-	 private Set<ShipQuickReservation> shipQuickReservations;
 
 	 @OneToMany(mappedBy = "ship")
 	 private Set<ShipReservation> shipReservations;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ship_id")
 	@JsonManagedReference
 	 private Set<Rules> rules;
@@ -100,6 +101,7 @@ public class Ship {
 
 	@OneToMany
 	@JoinColumn(name = "ship_id")
+	@JsonManagedReference
 	private Set<NavigationalEquipment> navigationalEquipments;
     
     
@@ -112,5 +114,21 @@ public class Ship {
 	
 	 @Column(name = "deleted")
 	 private boolean deleted = false;
-	
+
+	public Ship(String name, String description, double price, Address address, ShipOwner owner, int capacity, double maxSpeed, int cancelationConditions, double length, double strengthOfEngine, String fishingEquipment, String numberOfEngine, String type) {
+	this.name=name;
+	this.description=description;
+	this.price=price;
+	this.address=address;
+	this.shipOwner=owner;
+	this.capacity=capacity;
+	this.maxSpeed=maxSpeed;
+	this.cancelationConditions=cancelationConditions;
+	this.length=length;
+	this.strengthOfEngine=strengthOfEngine;
+	this.fishingEquipment=fishingEquipment;
+	this.numberOfEngine=numberOfEngine;
+	this.type=type;
+
+	}
 }

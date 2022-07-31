@@ -35,10 +35,5 @@ public class CottageReservation extends Reservation {
 	    private RegisteredUser registeredUser;
 
 
-	    @ManyToMany
-	    @JoinTable(
-	            name = "cottage_reservation_utilities",
-	            joinColumns = @JoinColumn(name = "cottage_reservation_id"),
-	            inverseJoinColumns = @JoinColumn(name = "cottage_utility_id"))
-	    private Set<CottageUtility> utilities;
+
 }

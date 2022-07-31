@@ -1,44 +1,38 @@
+<div class="container" style="margin-top:20px">
+  <div class="container">
+    <div class="containter">
 
-      <div class="container"  style="margin-top:20px"> 
-        <div class="container">
-          <div class="containter">
+      <h1>Rules of cottage</h1>
+      <hr />
+      <div *ngFor="let rule of rules" class="containter">
+        <h3> {{ rule.ruleDescription}} <button style="margin-left:900px" class="btn"
+            (click)="deleteRule(rule.id)">Delete</button>
+          <hr />
+        </h3>
 
-            <h1 >Rules of cottage</h1>
-            <hr/>
-            <div *ngFor="let rule of rules" class="containter">
-            <h3 > {{ rule.ruleDescription}}    <button style="margin-left:900px" class="btn" (click)="deleteRule(rule.id)">Delete</button>
-            <hr/></h3>
-            
-            </div>
-              
-              </div>  
-          </div>
-      
       </div>
+
+    </div>
+  </div>
+
+</div>
 
 
 
 <div class="container" style="margin-top:20px">
-    <div class="containter">
+  <div class="containter">
+    <div>
+      <h1> Add rule of cottage</h1>
+      <hr />
       <div>
-        <h1> Add rule of cottage</h1>
-        <hr />
-        <div>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Enter your rule"
-            [(ngModel)]="rule"
-          />
-        </div>
+        <input class="form-control" type="text" placeholder="Enter your rule" [(ngModel)]="rulee.ruleDescription" />
       </div>
-      
     </div>
-    <div class="container"> 
-        <div>
-            <button class="btn" (click)="addRule">Add</button>
-        </div>
+
+  </div>
+  <div class="container">
+    <div>
+      <button class="btn" (click)="addRule()">Add</button>
     </div>
   </div>
-
- 
+</div>

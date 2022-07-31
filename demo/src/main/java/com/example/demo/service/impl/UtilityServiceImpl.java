@@ -1,8 +1,10 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.UtilityDto;
 import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -27,6 +29,8 @@ public class UtilityServiceImpl implements UtiilityService {
     @Autowired
     private ShipUtilityRepository shipUtilityRepository;
 
+    @Autowired
+    private CottageServiceImpl cottageService;
 
 
     @Override
@@ -75,6 +79,16 @@ public class UtilityServiceImpl implements UtiilityService {
 
         }
         return new ResponseEntity<>(id, HttpStatus.OK);
+
+    }
+
+    @Override
+    public CottageUtility add(CottageUtilityDto cottageUtilityDto) {
+        Utility utility=new Utility(cottageUtilityDto.getName());
+        Cottage cottage=cottageService.findCottageById(cottageUtilityDto.getCottageId());
+        CottageUtility ca=new CottageUtility(cottageUtilityDto.getPrice(),cottage,utility);
+        this.utilityRepository.save(utility);
+        return  this.cottageUtilityRepositoty.save(ca);
 
     }
 }

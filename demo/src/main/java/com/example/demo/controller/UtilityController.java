@@ -1,7 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CottageAvailabilityDto;
+import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.RuleDto;
 import com.example.demo.dto.UtilityDto;
+import com.example.demo.model.cottages.CottageAvailability;
+import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.service.impl.UserServiceImpl;
 import com.example.demo.service.impl.UtilityServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +45,12 @@ public class UtilityController {
 
 
         return utilityService.getUtilitiesbyBoat(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value="/addCottageUtility")
+    public CottageUtility addCottageAvailability(@RequestBody CottageUtilityDto cottageUtilityDto) {
+        return utilityService.add(cottageUtilityDto);
     }
 
 

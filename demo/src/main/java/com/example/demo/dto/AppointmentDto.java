@@ -30,8 +30,10 @@ public class AppointmentDto {
         this.capacity = Integer.toString(a.getCapacity());
         this.price = Double.toString(a.getPrice());
         this.isReserved = a.getIsReserved();
-        this.cottageId = Long.toString(a.getCottage().getId());
 
+        if (a.getCottage() != null) {
+            this.cottageId = Long.toString(a.getCottage().getId());
+        }
         if (a.getShip() != null) {
             this.shipId = Long.toString(a.getShip().getId());
 

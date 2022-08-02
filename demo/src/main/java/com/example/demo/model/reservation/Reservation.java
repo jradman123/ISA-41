@@ -35,7 +35,6 @@ public class Reservation {
 
      @Column(name = "numberOfPerson", nullable = false)
 	 private Integer numberOfPerson;
-    
 
 	
 	 @Column(name = "price", nullable = false)
@@ -46,13 +45,12 @@ public class Reservation {
      private Boolean isCanceled = false;
 
 
+	@Column(name = "isReserved", nullable = false)
+	private Boolean isReserved;
 
-	@Column(name = "isreserved", nullable = false)
-	private Boolean isreserved;
 
-
-	@Column(name = "isdeleted",nullable = false)
-	private boolean isdeleted;
+	@Column(name = "isDeleted",nullable = false)
+	private boolean isDeleted;
 	
 	 public Reservation() {
 		super();

@@ -1,4 +1,11 @@
 package com.example.demo.repository;
 
-public interface ReservationRepository {
+import com.example.demo.model.cottages.Room;
+import com.example.demo.model.reservation.Reservation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface ReservationRepository  extends JpaRepository<Reservation, Long> {
+
 }

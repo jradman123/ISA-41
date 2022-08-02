@@ -8,4 +8,6 @@ public interface ReservationService {
     List<ReservationDto> getReservationsByCottage(Long id);
 
     List<ReservationDto> getReservationsByBoat(Long id);
+
+    ReservationDto getById(Long id);
 }

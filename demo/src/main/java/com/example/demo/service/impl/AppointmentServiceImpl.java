@@ -2,10 +2,6 @@ package com.example.demo.service.impl;
 
 
 import com.example.demo.dto.AppointmentDto;
-import com.example.demo.dto.QuickReservationDto;
-import com.example.demo.dto.RuleDto;
-import com.example.demo.dto.ShipDto;
-import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.service.AppointmentService;
@@ -68,7 +64,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return null;
     }
 
-    
+
 
 
 }

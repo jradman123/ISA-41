@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.AppointmentDto;
-import com.example.demo.dto.QuickReservationDto;
-import com.example.demo.dto.ShipDto;
 import com.example.demo.model.reservation.Appointment;
 import org.springframework.http.ResponseEntity;
 

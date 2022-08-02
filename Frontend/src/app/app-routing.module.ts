@@ -30,11 +30,13 @@ import { AddActionComponent } from './components/add-action/add-action/add-actio
 import { ReservationHistoryComponent } from './components/reservation-history/reservation-history/reservation-history.component';
 import { AddReservationComponent } from './components/add-reservation/add-reservation/add-reservation.component';
 import { CottageAvailabilityComponent } from './components/cottage-availability/cottage-availability/cottage-availability.component';
+import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'allCottages', component: AllCottagesListComponent },
   {
     path: 'admin',
     component: AdminDashboardComponent,

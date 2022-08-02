@@ -47,6 +47,7 @@ import { ReservationHistoryComponent } from './components/reservation-history/re
 import { AddReservationComponent } from './components/add-reservation/add-reservation/add-reservation.component';
 import { CottageAvailabilityComponent } from './components/cottage-availability/cottage-availability/cottage-availability.component';
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar/landing-navbar.component';
+import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 
 
 
@@ -90,7 +91,8 @@ import { LandingNavbarComponent } from './components/landing-navbar/landing-navb
     ReservationHistoryComponent,
     AddReservationComponent,
     CottageAvailabilityComponent,
-    LandingNavbarComponent
+    LandingNavbarComponent,
+    AllCottagesListComponent
 
 
   ],

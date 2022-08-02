@@ -4,7 +4,7 @@ INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Lo
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Paris', 'France', 'Avenija Fos','25');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22');
-
+INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Beograd', 'Srbija', '1300 kaplara','22');
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address)
@@ -135,3 +135,7 @@ INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES 
 
 --INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
 	--VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1);
+
+
+INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
+	VALUES (0.0, false, 'Vožnja čamcem uz pecanje da rijeci.', 5, 'Riječni raj', 50, 5, 6);

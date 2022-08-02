@@ -35,7 +35,7 @@ public class Adventure {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor")
 	private Instructor instructor;
 	
@@ -49,7 +49,7 @@ public class Adventure {
 	@Column(name="description", nullable = false)
 	private String description;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(
             name = "adventure_images",
             joinColumns = @JoinColumn(name = "adventure_id"),
@@ -75,7 +75,7 @@ public class Adventure {
 	private Set<Rules> rules;
 	 
 	 
-	 @ManyToMany(cascade = CascadeType.ALL)
+	 @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	 @JoinTable(
 	            name = "adventure_fishing_equipment",
 	            joinColumns = @JoinColumn(name = "adventure_id"),
@@ -83,12 +83,12 @@ public class Adventure {
 	 private Set<FishingEquipment> fishingEquipments;
 	
 	 
-    @Column(name = "cancelationConditions", nullable = false)
-	private Double cancelationConditions;
+    @Column(name = "cancellationConditions", nullable = false)
+	private Double cancellationConditions;
 	
 	
 	@Column(name = "price", nullable = false)
-    private Double price = 0.0;
+    private Double price;
 	
 	
 	@Column(name = "deleted")
@@ -103,7 +103,7 @@ public class Adventure {
 
 
 	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
-			Integer guestLimit, Set<Rules> rules, Set<FishingEquipment> fishingEquipments, Double cancelationConditions,
+			Integer guestLimit, Set<Rules> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions,
 			Double price, boolean deleted) {
 		super();
 		this.id = id;
@@ -114,7 +114,7 @@ public class Adventure {
 		this.guestLimit = guestLimit;
 		this.rules = rules;
 		this.fishingEquipments = fishingEquipments;
-		this.cancelationConditions = cancelationConditions;
+		this.cancellationConditions = cancellationConditions;
 		this.price = price;
 		this.deleted = deleted;
 	}

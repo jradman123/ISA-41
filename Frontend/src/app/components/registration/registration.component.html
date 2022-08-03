@@ -1,273 +1,215 @@
+<app-landing-navbar></app-landing-navbar>
 <div class="image">
-<div class="container" >
-  <mat-card >
-    <mat-card-title style="text-align: center;">Registration</mat-card-title>
-    <br/>
-    <mat-card-content>
-    <div  [formGroup]="createForm" >
+  <div class="container">
+    <mat-card style="margin-top: 100px;">
+      <mat-card-title style="text-align: center;">Registration</mat-card-title>
       <br />
-      <div class="separateMe">
-        <div class="row">
-          <div class="col-sm">
-        <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName" />
-            <mat-error
-              *ngIf="
+      <mat-card-content>
+        <div [formGroup]="createForm">
+          <br />
+          <div class="separateMe">
+            <div class="row">
+              <div class="col-sm">
+                <div style="width: 100%; display: flex">
+                  <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" />
+                    <mat-error *ngIf="
                 createForm?.get('firstName')?.valid &&
                 createForm?.get('firstName')?.touched &&
                 createForm?.get('firstName')?.errors?.required
-              "
-              >First name is required.</mat-error
-            >
-            <mat-error>Invalid input</mat-error>
-          </mat-form-field>
-          </div>
-          </div>
-          <div class="col-sm">
-          <div style="width: 100%; display: flex"></div>
-          <mat-form-field appearance="fill">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName" />
-            <mat-error
-              *ngIf="
+              ">First name is required.</mat-error>
+                    <mat-error>Invalid input</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div style="width: 100%; display: flex"></div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="lastName" />
+                  <mat-error *ngIf="
                 createForm?.get('lastName')?.valid &&
                 createForm?.get('lastName')?.touched &&
                 createForm?.get('lastName')?.errors?.required
-              "
-              >Last name is required.</mat-error
-            >
-            <mat-error>Invalid input</mat-error>
-          </mat-form-field>
-        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">
-        <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>Street</mat-label>
-            <input matInput formControlName="street" />
-            <mat-error
-              *ngIf="
+              ">Last name is required.</mat-error>
+                  <mat-error>Invalid input</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Street</mat-label>
+                  <input matInput formControlName="street" />
+                  <mat-error *ngIf="
                 !createForm?.get('street')?.valid &&
                 createForm?.get('street')?.touched &&
                 createForm?.get('street')?.errors?.required
-              "
-              >Street is required</mat-error
-            >
-          </mat-form-field>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>Street Number</mat-label>
-            <input matInput formControlName="streetNumber" />
-            <mat-error
-              *ngIf="
+              ">Street is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Street Number</mat-label>
+                  <input matInput formControlName="streetNumber" />
+                  <mat-error *ngIf="
                 !createForm?.get('streetNumber')?.valid &&
                 createForm?.get('streetNumber')?.touched &&
                 createForm?.get('streetNumber')?.errors?.required
-              "
-              >Street number is required</mat-error
-            >
-          </mat-form-field>
+              ">Street number is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">
-          <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>City</mat-label>
-            <input matInput formControlName="city" />
-            <mat-error
-              *ngIf="
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>City</mat-label>
+                  <input matInput formControlName="city" />
+                  <mat-error *ngIf="
                 !createForm?.get('city')?.valid &&
                 createForm?.get('city')?.touched &&
                 createForm?.get('city')?.errors?.required
-              "
-              >City is required</mat-error
-            >
-          </mat-form-field>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>Country</mat-label>
-            <input matInput formControlName="country" />
-            <mat-error
-              *ngIf="
+              ">City is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Country</mat-label>
+                  <input matInput formControlName="country" />
+                  <mat-error *ngIf="
                 !createForm?.get('country')?.valid &&
                 createForm?.get('country')?.touched &&
                 createForm?.get('country')?.errors?.required
-              "
-              >City is required</mat-error
-            >
-          </mat-form-field>
-        </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">
-        <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" />
-            <mat-error
-              *ngIf="
+              ">City is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Email</mat-label>
+                  <input matInput formControlName="email" />
+                  <mat-error *ngIf="
                 !createForm?.get('email')?.valid &&
                 createForm?.get('email')?.touched &&
                 createForm?.get('email')?.errors?.required
-              "
-              >Email is required</mat-error
-            >
-            <mat-error
-              *ngIf="
+              ">Email is required</mat-error>
+                  <mat-error *ngIf="
                 !createForm?.get('email')?.valid &&
                 createForm?.get('email')?.touched &&
                 createForm?.get('email')?.errors?.email
-              "
-              >Invalid email!</mat-error
-            >
-          </mat-form-field>
-          </div>
-        </div>
-        <div class="col-sm">
-          <div style="width: 100%; display: flex">
-          <mat-form-field appearance="fill">
-            <mat-label>Phone Number</mat-label>
-            <input matInput formControlName="phone" />
-            <mat-error
-              *ngIf="
+              ">Invalid email!</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phone" />
+                  <mat-error *ngIf="
                 !createForm?.get('phone')?.valid &&
                 createForm?.get('phone')?.touched &&
                 createForm?.get('phone')?.errors?.required
-              "
-              >Phone number is required</mat-error
-            >
-          </mat-form-field>
-        </div>
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
-        <div style="width: 100%; display: flex">
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="password"
-            (input)="onPasswordInput()"
-          />
-          <mat-error
-            *ngIf="
+              ">Phone number is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" formControlName="password" (input)="onPasswordInput()" />
+                  <mat-error *ngIf="
               !createForm?.get('password')?.valid &&
               createForm?.get('password')?.touched &&
               createForm?.get('password')?.errors?.required
-            "
-            >Password is required</mat-error
-          >
-          <mat-error
-            *ngIf="
+            ">Password is required</mat-error>
+                  <mat-error *ngIf="
               !createForm?.get('password')?.valid &&
               createForm?.get('password')?.touched &&
               createForm?.get('password')?.errors?.minlength
-            "
-            >Password must be at least 8 characters long</mat-error
-          >
-        </mat-form-field>
-        </div>
-        </div>
-        <div class="col-sm">
-        <div style="width: 100%; display: flex">
-        <mat-form-field appearance="fill">
-          <mat-label>Confirm Password</mat-label>
-          <input
-            type="password"
-            matInput
-            formControlName="passConfirmed"
-            (input)="onPasswordInput()"
-          />
-          <mat-error
-            *ngIf="
+            ">Password must be at least 8 characters long</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Confirm Password</mat-label>
+                  <input type="password" matInput formControlName="passConfirmed" (input)="onPasswordInput()" />
+                  <mat-error *ngIf="
               !createForm?.get('passConfirmed')?.valid &&
               createForm?.get('passConfirmed')?.touched &&
               createForm?.get('passConfirmed')?.errors?.required
-            "
-            >Password is required</mat-error
-          >
-          <mat-error *ngIf="!passMatch">Passwords does not match! </mat-error>
-        </mat-form-field>
-      </div>
-      </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">
-      <div style="width: 100%; display: flex">
-        <mat-form-field appearance="fill">
-          <mat-label>Description of registration</mat-label>
-          <textarea matInput formControlName="description" ></textarea>
-          <mat-error
-            *ngIf="
+            ">Password is required</mat-error>
+                  <mat-error *ngIf="!passMatch">Passwords does not match! </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Description of registration</mat-label>
+                  <textarea matInput formControlName="description"></textarea>
+                  <mat-error *ngIf="
               !createForm?.get('description')?.valid &&
               createForm?.get('description')?.touched &&
               createForm?.get('description')?.errors?.required
-            "
-            >Description is required</mat-error
-          >
-        </mat-form-field>
-        </div>
-        </div>
-        <div class="col-sm">
-        <div style="width: 100%; display: flex">
-            <mat-form-field appearance="fill">
-              <mat-label>Type of registration</mat-label>
-              <mat-select
-                formControlName="type"
-              >
-                <mat-option  value="INSTRUCTOR">
-                  INSTRUCTOR
-                </mat-option>
-                <mat-option  value="SHIP OWNER">
-                    SHIP OWNER
-                  </mat-option>
-                  <mat-option  value="COTTAGE OWNER">
-                    COTTAGE OWNER
-                  </mat-option>
-                  <mat-option  value="CLIENT">
-                    CLIENT
-                  </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="
+            ">Description is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Type of registration</mat-label>
+                  <mat-select formControlName="type">
+                    <mat-option value="INSTRUCTOR">
+                      INSTRUCTOR
+                    </mat-option>
+                    <mat-option value="SHIP OWNER">
+                      SHIP OWNER
+                    </mat-option>
+                    <mat-option value="COTTAGE OWNER">
+                      COTTAGE OWNER
+                    </mat-option>
+                    <mat-option value="CLIENT">
+                      CLIENT
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="
                   !createForm?.get('type')?.valid &&
                   createForm?.get('type')?.touched &&
                   createForm?.get('type')?.errors?.required
-                "
-                >Please select type</mat-error
-              >
-            </mat-form-field>
-        </div>
-      </div>
-      </div>
+                ">Please select type</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
 
-      <br /><br />
-        <button style="margin-left: 277px;"
-          mat-raised-button
-          (click)="onSubmit()"
-          color="primary"
-          class="icon-display"
-        >
-          Register
-        </button>
-      </div>
-    </mat-card-content>
+          <br /><br />
+          <button style="margin-left: 277px;" mat-raised-button (click)="onSubmit()" color="primary"
+            class="icon-display">
+            Register
+          </button>
+        </div>
+      </mat-card-content>
     </mat-card>
     <br />
-    </div>
-  
+  </div>

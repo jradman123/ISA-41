@@ -1,7 +1,10 @@
+<app-ship-owner-navbar (searchInput)="handleMe($event)"></app-ship-owner-navbar>
+
+
 <div>
-    <div class="card-holder" style="margin-left: 15px;">
+    <div class="card-holder" style="margin-left: 15px;margin-top: 50px;">
         <div class="row">
-            <div class="card" style="margin: 10px; " *ngFor="let ship of ships">
+            <div class="card" style="margin: 10px; " *ngFor="let ship of ships | shipSearch : searchText ">
                 <img :src="assets/Images/{{ship.name}}" class="card-img-top" sty alt="image of ship">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">

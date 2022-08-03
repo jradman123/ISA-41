@@ -2,9 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { DeleteAccountRequest } from 'src/app/interfaces/delete-account-request';
 import { PersonalData } from 'src/app/interfaces/personal-data';
+import { RequestForDeletingAccountServiceService } from 'src/app/services/RequestForDeletingAccountService/request-for-deleting-account-service.service';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { DialogForChangingPasswordComponent } from '../../dialog-for-changing-password/dialog-for-changing-password.component';
+import { DialogForDeletingAccountComponent } from '../../dialog-for-deleting-account/dialog-for-deleting-account.component';
 
 
 @Component({
@@ -15,8 +18,9 @@ import { DialogForChangingPasswordComponent } from '../../dialog-for-changing-pa
 export class ShipOwnerProfileComponent implements OnInit {
 
   personalData!: PersonalData;
+  request!: DeleteAccountRequest;
   sub!: Subscription;
-  constructor(private userService: UserService, public dialog: MatDialog) {
+  constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
   }
 
@@ -103,6 +107,33 @@ export class ShipOwnerProfileComponent implements OnInit {
         }
       }
     );
+  }
+
+
+  deleteAccount() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForDeletingAccountComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.createDeleteAccountRequest(data);
+          this.requestForDeletingAccountService.addNewRequest(this.request).subscribe((result: any) => {
+            void (0)
+          })
+        }
+      }
+    );
+
+  }
+
+  createDeleteAccountRequest(data: any) {
+    this.request.reason = data.reason;
+    this.request.email = localStorage.getItem('email');
   }
 
 }

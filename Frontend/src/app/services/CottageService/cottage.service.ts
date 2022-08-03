@@ -17,6 +17,10 @@ export class CottageService {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
 
+  findAll(): Observable<CottageDto[]> {
+    return this.http.get<CottageDto[]>(
+      `${this.apiServerUrl}/cottages/all`);
+  }
 
 
   findByEmail(): Observable<CottageDto[]> {

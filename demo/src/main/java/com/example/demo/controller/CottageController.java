@@ -30,8 +30,8 @@ public class CottageController {
 
 
 
-
-    @GetMapping()
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/all")
     public List<CottageDto> findAll() {
         return this.cottageService.findAll();
     }

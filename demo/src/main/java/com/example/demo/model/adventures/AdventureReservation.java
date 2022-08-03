@@ -39,9 +39,7 @@ public class AdventureReservation extends Reservation {
 	            inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
 	    private Set<AdventureUtility> utilities;
 	
-	    @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
-	    private RegisteredUser registeredUser;
+
 
 
 

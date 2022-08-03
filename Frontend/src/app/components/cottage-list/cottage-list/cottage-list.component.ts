@@ -11,8 +11,9 @@ import { ImageDto } from 'src/app/interfaces/image-dto';
 })
 export class CottageListComponent implements OnInit {
 
+  searchText = ''
 
-  cottages: CottageDto[] = [];
+  cottages!: CottageDto[];
   images: ImageDto[] = [];
   id: any;
   image!: ImageDto;
@@ -33,6 +34,10 @@ export class CottageListComponent implements OnInit {
 
     });
 
+  }
+
+  handleMe(searchText: string) {
+    this.searchText = searchText;
   }
 
   view(id: string) {

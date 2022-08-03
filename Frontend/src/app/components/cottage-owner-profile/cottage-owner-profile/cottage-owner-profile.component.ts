@@ -19,6 +19,8 @@ export class CottageOwnerProfileComponent implements OnInit {
 
   personalData!: PersonalData;
   sub!: Subscription;
+
+  request!: DeleteAccountRequest;
   constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
   }
@@ -28,7 +30,7 @@ export class CottageOwnerProfileComponent implements OnInit {
   initialDetails: any
   editMode = false
   id!: number
-  request!: DeleteAccountRequest;
+
   ngOnInit(): void {
     this.getPersonalData();
   }

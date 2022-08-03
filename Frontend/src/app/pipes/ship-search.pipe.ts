@@ -16,6 +16,17 @@ export class ShipSearchPipe implements PipeTransform {
           d.price.toLowerCase()
             .indexOf(search.toLowerCase()) > -1 ||
 
+          d.country.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+          d.city.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
+          d.streetName.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
+          d.streetNumber.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
 
           d.description.toLowerCase()
             .indexOf(search.toLowerCase()) > -1

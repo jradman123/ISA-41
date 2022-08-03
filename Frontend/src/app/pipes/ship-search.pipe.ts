@@ -27,6 +27,16 @@ export class ShipSearchPipe implements PipeTransform {
           d.streetNumber.toLowerCase()
             .indexOf(search.toLowerCase()) > -1 ||
 
+          d.numberOfEngine.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
+          d.strengthOfEngine.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
+          d.maxSpeed.toLowerCase()
+            .indexOf(search.toLowerCase()) > -1 ||
+
+
 
           d.description.toLowerCase()
             .indexOf(search.toLowerCase()) > -1

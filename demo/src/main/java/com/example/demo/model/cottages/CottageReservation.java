@@ -30,9 +30,7 @@ public class CottageReservation extends Reservation {
 	    @JoinColumn(name = "cottage_id")
 	    private Cottage cottage;
 	 
-	    @ManyToOne
-	    @JoinColumn(name = "user_id", nullable = false)
-	    private RegisteredUser registeredUser;
+
 
 
 

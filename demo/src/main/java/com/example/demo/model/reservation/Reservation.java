@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.example.demo.model.users.RegisteredUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,6 +41,9 @@ public class Reservation {
 	 @Column(name = "price", nullable = false)
      private Double price;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private RegisteredUser registeredUser;
 	
 	 @Column(name = "isCanceled", nullable = false)
      private Boolean isCanceled = false;

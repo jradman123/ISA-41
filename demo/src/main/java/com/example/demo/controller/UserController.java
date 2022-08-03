@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private TokenUtils tokenUtils;
 
-    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor')")
     @GetMapping(value = "/personal-data")
     public ResponseEntity<PersonalData> getPersonalData(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);

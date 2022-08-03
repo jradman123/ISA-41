@@ -38,7 +38,7 @@ INSERT INTO public.cottage(description, name, price, address,number_of_person, c
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
 	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false);
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-    	VALUES ('Small  cottage', 'Vila', 50, 1,2,3,false);
+    	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false);
 
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
     	VALUES ('Small and sweet  cottage', 'Marija', 50, 1,2,3,false);

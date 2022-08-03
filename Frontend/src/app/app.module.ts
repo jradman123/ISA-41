@@ -49,6 +49,7 @@ import { CottageAvailabilityComponent } from './components/cottage-availability/
 import { LandingNavbarComponent } from './components/landing-navbar/landing-navbar/landing-navbar.component';
 import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
+import { ShipSearchPipe } from './pipes/ship-search.pipe';
 
 
 
@@ -94,7 +95,8 @@ import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
     CottageAvailabilityComponent,
     LandingNavbarComponent,
     AllCottagesListComponent,
-    CottagesSearchPipe
+    CottagesSearchPipe,
+    ShipSearchPipe
 
 
   ],

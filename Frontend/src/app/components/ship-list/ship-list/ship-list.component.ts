@@ -11,7 +11,8 @@ import { ShipService } from 'src/app/services/ShipService/ship.service';
 })
 export class ShipListComponent implements OnInit {
 
-  ships: ShipDto[] = [];
+  searchText = ''
+  ships!: ShipDto[];
   constructor(private shipService: ShipService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -33,6 +34,10 @@ export class ShipListComponent implements OnInit {
 
       });
 
+  }
+
+  handleMe(searchText: string) {
+    this.searchText = searchText;
   }
 
 }

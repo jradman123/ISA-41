@@ -23,8 +23,16 @@
         <button class="btn btn-primary" [routerLink]="['/shipOwner/add-ship']"> Add new ship</button>
       </div>
 
+      <div class="search-bar" style="margin-left: 230px;">
+        <form class="search-form d-flex align-items-center">
+          <input type="search" placeholder="Search" (input)="emitMe($event)">
+          <button><i class="bi bi-search search-bar-toggle">...</i></button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 990px;">
+        </form>
+      </div>
+
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 550px;">
         <button class="btn btn-primary" (click)="onLogout()">Logout</button>
       </div>
 

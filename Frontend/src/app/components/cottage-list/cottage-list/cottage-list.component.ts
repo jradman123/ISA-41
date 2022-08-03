@@ -13,7 +13,7 @@ export class CottageListComponent implements OnInit {
 
   searchText = ''
 
-  cottages!: CottageDto[]
+  cottages!: CottageDto[];
   images: ImageDto[] = [];
   id: any;
   image!: ImageDto;

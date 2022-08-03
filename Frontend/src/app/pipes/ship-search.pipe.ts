@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'cottagesSearch'
+  name: 'shipSearch'
 })
-export class CottagesSearchPipe implements PipeTransform {
+export class ShipSearchPipe implements PipeTransform {
 
   transform(searchList: Array<any>, search: string): any {
 
@@ -26,4 +26,3 @@ export class CottagesSearchPipe implements PipeTransform {
   }
 
 }
-

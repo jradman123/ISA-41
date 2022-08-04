@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdventureDto } from 'src/app/interfaces/adventure-dto';
+import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
 
 @Component({
   selector: 'app-adventures-list',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdventuresListComponent implements OnInit {
 
-  constructor() { }
+  adventuresDto : AdventureDto[];
+  constructor(private adventureService : AdventureService) {
+    this.adventuresDto = [] as AdventureDto[];
+   }
 
   ngOnInit(): void {
+    this.adventureService.getAllForInstructor().subscribe((data) => {
+      this.adventuresDto = data;
+    });
   }
-
-}
+  }

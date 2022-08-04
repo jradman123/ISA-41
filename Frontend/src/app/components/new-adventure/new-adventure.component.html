@@ -1,9 +1,9 @@
     <div class="container">
-      <mat-card style="margin-top: 40px;">
+      <mat-card>
         <mat-card-title style="text-align: center;">Add new adventure</mat-card-title>
+        <br/>
         <mat-card-content>
           <div [formGroup]="createForm">
-            <br />
             <div class="separateMe">
               <div class="row">
                 <div class="col-sm">
@@ -93,34 +93,6 @@
               <div class="col-sm">
                 <div style="width: 100%; display: flex">
                     <mat-form-field appearance="fill">
-                        <mat-label>Description</mat-label>
-                        <textarea matInput formControlName="description"></textarea>
-                        <mat-error *ngIf="
-                      createForm?.get('description')?.valid &&
-                      createForm?.get('description')?.touched &&
-                      createForm?.get('description')?.errors?.required
-                    ">Description is required.</mat-error>
-                      </mat-form-field>
-                </div>
-              </div>
-              <div class="col-sm">
-                <div style="width: 100%; display: flex">
-                  <mat-form-field appearance="fill">
-                    <mat-label>Biography of instructor</mat-label>
-                    <textarea matInput formControlName="biography"> </textarea>
-                    <mat-error *ngIf="
-                  !createForm?.get('biography')?.valid &&
-                  createForm?.get('biography')?.touched &&
-                  createForm?.get('biography')?.errors?.required
-                ">Biography is required</mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <div style="width: 100%; display: flex">
-                    <mat-form-field appearance="fill">
                         <mat-label>Price in euro</mat-label>
                         <input matInput formControlName="price" />
                         <mat-error *ngIf="
@@ -145,10 +117,25 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-sm">
+                <div style="width: 100%; display: flex">
+                    <mat-form-field style="width: 640px;" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                        <mat-error *ngIf="
+                      createForm?.get('description')?.valid &&
+                      createForm?.get('description')?.touched &&
+                      createForm?.get('description')?.errors?.required
+                    ">Description is required.</mat-error>
+                      </mat-form-field>
+                </div>
+              </div>
+            </div>
             
   
             <br /><br />
-            <button style="margin-left: 277px;" mat-raised-button  color="primary"
+            <button style="margin-left: 277px;" mat-flat-button (click)="save()"  color="primary"
               class="icon-display">
               Save
             </button>

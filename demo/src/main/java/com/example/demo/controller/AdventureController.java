@@ -1,22 +1,27 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AdventureDto;
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.NewAdventureDto;
+import com.example.demo.mapper.AdventureMapper;
 import com.example.demo.model.adventures.Adventure;
+import com.example.demo.model.users.Instructor;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.AdventureService;
+import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,13 +36,30 @@ public class AdventureController {
     private TokenUtils tokenUtils;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
+
+    @Autowired
+    private AdventureMapper adventureMapper;
 
     @PreAuthorize("hasAuthority('Instructor')")
-    @GetMapping(value="/get-all-for-instructor")
-    public ResponseEntity<List<Adventure>> getAllForInstructor(HttpServletRequest request) {
+    @GetMapping(value="/all-for-instructor")
+    public ResponseEntity<List<AdventureDto>> getAllForInstructor(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         String email = tokenUtils.getEmailFromToken(token);
-        return new ResponseEntity<>(adventureService.getAllForInstructor(userRepository.findByEmail(email).getId()), HttpStatus.OK);
+        List<AdventureDto> adventureDtos = new ArrayList<>();
+        for (Adventure adventure : adventureService.getAllForInstructor(userService.findByEmail(email).getId())) {
+            adventureDtos.add(adventureMapper.mapAdventureToAdventureDto(adventure));
+        }
+        return new ResponseEntity<>(adventureDtos, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PostMapping()
+    public ResponseEntity<Adventure> createNewAdventure(@Valid @RequestBody NewAdventureDto newAdventureDto, HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        Instructor instructor =(Instructor) userService.findByEmail(tokenUtils.getEmailFromToken(token));
+        Adventure adventure = adventureMapper.mapAdventureDtoToAdventure(newAdventureDto);
+        adventure.setInstructor(instructor);
+        return new ResponseEntity<>(adventureService.createAdventure(adventure), HttpStatus.CREATED);
     }
 }

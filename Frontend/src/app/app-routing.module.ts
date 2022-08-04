@@ -207,17 +207,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'adventures',
+        path: '',
         component: AdventuresListComponent,
         canActivate: [AuthGuard]
       },
       {
         path: 'profile',
-        component: InstructorProfileComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'reservations',
         component: InstructorProfileComponent,
         canActivate: [AuthGuard]
       },

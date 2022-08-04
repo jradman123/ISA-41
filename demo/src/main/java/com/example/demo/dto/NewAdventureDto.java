@@ -24,13 +24,11 @@ public class NewAdventureDto {
     private String price;
     @NotBlank
     private String cancellationConditions;
-    @NotBlank
-    private String biography;
 
     public NewAdventureDto() {
     }
 
-    public NewAdventureDto(String name, String description, String streetName, String city, String country, String streetNumber, String guestLimit, String price, String cancellationConditions, String biography) {
+    public NewAdventureDto(String name, String description, String streetName, String city, String country, String streetNumber, String guestLimit, String price, String cancellationConditions) {
         this.name = name;
         this.description = description;
         this.streetName = streetName;
@@ -40,7 +38,6 @@ public class NewAdventureDto {
         this.guestLimit = guestLimit;
         this.price = price;
         this.cancellationConditions = cancellationConditions;
-        this.biography = biography;
     }
 
     public String getName() {
@@ -115,11 +112,4 @@ public class NewAdventureDto {
         this.cancellationConditions = cancellationConditions;
     }
 
-    public String getBiography() {
-        return biography;
-    }
-
-    public void setBiography(String biography) {
-        this.biography = biography;
-    }
 }

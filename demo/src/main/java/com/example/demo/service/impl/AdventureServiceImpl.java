@@ -21,7 +21,7 @@ public class AdventureServiceImpl implements AdventureService {
     }
 
     @Override
-    public void createAdventure(Adventure newAdventure) {
-        adventureRepository.save(newAdventure);
+    public Adventure createAdventure(Adventure newAdventure) {
+        return adventureRepository.save(newAdventure);
     }
 }

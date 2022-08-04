@@ -16,7 +16,7 @@ public class CreateReservationDto {
    public  Double price;
    public String clientEmail;
    public String typeOfRes;
-   public Long objectId;
+   public String objectId;
 
 
 

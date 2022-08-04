@@ -92,7 +92,7 @@ public class ReservationServiceImpl implements ReservationService
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
             CottageReservation cottageReservation=new CottageReservation();
-            Cottage cottage=cottageService.findCottageById(createReservationDto.getObjectId());
+            Cottage cottage=cottageService.findCottageById(Long.parseLong(createReservationDto.getObjectId()));
             cottageReservation.setCottage(cottage);
             cottageReservation.setNumberOfPerson(createReservationDto.getNumberOfPerson());
             Set<CottageReservation> cottageReservations=cottage.getCottageReservations();
@@ -103,7 +103,7 @@ public class ReservationServiceImpl implements ReservationService
 
         }else if(createReservationDto.typeOfRes.equals("BOAT")) {
             ShipReservation shipReservation=new ShipReservation();
-            Ship ship=shipService.findShipById(createReservationDto.getObjectId());
+            Ship ship=shipService.findShipById(Long.parseLong(createReservationDto.getObjectId()));
             shipReservation.setShip(ship);
             shipReservation.setNumberOfPerson(ship.getCapacity());
             Set<ShipReservation> shipReservations=ship.getShipReservations();

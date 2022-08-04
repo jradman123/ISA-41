@@ -50,6 +50,8 @@ import { LandingNavbarComponent } from './components/landing-navbar/landing-navb
 import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
 import { ShipSearchPipe } from './pipes/ship-search.pipe';
+import { AdventuresListComponent } from './components/adventures-list/adventures-list.component';
+import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 
 
 
@@ -96,7 +98,9 @@ import { ShipSearchPipe } from './pipes/ship-search.pipe';
     LandingNavbarComponent,
     AllCottagesListComponent,
     CottagesSearchPipe,
-    ShipSearchPipe
+    ShipSearchPipe,
+    AdventuresListComponent,
+    NewAdventureComponent
 
 
   ],

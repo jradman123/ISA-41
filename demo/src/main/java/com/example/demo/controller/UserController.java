@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AdministratorRegistrationDto;
-import com.example.demo.dto.ChangePasswordDto;
-import com.example.demo.dto.PersonalData;
-import com.example.demo.dto.RegistrationRequestDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.users.Administrator;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.UserService;
@@ -26,7 +23,7 @@ public class UserController {
     @Autowired
     private TokenUtils tokenUtils;
 
-    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/personal-data")
     public ResponseEntity<PersonalData> getPersonalData(HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
@@ -35,7 +32,7 @@ public class UserController {
 
     }
     
-    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
     @PutMapping(value = "/update-personal-data")
     public ResponseEntity<PersonalData> updatePersonalData(@RequestBody PersonalData personalData, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
@@ -61,6 +58,24 @@ public class UserController {
         Administrator admin = (Administrator) userService.findByEmail(tokenUtils.getEmailFromToken(token));
         System.out.println(admin.isFirstLogin());
         return new ResponseEntity<>(admin.isFirstLogin(), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Admin') or hasAuthority('Instructor') or hasAuthority('CottageAdvertiser') or hasAuthority('ShipAdvertiser')")
+    @GetMapping(value = "/instructor-personal-data")
+    public ResponseEntity<InstructorPersonalData> getInstructorPersonalData(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        return new ResponseEntity<>(userService.getInstructorPersonalData(tokenUtils.getEmailFromToken(token)),
+                HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PutMapping(value = "/update-instructor-personal-data")
+    public ResponseEntity<InstructorPersonalData> updateInstructorPersonalData(@RequestBody InstructorPersonalData personalData, HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        return new ResponseEntity<>(userService.updateInstructorPersonalData(personalData,tokenUtils.getEmailFromToken(token)),
+                HttpStatus.OK);
+
     }
 
 

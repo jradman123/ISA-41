@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Instructor extends User {
 
 	@Column(name = "biography")
-    private String biography = "This user provided no biography.";
+    private String biography;
 	
 	/*@OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL)
 	private Set<Adventure> adventures;*/

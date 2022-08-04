@@ -13,5 +13,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height:-webkit-fill-available; 
   background-size:cover;
   width:auto;
-  background-image:url("assets/images/background1.jpg"); 
+  background-image:url("assets/images/background1.jpg");
+
 }

@@ -19,4 +19,9 @@ public class AdventureServiceImpl implements AdventureService {
     public List<Adventure> getAllForInstructor(int instructorId) {
         return adventureRepository.getAllForInstructor(instructorId);
     }
+
+    @Override
+    public void createAdventure(Adventure newAdventure) {
+        adventureRepository.save(newAdventure);
+    }
 }

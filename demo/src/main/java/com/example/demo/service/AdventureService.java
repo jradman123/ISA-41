@@ -7,4 +7,5 @@ import java.util.List;
 public interface AdventureService {
 
     List<Adventure> getAllForInstructor(int instructorId);
+    void createAdventure(Adventure newAdventure);
 }

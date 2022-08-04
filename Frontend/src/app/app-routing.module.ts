@@ -31,6 +31,8 @@ import { ReservationHistoryComponent } from './components/reservation-history/re
 import { AddReservationComponent } from './components/add-reservation/add-reservation/add-reservation.component';
 import { CottageAvailabilityComponent } from './components/cottage-availability/cottage-availability/cottage-availability.component';
 import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
+import { AdventuresListComponent } from './components/adventures-list/adventures-list.component';
+import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -205,8 +207,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'services',
-        component: RegistrationRequestsComponent,
+        path: 'adventures',
+        component: AdventuresListComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -217,6 +219,11 @@ const routes: Routes = [
       {
         path: 'reservations',
         component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'newAdventure',
+        component: NewAdventureComponent,
         canActivate: [AuthGuard]
       },
     ],

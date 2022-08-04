@@ -53,6 +53,13 @@ export class DialogForReservationCottageComponent implements OnInit {
     if (different <= 0) { alert("Please enter valid dates!"); return; }
     console.log(different)
 
+
+
+  }
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

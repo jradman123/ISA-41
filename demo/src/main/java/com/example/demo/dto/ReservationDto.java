@@ -14,6 +14,7 @@ public class ReservationDto {
     public Integer cottageId;
     public Integer shipId;
     public Integer adventureId;
+    public String clientEmail;
 
 
 

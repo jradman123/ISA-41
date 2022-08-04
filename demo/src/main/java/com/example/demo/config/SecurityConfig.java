@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // svim korisnicima dopusti da pristupe sledecim putanjama:
                 .authorizeRequests().antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/signup").permitAll()
+                .antMatchers("/reservations/createReservation").permitAll()
                 .antMatchers("/h2-console/**").permitAll()	// /h2-console/** ako se koristi H2 baza)
                 .antMatchers("/api/foo").permitAll()		// /api/foo
                 //.antMatchers("/requests/**").hasRole("Admin")

@@ -1,15 +1,20 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 import com.example.demo.service.ReservationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/reservations")
 
 public class ReservationController {
 
@@ -36,5 +41,12 @@ public class ReservationController {
     @GetMapping(value = "getById/{id}")
     public ReservationDto getById(@PathVariable Long id) {
         return this.reservationService.getById(id);
+    }
+
+
+    @PostMapping(value="/createReservation")
+    public ResponseEntity<HttpStatus> createReservation(@RequestBody CreateReservationDto createReservationDto) {
+        reservationService.createReservation(createReservationDto);
+    return ResponseEntity.noContent().build();
     }
 }

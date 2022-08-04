@@ -11,6 +11,13 @@ import { Router } from '@angular/router';
 import { RoomDto } from 'src/app/interfaces/room-dto';
 import { ImageService } from 'src/app/services/ImageService/image.service';
 import { ImageDto } from 'src/app/interfaces/image-dto';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogForReservationCottageComponent } from '../../dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
+
+
+export interface DataForDialogCottage {
+  id: string;
+}
 
 @Component({
   selector: 'app-cottage-profile',
@@ -29,7 +36,7 @@ export class CottageProfileComponent implements OnInit {
   rooms: RoomDto[] = [];
   images: ImageDto[] = [];
 
-  constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService) {
+  constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
 
   }
 
@@ -68,9 +75,20 @@ export class CottageProfileComponent implements OnInit {
 
   }
   addReservation() {
-    this.route.navigate(['cottageOwner/add-reservation/' + this.id]);
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
 
+    const dialogRef = this.dialog.open(DialogForReservationCottageComponent, {
+
+      data: { id: this.id },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.id = result;
+
+    });
   }
 
   viewAvailability() {

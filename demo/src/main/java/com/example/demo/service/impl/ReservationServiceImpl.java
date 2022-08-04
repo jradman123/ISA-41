@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -41,8 +42,16 @@ public class ReservationServiceImpl implements ReservationService
 
     @Override
     public List<ReservationDto> getReservationsByCottage(Long id) {
-        return null;
+        List<ReservationDto> reservationDtos=new ArrayList<>();
+        for(Reservation r : reservationRepository.findAll()) {
+            if(r.getId()==id) {
+                reservationDtos.add(new ReservationDto(r));
+            }
+        }
+
+        return reservationDtos;
     }
+
 
     @Override
     public List<ReservationDto> getReservationsByBoat(Long id) {
@@ -66,7 +75,7 @@ public class ReservationServiceImpl implements ReservationService
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
 
-       
+
        if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
             reservation.setReservationStart(createReservationDto.resStart);
             reservation.setReservationEnd(createReservationDto.resEnd);
@@ -85,7 +94,7 @@ public class ReservationServiceImpl implements ReservationService
             CottageReservation cottageReservation=new CottageReservation();
             Cottage cottage=cottageService.findCottageById(createReservationDto.getObjectId());
             cottageReservation.setCottage(cottage);
-            cottageReservation.setNumberOfPerson(cottage.getNumberOfPerson());
+            cottageReservation.setNumberOfPerson(createReservationDto.getNumberOfPerson());
             Set<CottageReservation> cottageReservations=cottage.getCottageReservations();
             cottageReservations.add(cottageReservation);
             cottage.setCottageReservations(cottageReservations);

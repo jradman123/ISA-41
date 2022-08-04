@@ -12,6 +12,7 @@ public class CreateReservationDto {
 
    public LocalDateTime resStart;
    public LocalDateTime resEnd;
+   public Integer numberOfPerson;
    public  Double price;
    public String clientEmail;
    public String typeOfRes;

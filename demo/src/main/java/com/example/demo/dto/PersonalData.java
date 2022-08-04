@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.users.User;
+
 public class PersonalData {
 
     private String firstName;
@@ -14,6 +16,8 @@ public class PersonalData {
     public PersonalData() {
     }
 
+
+
     public PersonalData(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,6 +27,18 @@ public class PersonalData {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public PersonalData(User user) {
+        firstName=user.getFirstName();
+        lastName=user.getLastName();
+        streetName=user.getAddress().getStreetName();
+        streetNumber=user.getAddress().getStreetNumber();
+        city=user.getAddress().getCity();
+        country=user.getAddress().getCountry();
+        phoneNumber=user.getPhoneNumber();
+        email=user.getEmail();
+
     }
 
     public String getFirstName() {

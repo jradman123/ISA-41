@@ -213,5 +213,10 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public List<PersonalData> findAllUsers() {
+		return null;
+	}
+
 
 }

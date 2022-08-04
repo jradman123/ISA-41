@@ -50,6 +50,7 @@ import { LandingNavbarComponent } from './components/landing-navbar/landing-navb
 import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
 import { ShipSearchPipe } from './pipes/ship-search.pipe';
+import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 
 
 
@@ -96,7 +97,8 @@ import { ShipSearchPipe } from './pipes/ship-search.pipe';
     LandingNavbarComponent,
     AllCottagesListComponent,
     CottagesSearchPipe,
-    ShipSearchPipe
+    ShipSearchPipe,
+    DialogForReservationCottageComponent
 
 
   ],

@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   private apiServerUrl = environment.apiBaseUrl
-  constructor(private http: HttpClient, private router : Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getPersonalData(): Observable<PersonalData> {
     return this.http.get<PersonalData>(
@@ -19,10 +19,15 @@ export class UserService {
     );
   }
 
-  updatePersonalData( data : PersonalData): Observable<PersonalData> {
+  updatePersonalData(data: PersonalData): Observable<PersonalData> {
     return this.http.put<PersonalData>(
       `${this.apiServerUrl}/users/update-personal-data`, data
     );
+  }
+
+  findAll(): Observable<PersonalData[]> {
+    return this.http.get<PersonalData[]>(
+      `${this.apiServerUrl}/users/all`);
   }
 
   changePassword(data: any) {
@@ -31,7 +36,7 @@ export class UserService {
 
   isFirstLogin() {
     return this.http.get(`${this.apiServerUrl}/users/is-first-login`, {
-      responseType : 'text'
+      responseType: 'text'
     });
   }
 

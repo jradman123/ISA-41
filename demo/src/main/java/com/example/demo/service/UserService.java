@@ -26,4 +26,6 @@ public interface UserService {
     boolean isFirstLogin(String email);
     boolean isPredefAdmin(String email);
     void deleteUser(User user);
+
+    List<PersonalData> findAllUsers();
 }

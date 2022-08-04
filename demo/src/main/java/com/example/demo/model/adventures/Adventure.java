@@ -58,20 +58,17 @@ public class Adventure {
 
 
 
-	  @OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
-	    private Set<AdventureReservation> adventureReservations;
+	@OneToMany(mappedBy = "adventure", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+	private Set<AdventureReservation> adventureReservations;
 
+	@Column(name = "guestLimit", nullable = false)
+	private Integer guestLimit;
 	
 	
-	 @Column(name = "guestLimit", nullable = false)
-	 private Integer guestLimit;
-	
-	
-	 @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	    @JoinTable(
-	            name = "adventure_rules",
-	            joinColumns = @JoinColumn(name = "adventure_id"),
-	            inverseJoinColumns = @JoinColumn(name = "rule_id"))
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "adventure_rules",
+			   joinColumns = @JoinColumn(name = "adventure_id"),
+			   inverseJoinColumns = @JoinColumn(name = "rule_id"))
 	private Set<Rules> rules;
 	 
 	 
@@ -93,6 +90,10 @@ public class Adventure {
 	
 	@Column(name = "deleted")
     private boolean deleted = false;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "adventure_id")
+	private Set<AdventureUtility> utilities;
 	
 
 	public Adventure() {
@@ -104,7 +105,7 @@ public class Adventure {
 
 	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
 			Integer guestLimit, Set<Rules> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions,
-			Double price, boolean deleted) {
+			Double price, boolean deleted,Set<AdventureUtility> utilities) {
 		super();
 		this.id = id;
 		this.instructor = instructor;
@@ -117,6 +118,7 @@ public class Adventure {
 		this.cancellationConditions = cancellationConditions;
 		this.price = price;
 		this.deleted = deleted;
+		this.utilities = utilities;
 	}
 
 

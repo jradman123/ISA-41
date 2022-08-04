@@ -26,10 +26,7 @@ public class ShipReservation extends Reservation{
     @JoinColumn(name = "ship_id")
     private Ship ship;
 	
-	
-	 @ManyToOne
-	 @JoinColumn(name = "user_id", nullable = false)
-	 private RegisteredUser registeredUser;
+
 	
     @ManyToMany
     @JoinTable(

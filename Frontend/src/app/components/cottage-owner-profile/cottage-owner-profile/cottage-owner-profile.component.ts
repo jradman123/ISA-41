@@ -2,9 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { DeleteAccountRequest } from 'src/app/interfaces/delete-account-request';
 import { PersonalData } from 'src/app/interfaces/personal-data';
+import { RequestForDeletingAccountServiceService } from 'src/app/services/RequestForDeletingAccountService/request-for-deleting-account-service.service';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { DialogForChangingPasswordComponent } from '../../dialog-for-changing-password/dialog-for-changing-password.component';
+import { DialogForDeletingAccountComponent } from '../../dialog-for-deleting-account/dialog-for-deleting-account.component';
+
 
 @Component({
   selector: 'app-cottage-owner-profile',
@@ -13,17 +17,20 @@ import { DialogForChangingPasswordComponent } from '../../dialog-for-changing-pa
 })
 export class CottageOwnerProfileComponent implements OnInit {
 
-  personalData! : PersonalData;
+  personalData!: PersonalData;
   sub!: Subscription;
-  constructor(private userService : UserService,public dialog: MatDialog) {
-    this.personalData = {} as PersonalData;
-   }
 
-   @Input() 
+  request!: DeleteAccountRequest;
+  constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
+    this.personalData = {} as PersonalData;
+  }
+
+  @Input()
   userDetails: any
   initialDetails: any
   editMode = false
   id!: number
+
   ngOnInit(): void {
     this.getPersonalData();
   }
@@ -32,7 +39,7 @@ export class CottageOwnerProfileComponent implements OnInit {
     this.sub = this.userService.getPersonalData().subscribe({
       next: (data: PersonalData) => {
         this.userDetails = data
-        this.initialDetails = JSON.parse(JSON.stringify(data)); 
+        this.initialDetails = JSON.parse(JSON.stringify(data));
         this.detailsForm.controls['firstName'].setValue(data.firstName)
         this.detailsForm.controls['lastName'].setValue(data.lastName)
         this.detailsForm.controls['email'].setValue(data.email)
@@ -48,7 +55,7 @@ export class CottageOwnerProfileComponent implements OnInit {
   detailsForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    email: new FormControl('',Validators.required),
+    email: new FormControl('', Validators.required),
     phoneNumber: new FormControl('', Validators.required),
     streetName: new FormControl('', Validators.required),
     streetNumber: new FormControl('', Validators.required),
@@ -85,27 +92,52 @@ export class CottageOwnerProfileComponent implements OnInit {
     })
   }
 
-  changePassword() {
+  deleteAccount() {
     const dialogConfig = new MatDialogConfig();
- 
+
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
- 
-    const dialogRef = this.dialog.open(DialogForChangingPasswordComponent, dialogConfig);
- 
+
+    const dialogRef = this.dialog.open(DialogForDeletingAccountComponent, dialogConfig);
+
     dialogRef.afterClosed().subscribe(
       data => {
         if (data) {
-          this.userService.changePassword(data).subscribe((result:any) => {
-            void(0) 
+          this.createDeleteAccountRequest(data);
+          this.requestForDeletingAccountService.addNewRequest(this.request).subscribe((result: any) => {
+            void (0)
+          })
+        }
+      }
+    );
+
+  }
+
+  createDeleteAccountRequest(data: any) {
+    this.request.reason = data.reason;
+    this.request.email = localStorage.getItem('email');
+  }
+  changePassword() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForChangingPasswordComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.userService.changePassword(data).subscribe((result: any) => {
+            void (0)
           })
         }
       }
     );
   }
 
-  }
+}
 
- 
+
 
 

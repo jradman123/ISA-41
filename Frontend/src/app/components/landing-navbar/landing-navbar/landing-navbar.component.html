@@ -1,0 +1,36 @@
+<div class="container ">
+    <div class="navbar-inner">
+        <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
+            <img src="../../assets/images/logo.png" style="height: 32px" />
+
+            <a class="navbar-brand ml-3 ms-5" style="color:blue"> Adventure </a>
+
+            <div class="d-flex flex-row ">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <button class="btn btn-primary" [routerLink]="['/allCottages']">Cottages </button>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <button class="btn btn-primary">
+                        Ships</button>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <button class="btn btn-primary">Adventures</button>
+            </div>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 910px;">
+                <button class="btn btn-primary" [routerLink]="['/login']">Login</button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <button class="btn btn-primary" [routerLink]="['/registration']">Registration</button>
+            </div>
+
+        </nav>
+
+    </div>
+</div>

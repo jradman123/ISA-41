@@ -1,16 +1,18 @@
-<app-cottage-owner-navbar (searchInput)="handleMe($event)"></app-cottage-owner-navbar>
+<app-landing-navbar></app-landing-navbar>
+<div class="image">
 
 
-
-<div>
-
-
-
-
-
-    <div class="card-holder" style="margin-left: 15px;margin-top: 50px;">
+    <div class="card-holder" style="margin-left: 15px;">
         <div class="row">
-            <div class="card" style="margin: 10px; " *ngFor="let cottage of cottages | cottagesSearch : searchText ">
+            <input type="text" class="input-border" class="container" formControlName="search"
+                placeholder="Search by name,description,address..." />
+
+            <button class="container" type="submit">Search</button>
+
+
+
+
+            <div class="card" style="margin: 10px; " *ngFor="let cottage of cottages">
 
                 <img :src="assets/images/cottage.jpg" class="card-img-top" sty alt="image of cottage">
 
@@ -24,14 +26,12 @@
                     </li>
                     <li style="height: 70px;" class="list-group-item">{{cottage.description}}</li>
                     <li class="list-group-item">
-                        <button class="btn btn-primary" (click)="view(cottage.id)">View</button>
-                        <button class="btn btn-primary" (click)="delete(cottage.id)">Delete</button>
 
                     </li>
                 </ul>
 
             </div>
         </div>
-
-
     </div>
+
+</div>

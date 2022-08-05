@@ -2,8 +2,8 @@ export interface CottageReservation {
     resStart: Date,
     resEnd: Date,
     numberOfPerson: number,
-    price: number,
+    price: string,
     clientEmail: string,
-    objectId: number,
+    objectId: string,
     typeOfRes: string
 }

@@ -76,13 +76,16 @@ public class ReservationServiceImpl implements ReservationService
         reservation.setRegisteredUser(user);
 
 
-       if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-            reservation.setReservationStart(createReservationDto.resStart);
+     /*  if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+       */
+        System.out.print("dsuhifrkdjfd"+createReservationDto.resStart);
+        System.out.print("fsfdsfdsf"+createReservationDto.resEnd);
+        reservation.setReservationStart(createReservationDto.resStart);
             reservation.setReservationEnd(createReservationDto.resEnd);
             reservation.setIsReserved(true);
 
-        }else { throw new RuntimeException();}
-
+       /* }else { throw new RuntimeException();}
+*/
         reservationRepository.save(reservation);
 
 

@@ -5,7 +5,7 @@
         <mat-form-field appearance="standard">
             <mat-label>Client</mat-label>
             <mat-select>
-                <mat-option *ngFor="let user of users" [value]="user.email">
+                <mat-option *ngFor="let user of users" [value]="newReservation.clientEmail">
                     {{user.email}}
                 </mat-option>
             </mat-select>
@@ -32,7 +32,7 @@
 
     </form>
     <div class="button-container">
-        <button mat-flat-button color="primary">Add</button>
+        <button mat-flat-button color="primary" (click)="reserved()">Add</button>
         <button mat-flat-button color="warn" (click)="onNoClick()">Close</button>
     </div>
 </div>

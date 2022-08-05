@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,6 +7,9 @@ import { CottageService } from 'src/app/services/CottageService/cottage.service'
 import { DataForDialogCottage } from '../cottage-profile/cottage-profile/cottage-profile.component';
 import { PersonalData } from 'src/app/interfaces/personal-data';
 import { UserService } from 'src/app/services/UserService/user.service';
+import { Subscription } from 'rxjs';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 
 
 @Component({
@@ -16,13 +19,21 @@ import { UserService } from 'src/app/services/UserService/user.service';
 })
 export class DialogForReservationCottageComponent implements OnInit {
 
+
   fullPrice: number = 0;
   cottage!: CottageDto;
   users!: PersonalData[];
   id: any;
+  sub!: Subscription;
+  newReservation!: CottageReservation
+  form!: FormGroup;
+  formData!: FormData;
 
-  constructor(private userService: UserService, private route: Router, @Inject(MAT_DIALOG_DATA) public data: DataForDialogCottage, private cottageService: CottageService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
 
+
+
+  constructor(private userService: UserService, private reservationService: ReservationService, private route: Router, @Inject(MAT_DIALOG_DATA) public data: DataForDialogCottage, private cottageService: CottageService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
+    this.newReservation = {} as CottageReservation;
   }
 
   ngOnInit() {
@@ -36,32 +47,59 @@ export class DialogForReservationCottageComponent implements OnInit {
       this.cottage = data;
     });
 
+    this.form = new FormGroup({
+      clientEmail: new FormControl('', Validators.required),
+      resStart: new FormControl('', Validators.required),
+      resEnd: new FormControl('', Validators.required),
+      numberOfPerson: new FormControl('', Validators.required)
+    })
+
   }
 
 
-  form = new FormGroup({
-    clientEmail: new FormControl('', Validators.required),
-    resStart: new FormControl('', Validators.required),
-    resEnd: new FormControl('', Validators.required),
-    numberOfPerson: new FormControl('', Validators.required)
-  })
+
 
   calcPrice() {
-    const date1 = Date.UTC(this.form.value.resStart.getFullYear(), this.form.value.resStart.getMonth(), this.form.value.resStart.getDate());
-    const date2 = Date.UTC(this.form.value.resEnd.getFullYear(), this.form.value.resEnd.getMonth(), this.form.value.resEnd.s.endingDate.getDate());
-    const different = Math.floor((date1 - date2) / (24 * 60 * 60 * 1000));
-    if (different <= 0) { alert("Please enter valid dates!"); return; }
-    console.log(different)
+
 
 
 
   }
 
+
+  reserved(): void {
+    this.reservateCottage();
+    this.sub = this.reservationService.reservatedCottage(this.newReservation)
+      .subscribe({
+        next: () => {
+
+          this.onNoClick();
+        }
+      });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  reservateCottage(): void {
+
+
+    let newStart = new Date(this.form.value.resStart)
+    let newEnd = new Date(this.form.value.resEnd)
+
+
+    console.log(newStart)
+    console.log(newEnd)
+    this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
+      this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
+      this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
+    this.newReservation.price = this.cottage.price;
+    this.newReservation.clientEmail = 'goran@gmail.com'
+    this.newReservation.objectId = this.data.id;
+    this.newReservation.typeOfRes = 'COTTAGE';
+
+  }
 }
 
 

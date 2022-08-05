@@ -95,7 +95,7 @@ export class DialogForReservationCottageComponent implements OnInit {
       this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
       this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
     this.newReservation.price = this.cottage.price;
-    this.newReservation.clientEmail = 'goran@gmail.com'
+    this.newReservation.clientEmail = this.form.value.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'COTTAGE';
 

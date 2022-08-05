@@ -4,7 +4,7 @@
     <form class="form" [formGroup]="form">
         <mat-form-field appearance="standard">
             <mat-label>Client</mat-label>
-            <mat-select>
+            <mat-select formControlName="clientEmail">
                 <mat-option *ngFor="let user of users" [value]="user.email">
                     {{user.email}}
                 </mat-option>

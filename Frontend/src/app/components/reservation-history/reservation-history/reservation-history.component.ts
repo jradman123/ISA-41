@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -6,6 +7,13 @@ import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { DialogForGuestDataComponent } from '../../dialog-for-guest-data/dialog-for-guest-data.component';
+import { MatDialog } from '@angular/material/dialog';
+
+
+export interface DataForDialogGuest {
+  clientEmail: string;
+}
 
 @Component({
   selector: 'app-reservation-history',
@@ -13,6 +21,9 @@ import { ReservationService } from 'src/app/services/ReservationService/reservat
   styleUrls: ['./reservation-history.component.css']
 })
 export class ReservationHistoryComponent implements OnInit {
+
+
+  clientEmail!: string;
 
   cottage!: CottageDto;
   sub!: Subscription;
@@ -29,7 +40,7 @@ export class ReservationHistoryComponent implements OnInit {
     'Buttons'
   ];
 
-  constructor(private reservationService: ReservationService, private route: Router, private router: ActivatedRoute, private cottageService: CottageService) {
+  constructor(private reservationService: ReservationService, private route: Router, private router: ActivatedRoute, private cottageService: CottageService, public dialog: MatDialog) {
     this.reservations = new MatTableDataSource<CottageReservation>();
 
   }
@@ -46,6 +57,24 @@ export class ReservationHistoryComponent implements OnInit {
 
           },
         });
+    });
+
+  }
+
+  viewPersonalData(clientEmail: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForGuestDataComponent, {
+
+      data: { clientEmail: clientEmail },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.id = result;
+
     });
 
   }

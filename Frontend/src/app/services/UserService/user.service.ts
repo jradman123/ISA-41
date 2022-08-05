@@ -30,6 +30,12 @@ export class UserService {
       `${this.apiServerUrl}/users/all`);
   }
 
+  findbyEmail(email: string) {
+    return this.http.get<PersonalData>(
+      `${this.apiServerUrl}/users/findbyEmail/${email}`);
+  }
+
+
   changePassword(data: any) {
     return this.http.put(`${this.apiServerUrl}/users/change-password`, data)
   }

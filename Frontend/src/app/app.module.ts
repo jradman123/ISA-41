@@ -51,6 +51,7 @@ import { AllCottagesListComponent } from './components/all-cottages-list/all-cot
 import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
 import { ShipSearchPipe } from './pipes/ship-search.pipe';
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
+import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
 
 
 
@@ -98,7 +99,8 @@ import { DialogForReservationCottageComponent } from './components/dialog-for-re
     AllCottagesListComponent,
     CottagesSearchPipe,
     ShipSearchPipe,
-    DialogForReservationCottageComponent
+    DialogForReservationCottageComponent,
+    DialogForGuestDataComponent
 
 
   ],

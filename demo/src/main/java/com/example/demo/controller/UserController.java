@@ -65,6 +65,12 @@ public class UserController {
        return personalDatas;
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/findByEmail/{clientEmail}")
+    public PersonalData findByEmail(@PathVariable String clientEmail) {
+
+       return userService.getPersonalData(clientEmail);
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")

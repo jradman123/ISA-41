@@ -28,6 +28,6 @@ public class CottageReservationViewDto {
         numberOfPerson=r.getNumberOfPerson();
         price=r.getPrice();
         clientEmail=r.getRegisteredUser().getEmail();
-        
+
     }
 }

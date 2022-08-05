@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { environment } from 'src/environments/environment';
 
@@ -18,4 +19,10 @@ export class ReservationService {
       responseType: 'text',
     });
   }
+
+  getCottageReservationById(id: string): Observable<CottageReservation[]> {
+    return this.http.get<CottageReservation[]>(
+      `${this.apiServerUrl}/reservations/findReservationsByCottage/${id}`);
+  }
+
 }

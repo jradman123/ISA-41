@@ -1,0 +1,13 @@
+.container {
+    align-items: center;
+}
+
+mat-tab-group{
+    background-color: white;
+}
+
+.adventurePhoto {
+    width: 100px;
+    height: 100px;
+    
+}

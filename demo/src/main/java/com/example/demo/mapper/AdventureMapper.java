@@ -11,10 +11,10 @@ import java.util.Optional;
 @Component
 public class AdventureMapper {
 
-    public Adventure mapAdventureDtoToAdventure(NewAdventureDto newAdventureDto){
+    public Adventure mapAdventureDtoToAdventure(NewAdventureDto newAdventureDto) {
         Adventure adventure = new Adventure();
-        Address address = new Address(newAdventureDto.getStreetName(),newAdventureDto.getStreetNumber(),
-                                        newAdventureDto.getCity(),newAdventureDto.getCountry());
+        Address address = new Address(newAdventureDto.getStreetName(), newAdventureDto.getStreetNumber(),
+                newAdventureDto.getCity(), newAdventureDto.getCountry());
         adventure.setAddress(address);
         adventure.setPrice(Double.parseDouble(newAdventureDto.getPrice()));
         adventure.setCancellationConditions(Double.parseDouble(newAdventureDto.getCancellationConditions()));
@@ -24,7 +24,7 @@ public class AdventureMapper {
         return adventure;
     }
 
-    public AdventureDto mapAdventureToAdventureDto(Adventure adventure){
+    public AdventureDto mapAdventureToAdventureDto(Adventure adventure) {
         AdventureDto adventureDto = new AdventureDto();
         adventureDto.setId(adventure.getId().toString());
         adventureDto.setName(adventure.getName());
@@ -36,21 +36,6 @@ public class AdventureMapper {
         adventureDto.setStreetName(adventure.getAddress().getStreetName());
         adventureDto.setStreetNumber(adventure.getAddress().getStreetNumber());
         adventureDto.setPrice(adventure.getPrice().toString());
-        return adventureDto;
-    }
-
-    public AdventureDto mapOptionalAdventureToAdventureDto(Optional<Adventure> adventure){
-        AdventureDto adventureDto = new AdventureDto();
-        adventureDto.setId(adventure.get().getId().toString());
-        adventureDto.setName(adventure.get().getName());
-        adventureDto.setDescription(adventure.get().getDescription());
-        adventureDto.setCancellationConditions(adventure.get().getCancellationConditions().toString());
-        adventureDto.setGuestLimit(adventure.get().getGuestLimit().toString());
-        adventureDto.setCity(adventure.get().getAddress().getCity());
-        adventureDto.setCountry(adventure.get().getAddress().getCountry());
-        adventureDto.setStreetName(adventure.get().getAddress().getStreetName());
-        adventureDto.setStreetNumber(adventure.get().getAddress().getStreetNumber());
-        adventureDto.setPrice(adventure.get().getPrice().toString());
         return adventureDto;
     }
 }

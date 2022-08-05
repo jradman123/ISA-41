@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.CottageReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 import com.example.demo.service.ReservationService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,9 +25,10 @@ public class ReservationController {
     ReservationService reservationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
+ //   @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/findReservationsByCottage/{id}")
-    public List<ReservationDto> getReservationsByCottage(@PathVariable Long id) {
-        List<ReservationDto> reservationDtos = this.reservationService.getReservationsByCottage(id);
+    public List<CottageReservationViewDto> getReservationsByCottage(@PathVariable Long id) {
+        List<CottageReservationViewDto> reservationDtos = this.reservationService.getReservationsByCottage(id);
         return reservationDtos;
     }
 

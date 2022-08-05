@@ -1,16 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CreateReservationDto;
-import com.example.demo.dto.ReservationDto;
-import com.example.demo.dto.ShipDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
-import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
+import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +33,18 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private ShipServiceImpl shipService;
 
+    @Autowired
+    private CottageReservationRepository cottageReservationRepository;
 
 
 
 
     @Override
-    public List<ReservationDto> getReservationsByCottage(Long id) {
-        List<ReservationDto> reservationDtos=new ArrayList<>();
-        for(Reservation r : reservationRepository.findAll()) {
-            if(r.getId()==id) {
-                reservationDtos.add(new ReservationDto(r));
+    public List<CottageReservationViewDto> getReservationsByCottage(Long id) {
+        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+        for(CottageReservation r : cottageReservationRepository.findAll()) {
+            if(r.getCottage().getId()==id) {
+                reservationDtos.add(new CottageReservationViewDto(r));
             }
         }
 

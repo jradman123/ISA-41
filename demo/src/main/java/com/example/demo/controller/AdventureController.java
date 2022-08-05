@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.AdventureDto;
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.NewAdventureDto;
 import com.example.demo.mapper.AdventureMapper;
 import com.example.demo.model.adventures.Adventure;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,5 +63,12 @@ public class AdventureController {
         Adventure adventure = adventureMapper.mapAdventureDtoToAdventure(newAdventureDto);
         adventure.setInstructor(instructor);
         return new ResponseEntity<>(adventureService.createAdventure(adventure), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/find-adventure/{id}")
+    public ResponseEntity<AdventureDto> findAdventure(@PathVariable int id) {
+        Optional<Adventure> adventure = this.adventureService.findAdventure(id);
+        return new ResponseEntity<>(this.adventureMapper.mapOptionalAdventureToAdventureDto(adventure),HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.controller.AdventureController;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.repository.AdventureRepository;
 import com.example.demo.service.AdventureService;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdventureServiceImpl implements AdventureService {
@@ -23,5 +23,10 @@ public class AdventureServiceImpl implements AdventureService {
     @Override
     public Adventure createAdventure(Adventure newAdventure) {
         return adventureRepository.save(newAdventure);
+    }
+
+    @Override
+    public Optional<Adventure> findAdventure(int id) {
+        return adventureRepository.findById(id);
     }
 }

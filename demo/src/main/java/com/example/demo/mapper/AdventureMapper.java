@@ -6,6 +6,8 @@ import com.example.demo.model.Address;
 import com.example.demo.model.adventures.Adventure;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class AdventureMapper {
 
@@ -34,6 +36,21 @@ public class AdventureMapper {
         adventureDto.setStreetName(adventure.getAddress().getStreetName());
         adventureDto.setStreetNumber(adventure.getAddress().getStreetNumber());
         adventureDto.setPrice(adventure.getPrice().toString());
+        return adventureDto;
+    }
+
+    public AdventureDto mapOptionalAdventureToAdventureDto(Optional<Adventure> adventure){
+        AdventureDto adventureDto = new AdventureDto();
+        adventureDto.setId(adventure.get().getId().toString());
+        adventureDto.setName(adventure.get().getName());
+        adventureDto.setDescription(adventure.get().getDescription());
+        adventureDto.setCancellationConditions(adventure.get().getCancellationConditions().toString());
+        adventureDto.setGuestLimit(adventure.get().getGuestLimit().toString());
+        adventureDto.setCity(adventure.get().getAddress().getCity());
+        adventureDto.setCountry(adventure.get().getAddress().getCountry());
+        adventureDto.setStreetName(adventure.get().getAddress().getStreetName());
+        adventureDto.setStreetNumber(adventure.get().getAddress().getStreetNumber());
+        adventureDto.setPrice(adventure.get().getPrice().toString());
         return adventureDto;
     }
 }

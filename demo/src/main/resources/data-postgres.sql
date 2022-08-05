@@ -141,4 +141,4 @@ INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES 
 
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
-	VALUES (0.0, false, 'Vožnja čamcem uz pecanje da rijeci.', 5, 'Riječni raj', 50, 5, 6);
+	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 50, 5, 6);

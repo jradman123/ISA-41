@@ -22,4 +22,9 @@ export class AdventureService {
       `${this.apiServerUrl}/adventures/all-for-instructor`);
   }
 
+  findById(id: string) {
+    return this.http.get<AdventureDto>(
+      `${this.apiServerUrl}/adventures/find-adventure/${id}`);
+  }
+
 }

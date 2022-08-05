@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
 
@@ -10,7 +11,7 @@ import { AdventureService } from 'src/app/services/AdventureService/adventure.se
 export class AdventuresListComponent implements OnInit {
 
   adventuresDto : AdventureDto[];
-  constructor(private adventureService : AdventureService) {
+  constructor(private adventureService : AdventureService,private router : Router) {
     this.adventuresDto = [] as AdventureDto[];
    }
 
@@ -18,5 +19,10 @@ export class AdventuresListComponent implements OnInit {
     this.adventureService.getAllForInstructor().subscribe((data) => {
       this.adventuresDto = data;
     });
+  }
+
+  view(id: string) {
+    this.router.navigate(['instructor/adventure-profile/' + id]);
+    console.log(id);
   }
   }

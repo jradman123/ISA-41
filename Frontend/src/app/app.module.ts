@@ -52,6 +52,7 @@ import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
 import { ShipSearchPipe } from './pipes/ship-search.pipe';
 import { AdventuresListComponent } from './components/adventures-list/adventures-list.component';
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
+import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 
 
 
@@ -100,7 +101,8 @@ import { NewAdventureComponent } from './components/new-adventure/new-adventure.
     CottagesSearchPipe,
     ShipSearchPipe,
     AdventuresListComponent,
-    NewAdventureComponent
+    NewAdventureComponent,
+    AdventureProfileComponent
 
 
   ],

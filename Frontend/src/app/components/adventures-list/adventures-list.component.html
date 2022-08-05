@@ -15,7 +15,7 @@
                 <li style="height: 70px;" class="list-group-item">{{adventure.description}}</li>
                 <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i><span> </span>{{adventure.price}}€</li>
                 <li class="list-group-item">
-                    <button mat-button color="primary" >View</button>
+                    <button mat-button color="primary" (click)="view(adventure.id)">View</button>
                     <button mat-button color="warn" >Delete</button>
 
                 </li>

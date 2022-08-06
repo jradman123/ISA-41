@@ -35,9 +35,11 @@ export class CottageProfileComponent implements OnInit {
   utilities: UtilityDto[] = [];
   rooms: RoomDto[] = [];
   images: ImageDto[] = [];
+  utilityy!: UtilityDto;
 
   constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
+    this.utilityy = {} as UtilityDto;
   }
 
   ngOnInit(): void {
@@ -69,11 +71,7 @@ export class CottageProfileComponent implements OnInit {
 
 
   }
-  reservationHistory() {
-    this.route.navigate(['cottageOwner/reservation-history/' + this.id]);
 
-
-  }
   addReservation() {
     const dialogConfig = new MatDialogConfig();
 
@@ -91,32 +89,7 @@ export class CottageProfileComponent implements OnInit {
     });
   }
 
-  viewAvailability() {
-    this.route.navigate(['cottageOwner/cottage-availability/' + this.id]);
 
-
-  }
-
-  addAction() {
-    this.route.navigate(['cottageOwner/add-action/' + this.id]);
-
-  }
-
-  editCottage() {
-    this.route.navigate(['cottageOwner/edit-cottage/' + this.id]);
-  }
-
-  editRooms() {
-    this.route.navigate(['cottageOwner/edit-rooms/' + this.id]);
-  }
-  editRules() {
-    this.route.navigate(['cottageOwner/edit-rules/' + this.id]);
-  }
-
-  editUtilities() {
-    this.route.navigate(['cottageOwner/edit-utilities/' + this.id]);
-
-  }
   deletePicture(idP: any) {
 
 
@@ -156,6 +129,36 @@ export class CottageProfileComponent implements OnInit {
 
 
       });
+  }
+
+  addUtility() {
+    this.utilityy.cottageId = this.id;
+    console.log("fedfefdfdf0" + this.utilityy.name)
+
+    this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
+
+      window.location.reload();
+
+    });
+
+
+  }
+  deleteUtility(idU: any) {
+
+
+    this.utilityService.deleteUtility(idU, this.id)
+      .subscribe(data => {
+        window.location.reload();
+
+
+        console.log(this.id)
+
+
+
+      });
+
+
+
   }
 
 }

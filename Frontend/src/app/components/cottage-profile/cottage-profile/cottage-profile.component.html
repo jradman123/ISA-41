@@ -1,103 +1,74 @@
-<div>
-    <div style="margin-left: 220px;">
-        <h1 class="h1"> {{this.cottage.name }}</h1>
-
-        <button class="btn" (click)="editCottage()">Edit basic information</button>
-        <button class="btn" (click)="editRooms()">Edit rooms of cottage</button>
-        <button class="btn" (click)="editRules()">Edit rules of cottage</button>
-        <button class="btn" (click)="editUtilities()">Edit utilities of cottage</button>
-        <button class="btn" (click)="viewAvailability()">Availability</button>
-        <button class="btn" (click)="addAction()">Appointments</button>
-        <button class="btn" (click)="addReservation()">Add reservation</button>
-        <button class="btn" (click)="reservationHistory()"> Reservation history</button>
-        <div class="row">
-            <div class="card1">
-                <div class="col">
-                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Address of
-                        cottage:</h4>
-                    <h6 class="text-white row"
-                        style="margin-top: 40px; margin-left: 10px; font-size: 18px; margin-right: 10px;">
-                        {{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}
-                    </h6>
-                </div>
-            </div>
-
-            <div class="card2">
-                <div class="col">
-                    <h4 class="text-white row"
-                        style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rooms of
-                        cottage:
-                    </h4>
-                    <div *ngFor="let room of rooms">
-                        <h6 class="text-white row"
-                            style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                            -{{this.room.number}} beds</h6>
-
+<div class="container">
+    <br /><br /><br />
+    <mat-tab-group>
+        <mat-tab style="overflow-y: hidden!important;" label="Basic info">
+            <div class="columns">
+                <form>
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter your name"
+                            [(ngModel)]="this.cottage.name" name="name" />
+                    </div>
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Description:</label>
+                        <input type="text" class="form-control" placeholder="Enter your description"
+                            [(ngModel)]="this.cottage.description" name="description" />
+                    </div>
+                    <div class="container" style="margin-bottom: 10px;">
+                        <label>Price for one day in euro:</label>
+                        <input type="text" class="form-control" placeholder="Enter your price"
+                            [(ngModel)]="this.cottage.price" name="price" />
+                    </div>
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Number of people:</label>
+                        <input type="text" class="form-control" placeholder="Enter your number"
+                            [(ngModel)]="this.cottage.numberOfPeople" name="numberOfPeople" />
                     </div>
 
 
-                </div>
-            </div>
-
-            <div class="card1">
-                <div class="col">
-                    <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;">Price of
-                        cottage for one day: {{this.cottage.price}} €</h4>
-
-                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Number of
-                        people
-                        who may be in cottage: {{this.cottage.numberOfPeople}}</h4>
-                    <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Short
-                        description: {{this.cottage.description}}</h4>
 
 
-
-                </div>
-            </div>
-            <div class="card2">
-                <div class="col">
-                    <h4 class="text-white row"
-                        style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rules of
-                        cottages:
-                    </h4>
-                    <div *ngFor="let rule of rules">
-                        <h6 class="text-white row"
-                            style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                            -{{this.rule.ruleDescription}}</h6>
-
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Street:</label>
+                        <input type="text" class="form-control" placeholder="Enter your street"
+                            [(ngModel)]="this.cottage.streetName" name="street" />
                     </div>
-                </div>
-            </div>
+                </form>
 
-            <div class="card1">
-                <div class="col">
-                    <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Utilities of
-                        cottage:</h4>
-                    <div *ngFor="let utility of utilities">
-                        <h6 class="text-white row"
-                            style="margin-top: 40px; margin-left: 10px; font-size:18px; margin-right: 10px;"> -
-                            {{this.utility.name}}</h6>
+
+                <form>
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Street number:</label>
+                        <input type="text" class="form-control" placeholder="Enter your street number"
+                            [(ngModel)]="this.cottage.streetNumber" name="streetNumber" />
                     </div>
-                </div>
-            </div>
-            <h1 style="margin-top:320px;margin-left: 70px;"> Gallery</h1>
 
 
-            <div style="margin-top: 30px;">
-                <div class="col">
-
-                    <div *ngFor="let image of images">
-                        <img src="{{image.url}}" alt="..." style="width:980px">
-                        <button class="btn2" (click)=deletePicture(image.id)>Delete</button>
-
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>City:</label>
+                        <input type="text" class="form-control" placeholder="Enter your city"
+                            [(ngModel)]="this.cottage.city" name="cityName" />
                     </div>
-                </div>
+
+                    <div class="container" style="margin-bottom: 20px;">
+                        <label>Country:</label>
+                        <input type="text" class="form-control" background="gray" placeholder="Enter your country"
+                            [(ngModel)]="this.cottage.country" name="countryName" />
+                    </div>
+
+                    <div>
+                        <button type="submit" style="margin-left: 500px;" class="btn">Submit</button>
+                        <button type="submit" style="margin-left: 20px;" class="btn">Cancel</button>
+                    </div>
+                </form>
             </div>
 
-
-
-
-
-        </div>
-    </div>
+        </mat-tab>
+        <mat-tab label="Edit rules"> Content 2 </mat-tab>
+        <mat-tab label="Edit utilities"> Content 3 </mat-tab>
+        <mat-tab label="Edit rooms"> Content 3 </mat-tab>
+        <mat-tab label="Availability"> Content 3 </mat-tab>
+        <mat-tab label="Add reservation"> Content 3 </mat-tab>
+        <mat-tab label="Reservation history"> Content 3 </mat-tab>
+    </mat-tab-group>
 </div>

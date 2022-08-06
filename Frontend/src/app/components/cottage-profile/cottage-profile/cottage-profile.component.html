@@ -151,7 +151,12 @@
         </mat-tab>
         <mat-tab label="Edit rooms"> Content 3 </mat-tab>
         <mat-tab label="Availability"> Content 3 </mat-tab>
+
+
+
+
         <mat-tab label="Add reservation">
+            <br />
 
             <div class="container">
 
@@ -196,11 +201,16 @@
                         style="margin-left: 450px;width: 100px;">Add</button>
                 </div>
             </div>
-
+            <br />
 
 
 
         </mat-tab>
+
+
+
+
+
         <mat-tab label="Reservation history">
             <table *ngIf="reservations.data.length != 0; else emptyTable" mat-table [dataSource]="reservations"
                 class="mat-elevation-z8">

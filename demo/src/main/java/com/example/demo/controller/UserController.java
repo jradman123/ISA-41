@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.*;
 import com.example.demo.model.users.Administrator;
+import com.example.demo.model.users.User;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,6 +51,26 @@ public class UserController {
         String token = tokenUtils.getToken(request);
         userService.changePassword(tokenUtils.getEmailFromToken(token), changePasswordDto);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/all")
+    public List<PersonalData> findAll() {
+
+       List<PersonalData> personalDatas=new ArrayList<>();
+       for(User user:this.userService.findAll()) {
+           personalDatas.add(new PersonalData(user));
+       }
+       return personalDatas;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/findByEmail/{clientEmail}")
+    public PersonalData findByEmail(@PathVariable String clientEmail) {
+
+        System.out.print("USLAAAA");
+       return userService.getPersonalData(clientEmail);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

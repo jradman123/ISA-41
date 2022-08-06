@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.model.users.RegisteredUser;
+import com.example.demo.model.users.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,7 +44,7 @@ public class Reservation {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private RegisteredUser registeredUser;
+	private User registeredUser;
 	
 	 @Column(name = "isCanceled", nullable = false)
      private Boolean isCanceled = false;

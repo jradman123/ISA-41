@@ -211,6 +211,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
 	public InstructorPersonalData getInstructorPersonalData(String email) {
 		Instructor instructor = (Instructor) findByEmail(email);
 		return new InstructorPersonalData(instructor.getFirstName(),instructor.getLastName(),instructor.getAddress().getStreetNumber(),
@@ -233,6 +234,13 @@ public class UserServiceImpl implements UserService {
 		return new InstructorPersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
 				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail(),saved.getBiography());
 	}
+
+	public List<PersonalData> findAllUsers() {
+		return null;
+	}
+
+
+
 
 
 }

@@ -66,6 +66,12 @@ public class ShipServiceImpl  implements ShipService {
         return null;
     }
 
+    @Override
+    public Ship findShipById(Long objectId) {
+        Ship ship= shipRepository.findById(objectId).orElse(null);
+        return ship;
+    }
+
 
     @Override
     public List<ShipDto> findAll() {

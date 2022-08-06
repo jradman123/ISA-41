@@ -50,10 +50,15 @@ import { LandingNavbarComponent } from './components/landing-navbar/landing-navb
 import { AllCottagesListComponent } from './components/all-cottages-list/all-cottages-list/all-cottages-list.component';
 import { CottagesSearchPipe } from './pipes/cottages-search.pipe';
 import { ShipSearchPipe } from './pipes/ship-search.pipe';
+
 import { AdventuresListComponent } from './components/adventures-list/adventures-list.component';
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-carousel';
+
+import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
+import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
+
 
 
 
@@ -101,9 +106,13 @@ import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-car
     AllCottagesListComponent,
     CottagesSearchPipe,
     ShipSearchPipe,
+
     AdventuresListComponent,
     NewAdventureComponent,
-    AdventureProfileComponent
+    AdventureProfileComponent,
+
+    DialogForReservationCottageComponent,
+    DialogForGuestDataComponent
 
 
   ],

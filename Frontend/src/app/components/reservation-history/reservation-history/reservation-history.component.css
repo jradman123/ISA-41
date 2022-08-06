@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+th {
+    width: 200px;
+}
+
+tr {
+    font-style: italic;
+    height: 60px;
+}
+
+table {
+    align-self: center;
+}
+
+
+button {
+    width: 50;
+}
+
+mat-card {
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    width: 500px;
+    text-size-adjust: 50px;
+    font-size: 50px;
+    font-style: italic;
+}

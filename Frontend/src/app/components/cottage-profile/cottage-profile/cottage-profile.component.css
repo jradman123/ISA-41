@@ -1,6 +1,6 @@
 .container {
   align-items: center;
-  width: 1400px;
+  width: 1500px;
 }
 
 mat-tab-group {
@@ -17,7 +17,7 @@ mat-tab-group {
   transform: scale(1.10);
   width: 120px;
 
-  margin-left: 500px;
+  margin-left: 460px;
   color: white;
   background: rgb(81, 63, 243);
   font-size: 14px;

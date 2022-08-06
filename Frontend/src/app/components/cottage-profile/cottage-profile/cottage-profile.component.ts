@@ -28,7 +28,7 @@ export class CottageProfileComponent implements OnInit {
 
 
 
-
+  rulee!: RuleDto
   cottage!: CottageDto;
   id: any;
   rules: RuleDto[] = [];
@@ -37,7 +37,7 @@ export class CottageProfileComponent implements OnInit {
   images: ImageDto[] = [];
 
   constructor(private route: Router, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
-
+    this.rulee = {} as RuleDto;
   }
 
   ngOnInit(): void {
@@ -131,4 +131,31 @@ export class CottageProfileComponent implements OnInit {
       });
 
   }
+
+  addRule() {
+
+    this.rulee.cottageId = this.id;
+
+    console.log(this.rulee)
+    this.ruleService.addRule(this.rulee).subscribe((data) => {
+      window.location.reload();
+
+
+    });
+
+
+  }
+  deleteRule(idR: any) {
+
+    this.ruleService.deleteRule(idR, this.id)
+      .subscribe(data => {
+        window.location.reload();
+
+
+
+
+
+      });
+  }
+
 }

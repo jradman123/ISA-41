@@ -154,10 +154,9 @@
         <mat-tab label="Add reservation">
 
             <div class="container">
-                <h2 mat-dialog-title>Add reservation for client</h2>
 
-                <form class="form" [formGroup]="form">
-                    <mat-form-field appearance="fill" style="width: 95%">
+                <form class="form" [formGroup]="form" style="margin-top: 20px;">
+                    <mat-form-field appearance="fill" style="width: 90%;margin-left:30px;">
                         <mat-label>Client</mat-label>
                         <mat-select formControlName="clientEmail">
                             <mat-option *ngFor="let user of users" [value]="user.email">
@@ -165,26 +164,26 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="width: 95%">
+                    <mat-form-field appearance="fill" style="width: 90%;margin-left:30px;">
 
                         <mat-label>Start Date</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="resStart" />
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="width: 95%">
+                    <mat-form-field appearance="fill" style="width: 90%;margin-left:30px;">
 
                         <mat-label>End Date</mat-label>
                         <input matInput [matDatepicker]="picker1" formControlName="resEnd" />
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="width: 95%">
+                    <mat-form-field appearance="fill" style="width: 90%;margin-left:30px;">
                         <mat-label>Number of person</mat-label>
                         <input matInput type="number" min="1" max="{{this.cottage.numberOfPeople}}"
                             placeholder="Number of person" formControlName="numberOfPerson" />
                     </mat-form-field>
-                    <mat-form-field appearance="fill" style="width: 95%">
+                    <mat-form-field appearance="fill" style="width: 90%;margin-left:30px;">
                         <mat-label>Total price</mat-label>
                         <input matInput>{{fullPrice}}
                         <button mat-raised-button style="margin-left: 10px;" click="calcPrice()">Calculate</button>

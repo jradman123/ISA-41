@@ -19,7 +19,12 @@ import { UserService } from 'src/app/services/UserService/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { DialogForGuestDataComponent } from '../../dialog-for-guest-data/dialog-for-guest-data.component';
 
+export interface DataForDialogGuest {
+  clientEmail: string;
+}
 
 
 export interface DataForDialogCottage {
@@ -48,15 +53,39 @@ export class CottageProfileComponent implements OnInit {
   form!: FormGroup;
   formData!: FormData;
   sub!: Subscription;
+  reservations!: MatTableDataSource<CottageReservation>;
+
+  columnsToDisplayCottageReservations: string[] = [
+    'No.',
+    'StartDate',
+    'EndDate',
+    'Price',
+    'NumberOfPerson',
+    'ClientEmail',
+    'Buttons'
+  ];
+
 
   constructor(private route: Router, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
     this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
+    this.reservations = new MatTableDataSource<CottageReservation>();
+
+
   }
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
+
+    this.reservationService.getCottageReservationById(this.id)
+      .subscribe({
+        next: (reservations: CottageReservation[]) => {
+          this.reservations.data = reservations;
+
+        },
+      });
+
 
     this.userService.findAll().subscribe((data) => {
       this.users = data;
@@ -216,6 +245,24 @@ export class CottageProfileComponent implements OnInit {
     this.newReservation.clientEmail = this.form.value.clientEmail;
     this.newReservation.objectId = this.id;
     this.newReservation.typeOfRes = 'COTTAGE';
+
+  }
+
+  viewPersonalData(clientEmail: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForGuestDataComponent, {
+
+      data: { clientEmail: clientEmail },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.id = result;
+
+    });
 
   }
 

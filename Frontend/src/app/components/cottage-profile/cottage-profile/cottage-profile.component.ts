@@ -21,6 +21,8 @@ import { ReservationService } from 'src/app/services/ReservationService/reservat
 import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogForGuestDataComponent } from '../../dialog-for-guest-data/dialog-for-guest-data.component';
+import { Image } from 'src/app/interfaces/image';
+import { ImagesResponse } from 'src/app/interfaces/images-response';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -46,7 +48,6 @@ export class CottageProfileComponent implements OnInit {
   rules: RuleDto[] = [];
   utilities: UtilityDto[] = [];
   rooms: RoomDto[] = [];
-  images: ImageDto[] = [];
   utilityy!: UtilityDto;
   users!: PersonalData[];
   newReservation!: CottageReservation
@@ -54,6 +55,13 @@ export class CottageProfileComponent implements OnInit {
   formData!: FormData;
   sub!: Subscription;
   reservations!: MatTableDataSource<CottageReservation>;
+
+
+  uploaded: boolean = false;
+  fileToUpload!: File;
+  image: Image;
+  imagesResponse: ImagesResponse;
+  images: Image[];
 
   columnsToDisplayCottageReservations: string[] = [
     'No.',
@@ -72,6 +80,9 @@ export class CottageProfileComponent implements OnInit {
     this.newReservation = {} as CottageReservation;
     this.reservations = new MatTableDataSource<CottageReservation>();
 
+    this.image = {} as Image;
+    this.imagesResponse = {} as ImagesResponse;
+    this.images = [] as Image[];
 
   }
 
@@ -108,10 +119,7 @@ export class CottageProfileComponent implements OnInit {
       this.rooms = data;
       console.log(this.utilities);
     });
-    this.imageService.findImageByCottageId(this.id).subscribe((data) => {
-      this.images = data;
-      console.log(this.images);
-    });
+
 
 
     this.form = new FormGroup({
@@ -121,7 +129,50 @@ export class CottageProfileComponent implements OnInit {
       numberOfPerson: new FormControl('', Validators.required)
     })
 
+    this.getImages();
+
   }
+
+  getImages() {
+    this.cottageService.getCottageImages(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.imagesResponse = res
+        this.imagesResponse.images.forEach((image) => {
+          this.images.push(image)
+        })
+      }
+    });
+  }
+
+  toBase64 = (file: Blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  async uploadPicture() {
+    if (this.uploaded) {
+      await this.toBase64(this.fileToUpload).then(
+        (res) => (this.image.url = res as string)
+      );
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.fileToUpload = <File>event.target.files[0];
+    this.uploaded = true;
+    this.uploadPicture().then((resultt) => {
+      this.cottageService.addImage(this.id, this.image).subscribe((data) => {
+        this.cottage = data;
+        this.images = [];
+        this.getImages();
+      });
+    });
+  }
+
 
   addReservation() {
     const dialogConfig = new MatDialogConfig();

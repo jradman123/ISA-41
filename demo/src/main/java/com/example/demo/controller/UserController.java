@@ -69,6 +69,7 @@ public class UserController {
     @GetMapping(value = "/findByEmail/{clientEmail}")
     public PersonalData findByEmail(@PathVariable String clientEmail) {
 
+        System.out.print("USLAAAA");
        return userService.getPersonalData(clientEmail);
     }
 

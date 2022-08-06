@@ -32,7 +32,7 @@ export class UserService {
 
   findbyEmail(email: string) {
     return this.http.get<PersonalData>(
-      `${this.apiServerUrl}/users/findbyEmail/${email}`);
+      `${this.apiServerUrl}/users/findByEmail/${email}`);
   }
 
 

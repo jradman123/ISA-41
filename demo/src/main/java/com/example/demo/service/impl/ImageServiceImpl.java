@@ -60,6 +60,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public void addAdventureImage(Image image) {
+        imageRepository.save(image);
+    }
+
+    @Override
     public ResponseEntity<Long> deleteImage(Long idP, Long id) {
         List<CottageImage> cottageImages=this.cottageImageRepository.findAll();
         for (CottageImage cottageImage: cottageImages)

@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.AdministratorRegistrationDto;
-import com.example.demo.dto.ChangePasswordDto;
-import com.example.demo.dto.PersonalData;
-import com.example.demo.dto.RegistrationRequestDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.users.*;
 
 import java.net.UnknownHostException;
@@ -26,4 +23,6 @@ public interface UserService {
     boolean isFirstLogin(String email);
     boolean isPredefAdmin(String email);
     void deleteUser(User user);
+    InstructorPersonalData getInstructorPersonalData(String email);
+    InstructorPersonalData updateInstructorPersonalData(InstructorPersonalData data,String email);
 }

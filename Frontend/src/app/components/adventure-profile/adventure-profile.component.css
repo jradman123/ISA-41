@@ -1,0 +1,7 @@
+.container {
+    align-items: center;
+}
+
+mat-tab-group{
+    background-color: white;
+}

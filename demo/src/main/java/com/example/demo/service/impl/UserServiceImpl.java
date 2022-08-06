@@ -3,10 +3,7 @@ package com.example.demo.service.impl;
 import java.net.UnknownHostException;
 import java.util.List;
 
-import com.example.demo.dto.AdministratorRegistrationDto;
-import com.example.demo.dto.ChangePasswordDto;
-import com.example.demo.dto.PersonalData;
-import com.example.demo.dto.RegistrationRequestDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.Address;
 import com.example.demo.model.enumeration.AdminType;
 import com.example.demo.model.enumeration.UserType;
@@ -211,6 +208,30 @@ public class UserServiceImpl implements UserService {
 		userDb.setDeleted(true);
 		userRepository.save(userDb);
 
+	}
+
+	@Override
+	public InstructorPersonalData getInstructorPersonalData(String email) {
+		Instructor instructor = (Instructor) findByEmail(email);
+		return new InstructorPersonalData(instructor.getFirstName(),instructor.getLastName(),instructor.getAddress().getStreetNumber(),
+				instructor.getAddress().getStreetName(),instructor.getAddress().getCity(),instructor.getAddress().getCountry(),
+				instructor.getPhoneNumber(),instructor.getEmail(),instructor.getBiography());
+	}
+
+	@Override
+	public InstructorPersonalData updateInstructorPersonalData(InstructorPersonalData data, String email) {
+		Instructor instructor = (Instructor) findByEmail(email);
+		instructor.setFirstName(data.getFirstName());
+		instructor.setLastName(data.getLastName());
+		instructor.setPhoneNumber(data.getPhoneNumber());
+		instructor.getAddress().setStreetName(data.getStreetName());
+		instructor.getAddress().setStreetNumber(data.getStreetNumber());
+		instructor.getAddress().setCity(data.getCity());
+		instructor.getAddress().setCountry(data.getCountry());
+		instructor.setBiography(data.getBiography());
+		Instructor saved = userRepository.save(instructor);
+		return new InstructorPersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
+				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail(),saved.getBiography());
 	}
 
 

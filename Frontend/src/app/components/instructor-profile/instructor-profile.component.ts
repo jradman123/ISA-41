@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DeleteAccountRequest } from 'src/app/interfaces/delete-account-request';
-import { PersonalData } from 'src/app/interfaces/personal-data';
+import { InstructorPersonalData } from 'src/app/interfaces/instructor-personal-data';
 import { AuthService } from 'src/app/services/AuthService/auth.service';
 import { RequestForDeletingAccountServiceService } from 'src/app/services/RequestForDeletingAccountService/request-for-deleting-account-service.service';
 import { UserService } from 'src/app/services/UserService/user.service';
@@ -18,14 +18,14 @@ import { DialogForDeletingAccountComponent } from '../dialog-for-deleting-accoun
 })
 export class InstructorProfileComponent implements OnInit {
 
-  personalData! : PersonalData;
+  personalData! : InstructorPersonalData;
   sub!: Subscription;
   request! : DeleteAccountRequest;
 
 
   constructor(private userService : UserService,public dialog: MatDialog,private authService : AuthService,private router : Router,
     private requestForDeletingAccountService : RequestForDeletingAccountServiceService) {
-    this.personalData = {} as PersonalData;
+    this.personalData = {} as InstructorPersonalData;
     this.request = {} as DeleteAccountRequest;
    }
 
@@ -43,8 +43,8 @@ export class InstructorProfileComponent implements OnInit {
   }
 
   getPersonalData() {
-    this.sub = this.userService.getPersonalData().subscribe({
-      next: (data: PersonalData) => {
+    this.sub = this.userService.getInstructorPersonalData().subscribe({
+      next: (data: InstructorPersonalData) => {
         this.userDetails = data
         this.initialDetails = JSON.parse(JSON.stringify(data)); 
         this.detailsForm.controls['firstName'].setValue(data.firstName)
@@ -55,6 +55,7 @@ export class InstructorProfileComponent implements OnInit {
         this.detailsForm.controls['streetNumber'].setValue(data.streetNumber)
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
+        this.detailsForm.controls['biography'].setValue(data.biography)
       },
     });
   }
@@ -87,7 +88,11 @@ export class InstructorProfileComponent implements OnInit {
     Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
   ]),
   email: new FormControl(null, [Validators.required, Validators.email]),
-  phoneNumber: new FormControl(null, [Validators.required])
+  phoneNumber: new FormControl(null, [Validators.required]),
+  biography: new FormControl(null, [
+    Validators.required,
+    Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+  ]), 
 })
 
   cancel() {
@@ -100,6 +105,7 @@ export class InstructorProfileComponent implements OnInit {
     this.detailsForm.controls['streetNumber'].setValue(this.initialDetails.streetNumber)
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
+    this.detailsForm.controls['biography'].setValue(this.initialDetails.biography)
   }
 
   edit() {
@@ -114,9 +120,10 @@ export class InstructorProfileComponent implements OnInit {
       streetName: this.detailsForm.get('streetName')?.value,
       streetNumber: this.detailsForm.get('streetNumber')?.value,
       city: this.detailsForm.get('city')?.value,
-      country: this.detailsForm.get('country')?.value
+      country: this.detailsForm.get('country')?.value,
+      biography: this.detailsForm.get('biography')?.value
     }
-    this.userService.updatePersonalData(this.userDetails).subscribe((data) => {
+    this.userService.updateInstructorPersonalData(this.userDetails).subscribe((data) => {
       this.userDetails = data
       this.initialDetails = JSON.parse(JSON.stringify(data));
       this.editMode = false

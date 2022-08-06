@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -13,5 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height:-webkit-fill-available; 
   background-size:cover;
   width:auto;
-  background-image:url("assets/images/background1.jpg"); 
+  background-image:url("assets/images/background1.jpg");
+
 }
+

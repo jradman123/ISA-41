@@ -1,0 +1,104 @@
+
+<div class="container">
+    <br/><br/><br/>
+<mat-tab-group>
+    <mat-tab style="overflow-y: hidden!important;" label="Basic info">
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; Name of adventure</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.name}}</p>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; Description</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.description}}</p>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; Address</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.streetName}} {{adventure.streetNumber}}, {{adventure.city}}, {{adventure.country}}</p>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; Guest limit</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.guestLimit}}</p>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; Price in euro</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.price}}</p>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <p>&nbsp; The percentage of the price that is retained</p>
+            </div>
+            <div class="col">
+                <p>{{adventure.cancellationConditions}}</p>
+            </div>
+        </div>
+        <br/>
+    </mat-tab>
+    <mat-tab label="Previous adventures"> 
+          <div>
+            <mat-carousel 
+              timings="250ms ease-in"
+              color="primary"
+              maxWidth="auto"
+              maxHeight="auto"    
+              [loop]="true"
+              [hideArrows]="false"
+              [hideIndicators]="true"
+              [useKeyboard]="true"
+              [useMouseWheel]="false"
+              orientation="ltr"
+            >
+              <mat-carousel-slide style="height: 600px !important;"
+                #matCarouselSlide
+                *ngFor="let image of images; let i = index"
+              >
+              <img [src]="image.url" style="height: 400px; width: 1150px;"/>
+              </mat-carousel-slide>
+            </mat-carousel>
+          </div>
+          <div style="align-items: center;">
+            <br />
+            <input
+              style="margin-top: 20px; color:primary;"
+              type="file"
+              #file
+              (change)="onFileSelected($event)"
+            />
+          </div>
+          
+    </mat-tab>
+    <mat-tab label="Edit basic info"> Content 1 </mat-tab>
+    <mat-tab label="Edit rules"> Content 2 </mat-tab>
+    <mat-tab label="Edit utilities"> Content 3 </mat-tab>
+    <mat-tab label="Edit fishing equipment"> Content 3 </mat-tab>
+    <mat-tab label="Availability"> Content 3 </mat-tab>
+    <mat-tab label="Add reservation"> Content 3 </mat-tab>
+    <mat-tab label="Reservation history"> Content 3 </mat-tab>
+   
+  </mat-tab-group>
+  </div>

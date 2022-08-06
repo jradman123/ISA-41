@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Blob;
+
 @Entity
 @Getter
 @Setter
@@ -20,8 +22,8 @@ public class Image {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "url", unique = false, nullable = false)
-	String url;
+	@Column(columnDefinition = "TEXT")
+	private String url;
 
 
 

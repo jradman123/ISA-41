@@ -23,6 +23,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DialogForGuestDataComponent } from '../../dialog-for-guest-data/dialog-for-guest-data.component';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { CottageAvailability } from 'src/app/interfaces/cottage-availability';
+import { AvailabilityService } from 'src/app/services/availabilityService/availability.service';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -55,6 +57,11 @@ export class CottageProfileComponent implements OnInit {
   formData!: FormData;
   sub!: Subscription;
   reservations!: MatTableDataSource<CottageReservation>;
+  newAvailability!: CottageAvailability;
+  availabilities: CottageAvailability[] = [];
+  startAvailableDate: any = null;
+  endAvailableDate: any = null;
+
 
 
   uploaded: boolean = false;
@@ -74,11 +81,12 @@ export class CottageProfileComponent implements OnInit {
   ];
 
 
-  constructor(private route: Router, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
+  constructor(private route: Router, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
     this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
     this.reservations = new MatTableDataSource<CottageReservation>();
+    this.newAvailability = {} as CottageAvailability;
 
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -88,6 +96,11 @@ export class CottageProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
+
+    this.availabilityService.findAvailabilityByCottage(this.id).subscribe((data) => {
+      this.availabilities = data;
+
+    });
 
     this.reservationService.getCottageReservationById(this.id)
       .subscribe({
@@ -299,6 +312,23 @@ export class CottageProfileComponent implements OnInit {
       console.log('The dialog was closed');
       this.id = result;
 
+    });
+
+  }
+
+  addAvailability() {
+
+    let startDate = new Date(this.startAvailableDate);
+    let endDate = new Date(this.endAvailableDate);
+    this.newAvailability.cottageId = this.cottage.id;
+    this.newAvailability.startDate = startDate;
+    this.newAvailability.endDate = endDate;
+    console.log("fedfefdfdf0" + this.newAvailability.startDate)
+
+    this.availabilityService.addAvailabilityCottage(this.newAvailability).subscribe((data) => {
+
+      console.log(this.cottage)
+      window.location.reload();
     });
 
   }

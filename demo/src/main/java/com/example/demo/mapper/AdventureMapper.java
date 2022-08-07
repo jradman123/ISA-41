@@ -6,12 +6,10 @@ import com.example.demo.model.Address;
 import com.example.demo.model.adventures.Adventure;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class AdventureMapper {
 
-    public Adventure mapAdventureDtoToAdventure(NewAdventureDto newAdventureDto) {
+    public Adventure mapNewAdventureDtoToAdventure(NewAdventureDto newAdventureDto) {
         Adventure adventure = new Adventure();
         Address address = new Address(newAdventureDto.getStreetName(), newAdventureDto.getStreetNumber(),
                 newAdventureDto.getCity(), newAdventureDto.getCountry());
@@ -37,5 +35,18 @@ public class AdventureMapper {
         adventureDto.setStreetNumber(adventure.getAddress().getStreetNumber());
         adventureDto.setPrice(adventure.getPrice().toString());
         return adventureDto;
+    }
+
+    public Adventure mapAdventureDtoToAdventure(AdventureDto adventureDto) {
+        Adventure adventure = new Adventure();
+        Address address = new Address(adventureDto.getStreetName(), adventureDto.getStreetNumber(),
+                adventureDto.getCity(), adventureDto.getCountry());
+        adventure.setAddress(address);
+        adventure.setPrice(Double.parseDouble(adventureDto.getPrice()));
+        adventure.setCancellationConditions(Double.parseDouble(adventureDto.getCancellationConditions()));
+        adventure.setName(adventureDto.getName());
+        adventure.setDescription(adventureDto.getDescription());
+        adventure.setGuestLimit(Integer.parseInt(adventureDto.getGuestLimit()));
+        return adventure;
     }
 }

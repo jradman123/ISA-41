@@ -4,7 +4,7 @@ INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Lo
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Paris', 'France', 'Avenija Fos','25');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Beograd', 'Srbija', '1300 kaplara','22');
+INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Beograd', 'Srbija', 'Majska','22');
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address)

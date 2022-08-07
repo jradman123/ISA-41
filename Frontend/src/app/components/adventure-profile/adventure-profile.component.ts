@@ -22,14 +22,16 @@ export class AdventureProfileComponent implements OnInit {
   image : Image;
   imagesResponse : ImagesResponse;
   images : Image[];
+  adventureForUpdate : AdventureDto;
   initialDetails: any
   editMode = false
 
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,) { 
-    this.adventure = {}as AdventureDto;
+    this.adventure = {} as AdventureDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
     this.images = [] as Image[];
+    this.adventureForUpdate = {} as AdventureDto;
   }
 
   ngOnInit(): void {
@@ -99,8 +101,7 @@ export class AdventureProfileComponent implements OnInit {
     Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
   ]),
   description: new FormControl('', [
-    Validators.required,
-    Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+    Validators.required
   ]),
   streetName: new FormControl(null, [
     Validators.required,
@@ -118,17 +119,46 @@ export class AdventureProfileComponent implements OnInit {
     Validators.required,
     Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
   ]),
-  price: new FormControl(null, [Validators.required]),
-  cancellationConditions: new FormControl(null, [Validators.required]),
-  guestLimit: new FormControl(null, [Validators.required])
+  price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
+  cancellationConditions: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
+  guestLimit: new FormControl(null, [Validators.required,Validators.pattern('^\\d{1,3}$')])
 })
 
 
 edit() {
-
+  if(this.detailsForm.invalid){
+    return;
+  }
+  this.adventureForUpdate = {
+    name: this.detailsForm.get('name')?.value,
+    description: this.detailsForm.get('description')?.value,
+    price: this.detailsForm.get('price')?.value,
+    cancellationConditions: this.detailsForm.get('cancellationConditions')?.value,
+    streetName: this.detailsForm.get('streetName')?.value,
+    streetNumber: this.detailsForm.get('streetNumber')?.value,
+    city: this.detailsForm.get('city')?.value,
+    country: this.detailsForm.get('country')?.value,
+    id : this.id,
+    guestLimit : this.detailsForm.get('guestLimit')?.value
+  }
+  this.adventureService.updateAdventure(this.id,this.adventureForUpdate).subscribe((data) => {
+    this.adventureForUpdate = data
+    this.initialDetails = JSON.parse(JSON.stringify(data));
+    this.editMode = false
+  })
 }
 
-cancel(){
-
+cancel() {
+  this.editMode = false
+  this.detailsForm.controls['name'].setValue(this.initialDetails.name)
+  this.detailsForm.controls['description'].setValue(this.initialDetails.description)
+  this.detailsForm.controls['cancellationConditions'].setValue(this.initialDetails.cancellationConditions)
+  this.detailsForm.controls['price'].setValue(this.initialDetails.price)
+  this.detailsForm.controls['streetName'].setValue(this.initialDetails.streetName)
+  this.detailsForm.controls['streetNumber'].setValue(this.initialDetails.streetNumber)
+  this.detailsForm.controls['city'].setValue(this.initialDetails.city)
+  this.detailsForm.controls['country'].setValue(this.initialDetails.country)
+  this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
 }
+
 }

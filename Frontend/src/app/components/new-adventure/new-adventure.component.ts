@@ -31,11 +31,11 @@ export class NewAdventureComponent implements OnInit {
       ]),
       price: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^\\d{1,3}$'),
+        Validators.pattern('^\\d{1,3}.?\\d{1,3}$'),
       ]),
       cancellationConditions: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^\\d{1,3}$'),
+        Validators.pattern('^\\d{1,3}.?\\d{1,3}$'),
       ]),
       street: new FormControl(null, [
         Validators.required,

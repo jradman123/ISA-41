@@ -10,5 +10,7 @@ public interface AdventureService {
 
     List<Adventure> getAllForInstructor(int instructorId);
     Adventure createAdventure(Adventure newAdventure);
-    Optional<Adventure> findAdventure(int id);
+    Adventure findAdventure(int id);
+    Adventure updateAdventure(Adventure updatedAdventure,int id);
+
 }

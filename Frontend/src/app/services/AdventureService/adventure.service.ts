@@ -40,4 +40,9 @@ export class AdventureService {
       `${this.apiServerUrl}/adventures/${id}/images`);
   }
 
+  updateAdventure(id : string,adventureDto : AdventureDto){
+    return this.http.put<AdventureDto>(
+      `${this.apiServerUrl}/adventures/${id}/update`,adventureDto);
+  }
+
 }

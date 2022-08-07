@@ -56,7 +56,7 @@ public class AdventureController {
     public ResponseEntity<Adventure> createNewAdventure(@Valid @RequestBody NewAdventureDto newAdventureDto, HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         Instructor instructor =(Instructor) userService.findByEmail(tokenUtils.getEmailFromToken(token));
-        Adventure adventure = adventureMapper.mapAdventureDtoToAdventure(newAdventureDto);
+        Adventure adventure = adventureMapper.mapNewAdventureDtoToAdventure(newAdventureDto);
         adventure.setInstructor(instructor);
         return new ResponseEntity<>(adventureService.createAdventure(adventure), HttpStatus.CREATED);
     }
@@ -64,14 +64,14 @@ public class AdventureController {
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value = "/find-adventure/{id}")
     public ResponseEntity<AdventureDto> findAdventure(@PathVariable int id) {
-        Adventure adventure = this.adventureService.findAdventure(id).get();
+        Adventure adventure = this.adventureService.findAdventure(id);
         return new ResponseEntity<>(this.adventureMapper.mapAdventureToAdventureDto(adventure),HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('Instructor')")
     @PostMapping(value = "/add-image/{id}")
     public ResponseEntity<Adventure> addImage(@PathVariable int id,@RequestBody ImageRequest imageRequest) {
-        Adventure adventure = this.adventureService.findAdventure(id).get();
+        Adventure adventure = this.adventureService.findAdventure(id);
         Set<Image> images = new HashSet<>();
         for (Image image: adventure.getImages()) {
             images.add(image);
@@ -84,9 +84,18 @@ public class AdventureController {
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value = "/{id}/images")
     public ResponseEntity<ImagesResponse> getAdventuresImages(@PathVariable int id) {
-        Adventure adventure = this.adventureService.findAdventure(id).get();
+        Adventure adventure = this.adventureService.findAdventure(id);
         Set<Image> images = adventure.getImages();
         ImagesResponse response = this.imageMapper.mapImagesToImagesResponse(images);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PutMapping(value = "/{id}/update")
+    public ResponseEntity<AdventureDto> updateAdventure(@PathVariable int id,@RequestBody AdventureDto adventureForUpdate) {
+        Adventure adventure = this.adventureMapper.mapAdventureDtoToAdventure(adventureForUpdate);
+        Adventure updated = this.adventureService.updateAdventure(adventure,id);
+        return new ResponseEntity<>(this.adventureMapper.mapAdventureToAdventureDto(updated),HttpStatus.OK);
+    }
+
 }

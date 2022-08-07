@@ -18,15 +18,6 @@ public class ImageController {
     @Autowired
     ImageService imageService;
 
-    @GetMapping(value="/getPicturesByCottage/{id}")
-    public List<ImageDto> getPicturesByCottage(@PathVariable Long id) {
-        return this.imageService.getPicturesByCottage(id);
-    }
-
-    @GetMapping(value="/getPicturesByBoat/{id}")
-    public List<ImageDto> getPictureByBoat(@PathVariable Long id) {
-        return this.imageService.getPicturesByBoat(id);
-    }
 
 
     @PostMapping(value="/addPicture")
@@ -34,10 +25,6 @@ public class ImageController {
         return this.imageService.addImage(dto);
     }
 
-    @DeleteMapping(value="/deletePicture/{idP}/{id}")
-    public ResponseEntity<Long> deletePicture(@PathVariable Long idP,@PathVariable Long id) {
-        return this.imageService.deleteImage(idP,id);
-    }
 
 
 

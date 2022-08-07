@@ -169,27 +169,13 @@ export class CottageProfileComponent implements OnInit {
         this.cottage = data;
         this.images = [];
         this.getImages();
+        window.location.reload();
       });
     });
   }
 
 
-  addReservation() {
-    const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    const dialogRef = this.dialog.open(DialogForReservationCottageComponent, {
-
-      data: { id: this.id },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.id = result;
-
-    });
-  }
 
 
   deletePicture(idP: any) {

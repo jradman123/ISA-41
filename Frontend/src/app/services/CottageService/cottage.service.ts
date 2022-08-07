@@ -65,7 +65,7 @@ export class CottageService {
 
   getCottageImages(id: string) {
     return this.http.get<ImagesResponse>(
-      `${this.apiServerUrl}/adventures/${id}/images`);
+      `${this.apiServerUrl}/cottages/${id}/images`);
   }
 }
 

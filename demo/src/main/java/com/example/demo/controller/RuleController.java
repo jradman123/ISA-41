@@ -58,6 +58,8 @@ public class RuleController {
     public Rules createCottageRule(@RequestBody RuleDto newRule) {
         return this.ruleService.createCottageRule(newRule);
     }
+
+
 }
 
 

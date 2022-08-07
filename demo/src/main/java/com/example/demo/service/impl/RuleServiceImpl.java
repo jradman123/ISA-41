@@ -113,4 +113,5 @@ public class RuleServiceImpl implements RuleService {
          return new ResponseEntity<>(id, HttpStatus.OK);
 
      }
+
 }

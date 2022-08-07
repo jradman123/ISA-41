@@ -3,6 +3,7 @@ import { RuleDto } from 'src/app/interfaces/rule-dto';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { AdventureRuleDto } from 'src/app/interfaces/adventure-rule-dto';
 
 @Injectable({
   providedIn: 'root'

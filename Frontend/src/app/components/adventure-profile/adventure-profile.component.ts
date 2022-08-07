@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute} from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
+import { AdventureRuleDto } from 'src/app/interfaces/adventure-rule-dto';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { ResponseRules } from 'src/app/interfaces/response-rules';
+import { AdventureRuleService } from 'src/app/services/AdventureRuleService/adventure-rule.service';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
-import { EditCottageComponent } from '../edit-cottage/edit-cottage/edit-cottage.component';
 
 @Component({
   selector: 'app-adventure-profile',
@@ -25,13 +27,17 @@ export class AdventureProfileComponent implements OnInit {
   adventureForUpdate : AdventureDto;
   initialDetails: any
   editMode = false
+  newAdventureRule : AdventureRuleDto;
+  rules : ResponseRules[];
 
-  constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,) { 
+  constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,private adventureRuleService : AdventureRuleService) { 
     this.adventure = {} as AdventureDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
     this.images = [] as Image[];
     this.adventureForUpdate = {} as AdventureDto;
+    this.newAdventureRule = {} as AdventureRuleDto;
+    this.rules = [] as ResponseRules[];
   }
 
   ngOnInit(): void {
@@ -53,6 +59,7 @@ export class AdventureProfileComponent implements OnInit {
     });
 
     this.getImages();
+    this.getRules();
   }
 
   getImages() {
@@ -65,6 +72,32 @@ export class AdventureProfileComponent implements OnInit {
         })
     }
   });
+  }
+
+  getRules() {
+    this.adventureService.getAdventuresRules(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.rules = res
+    }
+  });
+  }
+
+  addRule() {
+    this.newAdventureRule.adventureId = this.id;
+    this.adventureRuleService.addAdventureRule(this.newAdventureRule).subscribe((data) => {
+      this.rules = [];
+      this.getRules();
+    });
+  }
+
+  deleteRule(ruleId: string) {
+
+    this.adventureRuleService.deleteAdventureRule(ruleId)
+      .subscribe(data => {
+        this.rules = [];
+        this.getRules();
+      });
   }
 
   toBase64 = (file: Blob) =>
@@ -160,5 +193,7 @@ cancel() {
   this.detailsForm.controls['country'].setValue(this.initialDetails.country)
   this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
 }
+
+
 
 }

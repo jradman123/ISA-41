@@ -6,6 +6,7 @@ import { NewAdventureDto } from 'src/app/interfaces/new-adventure-dto';
 import { environment } from 'src/environments/environment';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { ResponseRules } from 'src/app/interfaces/response-rules';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,11 @@ export class AdventureService {
   updateAdventure(id : string,adventureDto : AdventureDto){
     return this.http.put<AdventureDto>(
       `${this.apiServerUrl}/adventures/${id}/update`,adventureDto);
+  }
+
+  getAdventuresRules(id : string){
+    return this.http.get<ResponseRules[]>(
+      `${this.apiServerUrl}/adventures/${id}/rules`);
   }
 
 }

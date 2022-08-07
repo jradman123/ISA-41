@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dto.*;
 import com.example.demo.mapper.AdventureMapper;
 import com.example.demo.mapper.ImageMapper;
+import com.example.demo.mapper.AdventureRuleMapper;
 import com.example.demo.model.Image;
 import com.example.demo.model.adventures.Adventure;
+import com.example.demo.model.adventures.AdventureRule;
 import com.example.demo.model.users.Instructor;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.AdventureService;
@@ -38,6 +40,9 @@ public class AdventureController {
 
     @Autowired
     private ImageMapper imageMapper;
+
+    @Autowired
+    private AdventureRuleMapper adventureRuleMapper;
 
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value="/all-for-instructor")
@@ -96,6 +101,14 @@ public class AdventureController {
         Adventure adventure = this.adventureMapper.mapAdventureDtoToAdventure(adventureForUpdate);
         Adventure updated = this.adventureService.updateAdventure(adventure,id);
         return new ResponseEntity<>(this.adventureMapper.mapAdventureToAdventureDto(updated),HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/{id}/rules")
+    public ResponseEntity<Set<ResponseRules>> getAdventureRules(@PathVariable int id) {
+        Adventure adventure = this.adventureService.findAdventure(id);
+        Set<AdventureRule> adventureRules = this.adventureService.getRulesByAdventure(adventure);
+        return new ResponseEntity<>(this.adventureRuleMapper.mapRulesToResponseRules(adventureRules),HttpStatus.OK);
     }
 
 }

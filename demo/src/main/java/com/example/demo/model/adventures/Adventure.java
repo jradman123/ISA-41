@@ -66,10 +66,10 @@ public class Adventure {
 	
 	
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinTable(name = "adventure_rules",
+	@JoinTable(name = "adventure_adventureRules",
 			   joinColumns = @JoinColumn(name = "adventure_id"),
-			   inverseJoinColumns = @JoinColumn(name = "rule_id"))
-	private Set<Rules> rules;
+			   inverseJoinColumns = @JoinColumn(name = "adventure_rule_id"))
+	private Set<AdventureRule> rules;
 	 
 	 
 	 @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -104,7 +104,7 @@ public class Adventure {
 
 
 	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
-			Integer guestLimit, Set<Rules> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions,
+			Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions,
 			Double price, boolean deleted,Set<AdventureUtility> utilities) {
 		super();
 		this.id = id;

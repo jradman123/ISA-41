@@ -1,5 +1,6 @@
 package com.example.demo.model.reservation;
 
+import com.example.demo.dto.AppointmentDto;
 import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
@@ -61,4 +62,18 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ship_id",nullable = true)
     private Ship ship;
+
+    public Appointment(AppointmentDto dto) {
+
+        startDate=dto.getStartDate();
+        endDate=dto.getEndDate();
+        capacity=Integer.parseInt(dto.getCapacity());
+        price=Double.parseDouble(dto.getPrice());
+        validUntil=dto.getValidUntil();
+        isDeleted=false;
+        isReserved=false;
+
+
+
+    }
 }

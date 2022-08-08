@@ -2,9 +2,11 @@ package com.example.demo.service.impl;
 
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.service.AppointmentService;
+import com.example.demo.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private AppointmentServiceImpl appointmentService;
 
+    @Autowired
+    private CottageService cottageService;
 
     @Autowired
     private AppointmentRepository appointmentRepository;
@@ -61,7 +65,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment createAppointment(AppointmentDto dto) {
-        return null;
+       Appointment appointment=new Appointment(dto);
+       if(dto.getCottageId()!=null) {
+           Cottage cottage=cottageService.findCottageById(Long.parseLong(dto.getCottageId()));
+           appointment.setCottage(cottage);
+            appointmentRepository.save(appointment);
+            return appointment;
+       }else if(dto.getShipId()!=null) {
+
+       }
+
+       return null;
     }
 
 

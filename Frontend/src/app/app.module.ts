@@ -58,6 +58,7 @@ import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-car
 
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
+import { DialogForAppointmentComponent } from './components/dialog-for-appointment/dialog-for-appointment.component';
 
 
 
@@ -112,7 +113,8 @@ import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/
     AdventureProfileComponent,
 
     DialogForReservationCottageComponent,
-    DialogForGuestDataComponent
+    DialogForGuestDataComponent,
+    DialogForAppointmentComponent
 
 
   ],

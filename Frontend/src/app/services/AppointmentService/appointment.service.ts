@@ -26,4 +26,10 @@ export class AppointmentService {
     return this.http.delete<AppointmentDto>(
       `${this.apiServerUrl}/appointments/deleteApp/${id}`);
   }
+
+  createApp(newAppointment: AppointmentDto) {
+    return this.http.post(`${this.apiServerUrl}/appointments/createApp`, newAppointment, {
+      responseType: 'text',
+    });
+  }
 }

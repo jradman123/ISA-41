@@ -27,6 +27,7 @@ import { CottageAvailability } from 'src/app/interfaces/cottage-availability';
 import { AvailabilityService } from 'src/app/services/availabilityService/availability.service';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
+import { DialogForAppointmentComponent } from '../../dialog-for-appointment/dialog-for-appointment.component';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -196,9 +197,7 @@ export class CottageProfileComponent implements OnInit {
     });
   }
 
-  addApp() {
 
-  }
 
 
 
@@ -353,6 +352,24 @@ export class CottageProfileComponent implements OnInit {
         window.location.reload();
 
       });
+
+  }
+
+  addApp() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForAppointmentComponent, {
+
+      data: { id: this.id },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.id = result;
+
+    });
 
   }
 }

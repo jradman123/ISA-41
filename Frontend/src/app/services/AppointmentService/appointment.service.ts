@@ -21,4 +21,9 @@ export class AppointmentService {
 
 
   }
+
+  deleteApp(id: any) {
+    return this.http.delete<AppointmentDto>(
+      `${this.apiServerUrl}/appointments/deleteApp/${id}`);
+  }
 }

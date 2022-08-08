@@ -346,4 +346,13 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
+  deleteApp(id: string) {
+    this.appointmentService.deleteApp(id)
+      .subscribe(data => {
+
+        window.location.reload();
+
+      });
+
+  }
 }

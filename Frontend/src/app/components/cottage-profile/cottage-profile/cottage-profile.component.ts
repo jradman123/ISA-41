@@ -251,6 +251,8 @@ export class CottageProfileComponent implements OnInit {
 
   addRule() {
 
+    if (this.rulee.ruleDescription == null) { alert("Please add rule description!"); return; }
+
     this.rulee.cottageId = this.id;
 
     console.log(this.rulee)
@@ -277,6 +279,8 @@ export class CottageProfileComponent implements OnInit {
   }
 
   addUtility() {
+    if (this.utilityy.name == null) { alert("Please add name of utility!"); return; }
+
     this.utilityy.cottageId = this.id;
     console.log("fedfefdfdf0" + this.utilityy.name)
 
@@ -307,6 +311,12 @@ export class CottageProfileComponent implements OnInit {
   }
 
   reserved(): void {
+    if (this.newReservation.resStart == null
+      || this.newReservation.resEnd == null ||
+      this.newReservation.numberOfPerson == null ||
+      this.newReservation.price == null || this.newReservation.clientEmail == null) { alert("Please fill all fields!"); return; }
+
+
     this.reservateCottage();
     this.sub = this.reservationService.reservatedCottage(this.newReservation)
       .subscribe({
@@ -324,6 +334,7 @@ export class CottageProfileComponent implements OnInit {
   }
 
   reservateCottage(): void {
+
 
 
     let newStart = new Date(this.form.value.resStart)

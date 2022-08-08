@@ -102,47 +102,15 @@ export class CottageProfileComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
 
-    this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
-      this.appointments = data;
-
-    });
-
-    this.availabilityService.findAvailabilityByCottage(this.id).subscribe((data) => {
-      this.availabilities = data;
-
-    });
-
-    this.reservationService.getCottageReservationById(this.id)
-      .subscribe({
-        next: (reservations: CottageReservation[]) => {
-          this.reservations.data = reservations;
-
-        },
-      });
-
-
-    this.userService.findAll().subscribe((data) => {
-      this.users = data;
-    });
-    this.cottageService.findbyId(this.id).subscribe((data) => {
-      this.cottage = data;
-    });
-
-    this.ruleService.findRulebyId(this.id).subscribe((data) => {
-      this.rules = data;
-
-    });
-
-    this.utilityService.findUtilityById(this.id).subscribe((data) => {
-      this.utilities = data;
-      console.log(this.utilities);
-    });
-
-    this.cottageService.findRoomsById(this.id).subscribe((data) => {
-      this.rooms = data;
-      console.log(this.utilities);
-    });
-
+    this.findAppointments();
+    this.findAvailability();
+    this.findReservations();
+    this.findUsers();
+    this.findCottages();
+    this.findRules();
+    this.findUtility();
+    this.findRooms();
+    this.getImages();
 
 
     this.form = new FormGroup({
@@ -152,8 +120,71 @@ export class CottageProfileComponent implements OnInit {
       numberOfPerson: new FormControl('', Validators.required)
     })
 
-    this.getImages();
 
+
+  }
+
+  findCottages() {
+    this.cottageService.findbyId(this.id).subscribe((data) => {
+      this.cottage = data;
+    });
+  }
+
+  findAvailability() {
+
+    this.availabilityService.findAvailabilityByCottage(this.id).subscribe((data) => {
+      this.availabilities = data;
+
+    });
+  }
+
+  findAppointments() {
+    this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
+      this.appointments = data;
+
+    });
+  }
+  findRooms() {
+
+    this.cottageService.findRoomsById(this.id).subscribe((data) => {
+      this.rooms = data;
+      console.log(this.utilities);
+    });
+
+  }
+
+
+
+  findUsers() {
+    this.userService.findAll().subscribe((data) => {
+      this.users = data;
+    });
+  }
+
+  findReservations() {
+
+    this.reservationService.getCottageReservationById(this.id)
+      .subscribe({
+        next: (reservations: CottageReservation[]) => {
+          this.reservations.data = reservations;
+
+        },
+      });
+
+  }
+
+  findRules() {
+    this.ruleService.findRulebyId(this.id).subscribe((data) => {
+      this.rules = data;
+
+    });
+  }
+
+  findUtility() {
+    this.utilityService.findUtilityById(this.id).subscribe((data) => {
+      this.utilities = data;
+      console.log(this.utilities);
+    });
   }
 
   getImages() {
@@ -192,7 +223,7 @@ export class CottageProfileComponent implements OnInit {
         this.cottage = data;
         this.images = [];
         this.getImages();
-        window.location.reload();
+
       });
     });
   }
@@ -224,7 +255,8 @@ export class CottageProfileComponent implements OnInit {
 
     console.log(this.rulee)
     this.ruleService.addRule(this.rulee).subscribe((data) => {
-      window.location.reload();
+      this.rules = []
+      this.findRules();
 
 
     });
@@ -235,8 +267,8 @@ export class CottageProfileComponent implements OnInit {
 
     this.ruleService.deleteRule(idR, this.id)
       .subscribe(data => {
-        window.location.reload();
-
+        this.rules = []
+        this.findRules();
 
 
 
@@ -250,7 +282,9 @@ export class CottageProfileComponent implements OnInit {
 
     this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
 
-      window.location.reload();
+      this.utilities = []
+      this.findUtility();
+
 
     });
 
@@ -261,10 +295,8 @@ export class CottageProfileComponent implements OnInit {
 
     this.utilityService.deleteUtility(idU, this.id)
       .subscribe(data => {
-        window.location.reload();
-
-
-        console.log(this.id)
+        this.utilities = []
+        this.findUtility();
 
 
 
@@ -340,7 +372,9 @@ export class CottageProfileComponent implements OnInit {
     this.availabilityService.addAvailabilityCottage(this.newAvailability).subscribe((data) => {
 
       console.log(this.cottage)
-      window.location.reload();
+      this.availabilities = []
+      this.findAvailability();
+
     });
 
   }
@@ -349,7 +383,8 @@ export class CottageProfileComponent implements OnInit {
     this.appointmentService.deleteApp(id)
       .subscribe(data => {
 
-        window.location.reload();
+        this.appointments = []
+        this.findAppointments();
 
       });
 
@@ -367,7 +402,8 @@ export class CottageProfileComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.id = result;
+      this.appointments = [];
+      this.findAppointments();
 
     });
 

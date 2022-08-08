@@ -5,6 +5,7 @@ export interface AppointmentDto {
     endDate: Date;
     capacity: String;
     price: String;
+    validUntil: Date;
     isReserved: Boolean;
     cottageId: String;
     shipId: String;

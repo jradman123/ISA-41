@@ -25,6 +25,8 @@ import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { CottageAvailability } from 'src/app/interfaces/cottage-availability';
 import { AvailabilityService } from 'src/app/services/availabilityService/availability.service';
+import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
+import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -61,6 +63,8 @@ export class CottageProfileComponent implements OnInit {
   availabilities: CottageAvailability[] = [];
   startAvailableDate: any = null;
   endAvailableDate: any = null;
+  appointments: AppointmentDto[] = []
+
 
 
 
@@ -81,7 +85,7 @@ export class CottageProfileComponent implements OnInit {
   ];
 
 
-  constructor(private route: Router, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
+  constructor(private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
     this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
@@ -96,6 +100,11 @@ export class CottageProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
+
+    this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
+      this.appointments = data;
+
+    });
 
     this.availabilityService.findAvailabilityByCottage(this.id).subscribe((data) => {
       this.availabilities = data;
@@ -185,6 +194,10 @@ export class CottageProfileComponent implements OnInit {
         window.location.reload();
       });
     });
+  }
+
+  addApp() {
+
   }
 
 

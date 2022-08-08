@@ -232,6 +232,47 @@
         </mat-tab>
 
 
+        <mat-tab label="Edit appointments">
+
+
+            <div class="card-holder" style="margin-left: 15px;margin-top: 30px;">
+                <div class="row">
+                    <div class="card" style="margin: 10px; " *ngFor="let app of appointments ">
+
+
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong> from {{app.startDate}} to {{app.endDate}}</strong>
+                            </li>
+
+                            <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.capacity}}
+                                person </li>
+                            <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil}}
+                            </li>
+                            <li style="height: 70px;" class="list-group-item"> <button>Reserve</button>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+                    <div class="container">
+                        <div>
+                            <button class="btn" (click)="addApp()" style="margin-left: 480px;">Add new
+                                appointment</button>
+                        </div>
+                        <br /><br />
+                    </div>
+                </div>
+
+
+            </div>
+
+        </mat-tab>
+
+
 
 
 

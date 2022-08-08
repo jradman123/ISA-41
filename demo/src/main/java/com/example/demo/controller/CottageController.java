@@ -115,7 +115,7 @@ public class CottageController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PutMapping(value = "/editCottage")
     public CottageDto editCottage(@RequestBody CottageDto newCottage) {
         return this.cottageService.editCottage(newCottage);

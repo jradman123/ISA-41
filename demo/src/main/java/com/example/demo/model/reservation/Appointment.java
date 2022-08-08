@@ -44,6 +44,9 @@ public class Appointment {
     @JsonManagedReference
     private Set<Utility> utilities;
 
+    @Column(name = "validUntil", nullable = false)
+    private LocalDateTime validUntil;
+
 
     @Column(name = "isReserved", nullable = false)
     private Boolean isReserved;

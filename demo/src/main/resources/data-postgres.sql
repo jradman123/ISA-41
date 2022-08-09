@@ -5,6 +5,7 @@ INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Pa
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22');
 INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Beograd', 'Srbija', 'Majska','22');
+INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50');
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address)
@@ -145,6 +146,25 @@ INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES 
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 50, 5, 6);
+INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
+	VALUES (0.0, false, 'Pecanje sa obale i sa rijeke.', 7, 'Magija na vodi', 54, 6, 6);
 
 INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);
 INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 5);
+
+INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No smoking');
+INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No alcohol');
+
+INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (1, 1);
+INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (1, 2);
+INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (2, 1);
+INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (2, 2);
+
+INSERT INTO public.fishing_equipment(name, is_deleted) VALUES ('Fishing rod', false);
+INSERT INTO public.fishing_equipment(name, is_deleted) VALUES ('Bag-net', false);
+
+INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (1, 1);
+INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (1, 2);
+INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 1);
+INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 2);
+

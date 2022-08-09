@@ -5,11 +5,14 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute} from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
 import { AdventureRuleDto } from 'src/app/interfaces/adventure-rule-dto';
+import { FishingEquipmentDto } from 'src/app/interfaces/fishing-equipment-dto';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { ResponseFishingEquipment } from 'src/app/interfaces/response-fishing-equipment';
 import { ResponseRules } from 'src/app/interfaces/response-rules';
 import { AdventureRuleService } from 'src/app/services/AdventureRuleService/adventure-rule.service';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
+import { FishingEquipmentService } from 'src/app/services/FishingEquipmentService/fishing-equipment.service';
 
 @Component({
   selector: 'app-adventure-profile',
@@ -30,9 +33,11 @@ export class AdventureProfileComponent implements OnInit {
   editMode = false
   newAdventureRule : AdventureRuleDto;
   rules : ResponseRules[];
+  newFishingEquipment : FishingEquipmentDto;
+  equipments : ResponseFishingEquipment[];
 
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,
-    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar) { 
+    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar,private fishingEquipmentService : FishingEquipmentService) { 
     this.adventure = {} as AdventureDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -40,6 +45,8 @@ export class AdventureProfileComponent implements OnInit {
     this.adventureForUpdate = {} as AdventureDto;
     this.newAdventureRule = {} as AdventureRuleDto;
     this.rules = [] as ResponseRules[];
+    this.newFishingEquipment = {} as FishingEquipmentDto;
+    this.equipments = [] as ResponseFishingEquipment[];
   }
 
   ngOnInit(): void {
@@ -62,6 +69,7 @@ export class AdventureProfileComponent implements OnInit {
 
     this.getImages();
     this.getRules();
+    this.getEquipments();
   }
 
   getImages() {
@@ -81,6 +89,15 @@ export class AdventureProfileComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.rules = res
+    }
+  });
+  }
+
+  getEquipments() {
+    this.adventureService.getAdventureFishingEquipment(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.equipments = res
     }
   });
   }
@@ -111,6 +128,35 @@ export class AdventureProfileComponent implements OnInit {
       .subscribe((data) => {
         this.rules = [];
         this.getRules();
+      });
+  }
+
+  addFishingEquipment() {
+    if(this.fishingEquipmentForm.invalid){
+      this._snackBar.open(
+        'Name of fishing equipment cannot be empty.',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
+      return;
+    }
+    this.newFishingEquipment = {
+      adventureId : this.id,
+      fishingEquipmentName: this.fishingEquipmentForm.get('name')?.value
+    }
+    this.fishingEquipmentService.addAdventureFishingEquipment(this.newFishingEquipment).subscribe((data) => {
+      this.fishingEquipmentForm.controls['name'].setValue('');
+      this.equipments = [];
+      this.getEquipments();
+    });
+  }
+
+  deleteFishingEquipment(equipmentId: string) {
+
+    this.fishingEquipmentService.deleteFishingEquipment(equipmentId)
+      .subscribe((data) => {
+        this.equipments = [];
+        this.getEquipments();
       });
   }
 
@@ -211,6 +257,11 @@ cancel() {
 
 ruleDescriptionForm = new FormGroup({ 
   description: new FormControl('', [
+  Validators.required
+])});
+
+fishingEquipmentForm = new FormGroup({ 
+  name: new FormControl('', [
   Validators.required
 ])});
 

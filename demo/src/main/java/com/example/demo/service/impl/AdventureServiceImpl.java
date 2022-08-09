@@ -1,10 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Rules;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
+import com.example.demo.model.adventures.FishingEquipment;
 import com.example.demo.repository.AdventureRepository;
-import com.example.demo.service.AdventureRuleService;
 import com.example.demo.service.AdventureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +72,30 @@ public class AdventureServiceImpl implements AdventureService {
             }
         }
         return adventureRules;
+    }
+
+    @Override
+    public Adventure addFishingEquipment(int id, FishingEquipment fishingEquipment) {
+        Adventure adventure = findAdventure(id);
+        Set<FishingEquipment> adventureFishingEquipments = new HashSet<>();
+        for (FishingEquipment equipment: adventure.getFishingEquipments()) {
+            adventureFishingEquipments.add(equipment);
+        }
+        adventureFishingEquipments.add(fishingEquipment);
+        adventure.setFishingEquipments(adventureFishingEquipments);
+        adventureRepository.save(adventure);
+        return adventure;
+    }
+
+    @Override
+    public Set<FishingEquipment> getFishingEquipmentByAdventure(Adventure adventure) {
+        Adventure adventureDb = findAdventure(adventure.getId());
+        Set<FishingEquipment> adventureFishingEquipments = new HashSet<>();
+        for (FishingEquipment equipment: adventureDb.getFishingEquipments()) {
+            if(!equipment.isDeleted()) {
+                adventureFishingEquipments.add(equipment);
+            }
+        }
+        return adventureFishingEquipments;
     }
 }

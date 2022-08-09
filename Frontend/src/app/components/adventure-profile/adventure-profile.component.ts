@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute} from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
@@ -30,7 +31,8 @@ export class AdventureProfileComponent implements OnInit {
   newAdventureRule : AdventureRuleDto;
   rules : ResponseRules[];
 
-  constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,private adventureRuleService : AdventureRuleService) { 
+  constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,
+    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar) { 
     this.adventure = {} as AdventureDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -84,8 +86,20 @@ export class AdventureProfileComponent implements OnInit {
   }
 
   addRule() {
-    this.newAdventureRule.adventureId = this.id;
+    if(this.ruleDescriptionForm.invalid){
+      this._snackBar.open(
+        'Rule cannot be empty.',
+        '',
+        {duration : 3000,panelClass: ['snack-bar']}
+      );
+      return;
+    }
+    this.newAdventureRule = {
+      adventureId : this.id,
+      ruleDescription: this.ruleDescriptionForm.get('description')?.value
+    }
     this.adventureRuleService.addAdventureRule(this.newAdventureRule).subscribe((data) => {
+      this.ruleDescriptionForm.controls['description'].setValue('');
       this.rules = [];
       this.getRules();
     });
@@ -94,7 +108,7 @@ export class AdventureProfileComponent implements OnInit {
   deleteRule(ruleId: string) {
 
     this.adventureRuleService.deleteAdventureRule(ruleId)
-      .subscribe(data => {
+      .subscribe((data) => {
         this.rules = [];
         this.getRules();
       });
@@ -194,6 +208,11 @@ cancel() {
   this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
 }
 
+
+ruleDescriptionForm = new FormGroup({ 
+  description: new FormControl('', [
+  Validators.required
+])});
 
 
 }

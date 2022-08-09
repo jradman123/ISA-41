@@ -42,4 +42,10 @@ mat-tab-group{
     text-align: center;
   }
 
+  mat-list {
+    flex-grow: 1;
+    overflow: auto;
+    height: 100px;
+}
+
   

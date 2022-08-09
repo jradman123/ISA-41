@@ -18,7 +18,19 @@ public class FishingEquipment {
 		@Column(name = "name", nullable = false)
 		private String fishingEquipmentName;
 
-	    public Long getId() {
+		@Column(name = "is_deleted", nullable = false)
+		private boolean isDeleted;
+
+		public FishingEquipment() {
+		}
+
+		public FishingEquipment(Long id, String fishingEquipmentName, boolean isDeleted) {
+			this.id = id;
+			this.fishingEquipmentName = fishingEquipmentName;
+			this.isDeleted = isDeleted;
+		}
+
+		public Long getId() {
 			return id;
 		}
 
@@ -34,11 +46,11 @@ public class FishingEquipment {
 			this.fishingEquipmentName = fishingEquipmentName;
 		}
 
-		public FishingEquipment(Long id, String fishingEquipmentName) {
-			super();
-			this.id = id;
-			this.fishingEquipmentName = fishingEquipmentName;
+		public boolean isDeleted() {
+			return isDeleted;
 		}
-	 
-	 
+
+		public void setDeleted(boolean deleted) {
+			isDeleted = deleted;
+		}
 }

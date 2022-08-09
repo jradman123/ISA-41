@@ -356,10 +356,6 @@ export class CottageProfileComponent implements OnInit {
   }
 
   reserved(): void {
-    if (this.newReservation.resStart == null
-      || this.newReservation.resEnd == null ||
-      this.newReservation.numberOfPerson == null ||
-      this.newReservation.price == null || this.newReservation.clientEmail == null) { alert("Please fill all fields!"); return; }
 
 
     this.reservateCottage();

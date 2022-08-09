@@ -28,9 +28,6 @@ public class Report {
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    @ManyToOne
-    @JoinColumn(name = "guest_id")
-    private User user;
 
     @Column(name = "comment", nullable = false)
     private String comment;
@@ -38,16 +35,16 @@ public class Report {
     @Column(name = "ReportDate", nullable = false)
     private LocalDateTime date;
 
-    @Column(name = "typeOfReservation", nullable = false)
-    private String typeOfReservation;
+    @Column(name = "appeared", nullable = false)
+    private boolean appeared;
 
-    @Column(name = "realization", nullable = false)
-    private String realization;
+    @Column(name="sanctioned",nullable = false)
+    private boolean sanctioned;
 
-    @Column(name = "entityName", nullable = false)
-    private String entityName;
+    @Column(name = "approvedbyAdmin")
+    private boolean approvedbyAdmin;
 
-    @Column(name = "rating", nullable = false)
-    private Integer rating;
+
+
 
 }

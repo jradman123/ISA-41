@@ -48,7 +48,7 @@ export class CottageProfileComponent implements OnInit {
 
   fullPrice: number = 0;
   rulee!: RuleDto
-  cottage!: CottageDto;
+  cottage: CottageDto;
   id: any;
   rules: RuleDto[] = [];
   utilities: UtilityDto[] = [];
@@ -65,6 +65,8 @@ export class CottageProfileComponent implements OnInit {
   startAvailableDate: any = null;
   endAvailableDate: any = null;
   appointments: AppointmentDto[] = []
+  editMode = false
+  initialDetails: any
 
 
 
@@ -92,6 +94,7 @@ export class CottageProfileComponent implements OnInit {
     this.newReservation = {} as CottageReservation;
     this.reservations = new MatTableDataSource<CottageReservation>();
     this.newAvailability = {} as CottageAvailability;
+    this.cottage = {} as CottageDto;
 
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -125,10 +128,49 @@ export class CottageProfileComponent implements OnInit {
   }
 
   findCottages() {
-    this.cottageService.findbyId(this.id).subscribe((data) => {
-      this.cottage = data;
+    this.cottageService.findbyId(this.id).subscribe({
+      next: (data: CottageDto) => {
+        this.cottage = data
+        this.initialDetails = JSON.parse(JSON.stringify(data));
+        this.detailsForm.controls['name'].setValue(data.name)
+        this.detailsForm.controls['description'].setValue(data.description)
+        this.detailsForm.controls['price'].setValue(data.price)
+        this.detailsForm.controls['streetName'].setValue(data.streetName)
+        this.detailsForm.controls['streetNumber'].setValue(data.streetNumber)
+        this.detailsForm.controls['city'].setValue(data.city)
+        this.detailsForm.controls['country'].setValue(data.country)
+        this.detailsForm.controls['numberOfPeople'].setValue(data.numberOfPeople)
+      },
     });
   }
+
+  detailsForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+    ]),
+    description: new FormControl('', [
+      Validators.required
+    ]),
+    streetName: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+    ]),
+    streetNumber: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^\\d{1,3}$'),
+    ]),
+    city: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+    ]),
+    country: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+    ]),
+    price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
+    numberOfPeople: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
+  })
 
   findAvailability() {
 

@@ -73,6 +73,15 @@ button {
   width: 50;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+
+}
+
 mat-card {
   align-self: center;
   align-items: center;

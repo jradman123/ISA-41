@@ -1,70 +1,98 @@
 <div class="container">
 
-    <br /><br /><br /> <br /><br />
+    <br /><br /><br />
     <h1 style="color:blue;">Cottage {{this.cottage.name}}</h1>
     <mat-tab-group>
         <mat-tab style="overflow-y: hidden!important;" label="Basic info">
-            <div class="columns">
-                <form>
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Name:</label>
-                        <input type="text" class="form-control" placeholder="Enter your name"
-                            [(ngModel)]="this.cottage.name" name="name" />
-                    </div>
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Description:</label>
-                        <input type="text" class="form-control" placeholder="Enter your description"
-                            [(ngModel)]="this.cottage.description" name="description" />
-                    </div>
-                    <div class="container" style="margin-bottom: 10px;">
-                        <label>Price for one day in euro:</label>
-                        <input type="text" class="form-control" placeholder="Enter your price"
-                            [(ngModel)]="this.cottage.price" name="price" />
-                    </div>
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Number of people:</label>
-                        <input type="text" class="form-control" placeholder="Enter your number"
-                            [(ngModel)]="this.cottage.numberOfPeople" name="numberOfPeople" />
-                    </div>
-
-
-
-
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Street:</label>
-                        <input type="text" class="form-control" placeholder="Enter your street"
-                            [(ngModel)]="this.cottage.streetName" name="street" />
-                    </div>
-                </form>
-
-
-                <form>
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Street number:</label>
-                        <input type="text" class="form-control" placeholder="Enter your street number"
-                            [(ngModel)]="this.cottage.streetNumber" name="streetNumber" />
-                    </div>
-
-
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>City:</label>
-                        <input type="text" class="form-control" placeholder="Enter your city"
-                            [(ngModel)]="this.cottage.city" name="cityName" />
-                    </div>
-
-                    <div class="container" style="margin-bottom: 20px;">
-                        <label>Country:</label>
-                        <input type="text" class="form-control" background="gray" placeholder="Enter your country"
-                            [(ngModel)]="this.cottage.country" name="countryName" />
-                    </div>
-
-                    <div>
-                        <button type="submit" style="margin-left: 380px;" class="btn">Submit</button>
-                        <button type="submit" style="margin-left: 20px;" class="btn">Cancel</button>
-                    </div>
-                    <br /><br />
-                </form>
-            </div>
+            <mat-card style="width:500px">
+                <mat-card-title></mat-card-title>
+                <mat-card-content>
+                    <form class="form-container" [formGroup]="detailsForm" style="width:1000px">
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Name of cottage</mat-label>
+                                    <input matInput placeholder="Name of adventure" formControlName="name"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Price in euro</mat-label>
+                                    <input matInput placeholder="Price in euro" formControlName="price"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Street name</mat-label>
+                                    <input matInput placeholder="Street name" formControlName="streetName"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Street number</mat-label>
+                                    <input matInput placeholder="Street number" formControlName="streetNumber"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="City" formControlName="city" [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput placeholder="Country" formControlName="country"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Guest limit</mat-label>
+                                    <input matInput placeholder="Guest limit" formControlName="numberOfPeople"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>The percentage of the price that is retained</mat-label>
+                                    <input matInput placeholder="The percentage of the price that is retained"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Description</mat-label>
+                                    <textarea matInput placeholder="Description" formControlName="description"
+                                        [readonly]="!editMode"> </textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="button-container" *ngIf="!editMode else editIsOn">
+                            <button mat-flat-button color="primary" class="button"
+                                (click)="editMode = true">Edit</button>
+                        </div>
+                        <ng-template #editIsOn>
+                            <div class="button-container" *ngIf="editMode">
+                                <button mat-flat-button color="primary" class="button">Save</button>
+                                <button mat-flat-button color="warn" class="button">Cancel</button>
+                            </div>
+                        </ng-template>
+                    </form>
+                </mat-card-content>
+            </mat-card>
 
         </mat-tab>
         <mat-tab label="Edit images">

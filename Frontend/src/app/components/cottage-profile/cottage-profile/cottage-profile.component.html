@@ -124,7 +124,7 @@
                         <h1>Rules of cottage</h1>
                         <hr />
                         <div *ngFor="let rule of rules" class="container">
-                            <h3> {{ rule.ruleDescription}} <button style="margin-left:850px" class="btn"
+                            <h3> {{ rule.ruleDescription}} <button style="margin-left:800px" class="btn"
                                     (click)="deleteRule(rule.id)">Delete</button>
                                 <hr />
                             </h3>
@@ -366,6 +366,8 @@
 
 
         <mat-tab label="Reservation history">
+            <br />
+            <h1>Current reservations</h1>
             <table *ngIf="reservations.data.length != 0; else emptyTable" mat-table [dataSource]="reservations"
                 class="mat-elevation-z8">
                 <ng-container matColumnDef="No.">
@@ -410,7 +412,6 @@
                 <ng-container matColumnDef="Buttons">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element; let i = index">
-                        <button mat-raised-button color="warn" style="width: 200px; ">Add report</button>
 
                         <button mat-raised-button color="primary" style="width: 200px; "
                             (click)="viewPersonalData(element.clientEmail)">Some
@@ -425,6 +426,70 @@
                             let element;
                             columns: columnsToDisplayCottageReservations
                           "></tr>
+            </table>
+
+            <br /><br /><br /><br />
+            <h1>Past reservations</h1>
+            <table *ngIf="reservations.data.length != 0; else emptyTable" mat-table [dataSource]="pastReservations"
+                class="mat-elevation-z8">
+                <ng-container matColumnDef="No.">
+                    <th mat-header-cell *matHeaderCellDef>No.</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ i + 1 }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="StartDate">
+                    <th mat-header-cell *matHeaderCellDef>Start date</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element.resStart }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="EndDate">
+                    <th mat-header-cell *matHeaderCellDef>End date</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{element.resEnd }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Price">
+                    <th mat-header-cell *matHeaderCellDef>Price</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element.price }} €
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="NumberOfPerson">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Number of person
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element.numberOfPerson }} person
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="ClientEmail">
+                    <th mat-header-cell *matHeaderCellDef>Email of client</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        {{ element.clientEmail }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Buttons">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <button mat-raised-button color="warn" style="width: 200px; ">Add
+                            report</button>
+
+                        <button mat-raised-button color="primary" style="width: 200px; "
+                            (click)="viewPersonalData(element.clientEmail)">Some
+                            informations of client</button>
+
+
+                    </td>
+
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplayCottageReservations"></tr>
+                <tr mat-row *matRowDef="
+                        let element;
+                        columns: columnsToDisplayCottageReservations
+                      "></tr>
             </table>
 
             <ng-template #emptyTable>

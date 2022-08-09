@@ -131,8 +131,10 @@ INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES 
 ----appointments-----
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '06-13-2022 10:00',false,false,40.0, '06-01-2022 10:00', 3,'06-01-2022 10:00');
 
---INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id)
-	--VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1);
+INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)
+	VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 3,'06-01-2022 10:00');
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id) VALUES ('CottageReservation',false,false,true,2,50.0,'07-01-2022 09:00','05-01-2022 12:00',null,2,null,3,null);
 
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)

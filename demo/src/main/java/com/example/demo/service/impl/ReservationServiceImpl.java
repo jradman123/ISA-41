@@ -43,7 +43,7 @@ public class ReservationServiceImpl implements ReservationService
     public List<CottageReservationViewDto> getReservationsByCottage(Long id) {
         List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
         for(CottageReservation r : cottageReservationRepository.findAll()) {
-            if(r.getCottage().getId()==id) {
+            if(r.getCottage().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
                 reservationDtos.add(new CottageReservationViewDto(r));
             }
         }
@@ -88,6 +88,19 @@ public class ReservationServiceImpl implements ReservationService
 
 
 
+    }
+
+    @Override
+    public List<CottageReservationViewDto> getPastReservationsByCottage(Long id) {
+        System.out.print("uslaaaaa");
+        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+        for(CottageReservation r : cottageReservationRepository.findAll()) {
+            if(r.getCottage().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
+                reservationDtos.add(new CottageReservationViewDto(r));
+            }
+        }
+
+        return reservationDtos;
     }
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {

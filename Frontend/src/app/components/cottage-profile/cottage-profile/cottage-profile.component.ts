@@ -69,7 +69,7 @@ export class CottageProfileComponent implements OnInit {
   initialDetails: any
   updateCottage: CottageDto
   email: any
-
+  pastReservations!: MatTableDataSource<CottageReservation>;
 
 
 
@@ -98,6 +98,8 @@ export class CottageProfileComponent implements OnInit {
     this.newAvailability = {} as CottageAvailability;
     this.cottage = {} as CottageDto;
     this.updateCottage = {} as CottageDto
+    this.pastReservations = new MatTableDataSource<CottageReservation>();
+
 
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -117,6 +119,7 @@ export class CottageProfileComponent implements OnInit {
     this.findUtility();
     this.findRooms();
     this.getImages();
+    this.findPastReservations();
 
 
     this.form = new FormGroup({
@@ -126,6 +129,19 @@ export class CottageProfileComponent implements OnInit {
       numberOfPerson: new FormControl('', Validators.required)
     })
 
+
+
+  }
+
+  findPastReservations() {
+
+    this.reservationService.getPastCottageReservationById(this.id)
+      .subscribe({
+        next: (pastReservations: CottageReservation[]) => {
+          this.pastReservations.data = pastReservations;
+
+        },
+      });
 
 
   }
@@ -371,6 +387,14 @@ export class CottageProfileComponent implements OnInit {
 
   onNoClick(): void {
     window.location.reload();
+
+  }
+
+  canReport(element: any) {
+    let newEnd = element.endDate
+    if (newEnd < new Date()) return
+
+
 
   }
 

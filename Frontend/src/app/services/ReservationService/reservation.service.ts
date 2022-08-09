@@ -20,6 +20,13 @@ export class ReservationService {
     });
   }
 
+  getPastCottageReservationById(id: string): Observable<CottageReservation[]> {
+
+    return this.http.get<CottageReservation[]>(
+
+      `${this.apiServerUrl}/reservations/findPastReservationsByCottage/${id}`);
+  }
+
   getCottageReservationById(id: string): Observable<CottageReservation[]> {
     return this.http.get<CottageReservation[]>(
       `${this.apiServerUrl}/reservations/findReservationsByCottage/${id}`);

@@ -86,8 +86,8 @@
                         </div>
                         <ng-template #editIsOn>
                             <div class="button-container" *ngIf="editMode">
-                                <button mat-flat-button color="primary" class="button">Save</button>
-                                <button mat-flat-button color="warn" class="button">Cancel</button>
+                                <button mat-flat-button color="primary" class="button" (click)="edit()">Save</button>
+                                <button mat-flat-button color="warn" class="button" (click)="cancel()">Cancel</button>
                             </div>
                         </ng-template>
                     </form>

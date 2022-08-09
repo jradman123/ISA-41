@@ -67,6 +67,8 @@ export class CottageProfileComponent implements OnInit {
   appointments: AppointmentDto[] = []
   editMode = false
   initialDetails: any
+  updateCottage: CottageDto
+  email: any
 
 
 
@@ -95,6 +97,7 @@ export class CottageProfileComponent implements OnInit {
     this.reservations = new MatTableDataSource<CottageReservation>();
     this.newAvailability = {} as CottageAvailability;
     this.cottage = {} as CottageDto;
+    this.updateCottage = {} as CottageDto
 
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -460,5 +463,43 @@ export class CottageProfileComponent implements OnInit {
 
     });
 
+  }
+
+
+  edit() {
+    if (this.detailsForm.invalid) {
+      return;
+    }
+    this.email = localStorage.getItem('email')
+    this.updateCottage = {
+      name: this.detailsForm.get('name')?.value,
+      description: this.detailsForm.get('description')?.value,
+      price: this.detailsForm.get('price')?.value,
+      streetName: this.detailsForm.get('streetName')?.value,
+      streetNumber: this.detailsForm.get('streetNumber')?.value,
+      city: this.detailsForm.get('city')?.value,
+      country: this.detailsForm.get('country')?.value,
+      id: this.id,
+      ownerEmail: this.email,
+      numberOfPeople: this.detailsForm.get('numberOfPeople')?.value
+    }
+    this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
+      this.updateCottage = data
+      this.initialDetails = JSON.parse(JSON.stringify(data));
+      this.editMode = false
+    })
+  }
+
+  cancel() {
+    this.editMode = false
+    this.detailsForm.controls['name'].setValue(this.initialDetails.name)
+    this.detailsForm.controls['description'].setValue(this.initialDetails.description)
+    this.detailsForm.controls['cancellationConditions'].setValue(this.initialDetails.cancellationConditions)
+    this.detailsForm.controls['price'].setValue(this.initialDetails.price)
+    this.detailsForm.controls['streetName'].setValue(this.initialDetails.streetName)
+    this.detailsForm.controls['streetNumber'].setValue(this.initialDetails.streetNumber)
+    this.detailsForm.controls['city'].setValue(this.initialDetails.city)
+    this.detailsForm.controls['country'].setValue(this.initialDetails.country)
+    this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
   }
 }

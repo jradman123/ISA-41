@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.users.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,12 @@ public class Report {
     private Long id;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reservation_id")
+    @OneToOne
+    @JoinColumn(name = "reservation_id", referencedColumnName = "id", nullable = false)
+    @JsonManagedReference
     private Reservation reservation;
+
+
 
 
     @Column(name = "comment", nullable = false)

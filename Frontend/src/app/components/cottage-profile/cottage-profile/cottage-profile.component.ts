@@ -28,6 +28,8 @@ import { AvailabilityService } from 'src/app/services/availabilityService/availa
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 import { DialogForAppointmentComponent } from '../../dialog-for-appointment/dialog-for-appointment.component';
+import { DialogForReportComponent } from '../../dialog-for-report/dialog-for-report.component';
+import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-for-add-report.component';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -37,6 +39,11 @@ export interface DataForDialogGuest {
 export interface DataForDialogCottage {
   id: string;
 }
+
+export interface DataForReport {
+  idReservation: string;
+}
+
 
 @Component({
   selector: 'app-cottage-profile',
@@ -521,5 +528,25 @@ export class CottageProfileComponent implements OnInit {
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
     this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
+  }
+
+  dialogReport(id: any) {
+
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForAddReportComponent, {
+
+      data: { idReservation: id },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      window.location.reload()
+
+    });
+
   }
 }

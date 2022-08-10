@@ -70,6 +70,12 @@
                         <textarea matInput placeholder="Description" formControlName="description" [readonly]="!editMode"> </textarea>
                       </mat-form-field>
                     </div>
+                    <div class="col-sm">
+                      <mat-form-field appearance="standard">
+                        <mat-label>Instructors biography</mat-label>
+                        <textarea matInput placeholder="Instructors biography" formControlName="biography" readonly> </textarea>
+                      </mat-form-field>
+                    </div>
                     </div>
                 <div class="button-container" *ngIf ="!editMode else editIsOn">
                 <button mat-flat-button color="primary"  class="button" (click)="editMode = true">Edit</button>
@@ -117,7 +123,7 @@
           </div>
           
     </mat-tab>
-    <mat-tab label="Edit rules"> 
+    <mat-tab label="Rules"> 
       <div class="container" style="margin-top:20px">
         <div class="container">
             <div class="container">
@@ -143,8 +149,8 @@
     </div>
     <br /><br /><br />
        </mat-tab>
-    <mat-tab label="Edit utilities"> Content 3 </mat-tab>
-    <mat-tab label="Edit fishing equipment">
+    <mat-tab label="Utilities"> Content 3 </mat-tab>
+    <mat-tab label="Fishing equipment">
       <div class="container" style="margin-top:20px">
         <div class="container">
             <div class="container">

@@ -12,11 +12,12 @@ public class AdventureDto {
     private String city;
     private String country;
     private String cancellationConditions;
+    private String instructorsBiography;
 
     public AdventureDto() {
     }
 
-    public AdventureDto(String id, String name, String description, String guestLimit, String price, String streetName, String streetNumber, String city, String country, String cancellationConditions) {
+    public AdventureDto(String id, String name, String description, String guestLimit, String price, String streetName, String streetNumber, String city, String country, String cancellationConditions, String instructorsBiography) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,6 +28,7 @@ public class AdventureDto {
         this.city = city;
         this.country = country;
         this.cancellationConditions = cancellationConditions;
+        this.instructorsBiography = instructorsBiography;
     }
 
     public String getId() {
@@ -107,5 +109,13 @@ public class AdventureDto {
 
     public void setCancellationConditions(String cancellationConditions) {
         this.cancellationConditions = cancellationConditions;
+    }
+
+    public String getInstructorsBiography() {
+        return instructorsBiography;
+    }
+
+    public void setInstructorsBiography(String instructorsBiography) {
+        this.instructorsBiography = instructorsBiography;
     }
 }

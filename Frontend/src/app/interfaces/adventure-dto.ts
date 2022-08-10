@@ -9,4 +9,5 @@ export interface AdventureDto {
     city : string;
     country : string;
     cancellationConditions : string;
+    instructorsBiography : string;
 }

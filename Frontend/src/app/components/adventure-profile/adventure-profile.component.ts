@@ -64,6 +64,7 @@ export class AdventureProfileComponent implements OnInit {
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['guestLimit'].setValue(data.guestLimit)
+        this.detailsForm.controls['biography'].setValue(data.instructorsBiography)
       },
     });
 
@@ -214,7 +215,10 @@ export class AdventureProfileComponent implements OnInit {
   ]),
   price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
   cancellationConditions: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
-  guestLimit: new FormControl(null, [Validators.required,Validators.pattern('^\\d{1,3}$')])
+  guestLimit: new FormControl(null, [Validators.required,Validators.pattern('^\\d{1,3}$')]),
+  biography : new FormControl(null, [
+    Validators.required
+  ]),
 })
 
 
@@ -232,7 +236,8 @@ edit() {
     city: this.detailsForm.get('city')?.value,
     country: this.detailsForm.get('country')?.value,
     id : this.id,
-    guestLimit : this.detailsForm.get('guestLimit')?.value
+    guestLimit : this.detailsForm.get('guestLimit')?.value,
+    instructorsBiography : this.detailsForm.get('biography')?.value
   }
   this.adventureService.updateAdventure(this.id,this.adventureForUpdate).subscribe((data) => {
     this.adventureForUpdate = data

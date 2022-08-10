@@ -55,17 +55,20 @@ public class Reservation {
 
 	@Column(name = "isDeleted",nullable = false)
 	private boolean isDeleted;
+
+	@Column(name = "haveReport",nullable = false)
+	private boolean haveReport=false;
 	
 	 public Reservation() {
 		super();
 	 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 }

@@ -75,6 +75,7 @@ public class ReservationServiceImpl implements ReservationService
 
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
+        reservation.setHaveReport(false);
 
 
       if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {

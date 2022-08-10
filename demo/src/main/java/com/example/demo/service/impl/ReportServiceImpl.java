@@ -38,6 +38,8 @@ public class ReportServiceImpl implements ReportService {
         report.setComment(newReport.getComment());
         report.setDate(LocalDateTime.now());
         report.setReservation(reservation);
+        reservation.setHaveReport(true);
+        this.reservationRepository.save(reservation);
 
         if(newReport.getAppeared().equals("1")) {
             report.setAppeared(true);

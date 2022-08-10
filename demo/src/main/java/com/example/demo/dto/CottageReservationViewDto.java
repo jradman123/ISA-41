@@ -19,6 +19,7 @@ public class CottageReservationViewDto {
     public String clientEmail;
     public String typeOfRes;
     public String objectId;
+    public boolean  haveReport;
 
 
     public CottageReservationViewDto(Reservation r) {
@@ -28,6 +29,7 @@ public class CottageReservationViewDto {
         numberOfPerson=r.getNumberOfPerson();
         price=r.getPrice();
         clientEmail=r.getRegisteredUser().getEmail();
+        haveReport=r.isHaveReport();
 
     }
 }

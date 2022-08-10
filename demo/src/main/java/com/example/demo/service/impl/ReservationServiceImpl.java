@@ -100,6 +100,7 @@ public class ReservationServiceImpl implements ReservationService
         for(CottageReservation r : cottageReservationRepository.findAll()) {
             if(r.getCottage().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
                 reservationDtos.add(new CottageReservationViewDto(r));
+
             }
         }
 

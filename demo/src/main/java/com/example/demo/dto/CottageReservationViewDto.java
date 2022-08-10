@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class CottageReservationViewDto {
 
     public Long id;
-    public LocalDateTime resStart;
-    public LocalDateTime resEnd;
+    public String resStart;
+    public String resEnd;
     public Integer numberOfPerson;
     public  Double price;
     public String clientEmail;
@@ -24,8 +24,8 @@ public class CottageReservationViewDto {
 
     public CottageReservationViewDto(Reservation r) {
         id=r.getId();
-        resStart=r.getReservationStart();
-        resEnd=r.getReservationEnd();
+        resStart=r.getReservationStart().toString();
+        resEnd=r.getReservationEnd().toString();
         numberOfPerson=r.getNumberOfPerson();
         price=r.getPrice();
         clientEmail=r.getRegisteredUser().getEmail();

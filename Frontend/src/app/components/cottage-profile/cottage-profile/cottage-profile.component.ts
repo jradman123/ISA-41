@@ -145,6 +145,9 @@ export class CottageProfileComponent implements OnInit {
   }
 
 
+  parseStringToDate(dateTime: string) {
+    return new Date(Date.parse(dateTime))
+  }
 
   findPastReservations() {
 

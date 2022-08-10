@@ -43,6 +43,7 @@ public class ReportController {
 
         Report report= this.reportService.findReportbyResId(id);
         ReportDto reportDto=new ReportDto(report);
+
         return reportDto;
     }
 

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.repository.AdventureUtilityRepository;
 import com.example.demo.service.AdventureUtilityService;
@@ -21,5 +22,14 @@ public class AdventureUtilityServiceImpl implements AdventureUtilityService {
         AdventureUtility adventureUtility = adventureUtilityRepository.findById(id).get();
         adventureUtility.setDeleted(true);
         return adventureUtilityRepository.save(adventureUtility);
+    }
+
+    @Override
+    public AdventureUtility updateAdventureUtility(AdventureUtility updatedAdventureUtility,Long id) {
+        AdventureUtility adventureUtility = adventureUtilityRepository.findById(id).get();
+        adventureUtility.setName(updatedAdventureUtility.getName());
+        adventureUtility.setPrice(updatedAdventureUtility.getPrice());
+        AdventureUtility saved = adventureUtilityRepository.save(adventureUtility);
+        return saved;
     }
 }

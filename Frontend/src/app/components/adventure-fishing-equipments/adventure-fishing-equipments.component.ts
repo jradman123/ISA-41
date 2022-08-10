@@ -56,7 +56,7 @@ export class AdventureFishingEquipmentsComponent implements OnInit {
       fishingEquipmentName: this.fishingEquipmentForm.get('name')?.value
     }
     this.fishingEquipmentService.addAdventureFishingEquipment(this.newFishingEquipment).subscribe((data) => {
-      this.fishingEquipmentForm.controls['name'].setValue('');
+      this.fishingEquipmentForm.reset();
       this.equipments = [];
       this.getEquipments();
     });

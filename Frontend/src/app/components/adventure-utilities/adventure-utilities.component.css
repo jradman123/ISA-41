@@ -6,7 +6,7 @@ mat-tab-group{
     background-color: white;
 }
 
-.container, .form-container {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +49,10 @@ mat-tab-group{
 }
 
 table {
-  width: 100%;
+  display:unset;
+  width: 600px;
+  height: 150px;
+  overflow-y: scroll;
 }
 
 th {
@@ -58,10 +61,15 @@ th {
 
 tr {
   font-style: italic;
-  height: 60px;
+  height: 50px;
 }
-table {
-  align-self: center;
+
+
+.form-container{
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
   

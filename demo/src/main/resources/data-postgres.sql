@@ -155,21 +155,17 @@ INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 5);
 INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No smoking');
 INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No alcohol');
 
-INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (1, 1);
+
 INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (1, 2);
 INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (2, 1);
-INSERT INTO public.adventure_adventure_rules(adventure_id, adventure_rule_id) VALUES (2, 2);
 
 INSERT INTO public.fishing_equipment(name, is_deleted) VALUES ('Fishing rod', false);
 INSERT INTO public.fishing_equipment(name, is_deleted) VALUES ('Bag-net', false);
 
 INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (1, 1);
-INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (1, 2);
-INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 1);
 INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 2);
 
 INSERT INTO public.adventure_utility(is_deleted, name, price) VALUES (false,'Diving',10.0);
 
 INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (1, 1);
-INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (2, 1);
 

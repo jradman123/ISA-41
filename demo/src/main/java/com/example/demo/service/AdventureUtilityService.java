@@ -6,4 +6,5 @@ public interface AdventureUtilityService {
 
     AdventureUtility createUtility(AdventureUtility utility);
     AdventureUtility deleteById(Long id);
+    AdventureUtility updateAdventureUtility(AdventureUtility updatedAdventureUtility,Long id);
 }

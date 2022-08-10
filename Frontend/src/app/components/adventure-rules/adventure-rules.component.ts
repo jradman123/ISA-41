@@ -50,7 +50,7 @@ export class AdventureRulesComponent implements OnInit {
       ruleDescription: this.ruleDescriptionForm.get('description')?.value
     }
     this.adventureRuleService.addAdventureRule(this.newAdventureRule).subscribe((data) => {
-      this.ruleDescriptionForm.controls['description'].setValue('');
+      this.ruleDescriptionForm.reset();
       this.rules = [];
       this.getRules();
     });

@@ -45,4 +45,11 @@ public class AdventureUtilityController {
     public ResponseEntity<AdventureUtility> deleteAdventureRule(@PathVariable Long id) {
         return new ResponseEntity<>(adventureUtilityService.deleteById(id),HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<AdventureUtility> updateAdventureUtility(@PathVariable Long id,@RequestBody AdventureUtilityDto adventureUtilityDto) {
+        AdventureUtility adventureUtility = adventureUtilityMapper.mapAdventureUtilityDtoToAdventureUtility(adventureUtilityDto);
+        return new ResponseEntity<>(adventureUtilityService.updateAdventureUtility(adventureUtility,id),HttpStatus.OK);
+    }
 }

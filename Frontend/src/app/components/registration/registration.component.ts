@@ -63,8 +63,7 @@ export class RegistrationComponent implements OnInit {
         Validators.minLength(8),
       ]),
       description: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+        Validators.required
       ]),
       type: new FormControl(null, [Validators.required])
     });

@@ -63,6 +63,7 @@ import { AdventureRulesComponent } from './components/adventure-rules/adventure-
 import { AdventureFishingEquipmentsComponent } from './components/adventure-fishing-equipments/adventure-fishing-equipments.component';
 import { AdventureUtilitiesComponent } from './components/adventure-utilities/adventure-utilities.component';
 import { AdventureImagesComponent } from './components/adventure-images/adventure-images.component';
+import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edit-utility-dialog.component';
 
 
 
@@ -122,7 +123,8 @@ import { AdventureImagesComponent } from './components/adventure-images/adventur
     AdventureRulesComponent,
     AdventureFishingEquipmentsComponent,
     AdventureUtilitiesComponent,
-    AdventureImagesComponent
+    AdventureImagesComponent,
+    EditUtilityDialogComponent
 
 
   ],

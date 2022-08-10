@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.repository.AppointmentRepository;
@@ -64,7 +65,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Appointment createAppointment(AppointmentDto dto) {
+    public Appointment createAppointment(CreateAppointmentDto dto) {
        Appointment appointment=new Appointment(dto);
        if(dto.getCottageId()!=null) {
            Cottage cottage=cottageService.findCottageById(Long.parseLong(dto.getCottageId()));

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.service.impl.AppointmentServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class AppointmentController {
 
 
     @PostMapping(value="/createApp")
-    public Appointment createApp(@RequestBody AppointmentDto dto) {
+    public Appointment createApp(@RequestBody CreateAppointmentDto dto) {
         return this.appointmentService.createAppointment(dto);
     }
 

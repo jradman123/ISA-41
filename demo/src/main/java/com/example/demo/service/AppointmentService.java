@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.reservation.Appointment;
 import org.springframework.http.ResponseEntity;
 
@@ -15,5 +16,5 @@ public interface AppointmentService {
 
     List<AppointmentDto> search(AppointmentDto dto);
 
-   Appointment createAppointment(AppointmentDto dto);
+   Appointment createAppointment(CreateAppointmentDto dto);
 }

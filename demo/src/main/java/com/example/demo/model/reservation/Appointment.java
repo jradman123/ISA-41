@@ -1,6 +1,7 @@
 package com.example.demo.model.reservation;
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
@@ -64,17 +65,13 @@ public class Appointment {
     @JoinColumn(name = "ship_id",nullable = true)
     private Ship ship;
 
-    public Appointment(AppointmentDto dto) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime start = LocalDateTime.parse(dto.getStartDate(), formatter);
-        LocalDateTime end = LocalDateTime.parse(dto.getEndDate(), formatter);
-        LocalDateTime valid = LocalDateTime.parse(dto.getValidUntil(), formatter);
+    public Appointment(CreateAppointmentDto dto) {
 
-        startDate=start;
-        endDate=end;
+        startDate=dto.getStartDate();
+        endDate=dto.getEndDate();
         capacity=Integer.parseInt(dto.getCapacity());
         price=Double.parseDouble(dto.getPrice());
-        validUntil=valid;
+        validUntil=dto.getValidUntil();
         isDeleted=false;
         isReserved=false;
 

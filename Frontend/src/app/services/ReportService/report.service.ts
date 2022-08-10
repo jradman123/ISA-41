@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { HaveReportDto } from 'src/app/interfaces/have-report';
 import { ReportDto } from 'src/app/interfaces/report-dto';
 import { environment } from 'src/environments/environment';
 
@@ -21,4 +23,9 @@ export class ReportService {
       responseType: 'text',
     });
   }
+
+  haveReport(id: string): Observable<any> {
+    return this.http.get<HaveReportDto>(`${this.apiServerUrl}/reports/haveReport/` + id);
+  }
+
 }

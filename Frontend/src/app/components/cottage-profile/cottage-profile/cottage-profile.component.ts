@@ -30,6 +30,7 @@ import { AppointmentService } from 'src/app/services/AppointmentService/appointm
 import { DialogForAppointmentComponent } from '../../dialog-for-appointment/dialog-for-appointment.component';
 import { DialogForReportComponent } from '../../dialog-for-report/dialog-for-report.component';
 import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-for-add-report.component';
+import { ReportService } from 'src/app/services/ReportService/report.service';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -73,10 +74,12 @@ export class CottageProfileComponent implements OnInit {
   endAvailableDate: any = null;
   appointments: AppointmentDto[] = []
   editMode = false
+  viewOff = false;
   initialDetails: any
   updateCottage: CottageDto
   email: any
   pastReservations!: MatTableDataSource<CottageReservation>;
+  haveReport!: string;
 
 
 
@@ -97,7 +100,7 @@ export class CottageProfileComponent implements OnInit {
   ];
 
 
-  constructor(private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
+  constructor(private reportService: ReportService, private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
     this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
@@ -117,6 +120,7 @@ export class CottageProfileComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
 
+    this.findReportByResId();
     this.findAppointments();
     this.findAvailability();
     this.findReservations();
@@ -137,6 +141,17 @@ export class CottageProfileComponent implements OnInit {
     })
 
 
+
+  }
+
+  findReportByResId() {
+    this.reportService.haveReport("1").subscribe(
+      res => {
+        this.haveReport = res.message;
+        console.log(this.haveReport);
+        console.log("dsafsfs" + this.id)
+      }
+    );
 
   }
 
@@ -397,13 +412,7 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  canReport(element: any) {
-    let newEnd = element.endDate
-    if (newEnd < new Date()) return
 
-
-
-  }
 
   reservateCottage(): void {
 
@@ -539,6 +548,27 @@ export class CottageProfileComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     const dialogRef = this.dialog.open(DialogForAddReportComponent, {
+
+      data: { idReservation: id },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      window.location.reload()
+
+
+    });
+
+  }
+
+  dialogViewReport(id: any) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForReportComponent, {
 
       data: { idReservation: id },
     })

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Service
@@ -37,8 +38,7 @@ public class ReportServiceImpl implements ReportService {
         report.setComment(newReport.getComment());
         report.setDate(LocalDateTime.now());
         report.setReservation(reservation);
-        System.out.print("Izvjestaaaaaaaj"+newReport.getAppeared() );
-        System.out.print("dfdfdf"+newReport.getAppeared());
+
         if(newReport.getAppeared().equals("1")) {
             report.setAppeared(true);
 
@@ -57,5 +57,19 @@ public class ReportServiceImpl implements ReportService {
 
         this.reportRepository.save(report);
         return report;
+    }
+
+    @Override
+    public Report findReportbyResId(Long id) {
+        List<Report> reports=reportRepository.findAll();
+        for(Report report:reports) {
+            if(report.getReservation().getId()==id) {
+                return report;
+
+            }
+        }
+        return null;
+
+
     }
 }

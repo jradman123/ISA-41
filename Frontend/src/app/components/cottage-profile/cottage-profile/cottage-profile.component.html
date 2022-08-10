@@ -475,8 +475,12 @@
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element; let i = index">
 
-                        <button mat-raised-button color="warn" style="width: 200px; "
+                        <button mat-raised-button color="warn" style="width: 200px; " *ngIf="haveReport=='FALSE'"
                             (click)="dialogReport(element.id)">Add
+                            report</button>
+
+                        <button mat-raised-button color="warn" style="width: 200px; " *ngIf="haveReport=='TRUE'"
+                            (click)="dialogReport(element.id)">View
                             report</button>
 
 

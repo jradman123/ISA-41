@@ -6,4 +6,6 @@ import com.example.demo.model.cottages.Room;
 
 public interface ReportService {
     Report createReport(ReportDto newReport);
+
+    Report findReportbyResId(Long id);
 }

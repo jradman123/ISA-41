@@ -51,7 +51,7 @@ public class ReportServiceImpl implements ReportService {
         if(newReport.getSanctioned().equals("1")) {
             report.setSanctioned(true);}
         else {
-            report.setAppeared(false);
+            report.setSanctioned(false);
         }
 
          report.setApprovedbyAdmin(false);

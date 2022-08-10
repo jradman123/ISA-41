@@ -15,11 +15,11 @@ import java.util.Date;
 @Getter
 public class AppointmentDto {
     private String id;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
     private String capacity;
     private String price;
-    private LocalDateTime validUntil;
+    private String validUntil;
     private Boolean isReserved;
     private String cottageId;
     private String shipId;
@@ -27,11 +27,11 @@ public class AppointmentDto {
 
     public AppointmentDto(Appointment a) {
         this.id = Long.toString(a.getId());
-        this.startDate = a.getStartDate();
-        this.endDate = a.getEndDate();
+        this.startDate = a.getStartDate().toString();
+        this.endDate = a.getEndDate().toString();
         this.capacity = Integer.toString(a.getCapacity());
         this.price = Double.toString(a.getPrice());
-        this.validUntil=a.getValidUntil();
+        this.validUntil=a.getValidUntil().toString();
         this.isReserved = a.getIsReserved();
 
         if (a.getCottage() != null) {

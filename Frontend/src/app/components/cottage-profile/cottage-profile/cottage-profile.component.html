@@ -271,12 +271,14 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong> from {{app.startDate}} to {{app.endDate}}</strong>
+                                <strong> from {{app.startDate | date:'d/M/yyyy' }} to {{app.endDate |
+                                    date:'d/M/yyyy'}}</strong>
                             </li>
 
                             <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.capacity}}
                                 person </li>
-                            <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil}}
+                            <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil |
+                                date:'d/M/yyyy, h:mm a' }}
                             </li>
                             <li style="height: 70px;" class="list-group-item"> <button
                                     (click)="deleteApp(app.id)">Delete</button>

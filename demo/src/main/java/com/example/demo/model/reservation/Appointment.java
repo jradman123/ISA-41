@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -64,12 +65,16 @@ public class Appointment {
     private Ship ship;
 
     public Appointment(AppointmentDto dto) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime start = LocalDateTime.parse(dto.getStartDate(), formatter);
+        LocalDateTime end = LocalDateTime.parse(dto.getEndDate(), formatter);
+        LocalDateTime valid = LocalDateTime.parse(dto.getValidUntil(), formatter);
 
-        startDate=dto.getStartDate();
-        endDate=dto.getEndDate();
+        startDate=start;
+        endDate=end;
         capacity=Integer.parseInt(dto.getCapacity());
         price=Double.parseDouble(dto.getPrice());
-        validUntil=dto.getValidUntil();
+        validUntil=valid;
         isDeleted=false;
         isReserved=false;
 

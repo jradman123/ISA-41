@@ -32,8 +32,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Report createReport(ReportDto newReport) {
 
-        Report report=new Report();
 
+        Report report=new Report();
         Reservation reservation= reservationRepository.findById(Long.parseLong(newReport.getReservationId())).orElse(null);
         report.setComment(newReport.getComment());
         report.setDate(LocalDateTime.now());
@@ -48,7 +48,7 @@ public class ReportServiceImpl implements ReportService {
             report.setAppeared(false);
         }
 
-        if(newReport.getSanctioned().equals(1)) {
+        if(newReport.getSanctioned().equals("1")) {
             report.setSanctioned(true);}
         else {
             report.setAppeared(false);
@@ -58,7 +58,9 @@ public class ReportServiceImpl implements ReportService {
 
 
         this.reportRepository.save(report);
+
         return report;
+
     }
 
     @Override

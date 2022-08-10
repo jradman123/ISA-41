@@ -38,7 +38,6 @@ public class ReportController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-
     @GetMapping(value = "/findReportByResId/{id}")
     public ReportDto findReportbyResId(@PathVariable Long id) {
 

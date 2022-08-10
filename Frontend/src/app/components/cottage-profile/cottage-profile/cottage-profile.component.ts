@@ -120,7 +120,7 @@ export class CottageProfileComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
 
-    this.findReportByResId();
+
     this.findAppointments();
     this.findAvailability();
     this.findReservations();
@@ -144,16 +144,7 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  findReportByResId() {
-    this.reportService.haveReport("1").subscribe(
-      res => {
-        this.haveReport = res.message;
-        console.log(this.haveReport);
-        console.log("dsafsfs" + this.id)
-      }
-    );
 
-  }
 
   findPastReservations() {
 

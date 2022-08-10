@@ -1,1 +1,42 @@
-<p>dialog-for-report works!</p>
+<div class="container">
+    <mat-card>
+        <mat-card-title>Report data of reservation</mat-card-title>
+        <br />
+        <mat-card-content>
+            <form class="form-container" [formGroup]="detailsForm">
+                <div class="row">
+                    <div class="col-sm">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Comment</mat-label>
+                            <input matInput placeholder="Comment" formControlName="comment" [readonly]="!editMode" />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Guest sunctioned?</mat-label>
+                            <input matInput placeholder="Sanctioned" formControlName="sanctioned"
+                                [readonly]="!editMode" />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Guest appeared?</mat-label>
+                            <input matInput placeholder="Appeared" formControlName="appeared" readonly />
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="button" (click)="onNoClick()">Close</button>
+
+                </div>
+                <ng-template #editIsOn>
+
+                </ng-template>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

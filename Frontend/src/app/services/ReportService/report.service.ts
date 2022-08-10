@@ -28,4 +28,11 @@ export class ReportService {
     return this.http.get<HaveReportDto>(`${this.apiServerUrl}/reports/haveReport/` + id);
   }
 
+  getReportByReservationId(id: string) {
+    return this.http.get<ReportDto>(
+      `${this.apiServerUrl}/reports/findReportByResId/${id}`);
+
+  }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.HaveReportDto;
 import com.example.demo.dto.ReportDto;
 import com.example.demo.dto.RoomDto;
@@ -33,6 +34,17 @@ public class ReportController {
     public Report createReport(@RequestBody ReportDto newReport) {
 
         return this.reportService.createReport(newReport);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+
+    @GetMapping(value = "/findReportByResId/{id}")
+    public ReportDto findReportbyResId(@PathVariable Long id) {
+
+        Report report= this.reportService.findReportbyResId(id);
+        ReportDto reportDto=new ReportDto(report);
+        return reportDto;
     }
 
 

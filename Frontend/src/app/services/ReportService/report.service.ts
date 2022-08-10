@@ -15,7 +15,8 @@ export class ReportService {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   addReport(newReport: ReportDto) {
-    console.log("fsfdsf" + newReport.reservationId)
+    console.log("fsfdsf" + newReport.appeared)
+    console.log("fsfdsf" + newReport.sanctioned)
     return this.http.post(`${this.apiServerUrl}/reports/createReport`, newReport, {
       responseType: 'text',
     });

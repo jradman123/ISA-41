@@ -26,6 +26,7 @@ public class ReportController {
 
     @PostMapping(value = "/createReport")
     public Report createReport(@RequestBody ReportDto newReport) {
+
         return this.reportService.createReport(newReport);
     }
 

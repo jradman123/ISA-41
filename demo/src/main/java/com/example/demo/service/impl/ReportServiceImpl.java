@@ -37,10 +37,23 @@ public class ReportServiceImpl implements ReportService {
         report.setComment(newReport.getComment());
         report.setDate(LocalDateTime.now());
         report.setReservation(reservation);
-        System.out.print("Izvjestaaaaaaaj"+newReport.getAppeared());
+        System.out.print("Izvjestaaaaaaaj"+newReport.getAppeared() );
+        System.out.print("dfdfdf"+newReport.getAppeared());
+        if(newReport.getAppeared().equals("1")) {
+            report.setAppeared(true);
+
+        }else {
+            report.setAppeared(false);
+        }
+
+        if(newReport.getSanctioned().equals(1)) {
+            report.setSanctioned(true);}
+        else {
+            report.setAppeared(false);
+        }
+
          report.setApprovedbyAdmin(false);
-         report.setAppeared(false);
-         report.setSanctioned(false);
+
 
         this.reportRepository.save(report);
         return report;

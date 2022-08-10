@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReportDto {
 
-    public Long id;
+    public String id;
     public String reservationId;
     public String comment;
     public String appeared;

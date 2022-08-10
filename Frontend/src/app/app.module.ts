@@ -58,6 +58,11 @@ import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-car
 
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
+import { AdventureBasicInfoComponent } from './components/adventure-basic-info/adventure-basic-info.component';
+import { AdventureRulesComponent } from './components/adventure-rules/adventure-rules.component';
+import { AdventureFishingEquipmentsComponent } from './components/adventure-fishing-equipments/adventure-fishing-equipments.component';
+import { AdventureUtilitiesComponent } from './components/adventure-utilities/adventure-utilities.component';
+import { AdventureImagesComponent } from './components/adventure-images/adventure-images.component';
 
 
 
@@ -112,7 +117,12 @@ import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/
     AdventureProfileComponent,
 
     DialogForReservationCottageComponent,
-    DialogForGuestDataComponent
+    DialogForGuestDataComponent,
+    AdventureBasicInfoComponent,
+    AdventureRulesComponent,
+    AdventureFishingEquipmentsComponent,
+    AdventureUtilitiesComponent,
+    AdventureImagesComponent
 
 
   ],

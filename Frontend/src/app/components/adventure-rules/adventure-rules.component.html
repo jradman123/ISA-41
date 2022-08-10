@@ -1,0 +1,24 @@
+<div class="container" style="margin-top:20px">
+    <div class="container">
+        <div class="container">
+            <h1 style="text-align: center;">Rules of adventure</h1>
+            <hr />
+            <mat-list role="list">
+              <mat-list-item *ngFor="let rule of rules" role="listitem">{{ rule.description}} <button style="margin-left : 830px" mat-flat-button color="warn"
+                (click)="deleteRule(rule.id)">Delete</button></mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top:20px">
+             
+              <form class="form" [formGroup]="ruleDescriptionForm">
+                <mat-form-field appearance="standard">
+                  <input matInput placeholder="Enter new rule" formControlName="description"/>
+                </mat-form-field>
+              </form> 
+              <div class="container">
+                <button mat-flat-button color="primary" (click)="addRule()">Add</button>
+              </div> 
+</div>
+<br /><br /><br />

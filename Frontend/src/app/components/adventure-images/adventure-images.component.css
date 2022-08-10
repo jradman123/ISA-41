@@ -1,0 +1,39 @@
+.container {
+    align-items: center;
+}
+
+mat-tab-group{
+    background-color: white;
+}
+
+.container, .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .title {
+    display: flex;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+  }
+  
+  
+  .button-container {
+    display: flex;
+  }
+  
+  .button {
+    margin-top: 30px;
+    width: 145px;
+    height: 40px;
+    font-size: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+
+
+  

@@ -46,7 +46,7 @@ public class FishingEquipmentController {
     }
 
     @PreAuthorize("hasAuthority('Instructor')")
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<FishingEquipment> deleteAdventureRule(@PathVariable Long id) {
         return new ResponseEntity<>(fishingEquipmentService.deleteById(id),HttpStatus.OK);
     }

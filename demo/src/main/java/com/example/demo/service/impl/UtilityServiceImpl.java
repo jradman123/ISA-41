@@ -4,7 +4,6 @@ import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.UtilityDto;
 import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
-import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -90,5 +89,17 @@ public class UtilityServiceImpl implements UtiilityService {
         this.utilityRepository.save(utility);
         return  this.cottageUtilityRepositoty.save(ca);
 
+    }
+
+    @Override
+    public Utility createUtility(Utility utility) {
+        return utilityRepository.save(utility);
+    }
+
+    @Override
+    public Utility deleteById(Long id) {
+        Utility utility = utilityRepository.findById(id).get();
+        utility.setDeleted(true);
+        return utilityRepository.save(utility);
     }
 }

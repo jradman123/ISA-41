@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.UtilityDto;
+import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.CottageUtility;
 import org.springframework.http.ResponseEntity;
 
@@ -17,4 +18,6 @@ public interface UtiilityService {
     ResponseEntity<Long> deleteUtiliry(Long id, Long idCottage);
 
     CottageUtility add(CottageUtilityDto cottageUtilityDto);
+    Utility createUtility(Utility utility);
+    Utility deleteById(Long id);
 }

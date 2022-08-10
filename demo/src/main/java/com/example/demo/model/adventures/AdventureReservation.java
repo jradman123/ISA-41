@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.example.demo.model.Utility;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.users.RegisteredUser;
 
@@ -37,7 +38,7 @@ public class AdventureReservation extends Reservation {
 	            name = "adventure_reservation_utilities",
 	            joinColumns = @JoinColumn(name = "adventure_reservation_id"),
 	            inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
-	    private Set<AdventureUtility> utilities;
+	    private Set<Utility> utilities;
 	
 
 

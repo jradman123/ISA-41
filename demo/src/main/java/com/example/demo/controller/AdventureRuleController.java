@@ -44,7 +44,7 @@ public class AdventureRuleController {
     }
 
     @PreAuthorize("hasAuthority('Instructor')")
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<AdventureRule> deleteAdventureRule(@PathVariable Long id) {
         return new ResponseEntity<>(adventureRuleService.deleteById(id),HttpStatus.OK);
     }

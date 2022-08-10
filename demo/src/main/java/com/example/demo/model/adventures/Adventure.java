@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import com.example.demo.model.Address;
 import com.example.demo.model.Image;
-import com.example.demo.model.Rules;
+import com.example.demo.model.Utility;
 import com.example.demo.model.users.Instructor;
 
 import lombok.Getter;
@@ -93,25 +93,21 @@ public class Adventure {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "adventure_id")
-	private Set<AdventureUtility> utilities;
+	private Set<Utility> utilities;
 	
 
 	public Adventure() {
 		super();
 	}
 
-	
-
-
-	public Adventure(Integer id, Instructor instructor, String name, Address address, String description,
-			Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions,
-			Double price, boolean deleted,Set<AdventureUtility> utilities) {
-		super();
+	public Adventure(Integer id, Instructor instructor, String name, Address address, String description, Set<Image> images, Set<AdventureReservation> adventureReservations, Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions, Double price, boolean deleted, Set<Utility> utilities) {
 		this.id = id;
 		this.instructor = instructor;
 		this.name = name;
 		this.address = address;
 		this.description = description;
+		this.images = images;
+		this.adventureReservations = adventureReservations;
 		this.guestLimit = guestLimit;
 		this.rules = rules;
 		this.fishingEquipments = fishingEquipments;
@@ -120,6 +116,4 @@ public class Adventure {
 		this.deleted = deleted;
 		this.utilities = utilities;
 	}
-
-
 }

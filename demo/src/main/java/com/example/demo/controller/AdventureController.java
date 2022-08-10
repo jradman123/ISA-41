@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.mapper.AdventureMapper;
-import com.example.demo.mapper.FishingEquipmentMapper;
-import com.example.demo.mapper.ImageMapper;
-import com.example.demo.mapper.AdventureRuleMapper;
+import com.example.demo.mapper.*;
 import com.example.demo.model.Image;
+import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
 import com.example.demo.model.adventures.FishingEquipment;
@@ -48,6 +46,9 @@ public class AdventureController {
 
     @Autowired
     private FishingEquipmentMapper fishingEquipmentMapper;
+
+    @Autowired
+    private UtilityMapper utilityMapper;
 
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value="/all-for-instructor")
@@ -123,6 +124,15 @@ public class AdventureController {
         Set<FishingEquipment> adventureFishingEquipments = this.adventureService.getFishingEquipmentByAdventure(adventure);
         return new ResponseEntity<>(this.fishingEquipmentMapper.mapFishingEquipmentsToResponseFishingEquipments(adventureFishingEquipments),
                                     HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/{id}/utilities")
+    public ResponseEntity<Set<ResponseUtility>> getUtilities(@PathVariable int id) {
+        Adventure adventure = this.adventureService.findAdventure(id);
+        Set<Utility> adventureUtilities = this.adventureService.getUtilitiesByAdventure(adventure);
+        return new ResponseEntity<>(this.utilityMapper.mapUtilityToResponseUtility(adventureUtilities),
+                HttpStatus.OK);
     }
 
 }

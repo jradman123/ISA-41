@@ -17,6 +17,6 @@ export class AdventureRuleService {
   }
 
   deleteAdventureRule(id : string){
-    return this.http.get(`${this.apiServerUrl}/adventure-rules/delete/${id}`);
+    return this.http.delete(`${this.apiServerUrl}/adventure-rules/delete/${id}`);
   }
 }

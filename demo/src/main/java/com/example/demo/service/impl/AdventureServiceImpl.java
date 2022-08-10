@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
 import com.example.demo.model.adventures.FishingEquipment;
@@ -97,5 +98,23 @@ public class AdventureServiceImpl implements AdventureService {
             }
         }
         return adventureFishingEquipments;
+    }
+
+    @Override
+    public Adventure addUtility(int id, Utility utility) {
+        Adventure adventure = findAdventure(id);
+        Set<Utility> adventureUtilities = new HashSet<>();
+        for (Utility adventureUtility: adventure.getUtilities()) {
+            adventureUtilities.add(adventureUtility);
+        }
+        adventureUtilities.add(utility);
+        adventure.setUtilities(adventureUtilities);
+        adventureRepository.save(adventure);
+        return adventure;
+    }
+
+    @Override
+    public Set<Utility> getUtilitiesByAdventure(Adventure adventure) {
+        return null;
     }
 }

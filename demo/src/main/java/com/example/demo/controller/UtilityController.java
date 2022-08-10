@@ -1,14 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.*;
-import com.example.demo.mapper.UtilityMapper;
+import com.example.demo.mapper.AdventureUtilityMapper;
 import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
-import com.example.demo.model.adventures.AdventureRule;
-import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.service.AdventureService;
-import com.example.demo.service.impl.UserServiceImpl;
 import com.example.demo.service.impl.UtilityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +23,6 @@ import java.util.Set;
 public class UtilityController {
     @Autowired
     private UtilityServiceImpl utilityService;
-
-    @Autowired
-    private UtilityMapper utilityMapper;
-
-    @Autowired
-    private AdventureService adventureService;
 
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -64,19 +55,6 @@ public class UtilityController {
         return utilityService.add(cottageUtilityDto);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
-    @PostMapping(value = "")
-    public ResponseEntity<Set<ResponseUtility>> addAdventureUtility(@RequestBody AdventureUtilityDto adventureUtilityDto) {
-        Utility utility = this.utilityMapper.mapAdventureUtilityDtoToUtility(adventureUtilityDto);
-        Utility savedUtility = this.utilityService.createUtility(utility);
-        Adventure updated = adventureService.addUtility(Integer.parseInt(adventureUtilityDto.getAdventureId()),savedUtility);
-        return new ResponseEntity<>(this.utilityMapper.mapUtilityToResponseUtility(updated.getUtilities()), HttpStatus.CREATED);
-    }
 
-    @PreAuthorize("hasAuthority('Instructor')")
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Utility> deleteAdventureRule(@PathVariable Long id) {
-        return new ResponseEntity<>(utilityService.deleteById(id),HttpStatus.OK);
-    }
 
 }

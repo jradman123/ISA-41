@@ -29,15 +29,8 @@ public class Utility {
 	 @Column(name = "name", nullable = false)
 	 private String name;
 
-	@Column(name = "is_deleted", nullable = false)
-	private boolean isDeleted;
-
-	@Column(name = "price", nullable = false)
-	private Double price = 0.0;
-
     public Utility(String name) {
 		this.id=id;
 		this.name=name;
-		this.isDeleted=false;
     }
 }

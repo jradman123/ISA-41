@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -44,7 +43,7 @@ public class AdventureRuleController {
     }
 
     @PreAuthorize("hasAuthority('Instructor')")
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<AdventureRule> deleteAdventureRule(@PathVariable Long id) {
         return new ResponseEntity<>(adventureRuleService.deleteById(id),HttpStatus.OK);
     }

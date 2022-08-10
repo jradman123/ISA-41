@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.adventures.FishingEquipment;
 import com.example.demo.repository.AdventureRepository;
 import com.example.demo.service.AdventureService;
@@ -101,10 +102,10 @@ public class AdventureServiceImpl implements AdventureService {
     }
 
     @Override
-    public Adventure addUtility(int id, Utility utility) {
+    public Adventure addUtility(int id, AdventureUtility utility) {
         Adventure adventure = findAdventure(id);
-        Set<Utility> adventureUtilities = new HashSet<>();
-        for (Utility adventureUtility: adventure.getUtilities()) {
+        Set<AdventureUtility> adventureUtilities = new HashSet<>();
+        for (AdventureUtility adventureUtility: adventure.getUtilities()) {
             adventureUtilities.add(adventureUtility);
         }
         adventureUtilities.add(utility);
@@ -114,7 +115,14 @@ public class AdventureServiceImpl implements AdventureService {
     }
 
     @Override
-    public Set<Utility> getUtilitiesByAdventure(Adventure adventure) {
-        return null;
+    public Set<AdventureUtility> getUtilitiesByAdventure(Adventure adventure) {
+        Adventure adventureDb = findAdventure(adventure.getId());
+        Set<AdventureUtility> adventureUtilities = new HashSet<>();
+        for (AdventureUtility utility: adventureDb.getUtilities()) {
+            if(!utility.isDeleted()) {
+                adventureUtilities.add(utility);
+            }
+        }
+        return adventureUtilities;
     }
 }

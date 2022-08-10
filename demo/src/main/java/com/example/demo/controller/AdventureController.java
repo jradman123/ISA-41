@@ -6,6 +6,7 @@ import com.example.demo.model.Image;
 import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.adventures.FishingEquipment;
 import com.example.demo.model.users.Instructor;
 import com.example.demo.security.TokenUtils;
@@ -48,7 +49,7 @@ public class AdventureController {
     private FishingEquipmentMapper fishingEquipmentMapper;
 
     @Autowired
-    private UtilityMapper utilityMapper;
+    private AdventureUtilityMapper adventureUtilityMapper;
 
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value="/all-for-instructor")
@@ -130,8 +131,8 @@ public class AdventureController {
     @GetMapping(value = "/{id}/utilities")
     public ResponseEntity<Set<ResponseUtility>> getUtilities(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
-        Set<Utility> adventureUtilities = this.adventureService.getUtilitiesByAdventure(adventure);
-        return new ResponseEntity<>(this.utilityMapper.mapUtilityToResponseUtility(adventureUtilities),
+        Set<AdventureUtility> adventureUtilities = this.adventureService.getUtilitiesByAdventure(adventure);
+        return new ResponseEntity<>(this.adventureUtilityMapper.mapAdventureUtilityToResponseUtility(adventureUtilities),
                 HttpStatus.OK);
     }
 

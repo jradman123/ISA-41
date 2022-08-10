@@ -17,6 +17,6 @@ export class FishingEquipmentService {
   }
 
   deleteFishingEquipment(id : string){
-    return this.http.delete(`${this.apiServerUrl}/adventure-fishing-equipments/delete/${id}`);
+    return this.http.delete(`${this.apiServerUrl}/adventure-fishing-equipments/${id}`);
   }
 }

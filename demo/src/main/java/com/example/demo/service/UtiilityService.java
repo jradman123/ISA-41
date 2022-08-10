@@ -18,6 +18,5 @@ public interface UtiilityService {
     ResponseEntity<Long> deleteUtiliry(Long id, Long idCottage);
 
     CottageUtility add(CottageUtilityDto cottageUtilityDto);
-    Utility createUtility(Utility utility);
-    Utility deleteById(Long id);
+
 }

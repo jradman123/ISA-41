@@ -168,3 +168,8 @@ INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUE
 INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 1);
 INSERT INTO public.adventure_fishing_equipment(adventure_id, equipment_id) VALUES (2, 2);
 
+INSERT INTO public.adventure_utility(is_deleted, name, price) VALUES (false,'Diving',10.0);
+
+INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (1, 1);
+INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (2, 1);
+

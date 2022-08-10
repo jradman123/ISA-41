@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { AdventureUtilityDto } from 'src/app/interfaces/adventure-utility-dto';
 
 @Injectable({
   providedIn: 'root'

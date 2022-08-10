@@ -91,16 +91,19 @@ public class Adventure {
 	@Column(name = "deleted")
     private boolean deleted = false;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "adventure_id")
-	private Set<Utility> utilities;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "adventure_adventure_utility",
+			joinColumns = @JoinColumn(name = "adventure_id"),
+			inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
+	private Set<AdventureUtility> utilities;
 	
 
 	public Adventure() {
 		super();
 	}
 
-	public Adventure(Integer id, Instructor instructor, String name, Address address, String description, Set<Image> images, Set<AdventureReservation> adventureReservations, Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions, Double price, boolean deleted, Set<Utility> utilities) {
+	public Adventure(Integer id, Instructor instructor, String name, Address address, String description, Set<Image> images, Set<AdventureReservation> adventureReservations, Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions, Double price, boolean deleted, Set<AdventureUtility> utilities) {
 		this.id = id;
 		this.instructor = instructor;
 		this.name = name;

@@ -48,4 +48,20 @@ mat-tab-group{
     height: 100px;
 }
 
+table {
+  width: 100%;
+}
+
+th {
+  width: 200px;
+}
+
+tr {
+  font-style: italic;
+  height: 60px;
+}
+table {
+  align-self: center;
+}
+
   

@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute} from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
 import { AdventureRuleDto } from 'src/app/interfaces/adventure-rule-dto';
+import { AdventureUtilityDto } from 'src/app/interfaces/adventure-utility-dto';
 import { FishingEquipmentDto } from 'src/app/interfaces/fishing-equipment-dto';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { ResponseFishingEquipment } from 'src/app/interfaces/response-fishing-equipment';
 import { ResponseRules } from 'src/app/interfaces/response-rules';
+import { ResponseUtility } from 'src/app/interfaces/response-utility';
 import { AdventureRuleService } from 'src/app/services/AdventureRuleService/adventure-rule.service';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
+import { AdventureUtilityService } from 'src/app/services/AdventureUtilityService/adventure-utility.service';
 import { FishingEquipmentService } from 'src/app/services/FishingEquipmentService/fishing-equipment.service';
 
 @Component({
@@ -35,9 +39,17 @@ export class AdventureProfileComponent implements OnInit {
   rules : ResponseRules[];
   newFishingEquipment : FishingEquipmentDto;
   equipments : ResponseFishingEquipment[];
+  newAdventureUtility : AdventureUtilityDto;
+  utilities!: MatTableDataSource<ResponseUtility>;
+  columnsToDisplayUtilities: string[] = [
+    'Name',
+    'Price',
+    'Buttons'
+  ];
 
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,private _sanitizer: DomSanitizer,
-    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar,private fishingEquipmentService : FishingEquipmentService) { 
+    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar,private fishingEquipmentService : FishingEquipmentService,
+    private adventureUtilityService : AdventureUtilityService) { 
     this.adventure = {} as AdventureDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -47,6 +59,8 @@ export class AdventureProfileComponent implements OnInit {
     this.rules = [] as ResponseRules[];
     this.newFishingEquipment = {} as FishingEquipmentDto;
     this.equipments = [] as ResponseFishingEquipment[];
+    this.newAdventureUtility = {} as AdventureUtilityDto;
+    this.utilities = new MatTableDataSource<ResponseUtility>();
   }
 
   ngOnInit(): void {
@@ -71,6 +85,7 @@ export class AdventureProfileComponent implements OnInit {
     this.getImages();
     this.getRules();
     this.getEquipments();
+    this.getUtilities();
   }
 
   getImages() {
@@ -85,10 +100,17 @@ export class AdventureProfileComponent implements OnInit {
   });
   }
 
+  getUtilities() {
+    this.adventureService.getAdventureUtilities(this.id).subscribe({
+      next: (res : ResponseUtility[]) => {
+        this.utilities.data = res
+    }
+  });
+  }
+
   getRules() {
     this.adventureService.getAdventuresRules(this.id).subscribe({
       next: (res) => {
-        console.log(res);
         this.rules = res
     }
   });
@@ -269,6 +291,11 @@ fishingEquipmentForm = new FormGroup({
   name: new FormControl('', [
   Validators.required
 ])});
+
+utilityForm = new FormGroup({ 
+  name: new FormControl('', [Validators.required]),
+  price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
+});
 
 
 }

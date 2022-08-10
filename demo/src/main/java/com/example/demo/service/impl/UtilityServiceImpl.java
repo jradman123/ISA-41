@@ -91,15 +91,4 @@ public class UtilityServiceImpl implements UtiilityService {
 
     }
 
-    @Override
-    public Utility createUtility(Utility utility) {
-        return utilityRepository.save(utility);
-    }
-
-    @Override
-    public Utility deleteById(Long id) {
-        Utility utility = utilityRepository.findById(id).get();
-        utility.setDeleted(true);
-        return utilityRepository.save(utility);
-    }
 }

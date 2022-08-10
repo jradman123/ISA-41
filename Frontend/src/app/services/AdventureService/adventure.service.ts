@@ -8,6 +8,7 @@ import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { ResponseRules } from 'src/app/interfaces/response-rules';
 import { ResponseFishingEquipment } from 'src/app/interfaces/response-fishing-equipment';
+import { ResponseUtility } from 'src/app/interfaces/response-utility';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,11 @@ export class AdventureService {
   getAdventureFishingEquipment(id : string){
     return this.http.get<ResponseFishingEquipment[]>(
       `${this.apiServerUrl}/adventures/${id}/fishing-equipments`);
+  }
+
+  getAdventureUtilities(id : string){
+    return this.http.get<ResponseUtility[]>(
+      `${this.apiServerUrl}/adventures/${id}/utilities`);
   }
 
 }

@@ -80,7 +80,6 @@ export class CottageProfileComponent implements OnInit {
   email: any
   pastReservations!: MatTableDataSource<CottageReservation>;
   haveReport!: string;
-  idResForReport!: any
 
 
 
@@ -121,6 +120,7 @@ export class CottageProfileComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
 
+    this.findReportByResId();
     this.findAppointments();
     this.findAvailability();
     this.findReservations();
@@ -144,26 +144,16 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  haveReportt(id: any) {
-
-    this.reportService.haveReport(id).subscribe(
+  findReportByResId() {
+    this.reportService.haveReport("1").subscribe(
       res => {
         this.haveReport = res.message;
-
+        console.log(this.haveReport);
+        console.log("dsafsfs" + this.id)
       }
     );
 
-    this.idResForReport
-
-    if (this.haveReport == 'TRUE') {
-      return true
-    }
-    return false
-
-
   }
-
-
 
   findPastReservations() {
 

@@ -25,6 +25,9 @@ export class EditRulesComponent implements OnInit {
   ngOnInit(): void {
 
 
+    this.findRules();
+  }
+  findRules() {
     this.idCottage = +this.router.snapshot.paramMap.get('id')!;
     this.ruleService.findRulebyId(this.idCottage).subscribe((data) => {
       this.rules = data;
@@ -38,7 +41,8 @@ export class EditRulesComponent implements OnInit {
 
     console.log(this.rulee)
     this.ruleService.addRule(this.rulee).subscribe((data) => {
-      window.location.reload();
+      this.rules = []
+      this.findRules();
 
 
     });
@@ -49,7 +53,8 @@ export class EditRulesComponent implements OnInit {
 
     this.ruleService.deleteRule(id, this.idCottage)
       .subscribe(data => {
-        window.location.reload();
+        this.rules = []
+        this.findRules();
 
 
 

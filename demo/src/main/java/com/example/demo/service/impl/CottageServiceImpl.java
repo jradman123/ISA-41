@@ -158,7 +158,7 @@ public class CottageServiceImpl implements CottageService {
     @Override
     public Room createRoom(RoomDto newRoom) {
 
-        Cottage cottage=this.co.findCottageById(newRule.getCottageId());
+        Cottage cottage=this.findCottageById(Long.parseLong(newRoom.getCottageId()));
 
         Room room = new Room();
                 room.setCottage(cottage);
@@ -171,7 +171,7 @@ public class CottageServiceImpl implements CottageService {
         }
 
 
-    }
+
 
     @Override
     public List<CottageDto> search(CottageDto dto) {

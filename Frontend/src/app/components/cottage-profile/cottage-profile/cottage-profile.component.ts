@@ -56,13 +56,12 @@ export class CottageProfileComponent implements OnInit {
 
 
   fullPrice: number = 0;
-  rulee!: RuleDto
+
   cottage: CottageDto;
   id: any;
-  rules: RuleDto[] = [];
-  utilities: UtilityDto[] = [];
+
   rooms: RoomDto[] = [];
-  utilityy!: UtilityDto;
+
   users!: PersonalData[];
   newReservation!: CottageReservation
   form!: FormGroup;
@@ -102,8 +101,6 @@ export class CottageProfileComponent implements OnInit {
 
 
   constructor(private roomService: RoomService, private reportService: ReportService, private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
-    this.rulee = {} as RuleDto;
-    this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
     this.reservations = new MatTableDataSource<CottageReservation>();
     this.newAvailability = {} as CottageAvailability;
@@ -128,8 +125,7 @@ export class CottageProfileComponent implements OnInit {
     this.findReservations();
     this.findUsers();
     this.findCottages();
-    this.findRules();
-    this.findUtility();
+
     this.findRooms();
     this.getImages();
     this.findPastReservations();
@@ -227,7 +223,7 @@ export class CottageProfileComponent implements OnInit {
 
     this.cottageService.findRoomsById(this.id).subscribe((data) => {
       this.rooms = data;
-      console.log(this.utilities);
+      console.log(this.rooms);
     });
 
   }
@@ -252,19 +248,7 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  findRules() {
-    this.ruleService.findRulebyId(this.id).subscribe((data) => {
-      this.rules = data;
 
-    });
-  }
-
-  findUtility() {
-    this.utilityService.findUtilityById(this.id).subscribe((data) => {
-      this.utilities = data;
-      console.log(this.utilities);
-    });
-  }
 
   getImages() {
     this.cottageService.getCottageImages(this.id).subscribe({
@@ -328,66 +312,9 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  addRule() {
-
-    if (this.rulee.ruleDescription == null) { alert("Please add rule description!"); return; }
-
-    this.rulee.cottageId = this.id;
-
-    console.log(this.rulee)
-    this.ruleService.addRule(this.rulee).subscribe((data) => {
-      this.rules = []
-      this.findRules();
-
-
-    });
-
-
-  }
-  deleteRule(idR: any) {
-
-    this.ruleService.deleteRule(idR, this.id)
-      .subscribe(data => {
-        this.rules = []
-        this.findRules();
 
 
 
-
-      });
-  }
-
-  addUtility() {
-    if (this.utilityy.name == null) { alert("Please add name of utility!"); return; }
-
-    this.utilityy.cottageId = this.id;
-    console.log("fedfefdfdf0" + this.utilityy.name)
-
-    this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
-
-      this.utilities = []
-      this.findUtility();
-
-
-    });
-
-
-  }
-  deleteUtility(idU: any) {
-
-
-    this.utilityService.deleteUtility(idU, this.id)
-      .subscribe(data => {
-        this.utilities = []
-        this.findUtility();
-
-
-
-      });
-
-
-
-  }
 
   reserved(): void {
 

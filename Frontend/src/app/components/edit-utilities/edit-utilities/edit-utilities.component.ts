@@ -24,6 +24,10 @@ export class EditUtilitiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.findUtilities();
+  }
+
+  findUtilities() {
     this.idCottage = +this.router.snapshot.paramMap.get('id')!;
     this.utilityService.findUtilityById(this.idCottage).subscribe((data) => {
       this.utilities = data;
@@ -37,28 +41,20 @@ export class EditUtilitiesComponent implements OnInit {
 
     this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
 
-      window.location.reload();
+      this.utilities = []
+      this.findUtilities();
 
     });
 
 
   }
   deleteUtility(id: any) {
-    /* let index = 0;
-     for (let utility of this.utilities) {
-       if (utility.id == id) {
-         this.utilities.splice(index, 1);
-       }
-       index++;
-     }*/
+
 
     this.utilityService.deleteUtility(id, this.idCottage)
       .subscribe(data => {
-        window.location.reload();
-
-        console.log(id);
-        console.log(this.idCottage)
-
+        this.utilities = []
+        this.findUtilities();
 
 
       });

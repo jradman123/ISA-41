@@ -117,88 +117,11 @@
 
         <mat-tab label="Edit rules">
 
-            <div class="container" style="margin-top:20px">
-                <div class="container">
-                    <div class="containter">
+            <app-edit-rules></app-edit-rules>
 
-                        <h1>Rules of cottage</h1>
-                        <hr />
-                        <div *ngFor="let rule of rules" class="container">
-                            <h3> {{ rule.ruleDescription}} <button style="margin-left:800px" class="btn"
-                                    (click)="deleteRule(rule.id)">Delete</button>
-                                <hr />
-                            </h3>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="container" style="margin-top:20px">
-                <div class="containter">
-                    <div>
-                        <h1> Add rule of cottage</h1>
-                        <hr />
-                        <div>
-                            <input class="form-control" type="text" placeholder="Enter your rule"
-                                [(ngModel)]="rulee.ruleDescription" />
-                        </div>
-                    </div>
-
-                </div>
-                <div class="container">
-                    <div>
-                        <button class="btn" (click)="addRule()">Add</button>
-                    </div>
-                </div>
-            </div>
-            <br /><br /><br />
         </mat-tab>
         <mat-tab label="Edit utilities">
-            <div class="container" style="margin-top:20px">
-                <div class="container">
-                    <div class="containter">
-
-                        <h1>Utilities of cottage</h1>
-                        <hr />
-                        <div *ngFor="let utility of utilities" class="containter">
-                            <h3> {{ utility.name}} <button style="margin-left:850px" class="btn"
-                                    (click)="deleteUtility(utility.id)">Delete</button>
-                                <hr />
-                            </h3>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="container" style="margin-top:20px">
-                <div class="containter">
-                    <div>
-                        <h1> Add utility of cottage</h1>
-                        <hr />
-                        <div>
-                            <input class="form-control" type="text" placeholder="Enter your utility"
-                                [(ngModel)]="utilityy.name" />
-                        </div>
-                    </div>
-
-                </div>
-                <div class="container">
-                    <div>
-                        <button class="btn" (click)="addUtility()">Add</button>
-                    </div>
-                </div>
-            </div>
-            <br /><br />
+            <app-edit-utilities></app-edit-utilities>
         </mat-tab>
         <mat-tab label="Edit rooms">
 

@@ -74,6 +74,7 @@ public class UtilityServiceImpl implements UtiilityService {
             if(utility.getCottage().getId()==idCottage & utility.getId()==id) {
                 utility.setDeleted(true);
                 cottageUtilityRepositoty.save(utility);
+
             }
 
         }

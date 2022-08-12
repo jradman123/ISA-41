@@ -19,4 +19,5 @@ public interface UtiilityService {
 
     CottageUtility add(CottageUtilityDto cottageUtilityDto);
 
+    CottageUtility updateCottageUtility(CottageUtilityDto cottageUtilityDto,Long id);
 }

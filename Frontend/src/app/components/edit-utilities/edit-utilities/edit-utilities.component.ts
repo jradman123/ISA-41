@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { windowTime } from 'rxjs/operators';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
+import { EditCottageUtilityDialogComponent } from '../../edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';
+import { EditUtilityDialogComponent } from '../../edit-utility-dialog/edit-utility-dialog.component';
 
 
 @Component({
@@ -18,7 +21,7 @@ export class EditUtilitiesComponent implements OnInit {
   idCottage: any;
   utilities: UtilityDto[] = [];
 
-  constructor(private utilityService: UtilityService, private router: ActivatedRoute) {
+  constructor(public dialog: MatDialog, private utilityService: UtilityService, private router: ActivatedRoute) {
 
     this.utilityy = {} as UtilityDto;
   }
@@ -47,6 +50,26 @@ export class EditUtilitiesComponent implements OnInit {
     });
 
 
+  }
+
+  editUtility(utility: UtilityDto) {
+    console.log(utility);
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(EditCottageUtilityDialogComponent, {
+      data: { name: utility.name, price: utility.price, id: utility.id, cottageId: this.idCottage },
+    });
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.findUtilities();
+        }
+      }
+    );
   }
   deleteUtility(id: any) {
 

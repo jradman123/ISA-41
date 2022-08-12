@@ -39,5 +39,8 @@ export class UtilityService {
     });
 
   }
+  upadteUtility(id: string, utility: UtilityDto) {
+    return this.http.put(`${this.apiServerUrl}/utilities/updateCottageUtility/${id}`, utility);
+  }
 }
 

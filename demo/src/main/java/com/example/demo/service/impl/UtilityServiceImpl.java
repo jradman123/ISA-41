@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.CottageUtilityDto;
 import com.example.demo.dto.UtilityDto;
 import com.example.demo.model.Utility;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.ShipUtility;
@@ -90,6 +91,13 @@ public class UtilityServiceImpl implements UtiilityService {
         this.utilityRepository.save(utility);
         return  this.cottageUtilityRepositoty.save(ca);
 
+    }
+
+    @Override
+    public CottageUtility updateCottageUtility(CottageUtilityDto cottageUtilityDto,Long id) {
+        CottageUtility cottageUtility = cottageUtilityRepositoty.findById(id).get();
+
+       return cottageUtility;
     }
 
 }

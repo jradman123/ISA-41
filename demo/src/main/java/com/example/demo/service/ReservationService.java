@@ -14,4 +14,6 @@ public interface ReservationService {
     ReservationDto getById(Long id);
 
     void createReservation(CreateReservationDto createReservationDto);
+
+    List<CottageReservationViewDto> getPastReservationsByCottage(Long id);
 }

@@ -25,10 +25,20 @@ public class ReservationController {
     ReservationService reservationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
- //   @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/findReservationsByCottage/{id}")
     public List<CottageReservationViewDto> getReservationsByCottage(@PathVariable Long id) {
         List<CottageReservationViewDto> reservationDtos = this.reservationService.getReservationsByCottage(id);
+        return reservationDtos;
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @GetMapping(value = "/findPastReservationsByCottage/{id}")
+    public List<CottageReservationViewDto> getPastReservationsByCottage(@PathVariable Long id) {
+        List<CottageReservationViewDto> reservationDtos = this.reservationService.getPastReservationsByCottage(id);
+        for(CottageReservationViewDto reservationViewDto:reservationDtos)
+            System.out.print(reservationViewDto.getResEnd());
         return reservationDtos;
     }
 

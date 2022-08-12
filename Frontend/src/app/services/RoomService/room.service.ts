@@ -21,6 +21,7 @@ export class RoomService {
 
   }
   addRoom(room: RoomDto) {
+    console.log(room.cottageId, room.number)
     return this.http.post(`${this.apiServerUrl}/cottages/createRoomByCottage`, room, {
       responseType: 'text',
     });

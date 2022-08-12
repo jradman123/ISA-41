@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.service.impl.AppointmentServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/appointments")
@@ -21,7 +23,7 @@ public class AppointmentController {
 
 
     //idCottage or idBoat
-    @GetMapping(value="/getApp/{id}")
+    @GetMapping(value="/getAppByCottage/{id}")
     public List<AppointmentDto> getAllByCottage(@PathVariable Long id) {
        return this.appointmentService.findApp(id);
     }
@@ -38,7 +40,7 @@ public class AppointmentController {
 
 
     @PostMapping(value="/createApp")
-    public Appointment createApp(@RequestBody AppointmentDto dto) {
+    public Appointment createApp(@RequestBody CreateAppointmentDto dto) {
         return this.appointmentService.createAppointment(dto);
     }
 

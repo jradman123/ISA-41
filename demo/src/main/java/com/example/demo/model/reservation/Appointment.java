@@ -1,5 +1,7 @@
 package com.example.demo.model.reservation;
 
+import com.example.demo.dto.AppointmentDto;
+import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.Utility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
@@ -12,6 +14,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -44,6 +47,9 @@ public class Appointment {
     @JsonManagedReference
     private Set<Utility> utilities;
 
+    @Column(name = "validUntil", nullable = false)
+    private LocalDateTime validUntil;
+
 
     @Column(name = "isReserved", nullable = false)
     private Boolean isReserved;
@@ -58,4 +64,18 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ship_id",nullable = true)
     private Ship ship;
+
+    public Appointment(CreateAppointmentDto dto) {
+
+        startDate=dto.getStartDate();
+        endDate=dto.getEndDate();
+        capacity=Integer.parseInt(dto.getCapacity());
+        price=Double.parseDouble(dto.getPrice());
+        validUntil=dto.getValidUntil();
+        isDeleted=false;
+        isReserved=false;
+
+
+
+    }
 }

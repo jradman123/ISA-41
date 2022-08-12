@@ -1,0 +1,43 @@
+<div class="container">
+    <h2 mat-dialog-title>Add appointment for cottage</h2>
+
+    <form class="form" [formGroup]="form">
+
+        <mat-form-field appearance="fill" style="width: 100%">
+
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="appStart" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%">
+
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="appEnd" />
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Number of person</mat-label>
+            <input matInput type="number" min="1" max="{{this.cottage.numberOfPeople}}" placeholder="Number of person"
+                formControlName="capacity" />
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Price in evro</mat-label>
+            <input matInput type="number" placeholder="Price" formControlName="price" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%">
+
+            <mat-label>Valid until</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="validUntil" />
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+
+    </form>
+    <div class="button-container">
+        <button mat-flat-button color="primary" (click)="addApp()">Add</button>
+        <button mat-flat-button color="warn" (click)="onNoClick()">Close</button>
+    </div>
+</div>

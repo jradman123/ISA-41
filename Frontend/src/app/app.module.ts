@@ -58,12 +58,18 @@ import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-car
 
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
+
 import { AdventureBasicInfoComponent } from './components/adventure-basic-info/adventure-basic-info.component';
 import { AdventureRulesComponent } from './components/adventure-rules/adventure-rules.component';
 import { AdventureFishingEquipmentsComponent } from './components/adventure-fishing-equipments/adventure-fishing-equipments.component';
 import { AdventureUtilitiesComponent } from './components/adventure-utilities/adventure-utilities.component';
 import { AdventureImagesComponent } from './components/adventure-images/adventure-images.component';
 import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edit-utility-dialog.component';
+
+import { DialogForAppointmentComponent } from './components/dialog-for-appointment/dialog-for-appointment.component';
+import { DialogForReportComponent } from './components/dialog-for-report/dialog-for-report.component';
+import { DialogForAddReportComponent } from './components/dialog-for-add-report/dialog-for-add-report.component';
+
 
 
 
@@ -119,12 +125,18 @@ import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edi
 
     DialogForReservationCottageComponent,
     DialogForGuestDataComponent,
+
     AdventureBasicInfoComponent,
     AdventureRulesComponent,
     AdventureFishingEquipmentsComponent,
     AdventureUtilitiesComponent,
     AdventureImagesComponent,
-    EditUtilityDialogComponent
+    EditUtilityDialogComponent,
+
+    DialogForAppointmentComponent,
+    DialogForReportComponent,
+    DialogForAddReportComponent
+
 
 
   ],

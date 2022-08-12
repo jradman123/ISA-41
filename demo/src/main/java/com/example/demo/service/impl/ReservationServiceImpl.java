@@ -43,7 +43,7 @@ public class ReservationServiceImpl implements ReservationService
     public List<CottageReservationViewDto> getReservationsByCottage(Long id) {
         List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
         for(CottageReservation r : cottageReservationRepository.findAll()) {
-            if(r.getCottage().getId()==id) {
+            if(r.getCottage().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
                 reservationDtos.add(new CottageReservationViewDto(r));
             }
         }
@@ -64,6 +64,8 @@ public class ReservationServiceImpl implements ReservationService
         return reservationDto;
     }
 
+
+
     @Override
     public void createReservation(CreateReservationDto createReservationDto) {
         User user=userService.findByEmail(createReservationDto.clientEmail);
@@ -73,6 +75,7 @@ public class ReservationServiceImpl implements ReservationService
 
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
+        reservation.setHaveReport(false);
 
 
       if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
@@ -88,6 +91,20 @@ public class ReservationServiceImpl implements ReservationService
 
 
 
+    }
+
+    @Override
+    public List<CottageReservationViewDto> getPastReservationsByCottage(Long id) {
+        System.out.print("uslaaaaa");
+        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+        for(CottageReservation r : cottageReservationRepository.findAll()) {
+            if(r.getCottage().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
+                reservationDtos.add(new CottageReservationViewDto(r));
+
+            }
+        }
+
+        return reservationDtos;
     }
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {

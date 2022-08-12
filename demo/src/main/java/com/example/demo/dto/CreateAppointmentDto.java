@@ -7,31 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class AppointmentDto {
+public class CreateAppointmentDto {
     private String id;
-    private String startDate;
-    private String endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String capacity;
     private String price;
-    private String validUntil;
+    private LocalDateTime validUntil;
     private Boolean isReserved;
     private String cottageId;
     private String shipId;
 
-
-    public AppointmentDto(Appointment a) {
+    public CreateAppointmentDto(Appointment a) {
         this.id = Long.toString(a.getId());
-        this.startDate = a.getStartDate().toString();
-        this.endDate = a.getEndDate().toString();
+        this.startDate = a.getStartDate();
+        this.endDate = a.getEndDate();
         this.capacity = Integer.toString(a.getCapacity());
         this.price = Double.toString(a.getPrice());
-        this.validUntil=a.getValidUntil().toString();
+        this.validUntil=a.getValidUntil();
         this.isReserved = a.getIsReserved();
 
         if (a.getCottage() != null) {
@@ -44,4 +42,5 @@ public class AppointmentDto {
         }
 
     }
+
 }

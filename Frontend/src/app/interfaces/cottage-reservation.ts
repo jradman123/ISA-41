@@ -6,4 +6,5 @@ export interface CottageReservation {
     clientEmail: string,
     objectId: string,
     typeOfRes: string
+    haveReport: boolean;
 }

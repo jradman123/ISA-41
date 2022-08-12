@@ -4,17 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.example.demo.model.Report;
 import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +23,10 @@ public class Reservation {
 	 @Column(name = "id")
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Long id;
+
+	@OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private Report report;
 	
      @Column(name = "reservationStart", nullable = false)
      private LocalDateTime reservationStart;
@@ -56,17 +55,20 @@ public class Reservation {
 
 	@Column(name = "isDeleted",nullable = false)
 	private boolean isDeleted;
+
+	@Column(name = "haveReport",nullable = false)
+	private boolean haveReport=false;
 	
 	 public Reservation() {
 		super();
 	 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 }

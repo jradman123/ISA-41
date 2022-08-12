@@ -2,20 +2,10 @@ package com.example.demo.model.cottages;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.example.demo.model.Address;
+import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.users.CottageOwner;
@@ -52,11 +42,12 @@ public class Cottage {
     @Column(name = "price", nullable = false)
     private Double price = 0.0;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "cottage_id")
-	@JsonManagedReference
-	private Set<CottageImage> images;
-
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "cottage_images",
+			joinColumns = @JoinColumn(name = "cottage_id"),
+			inverseJoinColumns = @JoinColumn(name = "image_id"))
+	private Set<Image> images;
 
 
 	@Column(name = "numberOfPerson", nullable = false)

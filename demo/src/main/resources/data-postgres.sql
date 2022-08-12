@@ -97,8 +97,8 @@ INSERT INTO public.utility(name)	VALUES ('Sauna');
 
 ---cottage utilities---
 
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 1,false);
-INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 2,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (20.0, 3, 1,false);
+INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (10.0, 3, 2,false);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 1, 3,false);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (10.0, 2, 5,false);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 2, 4,false);

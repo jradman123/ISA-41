@@ -56,7 +56,7 @@ public class CottageUtility {
 	public CottageUtility(String price, Cottage cottage, Utility utility) {
 		this.cottage=cottage;
 		this.utility=utility;
-		this.price=null;
+		this.price=Double.parseDouble(price);
 		this.isDeleted=false;
 	}
 }

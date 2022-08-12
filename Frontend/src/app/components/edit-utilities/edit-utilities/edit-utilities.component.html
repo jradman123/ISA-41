@@ -5,7 +5,7 @@
       <h1>Utilities of cottage</h1>
       <hr />
       <div *ngFor="let utility of utilities" class="containter">
-        <h3> {{ utility.name}} <button style="margin-left:900px" class="btn"
+        <h3> {{ utility.name}} {{utility.price}} € <button style="margin-left:900px" class="btn"
             (click)="deleteUtility(utility.id)">Delete</button>
           <hr />
         </h3>
@@ -26,6 +26,9 @@
       <hr />
       <div>
         <input class="form-control" type="text" placeholder="Enter your utility" [(ngModel)]="utilityy.name" />
+      </div>
+      <div>
+        <input class="form-control" type="number" placeholder="Enter price of utility" [(ngModel)]="utilityy.price" />
       </div>
     </div>
 

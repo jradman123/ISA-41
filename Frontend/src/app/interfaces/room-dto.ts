@@ -1,5 +1,5 @@
 export interface RoomDto {
     id: string;
-    number: string;
+    number: number;
     cottageId: string;
 }

@@ -31,6 +31,7 @@ import { DialogForAppointmentComponent } from '../../dialog-for-appointment/dial
 import { DialogForReportComponent } from '../../dialog-for-report/dialog-for-report.component';
 import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-for-add-report.component';
 import { ReportService } from 'src/app/services/ReportService/report.service';
+import { RoomService } from 'src/app/services/RoomService/room.service';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -79,7 +80,7 @@ export class CottageProfileComponent implements OnInit {
   updateCottage: CottageDto
   email: any
   pastReservations!: MatTableDataSource<CottageReservation>;
-  haveReport!: string;
+  roomm!: RoomDto
 
 
 
@@ -100,7 +101,7 @@ export class CottageProfileComponent implements OnInit {
   ];
 
 
-  constructor(private reportService: ReportService, private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
+  constructor(private roomService: RoomService, private reportService: ReportService, private route: Router, private appointmentService: AppointmentService, private availabilityService: AvailabilityService, private reservationService: ReservationService, private userService: UserService, private cottageService: CottageService, private imageService: ImageService, private router: ActivatedRoute, private ruleService: RuleService, public dialog: MatDialog, private utilityService: UtilityService) {
     this.rulee = {} as RuleDto;
     this.utilityy = {} as UtilityDto;
     this.newReservation = {} as CottageReservation;
@@ -109,6 +110,7 @@ export class CottageProfileComponent implements OnInit {
     this.cottage = {} as CottageDto;
     this.updateCottage = {} as CottageDto
     this.pastReservations = new MatTableDataSource<CottageReservation>();
+    this.roomm = {} as RoomDto;
 
 
     this.image = {} as Image;
@@ -572,5 +574,35 @@ export class CottageProfileComponent implements OnInit {
 
     });
 
+  }
+
+  addRoom() {
+
+    console.log(this.roomm)
+    this.roomm.cottageId = this.id;
+    this.roomService.addRoom(this.roomm).subscribe((data) => {
+
+
+      this.rooms = []
+      this.findRooms();
+    });
+  }
+
+  deleteRoom(idR: any) {
+    console.log("fefefeef" + idR);
+
+
+    this.roomService.deleteRoom(idR, this.id)
+      .subscribe(data => {
+
+        this.rooms = []
+        this.findRooms();
+
+
+
+
+
+
+      });
   }
 }

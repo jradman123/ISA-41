@@ -11,7 +11,7 @@ import java.util.List;
 public interface UtiilityService {
 
 
-    List<UtilityDto> getUtilityByCottage(Long id);
+    List<CottageUtilityDto> getUtilityByCottage(Long id);
 
     List<UtilityDto> getUtilitiesbyBoat(Long id);
 

@@ -35,7 +35,7 @@ public class UtilityController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/findUtilitiesByCottage/{id}")
-    public List<UtilityDto> getUtilitesByCottage(@PathVariable Long id) {
+    public List<CottageUtilityDto> getUtilitesByCottage(@PathVariable Long id) {
 
 
         return utilityService.getUtilityByCottage(id);

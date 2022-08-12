@@ -33,13 +33,13 @@ public class UtilityServiceImpl implements UtiilityService {
 
 
     @Override
-    public List<UtilityDto> getUtilityByCottage(Long id) {
-        List<UtilityDto> utilityDto=new ArrayList<>();
+    public List<CottageUtilityDto> getUtilityByCottage(Long id) {
+        List<CottageUtilityDto> utilityDto=new ArrayList<>();
         for(CottageUtility cottageUtility: cottageUtilityRepositoty.findAll()) {
             if(id.equals(cottageUtility.getCottage().getId()) & cottageUtility.isDeleted()==false) {
                for(Utility utility:utilityRepository.findAll()) {
                     if(cottageUtility.getUtility().getId().equals(utility.getId())) {
-                        utilityDto.add(new UtilityDto(utility));
+                        utilityDto.add(new CottageUtilityDto(cottageUtility));
                     }
                 }
 

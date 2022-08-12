@@ -24,5 +24,6 @@ public class CottageUtilityDto {
         this.cottageId=ca.getCottage().getId();
         this.utilityId=ca.getUtility().getId();
         this.price=ca.getPrice().toString();
+        this.name=ca.getUtility().getName();
     }
 }

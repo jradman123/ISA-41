@@ -5,9 +5,8 @@
       <h1>Utilities of cottage</h1>
       <hr />
       <div *ngFor="let utility of utilities" class="containter">
-        <h3> {{ utility.name}} {{utility.price}} € <button style="margin-left:700px;;width: 100px;" class="btn"
-            (click)="editUtility(utility)">Edit</button><button color="warn" class="btn"
-            style="margin-left:20px;width:100px;" (click)="deleteUtility(utility.id)">Delete</button>
+        <h3> {{ utility.name}} {{utility.price}} € <button color="warn" class="btn" style="margin-left:900px"
+            (click)="deleteUtility(utility.id)">Delete</button>
           <hr />
         </h3>
 

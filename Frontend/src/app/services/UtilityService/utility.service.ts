@@ -32,9 +32,23 @@ export class UtilityService {
 
   }
 
+  deleteUtilitybyShip(id: any, idShip: any) {
+    return this.http.delete<UtilityDto>(
+      `${this.apiServerUrl}/utilities/deleteUtilityByShip/${id}/${idShip}`);
+
+  }
+
   addCottageUtility(newUtility: UtilityDto) {
     console.log(newUtility)
     return this.http.post(`${this.apiServerUrl}/utilities/addCottageUtility`, newUtility, {
+      responseType: 'text',
+    });
+
+  }
+
+  addShipUtility(newUtility: UtilityDto) {
+    console.log(newUtility)
+    return this.http.post(`${this.apiServerUrl}/utilities/addShipUtility`, newUtility, {
       responseType: 'text',
     });
 

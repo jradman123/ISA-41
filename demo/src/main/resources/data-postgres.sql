@@ -95,11 +95,11 @@ INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VAL
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (10.0, 2, 5,false);
 INSERT INTO public.cottage_utility(price, cottage_id, utility_id,is_deleted)	VALUES (0.0, 2, 4,false);
 
-INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 1);
-INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 5);
-INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 1, 4);
-INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (10.0, 2, 5);
-INSERT INTO public.ship_utility(price, ship_id, utility_id)	VALUES (0.0, 2, 4);
+INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0.0, 1, 1,false);
+INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0.0, 1, 5,false);
+INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0.0, 1, 4,false);
+INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (10.0, 2, 5,false);
+INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0.0, 2, 4,false);
 
 INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1 , 1);
 INSERT INTO public.navigation_equipment( name, ship_id)	VALUES (2,1);

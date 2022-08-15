@@ -39,4 +39,19 @@ export class RuleService {
 
   }
 
+
+  deleteRulebyShip(id: any, idShip: any) {
+    return this.http.delete<RuleDto>(
+      `${this.apiServerUrl}/rules/deleteRyleByShip/${id}/${idShip}`);
+
+  }
+  addRulebyShip(rule: RuleDto) {
+    return this.http.post(`${this.apiServerUrl}/rules/createShipRule`, rule, {
+      responseType: 'text',
+    });
+
+  }
+
+
+
 }

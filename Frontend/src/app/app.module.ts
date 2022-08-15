@@ -70,6 +70,7 @@ import { DialogForAppointmentComponent } from './components/dialog-for-appointme
 import { DialogForReportComponent } from './components/dialog-for-report/dialog-for-report.component';
 import { DialogForAddReportComponent } from './components/dialog-for-add-report/dialog-for-add-report.component';
 import { EditCottageUtilityDialogComponent } from './components/edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';
+import { EditShipRulesComponent } from './components/edit-ship-rules/edit-ship-rules.component';
 
 
 
@@ -137,7 +138,8 @@ import { EditCottageUtilityDialogComponent } from './components/edit-cottage-uti
     DialogForAppointmentComponent,
     DialogForReportComponent,
     DialogForAddReportComponent,
-    EditCottageUtilityDialogComponent
+    EditCottageUtilityDialogComponent,
+    EditShipRulesComponent
 
 
 

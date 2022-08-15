@@ -10,4 +10,8 @@ public interface RuleService {
 
     List<RuleDto> getRulesByCottage(Long id);
     ResponseEntity<Long> deleteRuleByCottage(Long id, Long idCottage);
+
+    ResponseEntity<Long> deleteRuleByShip(Long id, Long idShip);
+
+    Rules createShipRule(RuleDto newRule);
 }

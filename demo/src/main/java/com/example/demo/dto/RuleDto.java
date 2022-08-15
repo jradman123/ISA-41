@@ -27,7 +27,13 @@ public class RuleDto {
             this.ruleDescription=rules.getRuleDescription();
             this.isDeletedbyCottage=rules.isDeletedbyCottages();
             this.isDeletedbyShip=rules.isDeletedByShip();
-            this.cottageId=rules.getCottage().getId();
+            if(rules.getCottage()!=null) {
+                this.cottageId = rules.getCottage().getId();
+            }
+            if(rules.getShip()!=null) {
+                this.shipId = rules.getShip().getId();
+            }
+
 
     }
 }

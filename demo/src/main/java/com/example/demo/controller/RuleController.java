@@ -27,6 +27,14 @@ public class RuleController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    //radi samo vlasnik vikendice
+    @DeleteMapping(value = "/deleteRyleByShip/{id}/{idShip}")
+    public ResponseEntity<Long> deleteRuleByShip(@PathVariable Long id,@PathVariable Long idShip) {
+        return this.ruleService.deleteRuleByShip(id,idShip);
+    }
+
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/findRulesByCottage/{id}")
@@ -57,6 +65,14 @@ public class RuleController {
     @PostMapping(value = "/createCottageRule")
     public Rules createCottageRule(@RequestBody RuleDto newRule) {
         return this.ruleService.createCottageRule(newRule);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    //ovo samo moze da radi vlasnik vikendice
+    @PostMapping(value = "/createShipRule")
+    public Rules createShipRule(@RequestBody RuleDto newRule) {
+        return this.ruleService.createShipRule(newRule);
     }
 
 

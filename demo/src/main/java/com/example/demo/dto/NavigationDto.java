@@ -2,11 +2,15 @@ package com.example.demo.dto;
 
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.ships.NavigationalEquipment;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class NavigationDto {
 
     private String id;

@@ -76,8 +76,7 @@ public class ReservationServiceImpl implements ReservationService
         User user=userService.findByEmail(createReservationDto.clientEmail);
         Reservation reservation=typeOfReservation(createReservationDto);
 
-
-
+       System.out.print("OPPPPPPPPEPEEEEEEEETJOOOOOJ"+createReservationDto.getPrice());
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
         reservation.setHaveReport(false);

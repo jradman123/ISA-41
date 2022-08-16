@@ -91,7 +91,7 @@ public class Ship {
 	private Integer capacity;
 	
 
-	 @OneToMany(mappedBy = "ship")
+	 @OneToMany(mappedBy = "ship",fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	 private Set<ShipReservation> shipReservations;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

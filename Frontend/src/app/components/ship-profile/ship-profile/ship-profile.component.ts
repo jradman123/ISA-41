@@ -72,7 +72,7 @@ export class ShipProfileComponent implements OnInit {
         this.detailsForm.controls['numberOfEngine'].setValue(data.numberOfEngine)
         this.detailsForm.controls['length'].setValue(data.length)
         this.detailsForm.controls['cancelationConditions'].setValue(data.cancelationConditions)
-        this.detailsForm.controls['fishingEquipmentts'].setValue(data.fishingEquipment)
+        this.detailsForm.controls['fishingEquipment'].setValue(data.fishingEquipment)
       },
     });
 
@@ -202,7 +202,6 @@ export class ShipProfileComponent implements OnInit {
     ]),
     fishingEquipment: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
     ]),
     cancelationConditions: new FormControl(null, [
       Validators.required,
@@ -234,7 +233,7 @@ export class ShipProfileComponent implements OnInit {
       numberOfEngine: this.detailsForm.get('numberOfEngine')?.value,
       length: this.detailsForm.get('length')?.value,
       cancelationConditions: this.detailsForm.get('cancelationConditions')?.value,
-      fishingEquipment: ''
+      fishingEquipment: this.detailsForm.get('fishingEquipment')?.value
     }
     this.shipService.editShip(this.updateShip).subscribe((data) => {
       this.updateShip = data
@@ -257,7 +256,7 @@ export class ShipProfileComponent implements OnInit {
     this.detailsForm.controls['strengthOfEngine'].setValue(this.initialDetails.strengthOfEngine)
     this.detailsForm.controls['numberOfEngine'].setValue(this.initialDetails.numberOfEngine)
     this.detailsForm.controls['length'].setValue(this.initialDetails.length)
-
+    this.detailsForm.controls['fishingEquipment'].setValue(this.initialDetails.fishingEquipment)
     this.detailsForm.controls['capacity'].setValue(this.initialDetails.capacity)
 
   }

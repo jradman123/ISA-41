@@ -120,6 +120,13 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Fishing equipment</mat-label>
+                                    <input matInput placeholder="Fishing equipment" formControlName="fishingEquipment"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
                         </div>
 
                         <div class="button-container" *ngIf="!editMode else editIsOn">

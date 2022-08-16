@@ -38,6 +38,7 @@ export class ShipProfileComponent implements OnInit {
   image: Image;
   imagesResponse: ImagesResponse;
   images: Image[];
+  viewOff = false;
 
   constructor(private shipService: ShipService, private appointmentService: AppointmentService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
     this.updateShip = {} as ShipDto;
@@ -135,9 +136,7 @@ export class ShipProfileComponent implements OnInit {
     });
   }
 
-  editShip() {
-    this.route.navigate(['shipOwner/edit-ship/' + this.id]);
-  }
+
 
   deleteShip() {
     this.shipService.deleteShip(this.id)
@@ -183,23 +182,23 @@ export class ShipProfileComponent implements OnInit {
     ]),
     strengthOfEngine: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     maxSpeed: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     numberOfEngine: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     length: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     type: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     fishingEquipment: new FormControl(null, [
       Validators.required,
@@ -207,7 +206,7 @@ export class ShipProfileComponent implements OnInit {
     ]),
     cancelationConditions: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+
     ]),
     price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
     capacity: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
@@ -216,9 +215,7 @@ export class ShipProfileComponent implements OnInit {
 
 
   edit() {
-    if (this.detailsForm.invalid) {
-      return;
-    }
+
     this.email = localStorage.getItem('email')
     this.updateShip = {
       name: this.detailsForm.get('name')?.value,

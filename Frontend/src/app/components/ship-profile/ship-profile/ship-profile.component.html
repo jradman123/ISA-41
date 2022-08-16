@@ -23,6 +23,14 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Guest limit</mat-label>
+                                    <input matInput placeholder="Guest limit" formControlName="capacity"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+
                         </div>
                         <div class="row">
                             <div class="col-sm">
@@ -39,8 +47,6 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>City</mat-label>
@@ -48,19 +54,13 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
+                        </div>
+                        <div class="row">
+
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Country</mat-label>
                                     <input matInput placeholder="Country" formControlName="countryName"
-                                        [readonly]="!editMode" />
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>Guest limit</mat-label>
-                                    <input matInput placeholder="Guest limit" formControlName="capacity"
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
@@ -71,8 +71,6 @@
                                         formControlName="cancelationConditions" [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Description</mat-label>
@@ -80,19 +78,14 @@
                                         [readonly]="!editMode"> </textarea>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>Type of ship</mat-label>
-                                    <input matInput placeholder="Type of ship" formControlName="type"
-                                        [readonly]="!editMode" />
-                                </mat-form-field>
-                            </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Length</mat-label>
-                                    <input matInput placeholder="Lenght of ship" formControlName="length"
+                                    <input matInput placeholder="Lenght of boat" formControlName="length"
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
@@ -103,8 +96,6 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Strength of ship:</mat-label>
@@ -112,10 +103,20 @@
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
+                        </div>
+                        <div class="row">
+
                             <div class="col-sm">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Maxspeed of boat:</mat-label>
                                     <input matInput placeholder="Maxspeed" formControlName="maxSpeed"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Type of ship</mat-label>
+                                    <input matInput placeholder="Type of ship" formControlName="type"
                                         [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
@@ -127,8 +128,8 @@
                         </div>
                         <ng-template #editIsOn>
                             <div class="button-container" *ngIf="editMode">
-                                <button mat-flat-button color="primary" class="button" click)="edit()">Save</button>
-                                <button mat-flat-button color="warn" class="button" click)="cancel()">Cancel</button>
+                                <button mat-flat-button color="primary" class="button" (click)="edit()">Save</button>
+                                <button mat-flat-button color="warn" class="button" (click)="cancel()">Cancel</button>
                             </div>
                         </ng-template>
                     </form>

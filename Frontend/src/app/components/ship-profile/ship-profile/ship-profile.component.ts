@@ -12,6 +12,8 @@ import { NavigationDto } from 'src/app/interfaces/navigation-dto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
+import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 
 @Component({
   selector: 'app-ship-profile',
@@ -22,6 +24,7 @@ import { ImagesResponse } from 'src/app/interfaces/images-response';
 export class ShipProfileComponent implements OnInit {
 
   ship!: ShipDto;
+  appointments: AppointmentDto[] = []
   id: any;
   rules: RuleDto[] = [];
   utilities: UtilityDto[] = [];
@@ -36,7 +39,7 @@ export class ShipProfileComponent implements OnInit {
   imagesResponse: ImagesResponse;
   images: Image[];
 
-  constructor(private shipService: ShipService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
+  constructor(private shipService: ShipService, private appointmentService: AppointmentService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
     this.updateShip = {} as ShipDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -73,21 +76,20 @@ export class ShipProfileComponent implements OnInit {
     });
 
 
+    this.findAppointments();
 
 
 
 
-    this.ruleService.findShipRulebyId(this.id).subscribe((data) => {
-      this.rules = data;
-
-    });
-
-    this.utilityService.findShipUtilityById(this.id).subscribe((data) => {
-      this.utilities = data;
-
-    });
     this.navigationService.findNavigationById(this.id).subscribe((data) => {
       this.navigations = data;
+
+    });
+  }
+
+  findAppointments() {
+    this.appointmentService.findAppByShip(this.id).subscribe((data) => {
+      this.appointments = data;
 
     });
   }

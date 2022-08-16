@@ -72,6 +72,7 @@ import { DialogForAddReportComponent } from './components/dialog-for-add-report/
 import { EditCottageUtilityDialogComponent } from './components/edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';
 import { EditShipRulesComponent } from './components/edit-ship-rules/edit-ship-rules.component';
 import { EditShipUtilitiesComponent } from './components/edit-ship-utilities/edit-ship-utilities.component';
+import { ShipReservationHistoryComponent } from './components/ship-reservation-history/ship-reservation-history.component';
 
 
 
@@ -141,7 +142,8 @@ import { EditShipUtilitiesComponent } from './components/edit-ship-utilities/edi
     DialogForAddReportComponent,
     EditCottageUtilityDialogComponent,
     EditShipRulesComponent,
-    EditShipUtilitiesComponent
+    EditShipUtilitiesComponent,
+    ShipReservationHistoryComponent
 
 
 

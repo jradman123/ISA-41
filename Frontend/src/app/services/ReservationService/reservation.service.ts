@@ -32,4 +32,18 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/findReservationsByCottage/${id}`);
   }
 
+  getPastShipReservationById(id: string): Observable<CottageReservation[]> {
+
+    return this.http.get<CottageReservation[]>(
+
+      `${this.apiServerUrl}/reservations/findPastReservationsByShip/${id}`);
+  }
+
+  getShipReservationById(id: string): Observable<CottageReservation[]> {
+    return this.http.get<CottageReservation[]>(
+      `${this.apiServerUrl}/reservations/findReservationsByShip/${id}`);
+  }
+
+
+
 }

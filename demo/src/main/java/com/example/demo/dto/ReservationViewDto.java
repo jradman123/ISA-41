@@ -5,11 +5,9 @@ import com.example.demo.model.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class CottageReservationViewDto {
+public class ReservationViewDto {
 
     public Long id;
     public String resStart;
@@ -22,7 +20,7 @@ public class CottageReservationViewDto {
     public boolean  haveReport;
 
 
-    public CottageReservationViewDto(Reservation r) {
+    public ReservationViewDto(Reservation r) {
         id=r.getId();
         resStart=r.getReservationStart().toString();
         resEnd=r.getReservationEnd().toString();

@@ -9,6 +9,7 @@ import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.ShipReservationRepository;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,15 +37,19 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private CottageReservationRepository cottageReservationRepository;
 
+    @Autowired
+    private ShipReservationRepository shipReservationRepository;
+
+
 
 
 
     @Override
-    public List<CottageReservationViewDto> getReservationsByCottage(Long id) {
-        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+    public List<ReservationViewDto> getReservationsByCottage(Long id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
         for(CottageReservation r : cottageReservationRepository.findAll()) {
             if(r.getCottage().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
-                reservationDtos.add(new CottageReservationViewDto(r));
+                reservationDtos.add(new ReservationViewDto(r));
             }
         }
 
@@ -94,12 +99,38 @@ public class ReservationServiceImpl implements ReservationService
     }
 
     @Override
-    public List<CottageReservationViewDto> getPastReservationsByCottage(Long id) {
+    public List<ReservationViewDto> getPastReservationsByCottage(Long id) {
         System.out.print("uslaaaaa");
-        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
         for(CottageReservation r : cottageReservationRepository.findAll()) {
             if(r.getCottage().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
-                reservationDtos.add(new CottageReservationViewDto(r));
+                reservationDtos.add(new ReservationViewDto(r));
+
+            }
+        }
+
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getReservationsByShip(Long id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(ShipReservation r : shipReservationRepository.findAll()) {
+            if(r.getShip().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
+                reservationDtos.add(new ReservationViewDto(r));
+            }
+        }
+
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getPastReservationsByShip(Long id) {
+        System.out.print("uslaaaaa");
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(ShipReservation r : shipReservationRepository.findAll()) {
+            if(r.getShip().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
+                reservationDtos.add(new ReservationViewDto(r));
 
             }
         }

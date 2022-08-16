@@ -103,7 +103,7 @@ public class Ship {
 	private String fishingEquipment;
 
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ship_id")
 	@JsonManagedReference
 	private Set<NavigationalEquipment> navigationalEquipments;

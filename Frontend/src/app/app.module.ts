@@ -73,6 +73,7 @@ import { EditCottageUtilityDialogComponent } from './components/edit-cottage-uti
 import { EditShipRulesComponent } from './components/edit-ship-rules/edit-ship-rules.component';
 import { EditShipUtilitiesComponent } from './components/edit-ship-utilities/edit-ship-utilities.component';
 import { ShipReservationHistoryComponent } from './components/ship-reservation-history/ship-reservation-history.component';
+import { EditShipNavigationComponent } from './components/edit-ship-navigation/edit-ship-navigation.component';
 
 
 
@@ -143,7 +144,8 @@ import { ShipReservationHistoryComponent } from './components/ship-reservation-h
     EditCottageUtilityDialogComponent,
     EditShipRulesComponent,
     EditShipUtilitiesComponent,
-    ShipReservationHistoryComponent
+    ShipReservationHistoryComponent,
+    EditShipNavigationComponent
 
 
 

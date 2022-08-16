@@ -26,7 +26,11 @@ import lombok.Setter;
 		private Integer id;
 		
 		@Column(name = "name", nullable = false)
-	    private EquipmentType name;
+	    private String name;
+
+
+		@Column(name = "isDeleted", nullable = false)
+		private boolean isDeleted;
 
 		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 		@JoinColumn(name = "ship_id",nullable = true)

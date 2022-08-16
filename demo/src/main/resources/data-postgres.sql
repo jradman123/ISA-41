@@ -101,11 +101,11 @@ INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0
 INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (10.0, 2, 5,false);
 INSERT INTO public.ship_utility(price, ship_id, utility_id,is_deleted)	VALUES (0.0, 2, 4,false);
 
-INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1 , 1);
-INSERT INTO public.navigation_equipment( name, ship_id)	VALUES (2,1);
-INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (0,2);
-INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (1,2);
-INSERT INTO public.navigation_equipment(name, ship_id)	VALUES (3,1);
+INSERT INTO public.navigation_equipment(name, ship_id,is_deleted)	VALUES ('radio' , 1,false);
+INSERT INTO public.navigation_equipment( name, ship_id,is_deleted)	VALUES ('GPS',1,false);
+INSERT INTO public.navigation_equipment(name, ship_id,is_deleted)	VALUES ('VHFRadio',2,false);
+INSERT INTO public.navigation_equipment(name, ship_id,is_deleted)	VALUES ('Radar',2,false);
+INSERT INTO public.navigation_equipment(name, ship_id,is_deleted)	VALUES ('Campas',1,false);
 
 
 INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (2, 3,false);

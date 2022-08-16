@@ -97,7 +97,7 @@ public class ShipController {
         }
         images.add(this.imageMapper.mapImageRequestToImage(imageRequest));
         ship.setImages(images);
-        return new ResponseEntity<>(this.shipRepository.save(ship)
+        return new ResponseEntity<>(this.shipService.create(ship)
                 , HttpStatus.OK);
     }
 

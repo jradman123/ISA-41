@@ -283,7 +283,7 @@ export class CottageProfileComponent implements OnInit {
     this.uploaded = true;
     this.uploadPicture().then((resultt) => {
       this.cottageService.addImage(this.id, this.image).subscribe((data) => {
-        this.cottage = data;
+
         this.images = [];
         this.getImages();
 

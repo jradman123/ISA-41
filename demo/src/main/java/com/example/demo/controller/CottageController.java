@@ -135,7 +135,7 @@ public class CottageController {
         }
         images.add(this.imageMapper.mapImageRequestToImage(imageRequest));
         cottage.setImages(images);
-        return new ResponseEntity<>(this.cottageRepository.save(cottage)
+        return new ResponseEntity<>(this.cottageService.create(cottage)
       , HttpStatus.OK);
     }
 

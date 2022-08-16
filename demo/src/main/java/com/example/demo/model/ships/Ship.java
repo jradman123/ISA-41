@@ -78,10 +78,13 @@ public class Ship {
     @Column(name = "description", nullable = false)
     private String description;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "ship_id")
-	@JsonManagedReference
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "ship_images",
+			joinColumns = @JoinColumn(name = "ship_id"),
+			inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private Set<Image> images;
+
 
 
 	@Column(name = "capacity", nullable = false)

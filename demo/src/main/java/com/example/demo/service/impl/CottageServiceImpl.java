@@ -179,5 +179,10 @@ public class CottageServiceImpl implements CottageService {
 
         return ret;
     }
+
+    @Override
+    public Cottage create(Cottage cottage) {
+        return cottageRepository.save(cottage);
+    }
 }
 

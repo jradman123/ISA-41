@@ -25,4 +25,6 @@ public interface ShipService {
     ShipDto editShip(ShipDto newShip);
 
     Ship findShipById(Long objectId);
+
+    Ship create(Ship ship);
 }

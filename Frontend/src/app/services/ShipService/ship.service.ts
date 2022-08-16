@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
+import { Image } from 'src/app/interfaces/image';
+import { ImagesResponse } from 'src/app/interfaces/images-response';
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +42,17 @@ export class ShipService {
   editShip(ship: ShipDto) {
 
     return this.http.put<ShipDto>(`${this.apiServerUrl}/ships/editShip`, ship);
+  }
+
+  addImage(id: string, image: Image) {
+    console.log("usao u add image");
+    return this.http.post<ShipDto>(`${this.apiServerUrl}/ships/add-image/${id}`, image);
+
+  }
+
+  getShipImages(id: string) {
+    return this.http.get<ImagesResponse>(
+      `${this.apiServerUrl}/ships/${id}/images`);
   }
 
 }

@@ -10,6 +10,8 @@ import { UtilityService } from 'src/app/services/UtilityService/utility.service'
 import { NavigationService } from 'src/app/services/NavigationService/navigation.service';
 import { NavigationDto } from 'src/app/interfaces/navigation-dto';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Image } from 'src/app/interfaces/image';
+import { ImagesResponse } from 'src/app/interfaces/images-response';
 
 @Component({
   selector: 'app-ship-profile',
@@ -27,12 +29,25 @@ export class ShipProfileComponent implements OnInit {
   initialDetails: any
   email: any
   editMode = false;
-  updateShip: ShipDto
+  updateShip: ShipDto;
+  uploaded: boolean = false;
+  fileToUpload!: File;
+  image: Image;
+  imagesResponse: ImagesResponse;
+  images: Image[];
 
   constructor(private shipService: ShipService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
-    this.updateShip = {} as ShipDto
+    this.updateShip = {} as ShipDto;
+    this.image = {} as Image;
+    this.imagesResponse = {} as ImagesResponse;
+    this.images = [] as Image[];
+
+
 
   }
+
+
+
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.shipService.findbyId(this.id).subscribe({
@@ -57,6 +72,11 @@ export class ShipProfileComponent implements OnInit {
       },
     });
 
+
+
+
+
+
     this.ruleService.findShipRulebyId(this.id).subscribe((data) => {
       this.rules = data;
 
@@ -69,6 +89,47 @@ export class ShipProfileComponent implements OnInit {
     this.navigationService.findNavigationById(this.id).subscribe((data) => {
       this.navigations = data;
 
+    });
+  }
+
+  getImages() {
+    this.shipService.getShipImages(this.id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.imagesResponse = res
+        this.imagesResponse.images.forEach((image) => {
+          this.images.push(image)
+        })
+      }
+    });
+  }
+
+  toBase64 = (file: Blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  async uploadPicture() {
+    if (this.uploaded) {
+      await this.toBase64(this.fileToUpload).then(
+        (res) => (this.image.url = res as string)
+      );
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.fileToUpload = <File>event.target.files[0];
+    this.uploaded = true;
+    this.uploadPicture().then((resultt) => {
+      this.shipService.addImage(this.id, this.image).subscribe((data) => {
+        this.ship = data;
+        this.images = [];
+        this.getImages();
+
+      });
     });
   }
 

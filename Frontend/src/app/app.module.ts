@@ -65,8 +65,8 @@ import { AdventureUtilitiesComponent } from './components/adventure-utilities/ad
 import { AdventureImagesComponent } from './components/adventure-images/adventure-images.component';
 import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edit-utility-dialog.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
-
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 @NgModule({
@@ -139,7 +139,8 @@ import { InstructorAvailabilityComponent } from './components/instructor-availab
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    MatCarouselModule
+    MatCarouselModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],

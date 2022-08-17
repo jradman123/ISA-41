@@ -6,7 +6,9 @@ import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { EditCottageUtilityDialogComponent } from '../../edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';
 import { EditUtilityDialogComponent } from '../../edit-utility-dialog/edit-utility-dialog.component';
-
+import Swal from 'sweetalert2';
+import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 
 @Component({
   selector: 'app-edit-utilities',
@@ -20,13 +22,20 @@ export class EditUtilitiesComponent implements OnInit {
   utilityy!: UtilityDto;
   idCottage: any;
   utilities: UtilityDto[] = [];
+  haveReservations!: CottageReservation[]
 
-  constructor(public dialog: MatDialog, private utilityService: UtilityService, private router: ActivatedRoute) {
+  constructor(public dialog: MatDialog, private reservationService: ReservationService, private utilityService: UtilityService, private router: ActivatedRoute) {
 
     this.utilityy = {} as UtilityDto;
   }
 
   ngOnInit(): void {
+    this.idCottage = +this.router.snapshot.paramMap.get('id')!;
+
+    this.reservationService.getCottageReservationById(this.idCottage).subscribe((data) => {
+      this.haveReservations = data;
+
+    });
     this.findUtilities();
   }
 
@@ -39,16 +48,25 @@ export class EditUtilitiesComponent implements OnInit {
   }
 
   addUtility() {
-    this.utilityy.cottageId = this.idCottage;
-    console.log("fedfefdfdf0" + this.utilityy.name)
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The utility cannot be added because cottage has a reservation!',
+      })
 
-    this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
+    }
+    else {
+      this.utilityy.cottageId = this.idCottage;
+      console.log("fedfefdfdf0" + this.utilityy.name)
 
-      this.utilities = []
-      this.findUtilities();
+      this.utilityService.addCottageUtility(this.utilityy).subscribe((data) => {
 
-    });
+        this.utilities = []
+        this.findUtilities();
 
+      });
+    }
 
   }
 
@@ -73,15 +91,24 @@ export class EditUtilitiesComponent implements OnInit {
   }
   deleteUtility(id: any) {
 
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The utility cannot be deleted because cottage has a reservation!',
+      })
 
-    this.utilityService.deleteUtility(id, this.idCottage)
-      .subscribe(data => {
-        this.utilities = []
-        this.findUtilities();
+    }
+    else {
+
+      this.utilityService.deleteUtility(id, this.idCottage)
+        .subscribe(data => {
+          this.utilities = []
+          this.findUtilities();
 
 
-      });
-
+        });
+    }
 
 
   }

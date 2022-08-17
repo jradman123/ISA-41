@@ -54,7 +54,7 @@
                             <div style="width: 100%; display: flex">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Street Number</mat-label>
-                                    <input matInput formControlName="streetNumber" />
+                                    <input type="number" matInput formControlName="streetNumber" />
                                     <mat-error *ngIf="
                 !createForm?.get('streetNumber')?.valid &&
                 createForm?.get('streetNumber')?.touched &&
@@ -98,7 +98,7 @@
                             <div style="width: 100%; display: flex">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Price for one day</mat-label>
-                                    <input matInput formControlName="price" />
+                                    <input type="number" matInput formControlName="price" />
                                     <mat-error *ngIf="
                 !createForm?.get('price')?.valid &&
                 createForm?.get('price')?.touched &&
@@ -113,7 +113,7 @@
                             <div style="width: 100%; display: flex">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Capacity</mat-label>
-                                    <input matInput formControlName="capacity" />
+                                    <input type="number" matInput formControlName="capacity" />
                                     <mat-error *ngIf="
                 !createForm?.get('capacity')?.valid &&
                 createForm?.get('capacity')?.touched &&
@@ -128,7 +128,7 @@
                             <div style="width: 100%; display: flex">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Length</mat-label>
-                                    <input matInput formControlName="lenght" />
+                                    <input type="number" matInput formControlName="lenght" />
                                     <mat-error *ngIf="
                 !createForm?.get('lenght')?.valid &&
                 createForm?.get('lenght')?.touched &&
@@ -142,7 +142,7 @@
                         <div class="col-sm">
                             <mat-form-field appearance="fill">
                                 <mat-label>Number of engine</mat-label>
-                                <input matInput formControlName="numberOfEngine" />
+                                <input type="number" matInput formControlName="numberOfEngine" />
                                 <mat-error *ngIf="
                 !createForm?.get('numberOfEngine')?.valid &&
                 createForm?.get('numberOfEngine')?.touched &&
@@ -155,7 +155,7 @@
                         <div class="col-sm">
                             <mat-form-field appearance="fill">
                                 <mat-label>Strength of engine</mat-label>
-                                <input matInput formControlName="strengthOfEngine" />
+                                <input type="number" matInput formControlName="strengthOfEngine" />
                                 <mat-error *ngIf="
                 !createForm?.get('strengthOfEngine')?.valid &&
                 createForm?.get('strengthOfEngine')?.touched &&
@@ -168,7 +168,7 @@
                         <div class="col-sm">
                             <mat-form-field appearance="fill">
                                 <mat-label>Max speed</mat-label>
-                                <input matInput formControlName="maxSpeed" />
+                                <input type="number" matInput formControlName="maxSpeed" />
                                 <mat-error *ngIf="
                 !createForm?.get('maxSpeed')?.valid &&
                 createForm?.get('maxSpeed')?.touched &&
@@ -197,7 +197,7 @@
                         <div style="width: 100%; display: flex">
                             <mat-form-field appearance="fill">
                                 <mat-label>Cancelation conditions</mat-label>
-                                <input matInput formControlName="cancelationConditions" />
+                                <input type="number" matInput formControlName="cancelationConditions" />
                                 <mat-error *ngIf="
                 !createForm?.get('cancelationConditions')?.valid &&
                 createForm?.get('cancelationConditions')?.touched &&

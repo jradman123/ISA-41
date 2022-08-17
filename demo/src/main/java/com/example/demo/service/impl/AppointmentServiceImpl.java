@@ -5,6 +5,7 @@ import com.example.demo.dto.AppointmentDto;
 import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.reservation.Appointment;
+import com.example.demo.model.ships.Ship;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.service.AppointmentService;
@@ -36,6 +37,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private ShipServiceImpl shipService;
 
 
 
@@ -86,6 +90,15 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             return appointment;
        }else if(dto.getShipId()!=null) {
+           
+           Ship ship=shipService.findShipById(Long.parseLong(dto.getShipId()));
+           appointment.setShip(ship);
+           appointmentRepository.save(appointment);
+
+           for (User user: userService.findAll()) {
+               notifyUser(user.getEmail(), ship.getName(),appointment.getValidUntil());
+           }
+           return appointment;
 
        }
 
@@ -95,7 +108,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void notifyUser(String email, String name, LocalDateTime date) {
-        emailSenderService.sendEmail(email,"Obavijest o novim terminima za rezervaciju","Imate nove termine za vikendicu   "   +name + "." + "Akcija vazi do  " + date + "."+
+        emailSenderService.sendEmail(email,"Obavijest o novim terminima za rezervaciju","Imate nove termine za vikendicu " +name + "." + "Akcija vazi do  " + date + "."+
                 "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
     }
 

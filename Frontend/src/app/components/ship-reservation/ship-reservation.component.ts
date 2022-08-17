@@ -42,7 +42,8 @@ export class ShipReservationComponent implements OnInit {
       clientEmail: new FormControl('', Validators.required),
       resStart: new FormControl('', Validators.required),
       resEnd: new FormControl('', Validators.required),
-      capacity: new FormControl('', Validators.required)
+      capacity: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
     })
   }
 
@@ -68,21 +69,33 @@ export class ShipReservationComponent implements OnInit {
     if (this.newReservation.resStart >= this.newReservation.resEnd) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: 'Error',
         text: 'Start date is greater or equal then end date!',
       })
+    } else if (this.newReservation.resStart < new Date()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date must be greater then today!',
+      })
+    } else {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully booked a ship!',
+      })
+
+
+      this.sub = this.reservationService.reservatedCottage(this.newReservation)
+        .subscribe({
+          next: () => {
+
+            window.location.reload();
+
+          }
+        });
     }
-
-
-
-    this.sub = this.reservationService.reservatedCottage(this.newReservation)
-      .subscribe({
-        next: () => {
-
-          window.location.reload();
-
-        }
-      });
   }
 
   reservateShip(): void {
@@ -99,7 +112,7 @@ export class ShipReservationComponent implements OnInit {
     this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
       this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
       this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
-    this.newReservation.price = this.ship.price;
+    this.newReservation.price = this.form.value.price;
     this.newReservation.clientEmail = this.form.value.clientEmail;
     this.newReservation.objectId = this.id;
     this.newReservation.typeOfRes = 'BOAT';

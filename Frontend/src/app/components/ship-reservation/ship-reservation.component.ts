@@ -8,6 +8,7 @@ import { ShipDto } from 'src/app/interfaces/ship-list-view';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { ShipService } from 'src/app/services/ShipService/ship.service';
 import { UserService } from 'src/app/services/UserService/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ship-reservation',
@@ -64,6 +65,15 @@ export class ShipReservationComponent implements OnInit {
 
 
     this.reservateShip();
+    if (this.newReservation.resStart >= this.newReservation.resEnd) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Start date is greater or equal then end date!',
+      })
+    }
+
+
 
     this.sub = this.reservationService.reservatedCottage(this.newReservation)
       .subscribe({

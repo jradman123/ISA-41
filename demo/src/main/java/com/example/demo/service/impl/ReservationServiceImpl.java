@@ -40,6 +40,8 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private ShipReservationRepository shipReservationRepository;
 
+    @Autowired
+    private EmailSenderServiceImpl emailSenderService;
 
 
 
@@ -88,6 +90,7 @@ public class ReservationServiceImpl implements ReservationService
         reservation.setReservationStart(createReservationDto.resStart);
             reservation.setReservationEnd(createReservationDto.resEnd);
             reservation.setIsReserved(true);
+            notifyUserForReservation(createReservationDto.clientEmail);
 
        }else { throw new RuntimeException();}
 
@@ -95,6 +98,11 @@ public class ReservationServiceImpl implements ReservationService
 
 
 
+    }
+
+    @Override
+    public void notifyUserForReservation(String email) {
+        emailSenderService.sendEmail(email,"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Molimo da potvrdite i provjerite detalje na svom profilu!");
     }
 
     @Override

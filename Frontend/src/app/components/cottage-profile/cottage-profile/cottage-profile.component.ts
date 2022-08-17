@@ -32,6 +32,7 @@ import { DialogForReportComponent } from '../../dialog-for-report/dialog-for-rep
 import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-for-add-report.component';
 import { ReportService } from 'src/app/services/ReportService/report.service';
 import { RoomService } from 'src/app/services/RoomService/room.service';
+import Swal from 'sweetalert2';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -80,7 +81,7 @@ export class CottageProfileComponent implements OnInit {
   email: any
   pastReservations!: MatTableDataSource<CottageReservation>;
   roomm!: RoomDto
-
+  haveReservations!: CottageReservation[]
 
 
   uploaded: boolean = false;
@@ -118,6 +119,10 @@ export class CottageProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
+    this.reservationService.getCottageReservationById(this.id).subscribe((data) => {
+      this.haveReservations = data;
+
+    });
 
 
     this.findAppointments();
@@ -429,24 +434,38 @@ export class CottageProfileComponent implements OnInit {
     if (this.detailsForm.invalid) {
       return;
     }
-    this.email = localStorage.getItem('email')
-    this.updateCottage = {
-      name: this.detailsForm.get('name')?.value,
-      description: this.detailsForm.get('description')?.value,
-      price: this.detailsForm.get('price')?.value,
-      streetName: this.detailsForm.get('streetName')?.value,
-      streetNumber: this.detailsForm.get('streetNumber')?.value,
-      city: this.detailsForm.get('city')?.value,
-      country: this.detailsForm.get('country')?.value,
-      id: this.id,
-      ownerEmail: this.email,
-      numberOfPeople: this.detailsForm.get('numberOfPeople')?.value
+
+
+
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The cottage cannot be deleted because it has a reservation!',
+      })
+
     }
-    this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
-      this.updateCottage = data
-      this.initialDetails = JSON.parse(JSON.stringify(data));
-      this.editMode = false
-    })
+    else {
+
+      this.email = localStorage.getItem('email')
+      this.updateCottage = {
+        name: this.detailsForm.get('name')?.value,
+        description: this.detailsForm.get('description')?.value,
+        price: this.detailsForm.get('price')?.value,
+        streetName: this.detailsForm.get('streetName')?.value,
+        streetNumber: this.detailsForm.get('streetNumber')?.value,
+        city: this.detailsForm.get('city')?.value,
+        country: this.detailsForm.get('country')?.value,
+        id: this.id,
+        ownerEmail: this.email,
+        numberOfPeople: this.detailsForm.get('numberOfPeople')?.value
+      }
+      this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
+        this.updateCottage = data
+        this.initialDetails = JSON.parse(JSON.stringify(data));
+        this.editMode = false
+      })
+    }
   }
 
   cancel() {
@@ -504,32 +523,51 @@ export class CottageProfileComponent implements OnInit {
   }
 
   addRoom() {
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The cottage cannot be deleted because it has a reservation!',
+      })
 
-    console.log(this.roomm)
-    this.roomm.cottageId = this.id;
-    this.roomService.addRoom(this.roomm).subscribe((data) => {
+    }
+    else {
 
+      console.log(this.roomm)
+      this.roomm.cottageId = this.id;
+      this.roomService.addRoom(this.roomm).subscribe((data) => {
 
-      this.rooms = []
-      this.findRooms();
-    });
-  }
-
-  deleteRoom(idR: any) {
-    console.log("fefefeef" + idR);
-
-
-    this.roomService.deleteRoom(idR, this.id)
-      .subscribe(data => {
 
         this.rooms = []
         this.findRooms();
-
-
-
-
-
-
       });
+    }
+  }
+
+  deleteRoom(idR: any) {
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The cottage cannot be deleted because it has a reservation!',
+      })
+
+    }
+    else {
+
+
+      this.roomService.deleteRoom(idR, this.id)
+        .subscribe(data => {
+
+          this.rooms = []
+          this.findRooms();
+
+
+
+
+
+
+        });
+    }
   }
 }

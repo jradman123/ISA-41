@@ -1,22 +1,93 @@
-<button class="btn" (click)="clickHome()">Home</button>
-<h1 style="margin-left: 210px"> Appointments of cottage {{cottage.name}}</h1>
+<div class="inner">
+    <form class="form" [formGroup]="form">
+        <div>
+            <label>Start date:</label>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="resStart">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <label>End date:</label>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="resEnd">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
 
-<div class="card">
-    <div class="container">
-        <div class="card" style="margin-top: 20px;" *ngFor="let a of appointments">
-            <ul class="list-group">
 
-                <li style="height: 60px;" class="list-group-item">Start date: {{a.startDate}} </li>
-                <li style="height: 60px;" class="list-group-item">End date: {{a.endDate}} </li>
-                <li style="height: 60px;" class="list-group-item">Duration: {{a.startDate}} - {{a.endDate}}</li>
-                <li style="height: 60px;" class="list-group-item">Max persons: {{a.capacity}}</li>
-                <li style="height: 60px;" class="list-group-item">Price: {{a.price}}</li>
-                <li class="list-group-item">
+        <div>
+            <label>Number of person:</label>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Add number of person</mat-label>
+                <input matInput type="number" min="1" max="{{this.ship.capacity}" placeholder="Number of person"
+                    formControlName="capacity" />
+            </mat-form-field>
+        </div>
+        <div>
+            <label>Price for reservation:</label>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Add price</mat-label>
+                <input matInput type="number" min="1" max="" placeholder="Price" formControlName="price" />
+            </mat-form-field>
+        </div>
+        <div>
+            <label>Valid until:</label>
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="validUntil">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </form>
 
 
-                </li>
-            </ul>
+
+
+
+    <form>
+
+        <table class="table" style="margin-left:200px; margin-top: 23px;">
+
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Select</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let utility of utilities">
+                    <td>{{utility.name}}</td>
+                    <td>
+
+                        <input type="checkbox" id="customCheck1">
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button mat-flat-button color="primary" (click)="add()"
+                style="margin-left: 200px;width: 200px;margin-top: 120px;">Add</button>
+            <button mat-flat-button color="primary" (click)="add()"
+                style="margin-left: 200px;width: 200px;margin-top: -20px;">Cancel</button>
 
         </div>
-    </div>
+
+    </form>
+
+
+    <form>
+
+    </form>
+
+
 </div>

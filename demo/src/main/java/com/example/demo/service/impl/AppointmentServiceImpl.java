@@ -47,7 +47,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> findApp(Long id) {
         List<AppointmentDto> appointmentDtos = new ArrayList<>();
         for (Appointment appointment : appointmentRepository.findAll()) {
-            if (appointment.getCottage() != null & appointment.isDeleted() == false) {
+            if (appointment.getCottage() != null & appointment.isDeleted() == false && appointment.getValidUntil().isBefore(LocalDateTime.now())) {
                 if (id.equals(appointment.getCottage().getId())) {
                     appointmentDtos.add(new AppointmentDto(appointment));
                 } else if (id.equals(appointment.getShip().getId())) {

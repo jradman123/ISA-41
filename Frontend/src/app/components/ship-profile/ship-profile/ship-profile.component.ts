@@ -15,6 +15,9 @@ import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 
+import Swal from 'sweetalert2';
+import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 @Component({
   selector: 'app-ship-profile',
   templateUrl: './ship-profile.component.html',
@@ -39,8 +42,9 @@ export class ShipProfileComponent implements OnInit {
   imagesResponse: ImagesResponse;
   images: Image[];
   viewOff = false;
+  haveReservations!: CottageReservation[]
 
-  constructor(private shipService: ShipService, private appointmentService: AppointmentService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
+  constructor(private shipService: ShipService, private reservationService: ReservationService, private appointmentService: AppointmentService, private navigationService: NavigationService, private router: ActivatedRoute, private ruleService: RuleService, private utilityService: UtilityService, private route: Router) {
     this.updateShip = {} as ShipDto;
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
@@ -81,11 +85,12 @@ export class ShipProfileComponent implements OnInit {
 
 
 
-
-    this.navigationService.findNavigationById(this.id).subscribe((data) => {
-      this.navigations = data;
+    this.reservationService.getShipReservationById(this.id).subscribe((data) => {
+      this.haveReservations = data;
 
     });
+
+
   }
 
   findAppointments() {
@@ -138,22 +143,6 @@ export class ShipProfileComponent implements OnInit {
 
 
 
-  deleteShip() {
-    this.shipService.deleteShip(this.id)
-      .subscribe(data => {
-
-
-        window.location.reload();
-      });
-  }
-  editRules() {
-    this.route.navigate(['shipOwner/edit-rules/' + this.id]);
-  }
-
-  editUtilities() {
-    this.route.navigate(['shipOwner/edit-utilities/' + this.id]);
-
-  }
 
 
   detailsForm = new FormGroup({
@@ -214,32 +203,54 @@ export class ShipProfileComponent implements OnInit {
 
 
   edit() {
-
-    this.email = localStorage.getItem('email')
-    this.updateShip = {
-      name: this.detailsForm.get('name')?.value,
-      description: this.detailsForm.get('description')?.value,
-      price: this.detailsForm.get('price')?.value,
-      streetName: this.detailsForm.get('street')?.value,
-      streetNumber: this.detailsForm.get('streetNumber')?.value,
-      city: this.detailsForm.get('cityName')?.value,
-      country: this.detailsForm.get('countryName')?.value,
-      id: this.id,
-      ownerEmail: this.email,
-      capacity: this.detailsForm.get('capacity')?.value,
-      type: this.detailsForm.get('type')?.value,
-      maxSpeed: this.detailsForm.get('maxSpeed')?.value,
-      strengthOfEngine: this.detailsForm.get('strengthOfEngine')?.value,
-      numberOfEngine: this.detailsForm.get('numberOfEngine')?.value,
-      length: this.detailsForm.get('length')?.value,
-      cancelationConditions: this.detailsForm.get('cancelationConditions')?.value,
-      fishingEquipment: this.detailsForm.get('fishingEquipment')?.value
+    if (this.detailsForm.invalid) {
+      return;
     }
-    this.shipService.editShip(this.updateShip).subscribe((data) => {
-      this.updateShip = data
-      this.initialDetails = JSON.parse(JSON.stringify(data));
-      this.editMode = false
-    })
+
+
+    if (this.haveReservations.length != 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The ship cannot be changed because it has a reservation!',
+      })
+
+    }
+    else {
+
+
+      this.email = localStorage.getItem('email')
+      this.updateShip = {
+        name: this.detailsForm.get('name')?.value,
+        description: this.detailsForm.get('description')?.value,
+        price: this.detailsForm.get('price')?.value,
+        streetName: this.detailsForm.get('street')?.value,
+        streetNumber: this.detailsForm.get('streetNumber')?.value,
+        city: this.detailsForm.get('cityName')?.value,
+        country: this.detailsForm.get('countryName')?.value,
+        id: this.id,
+        ownerEmail: this.email,
+        capacity: this.detailsForm.get('capacity')?.value,
+        type: this.detailsForm.get('type')?.value,
+        maxSpeed: this.detailsForm.get('maxSpeed')?.value,
+        strengthOfEngine: this.detailsForm.get('strengthOfEngine')?.value,
+        numberOfEngine: this.detailsForm.get('numberOfEngine')?.value,
+        length: this.detailsForm.get('length')?.value,
+        cancelationConditions: this.detailsForm.get('cancelationConditions')?.value,
+        fishingEquipment: this.detailsForm.get('fishingEquipment')?.value
+      }
+      this.shipService.editShip(this.updateShip).subscribe((data) => {
+        this.updateShip = data
+        this.initialDetails = JSON.parse(JSON.stringify(data));
+        this.editMode = false
+      })
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully changed a  ship!',
+      })
+
+    }
   }
 
   cancel() {

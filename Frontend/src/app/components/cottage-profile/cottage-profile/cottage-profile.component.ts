@@ -465,6 +465,11 @@ export class CottageProfileComponent implements OnInit {
         this.initialDetails = JSON.parse(JSON.stringify(data));
         this.editMode = false
       })
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully changed a  cottage!',
+      })
     }
   }
 
@@ -527,7 +532,7 @@ export class CottageProfileComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The cottage cannot be changed because it has a reservation!',
+        text: 'The room cannot be added because cottage has a reservation!',
       })
 
     }
@@ -549,7 +554,7 @@ export class CottageProfileComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The cottage cannot be changed because it has a reservation!',
+        text: 'The room cannot be deleted because cottage has a reservation!',
       })
 
     }

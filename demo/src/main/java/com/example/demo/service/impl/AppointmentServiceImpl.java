@@ -86,17 +86,17 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointmentRepository.save(appointment);
 
             for (User user: userService.findAll()) {
-                notifyUser(user.getEmail(), cottage.getName(),appointment.getValidUntil());
+                notifyUserForCottage(user.getEmail(), cottage.getName(),appointment.getValidUntil());
             }
             return appointment;
        }else if(dto.getShipId()!=null) {
-           
+
            Ship ship=shipService.findShipById(Long.parseLong(dto.getShipId()));
            appointment.setShip(ship);
            appointmentRepository.save(appointment);
 
            for (User user: userService.findAll()) {
-               notifyUser(user.getEmail(), ship.getName(),appointment.getValidUntil());
+               notifyUserForShip(user.getEmail(), ship.getName(),appointment.getValidUntil());
            }
            return appointment;
 
@@ -107,8 +107,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     @Override
-    public void notifyUser(String email, String name, LocalDateTime date) {
+    public void notifyUserForCottage(String email, String name, LocalDateTime date) {
         emailSenderService.sendEmail(email,"Obavijest o novim terminima za rezervaciju","Imate nove termine za vikendicu " +name + "." + "Akcija vazi do  " + date + "."+
+                "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
+    }
+
+    @Override
+    public void notifyUserForShip(String email, String name, LocalDateTime date) {
+        emailSenderService.sendEmail(email,"Obavijest o novim terminima za rezervaciju","Imate nove termine za brod " +name + "." + "Akcija vazi do  " + date + "."+
                 "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
     }
 

@@ -21,5 +21,8 @@ public interface AppointmentService {
 
 
 
-    void notifyUser(String email, String name, LocalDateTime date);
+
+    void notifyUserForCottage(String email, String name, LocalDateTime date);
+
+    void notifyUserForShip(String email, String name, LocalDateTime date);
 }

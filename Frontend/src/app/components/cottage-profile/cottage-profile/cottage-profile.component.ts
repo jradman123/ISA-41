@@ -441,7 +441,7 @@ export class CottageProfileComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The cottage cannot be deleted because it has a reservation!',
+        text: 'The cottage cannot be changed because it has a reservation!',
       })
 
     }
@@ -527,7 +527,7 @@ export class CottageProfileComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The cottage cannot be deleted because it has a reservation!',
+        text: 'The cottage cannot be changed because it has a reservation!',
       })
 
     }
@@ -549,7 +549,7 @@ export class CottageProfileComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The cottage cannot be deleted because it has a reservation!',
+        text: 'The cottage cannot be changed because it has a reservation!',
       })
 
     }

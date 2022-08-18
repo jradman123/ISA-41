@@ -15,7 +15,8 @@ public interface ReservationService {
 
     void createReservation(CreateReservationDto createReservationDto);
 
-    void notifyUserForReservation(String email);
+
+    void notifyUserForReservation(CreateReservationDto dto);
 
     List<ReservationViewDto> getPastReservationsByCottage(Long id);
 

@@ -89,8 +89,8 @@ public class ReservationServiceImpl implements ReservationService
 
         reservation.setReservationStart(createReservationDto.resStart);
             reservation.setReservationEnd(createReservationDto.resEnd);
-            reservation.setIsReserved(true);
-            notifyUserForReservation(createReservationDto.clientEmail);
+            reservation.setIsReserved(false);
+            notifyUserForReservation(createReservationDto);
 
        }else { throw new RuntimeException();}
 
@@ -102,8 +102,10 @@ public class ReservationServiceImpl implements ReservationService
     }
 
     @Override
-    public void notifyUserForReservation(String email) {
-        emailSenderService.sendEmail(email,"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Molimo da potvrdite i provjerite detalje na svom profilu!");
+    public void notifyUserForReservation(CreateReservationDto dto) {
+        emailSenderService.sendEmail(dto.getClientEmail(),"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Rezervacija traje od "+dto.getResStart() + " do " + dto.getResEnd() +
+                " po cijeni od " + dto.getPrice() + "€ za " + dto.getNumberOfPerson() + " osoba." +
+                "Molimo da potvrdite i provjerite detalje na svom profilu!");
     }
 
     @Override

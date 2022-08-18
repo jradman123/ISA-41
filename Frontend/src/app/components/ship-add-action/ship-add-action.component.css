@@ -1,0 +1,11 @@
+.inner {
+    padding: 20px;
+    background: #fff;
+    margin-left: 20px;
+    display: flex;
+}
+
+
+.inner form {
+    width: 100%;
+}

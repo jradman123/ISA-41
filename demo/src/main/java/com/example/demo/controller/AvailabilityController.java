@@ -8,6 +8,7 @@ import com.example.demo.service.AvailabilityService;
 import com.example.demo.service.impl.AvailabilityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +22,14 @@ public class AvailabilityController {
     @Autowired
     AvailabilityServiceImpl availabilityService;
 
-
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/getByCottage/{id}")
     public List<CottageAvailabilityDto> getByCottage(@PathVariable Long id) {
         return availabilityService.findByCottage(id);
     }
 
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value="/addCottageAvailability")
     public CottageAvailability addCottageAvailability(@RequestBody CottageAvailabilityDto cottageAvailabilityDto) {

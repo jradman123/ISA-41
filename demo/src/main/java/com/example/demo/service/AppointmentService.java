@@ -19,10 +19,10 @@ public interface AppointmentService {
 
    Appointment createAppointment(CreateAppointmentDto dto);
 
-
-
-
     void notifyUserForCottage(String email, String name, LocalDateTime date);
 
     void notifyUserForShip(String email, String name, LocalDateTime date);
+
+
+    List<AppointmentDto> findAppbyShip(Long id);
 }

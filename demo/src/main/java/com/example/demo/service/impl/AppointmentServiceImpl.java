@@ -47,10 +47,8 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<AppointmentDto> findApp(Long id) {
         List<AppointmentDto> appointmentDtos = new ArrayList<>();
         for (Appointment appointment : appointmentRepository.findAll()) {
-            if (appointment.getCottage() != null & appointment.isDeleted() == false && appointment.getValidUntil().isBefore(LocalDateTime.now())) {
+            if (appointment.getCottage() != null & appointment.isDeleted() == false && appointment.getValidUntil().isAfter(LocalDateTime.now())) {
                 if (id.equals(appointment.getCottage().getId())) {
-                    appointmentDtos.add(new AppointmentDto(appointment));
-                } else if (id.equals(appointment.getShip().getId())) {
                     appointmentDtos.add(new AppointmentDto(appointment));
                 }
             }
@@ -118,7 +116,18 @@ public class AppointmentServiceImpl implements AppointmentService {
                 "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
     }
 
-
+    @Override
+    public List<AppointmentDto> findAppbyShip(Long id) {
+        List<AppointmentDto> appointmentDtos = new ArrayList<>();
+        for (Appointment appointment : appointmentRepository.findAll()) {
+            if (appointment.getShip() != null & appointment.isDeleted() == false && appointment.getValidUntil().isAfter(LocalDateTime.now())) {
+                if (id.equals(appointment.getShip().getId())) {
+                    appointmentDtos.add(new AppointmentDto(appointment));
+                }
+            }
+        }
+        return appointmentDtos;
+    }
 
 
 }

@@ -40,7 +40,9 @@ public class CottageController {
     private CottageRepository cottageRepository;
 
 
+
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/all")
     public List<CottageDto> findAll() {
         return this.cottageService.findAll();
@@ -48,21 +50,21 @@ public class CottageController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value = "/createCottage")
     public Cottage createCottage(@RequestBody CottageDto newCottage) {
         return this.cottageService.createCottage(newCottage);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //isto radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/findCottage/{id}")
     public CottageDto findCottage(@PathVariable Long id) {
         return this.cottageService.findCottage(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //isto radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/findRoomsById/{id}")
     public List<RoomDto> findRoomsByCotttage(@PathVariable Long id) {
         return this.cottageService.findRoomsByCottage(id);
@@ -71,13 +73,14 @@ public class CottageController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @DeleteMapping(value = "/deleteRoomByCottage/{id}/{idCottage}")
     public ResponseEntity<Long> deleteRoomByCottage(@PathVariable Long id,@PathVariable Long idCottage) {
         return this.cottageService.deleteRoomByCottage(id,idCottage);
     }
 
 
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value = "/search")
     public List<CottageDto> search(CottageDto dto) {
         return this.cottageService.search(dto);
@@ -86,29 +89,22 @@ public class CottageController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value = "/createRoomByCottage")
     public Room createRoom(@RequestBody RoomDto newRoom) {
         return this.cottageService.createRoom(newRoom);
     }
 
 
-
-
-
-
-
-
-
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @DeleteMapping(value = "/deleteCottage/{id}")
     public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
         return this.cottageService.deleteCottage(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //isto radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value="/findOwnerCottages/{email}")
     public List<CottageDto> findCottagesFromOwner(@PathVariable String email) {
         return this.cottageService.getOwnerCottages(email);

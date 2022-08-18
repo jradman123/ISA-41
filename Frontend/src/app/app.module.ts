@@ -75,6 +75,7 @@ import { EditShipUtilitiesComponent } from './components/edit-ship-utilities/edi
 import { ShipReservationHistoryComponent } from './components/ship-reservation-history/ship-reservation-history.component';
 import { EditShipNavigationComponent } from './components/edit-ship-navigation/edit-ship-navigation.component';
 import { ShipReservationComponent } from './components/ship-reservation/ship-reservation.component';
+import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
 
 
 
@@ -147,7 +148,8 @@ import { ShipReservationComponent } from './components/ship-reservation/ship-res
     EditShipUtilitiesComponent,
     ShipReservationHistoryComponent,
     EditShipNavigationComponent,
-    ShipReservationComponent
+    ShipReservationComponent,
+    ShipAddActionComponent
 
 
 

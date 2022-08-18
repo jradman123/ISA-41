@@ -67,7 +67,8 @@ import { AdventureImagesComponent } from './components/adventure-images/adventur
 import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edit-utility-dialog.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';import { DialogForAppointmentComponent } from './components/dialog-for-appointment/dialog-for-appointment.component';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DialogForAppointmentComponent } from './components/dialog-for-appointment/dialog-for-appointment.component';
 import { DialogForReportComponent } from './components/dialog-for-report/dialog-for-report.component';
 import { DialogForAddReportComponent } from './components/dialog-for-add-report/dialog-for-add-report.component';
 import { EditCottageUtilityDialogComponent } from './components/edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';

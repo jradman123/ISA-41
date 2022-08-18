@@ -29,6 +29,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.29.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.4.28",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

@@ -1,10 +1,13 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageUtilityDto;
+import com.example.demo.dto.ShipUtilityDto;
 import com.example.demo.dto.UtilityDto;
 import com.example.demo.model.Utility;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
+import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.repository.CottageUtilityRepository;
 import com.example.demo.repository.ShipUtilityRepository;
@@ -31,15 +34,19 @@ public class UtilityServiceImpl implements UtiilityService {
     @Autowired
     private CottageServiceImpl cottageService;
 
+    @Autowired
+    private ShipServiceImpl shipService;
+
+
 
     @Override
-    public List<UtilityDto> getUtilityByCottage(Long id) {
-        List<UtilityDto> utilityDto=new ArrayList<>();
+    public List<CottageUtilityDto> getUtilityByCottage(Long id) {
+        List<CottageUtilityDto> utilityDto=new ArrayList<>();
         for(CottageUtility cottageUtility: cottageUtilityRepositoty.findAll()) {
             if(id.equals(cottageUtility.getCottage().getId()) & cottageUtility.isDeleted()==false) {
                for(Utility utility:utilityRepository.findAll()) {
                     if(cottageUtility.getUtility().getId().equals(utility.getId())) {
-                        utilityDto.add(new UtilityDto(utility));
+                        utilityDto.add(new CottageUtilityDto(cottageUtility));
                     }
                 }
 
@@ -50,13 +57,13 @@ public class UtilityServiceImpl implements UtiilityService {
     }
 
     @Override
-    public List<UtilityDto> getUtilitiesbyBoat(Long id) {
-        List<UtilityDto> utilityDto=new ArrayList<>();
+    public List<ShipUtilityDto> getUtilitiesbyBoat(Long id) {
+        List<ShipUtilityDto> utilityDto=new ArrayList<>();
         for(ShipUtility shipUtility: shipUtilityRepository.findAll()) {
-            if(id.equals(shipUtility.getShip().getId())) {
+            if(id.equals(shipUtility.getShip().getId()) & shipUtility.isDeleted()==false) {
                 for(Utility utility:utilityRepository.findAll()) {
                     if(shipUtility.getUtility().getId().equals(utility.getId())) {
-                        utilityDto.add(new UtilityDto(utility));
+                        utilityDto.add(new ShipUtilityDto(shipUtility));
                     }
                 }
 
@@ -74,6 +81,7 @@ public class UtilityServiceImpl implements UtiilityService {
             if(utility.getCottage().getId()==idCottage & utility.getId()==id) {
                 utility.setDeleted(true);
                 cottageUtilityRepositoty.save(utility);
+
             }
 
         }
@@ -88,6 +96,38 @@ public class UtilityServiceImpl implements UtiilityService {
         CottageUtility ca=new CottageUtility(cottageUtilityDto.getPrice(),cottage,utility);
         this.utilityRepository.save(utility);
         return  this.cottageUtilityRepositoty.save(ca);
+
+    }
+
+    @Override
+    public CottageUtility updateCottageUtility(CottageUtilityDto cottageUtilityDto,Long id) {
+        CottageUtility cottageUtility = cottageUtilityRepositoty.findById(id).get();
+
+       return cottageUtility;
+    }
+
+    @Override
+    public ShipUtility addUtilityByShip(ShipUtilityDto shipUtilityDto) {
+        Utility utility=new Utility(shipUtilityDto.getName());
+        Ship ship=shipService.findShipById(shipUtilityDto.getShipId());
+        ShipUtility ca=new ShipUtility(shipUtilityDto.getPrice(),ship,utility);
+        this.utilityRepository.save(utility);
+        return  this.shipUtilityRepository.save(ca);
+    }
+
+    @Override
+    public ResponseEntity<Long> deleteUtilirybyShip(Long id, Long idShip) {
+        List<ShipUtility> shipUtilities=this.shipUtilityRepository.findAll();
+        for (ShipUtility utility: shipUtilities)
+        {
+            if(utility.getShip().getId()==idShip & utility.getId()==id) {
+                utility.setDeleted(true);
+                shipUtilityRepository.save(utility);
+
+            }
+
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
 
     }
 

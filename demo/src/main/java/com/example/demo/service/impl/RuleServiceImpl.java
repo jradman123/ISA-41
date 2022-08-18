@@ -6,6 +6,7 @@ import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageUtility;
+import com.example.demo.model.ships.Ship;
 import com.example.demo.repository.CottageRepository;
 import com.example.demo.repository.RuleRepository;
 import com.example.demo.service.RuleService;
@@ -29,6 +30,9 @@ public class RuleServiceImpl implements RuleService {
 
     @Autowired
     private CottageServiceImpl cottageService;
+
+    @Autowired
+    private ShipServiceImpl shipService;
 
 
     @Override
@@ -69,9 +73,11 @@ public class RuleServiceImpl implements RuleService {
     public List<RuleDto> getRulesByBoat(Long id) {
         List<RuleDto> ruleDto = new ArrayList<>();
         for (Rules rule : ruleRepository.findAll()) {
-            if (rule.getShip() != null) {
+
+            if (rule.getShip() != null & rule.isDeletedByShip()==false) {
                 if (id.equals(rule.getShip().getId())) {
                     ruleDto.add(new RuleDto(rule));
+
                 }
             }
         }
@@ -113,5 +119,35 @@ public class RuleServiceImpl implements RuleService {
          return new ResponseEntity<>(id, HttpStatus.OK);
 
      }
+
+    @Override
+    public ResponseEntity<Long> deleteRuleByShip(Long id, Long idShip) {
+        List<Rules> rules=this.ruleRepository.findAll();
+        for (Rules rule: rules)
+        {
+            if(rule.getShip().getId()==idShip & rule.getId()==id) {
+                rule.setDeletedByShip(true);
+                ruleRepository.save(rule);
+            }
+
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @Override
+    public Rules createShipRule(RuleDto newRule) {
+
+        System.out.print("dsdsds"+newRule);
+        Ship ship=shipService.findShipById(newRule.getShipId());
+        Rules rule=new Rules();
+
+        rule.setShip(ship);
+        rule.setRuleDescription(newRule.getRuleDescription());
+        rule.setDeletedbyCottages(false);
+        rule.setDeletedByShip(false);
+        rule.setCottage(null);
+        this.ruleRepository.save(rule);
+        return rule;
+    }
 
 }

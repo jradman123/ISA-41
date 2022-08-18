@@ -5,29 +5,29 @@ import com.example.demo.model.reservation.Reservation;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
-public class CottageReservationViewDto {
+public class ReservationViewDto {
 
     public Long id;
-    public LocalDateTime resStart;
-    public LocalDateTime resEnd;
+    public String resStart;
+    public String resEnd;
     public Integer numberOfPerson;
     public  Double price;
     public String clientEmail;
     public String typeOfRes;
     public String objectId;
+    public boolean  haveReport;
 
 
-    public CottageReservationViewDto(Reservation r) {
+    public ReservationViewDto(Reservation r) {
         id=r.getId();
-        resStart=r.getReservationStart();
-        resEnd=r.getReservationEnd();
+        resStart=r.getReservationStart().toString();
+        resEnd=r.getReservationEnd().toString();
         numberOfPerson=r.getNumberOfPerson();
         price=r.getPrice();
         clientEmail=r.getRegisteredUser().getEmail();
+        haveReport=r.isHaveReport();
 
     }
 }

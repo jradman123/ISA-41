@@ -1,115 +1,236 @@
-<div style="margin-left: 220px; margin-top: 20px;" class="container">
-    <h1 class="h1"> {{this.ship.name }}</h1>
+<div class="container">
 
-    <button class="btn" (click)="editShip()">Edit basic information</button>
-    <button class="btn" (click)="deleteShip()">Delete ship</button>
-    <button class="btn" (click)="editRules()">Edit rules of ship</button>
-    <button class="btn" (click)="editUtilities()">Edit utilities of ship</button>
+    <br /><br /><br />
+
+    <mat-tab-group>
+        <mat-tab style="overflow-y: hidden!important;" label="Basic info">
+            <mat-card style="width:500px">
+                <mat-card-title></mat-card-title>
+                <mat-card-content>
+                    <form class="form-container" [formGroup]="detailsForm" style="width:1000px">
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Name of ship</mat-label>
+                                    <input matInput placeholder="Name of ship" formControlName="name"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Price in euro</mat-label>
+                                    <input matInput placeholder="Price in euro" formControlName="price"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Guest limit</mat-label>
+                                    <input matInput placeholder="Guest limit" formControlName="capacity"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Street name</mat-label>
+                                    <input matInput placeholder="Street name" formControlName="street"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Street number</mat-label>
+                                    <input matInput placeholder="Street number" formControlName="streetNumber"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="City" formControlName="cityName"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput placeholder="Country" formControlName="countryName"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>The percentage of the price that is retained</mat-label>
+                                    <input matInput placeholder="The percentage of the price that is retained"
+                                        formControlName="cancelationConditions" [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Description</mat-label>
+                                    <textarea matInput placeholder="Description" formControlName="description"
+                                        [readonly]="!editMode"> </textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
 
 
-    <div class="row">
-        <div class="card1">
-            <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Address of
-                    cottage:</h4>
-                <h6 class="text-white row"
-                    style="margin-top: 40px; margin-left: 10px; font-size: 18px; margin-right: 10px;">
-                    {{this.ship.streetName}},{{this.ship.streetNumber}},{{this.ship.city}},{{this.ship.country}}</h6>
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px; ;">Short
-                    description:</h4>
-                <h6 class="text-white row"
-                    style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                    {{this.ship.description}}</h6>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Length</mat-label>
+                                    <input matInput placeholder="Lenght of boat" formControlName="length"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Number of engine:</mat-label>
+                                    <input matInput placeholder="Number of engine" formControlName="numberOfEngine"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Strength of ship:</mat-label>
+                                    <input matInput placeholder="Strength of engine" formControlName="strengthOfEngine"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Maxspeed of boat:</mat-label>
+                                    <input matInput placeholder="Maxspeed" formControlName="maxSpeed"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Type of ship</mat-label>
+                                    <input matInput placeholder="Type of ship" formControlName="type"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Fishing equipment</mat-label>
+                                    <input matInput placeholder="Fishing equipment" formControlName="fishingEquipment"
+                                        [readonly]="!editMode" />
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="button-container" *ngIf="!editMode else editIsOn">
+                            <button mat-flat-button color="primary" class="button"
+                                (click)="editMode = true">Edit</button>
+                        </div>
+                        <ng-template #editIsOn>
+                            <div class="button-container" *ngIf="editMode">
+                                <button mat-flat-button color="primary" class="button" (click)="edit()">Save</button>
+                                <button mat-flat-button color="warn" class="button" (click)="cancel()">Cancel</button>
+                            </div>
+                        </ng-template>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+
+        </mat-tab>
+
+        <mat-tab label="Edit images">
+            <div>
+                <mat-carousel timings="250ms ease-in" color="primary" maxWidth="auto" maxHeight="auto" [loop]="true"
+                    [hideArrows]="false" [hideIndicators]="true" [useKeyboard]="true" [useMouseWheel]="false"
+                    orientation="ltr">
+                    <mat-carousel-slide style="height: 600px !important;" #matCarouselSlide
+                        *ngFor="let image of images; let i = index">
+                        <img [src]="image.url" style="height: 400px; width: 1150px;" />
+                    </mat-carousel-slide>
+                </mat-carousel>
             </div>
-        </div>
-
-        <div class="card2">
-            <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Lenght of
-                    boat: {{this.ship.length}}</h4>
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Number of
-                    engine: {{this.ship.numberOfEngine}}</h4>
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Strength of
-                    engine: {{this.ship.strengthOfEngine}}</h4>
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Max speed of
-                    boat: {{this.ship.maxSpeed}}</h4>
-
+            <div style="align-items: center;">
+                <br />
+                <input style="margin-top: 20px; color:primary;" type="file" #file (change)="onFileSelected($event)" />
             </div>
-        </div>
+        </mat-tab>
 
-        <div class="card1">
-            <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;">Price of
-                    cottage for one day:</h4>
-                <h6 class="text-white row"
-                    style="margin-top: 20px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                    {{this.ship.price}} € </h6>
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">If you cancel
-                    reservation, you pay {{this.ship.cancelationConditions}}% of price. </h4>
+        <mat-tab label="Edit rules">
+
+            <app-edit-ship-rules></app-edit-ship-rules>
+
+        </mat-tab>
+        <mat-tab label="Edit utilities">
+            <app-edit-ship-utilities></app-edit-ship-utilities>
+        </mat-tab>
+        <mat-tab label="Edit navigation equipment">
+            <app-edit-ship-navigation></app-edit-ship-navigation>
+        </mat-tab>
+
+        <mat-tab label="Edit availability">
 
 
-            </div>
-        </div>
 
-        <div class="card2">
-            <div class="col">
-                <h4 class="text-white row" style="margin-top: 25px; font-size: 18px; margin-left: 10px;"> Type of boat:
-                    {{this.ship.type}}</h4>
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Number of people
-                    who can be in ship: {{this.ship.capacity}}</h4>
-                <h4 class="text-white row" style="margin-top: 25px;font-size: 18px; margin-left: 10px;">Fishing
-                    equipment: {{this.ship.fishingEquipment}}</h4>
+        </mat-tab>
 
-            </div>
-        </div>
-        <div class="card1">
-            <div class="col">
-                <h4 class="text-white row"
-                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Rules of boat:</h4>
-                <div *ngFor="let rule of rules">
-                    <h6 class="text-white row"
-                        style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                        -{{this.rule.ruleDescription}}</h6>
+
+        <mat-tab label="Edit appointments">
+
+
+            <div class="card-holder" style="margin-left: 15px;margin-top: 30px;">
+                <div class="row">
+                    <div class="card" style="margin: 10px; " *ngFor="let app of appointments ">
+
+
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong> from {{app.startDate | date:'d/M/yyyy' }} to {{app.endDate |
+                                    date:'d/M/yyyy'}}</strong>
+                            </li>
+
+                            <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.capacity}}
+                                person </li>
+                            <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil |
+                                date:'d/M/yyyy, h:mm a' }}
+                            </li>
+                            <li style="height: 70px;" class="list-group-item"> <button>Delete</button>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
 
                 </div>
+
+
             </div>
-        </div>
+
+        </mat-tab>
+        <mat-tab label="Add action">
+
+            <app-ship-add-action></app-ship-add-action>
+
+        </mat-tab>
 
 
 
 
+        <mat-tab label="Reservations history">
+
+            <app-ship-reservation-history></app-ship-reservation-history>
+
+        </mat-tab>
 
 
-        <div class="card2">
-            <div class="col">
-                <h4 class="text-white row"
-                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Utilities of boat:
-                </h4>
-
-                <div *ngFor="let utility of utilities">
-                    <h6 class="text-white row"
-                        style="margin-top: 40px; margin-left: 10px; font-size:18px; margin-right: 10px;"> -
-                        {{this.utility.name}}</h6>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card1">
-            <div class="col">
-                <h4 class="text-white row"
-                    style="margin-top:  25px;font-style: bold; font-size: 18px; margin-left: 10px;"> Navigation
-                    equipment of boat:</h4>
-                <div *ngFor="let navigation of navigations">
-                    <h6 class="text-white row"
-                        style="margin-top: 40px; font-size: 18px; margin-left: 10px; margin-right: 10px;">
-                        -{{this.navigation.name}}</h6>
-
-                </div>
-            </div>
-        </div>
-
-
-
-    </div>
+    </mat-tab-group>
 </div>

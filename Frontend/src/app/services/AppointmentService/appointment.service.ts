@@ -21,4 +21,22 @@ export class AppointmentService {
 
 
   }
+
+  findAppByShip(id: string): Observable<AppointmentDto[]> {
+    return this.http.get<AppointmentDto[]>(
+      `${this.apiServerUrl}/appointments/getAppByShip/${id}`);
+
+
+  }
+
+  deleteApp(id: any) {
+    return this.http.delete<AppointmentDto>(
+      `${this.apiServerUrl}/appointments/deleteApp/${id}`);
+  }
+
+  createApp(newAppointment: AppointmentDto) {
+    return this.http.post(`${this.apiServerUrl}/appointments/createApp`, newAppointment, {
+      responseType: 'text',
+    });
+  }
 }

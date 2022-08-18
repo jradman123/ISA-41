@@ -157,26 +157,32 @@ public class CottageServiceImpl implements CottageService {
 
     @Override
     public Room createRoom(RoomDto newRoom) {
-        for(Cottage cottage: this.cottageRepository.findAll()){
-            if(newRoom.getCottageId().equals(cottage.getId())){
-                Room room = new Room();
-                room.setCottage(cottage);
-                room.setNumberOfBeds(Integer.parseInt(newRoom.getNumber()));
-                room.setDeleted(false);
 
+        Cottage cottage=this.findCottageById(Long.parseLong(newRoom.getCottageId()));
+
+        Room room = new Room();
+                room.setCottage(cottage);
+                room.setNumberOfBeds(newRoom.getNumber());
+                room.setDeleted(false);
 
                 this.roomRepository.save(room);
                 return room;
-            }
+
         }
-        return null;
-    }
+
+
+
 
     @Override
     public List<CottageDto> search(CottageDto dto) {
         List<CottageDto> ret = new ArrayList<>();
 
         return ret;
+    }
+
+    @Override
+    public Cottage create(Cottage cottage) {
+        return cottageRepository.save(cottage);
     }
 }
 

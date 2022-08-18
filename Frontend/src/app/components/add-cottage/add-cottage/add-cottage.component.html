@@ -55,7 +55,7 @@
               <div style="width: 100%; display: flex">
                 <mat-form-field appearance="fill">
                   <mat-label>Street Number</mat-label>
-                  <input matInput formControlName="streetNumber" />
+                  <input type="number" matInput formControlName="streetNumber" />
                   <mat-error *ngIf="
                 !createForm?.get('streetNumber')?.valid &&
                 createForm?.get('streetNumber')?.touched &&
@@ -98,7 +98,7 @@
               <div style="width: 100%; display: flex">
                 <mat-form-field appearance="fill">
                   <mat-label>Price for one day</mat-label>
-                  <input matInput formControlName="price" />
+                  <input type="number" matInput formControlName="price" />
                   <mat-error *ngIf="
                 !createForm?.get('price')?.valid &&
                 createForm?.get('price')?.touched &&
@@ -112,7 +112,7 @@
               <div style="width: 100%; display: flex">
                 <mat-form-field appearance="fill">
                   <mat-label>Number of people</mat-label>
-                  <input matInput formControlName="numberOfPeople" />
+                  <input type="number" matInput formControlName="numberOfPeople" />
                   <mat-error *ngIf="
                 !createForm?.get('numberOfPeople')?.valid &&
                 createForm?.get('numberOfPeople')?.touched &&

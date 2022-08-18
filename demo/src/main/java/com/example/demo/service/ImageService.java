@@ -7,12 +7,10 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ImageService {
-    List<ImageDto> getPicturesByCottage(Long id);
 
-    List<ImageDto> getPicturesByBoat(Long id);
 
     String addImage(ImageDto dto);
     void addAdventureImage(Image image);
 
-    ResponseEntity<Long> deleteImage(Long idP, Long id);
+
 }

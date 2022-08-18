@@ -38,10 +38,19 @@ public class ShipUtility {
 	 private Ship ship;
 
 
+	@Column(name = "isDeleted", nullable = false)
+	private boolean isDeleted;
+
 
 
 	 @Column(name = "price", nullable = false)
 	 private Double price;
 
-	   
+
+    public ShipUtility(String price, Ship ship, Utility utility) {
+		this.ship=ship;
+		this.utility=utility;
+		this.price=Double.parseDouble(price);
+		this.isDeleted=false;
+    }
 }

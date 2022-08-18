@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
 import { ShipService } from 'src/app/services/ShipService/ship.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-ship',
   templateUrl: './add-ship.component.html',
@@ -100,23 +102,43 @@ export class AddShipComponent implements OnInit {
 
   onSubmit(): void {
     this.createShip();
-    console.log(this.createShip);
-    this.shipService.saveShip(this.newShip).subscribe(
-      (res) => {
-        this.router.navigate(['/shipOwner']);
-        this._snackBar.open(
-          'You have successfully added a new ship',
-          'Dismiss'
-        );
-      },
-      (err) => {
-        let parts = err.error.split(':');
-        let mess = parts[parts.length - 1];
-        let description = mess.substring(1, mess.length - 4);
-        this._snackBar.open(description, 'Dismiss');
-      }
-    );
 
+    if (this.newShip.name == '' || this.newShip.city == '' ||
+      this.newShip.country == '' || this.newShip.description == ''
+      || this.newShip.cancelationConditions == '' || this.newShip.streetName == '' ||
+      this.newShip.price == '' || this.newShip.capacity == '' || this.newShip.streetName == '' ||
+      this.newShip.length == '' || this.newShip.strengthOfEngine == '' ||
+      this.newShip.type == '' || this.newShip.fishingEquipment == '' || this.newShip.numberOfEngine == '' ||
+      this.newShip.maxSpeed == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must fill in all fields!',
+      })
+
+    } else {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully added a new ship!',
+      })
+
+
+      console.log(this.createShip);
+      this.shipService.saveShip(this.newShip).subscribe(
+        (res) => {
+          this.router.navigate(['/shipOwner']);
+
+        },
+        (err) => {
+          let parts = err.error.split(':');
+          let mess = parts[parts.length - 1];
+          let description = mess.substring(1, mess.length - 4);
+
+        }
+      );
+    }
 
   }
 

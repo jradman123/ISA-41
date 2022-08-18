@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-cottage',
   templateUrl: './add-cottage.component.html',
@@ -74,29 +74,44 @@ export class AddCottageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    Swal.fire({
+      icon: 'success',
+      title: 'Good job!',
+      text: 'You have successfully added a new cottage!',
+    })
 
     this.createCottage();
-    console.log(this.createCottage);
-    this.cottageService.saveCottage(this.newCottage).subscribe(
-      (res) => {
-        this.router.navigate(['/cottageOwner']);
-        this._snackBar.open(
+    if (this.newCottage.name == '' || this.newCottage.city == '' ||
+      this.newCottage.country == '' || this.newCottage.description == ''
+      || this.newCottage.numberOfPeople == '' || this.newCottage.streetName == '' ||
+      this.newCottage.price == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must fill in all fields!',
+      })
 
-          'You have successfully added a new cottage',
-          'Dismiss'
+    } else {
+      console.log(this.createCottage);
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully added a new cottage!',
+      })
+      this.cottageService.saveCottage(this.newCottage).subscribe(
+        (res) => {
+          this.router.navigate(['/cottageOwner']);
 
-        );
-      },
-      (err) => {
-        let parts = err.error.split(':');
-        let mess = parts[parts.length - 1];
-        let description = mess.substring(1, mess.length - 4);
-        this._snackBar.open(description, '',
-          { duration: 3000, panelClass: ['snack-bar'] });
-      }
-    );
+        },
+        (err) => {
+          let parts = err.error.split(':');
+          let mess = parts[parts.length - 1];
+          let description = mess.substring(1, mess.length - 4);
 
+        }
+      );
 
+    }
   }
 
   createCottage(): void {

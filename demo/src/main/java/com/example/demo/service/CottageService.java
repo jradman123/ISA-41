@@ -30,4 +30,6 @@ public interface CottageService {
 
 
     List<CottageDto> search(CottageDto dto);
+
+    Cottage create(Cottage cottage);
 }

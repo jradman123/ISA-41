@@ -72,6 +72,11 @@ public class ShipServiceImpl  implements ShipService {
         return ship;
     }
 
+    @Override
+    public Ship create(Ship ship) {
+        return shipRepository.save(ship);
+    }
+
 
     @Override
     public List<ShipDto> findAll() {

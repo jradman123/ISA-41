@@ -7,8 +7,10 @@ public class UtilityDto {
     public String id;
     public String name;
 
+
     public UtilityDto(Utility utility) {
         this.id=Long.toString(utility.getId());
         this.name=utility.getName();
+
     }
 }

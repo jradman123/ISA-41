@@ -23,10 +23,14 @@ import lombok.Setter;
 		
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
-		private Integer id;
+		private Long id;
 		
 		@Column(name = "name", nullable = false)
-	    private EquipmentType name;
+	    private String name;
+
+
+		@Column(name = "isDeleted", nullable = false)
+		private boolean isDeleted;
 
 		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 		@JoinColumn(name = "ship_id",nullable = true)

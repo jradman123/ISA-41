@@ -1,0 +1,39 @@
+<div class="container" style="margin-top:20px">
+    <div class="container">
+        <div class="containter">
+
+            <h1>Rules of ship</h1>
+            <hr />
+            <div *ngFor="let rule of rules" class="containter">
+                <h3> {{ rule.ruleDescription}} <button style="margin-left:900px" class="btn"
+                        (click)="deleteRule(rule.id)">Delete</button>
+                    <hr />
+                </h3>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="container" style="margin-top:20px">
+    <div class="containter">
+        <div>
+            <h1> Add rule of ship</h1>
+            <hr />
+            <div>
+                <input class="form-control" type="text" placeholder="Enter your rule"
+                    [(ngModel)]="rulee.ruleDescription" />
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div>
+            <button class="btn" (click)="addRule()">Add</button>
+        </div>
+    </div>
+</div>

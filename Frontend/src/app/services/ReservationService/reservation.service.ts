@@ -15,14 +15,36 @@ export class ReservationService {
 
 
   reservatedCottage(newReservation: CottageReservation) {
+    console.log(newReservation.price)
     return this.http.post(`${this.apiServerUrl}/reservations/createReservation`, newReservation, {
       responseType: 'text',
     });
+  }
+
+  getPastCottageReservationById(id: string): Observable<CottageReservation[]> {
+
+    return this.http.get<CottageReservation[]>(
+
+      `${this.apiServerUrl}/reservations/findPastReservationsByCottage/${id}`);
   }
 
   getCottageReservationById(id: string): Observable<CottageReservation[]> {
     return this.http.get<CottageReservation[]>(
       `${this.apiServerUrl}/reservations/findReservationsByCottage/${id}`);
   }
+
+  getPastShipReservationById(id: string): Observable<CottageReservation[]> {
+
+    return this.http.get<CottageReservation[]>(
+
+      `${this.apiServerUrl}/reservations/findPastReservationsByShip/${id}`);
+  }
+
+  getShipReservationById(id: string): Observable<CottageReservation[]> {
+    return this.http.get<CottageReservation[]>(
+      `${this.apiServerUrl}/reservations/findReservationsByShip/${id}`);
+  }
+
+
 
 }

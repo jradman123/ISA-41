@@ -21,4 +21,16 @@ export class NavigationService {
     return this.http.get<NavigationDto[]>(
       `${this.apiServerUrl}/navigation/findNavigationbyBoat/${id}`);
   }
+
+  deleteNavigation(id: any, idShip: any) {
+    return this.http.delete<NavigationDto>(
+      `${this.apiServerUrl}/navigation/deleteNavigationByBoat/${id}/${idShip}`);
+
+  }
+  addNavigation(rule: NavigationDto) {
+    return this.http.post(`${this.apiServerUrl}/navigation/createNavigation`, rule, {
+      responseType: 'text',
+    });
+
+  }
 }

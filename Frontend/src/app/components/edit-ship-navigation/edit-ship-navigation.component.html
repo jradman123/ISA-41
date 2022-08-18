@@ -1,0 +1,39 @@
+<div class="container" style="margin-top:20px">
+    <div class="container">
+        <div class="containter">
+
+            <h1>Navigation equipment of ship</h1>
+            <hr />
+            <div *ngFor="let navigation of navigations" class="containter">
+                <h3> {{ navigation.name}} <button style="margin-left:900px" class="btn"
+                        (click)="deleteNavigation(navigation.id)">Delete</button>
+                    <hr />
+                </h3>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="container" style="margin-top:20px">
+    <div class="containter">
+        <div>
+            <h1> Add navigation of ship</h1>
+            <hr />
+            <div>
+                <input class="form-control" type="text" placeholder="Enter your navigation"
+                    [(ngModel)]="navigationn.name" />
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div>
+            <button class="btn" (click)="addNavigation()">Add</button>
+        </div>
+    </div>
+</div>

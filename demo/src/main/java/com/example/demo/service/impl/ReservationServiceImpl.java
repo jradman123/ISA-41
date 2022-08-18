@@ -9,6 +9,7 @@ import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ReservationRepository;
+import com.example.demo.repository.ShipReservationRepository;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,15 +37,21 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private CottageReservationRepository cottageReservationRepository;
 
+    @Autowired
+    private ShipReservationRepository shipReservationRepository;
+
+    @Autowired
+    private EmailSenderServiceImpl emailSenderService;
+
 
 
 
     @Override
-    public List<CottageReservationViewDto> getReservationsByCottage(Long id) {
-        List<CottageReservationViewDto> reservationDtos=new ArrayList<>();
+    public List<ReservationViewDto> getReservationsByCottage(Long id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
         for(CottageReservation r : cottageReservationRepository.findAll()) {
-            if(r.getCottage().getId()==id) {
-                reservationDtos.add(new CottageReservationViewDto(r));
+            if(r.getCottage().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
+                reservationDtos.add(new ReservationViewDto(r));
             }
         }
 
@@ -64,15 +71,17 @@ public class ReservationServiceImpl implements ReservationService
         return reservationDto;
     }
 
+
+
     @Override
     public void createReservation(CreateReservationDto createReservationDto) {
         User user=userService.findByEmail(createReservationDto.clientEmail);
         Reservation reservation=typeOfReservation(createReservationDto);
 
-
-
+       System.out.print("OPPPPPPPPEPEEEEEEEETJOOOOOJ"+createReservationDto.getPrice());
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
+        reservation.setHaveReport(false);
 
 
       if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
@@ -80,7 +89,8 @@ public class ReservationServiceImpl implements ReservationService
 
         reservation.setReservationStart(createReservationDto.resStart);
             reservation.setReservationEnd(createReservationDto.resEnd);
-            reservation.setIsReserved(true);
+            reservation.setIsReserved(false);
+            notifyUserForReservation(createReservationDto);
 
        }else { throw new RuntimeException();}
 
@@ -88,6 +98,54 @@ public class ReservationServiceImpl implements ReservationService
 
 
 
+
+    }
+
+    @Override
+    public void notifyUserForReservation(CreateReservationDto dto) {
+        emailSenderService.sendEmail(dto.getClientEmail(),"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Rezervacija traje od "+dto.getResStart() + " do " + dto.getResEnd() +
+                " po cijeni od " + dto.getPrice() + "€ za " + dto.getNumberOfPerson() + " osoba." +
+                "Molimo da potvrdite i provjerite detalje na svom profilu!");
+    }
+
+    @Override
+    public List<ReservationViewDto> getPastReservationsByCottage(Long id) {
+        System.out.print("uslaaaaa");
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(CottageReservation r : cottageReservationRepository.findAll()) {
+            if(r.getCottage().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
+                reservationDtos.add(new ReservationViewDto(r));
+
+            }
+        }
+
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getReservationsByShip(Long id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(ShipReservation r : shipReservationRepository.findAll()) {
+            if(r.getShip().getId()==id  && LocalDateTime.now().compareTo(r.getReservationEnd())<=0 ) {
+                reservationDtos.add(new ReservationViewDto(r));
+            }
+        }
+
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getPastReservationsByShip(Long id) {
+        System.out.print("uslaaaaa");
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(ShipReservation r : shipReservationRepository.findAll()) {
+            if(r.getShip().getId()==id && LocalDateTime.now().compareTo(r.getReservationEnd())>0) {
+                reservationDtos.add(new ReservationViewDto(r));
+
+            }
+        }
+
+        return reservationDtos;
     }
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {

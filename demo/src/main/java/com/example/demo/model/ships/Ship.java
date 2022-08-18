@@ -78,17 +78,20 @@ public class Ship {
     @Column(name = "description", nullable = false)
     private String description;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "ship_id")
-	@JsonManagedReference
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "ship_images",
+			joinColumns = @JoinColumn(name = "ship_id"),
+			inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private Set<Image> images;
+
 
 
 	@Column(name = "capacity", nullable = false)
 	private Integer capacity;
 	
 
-	 @OneToMany(mappedBy = "ship")
+	 @OneToMany(mappedBy = "ship",fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
 	 private Set<ShipReservation> shipReservations;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -100,7 +103,7 @@ public class Ship {
 	private String fishingEquipment;
 
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "ship_id")
 	@JsonManagedReference
 	private Set<NavigationalEquipment> navigationalEquipments;

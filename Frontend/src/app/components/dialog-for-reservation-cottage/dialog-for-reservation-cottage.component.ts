@@ -10,6 +10,8 @@ import { UserService } from 'src/app/services/UserService/user.service';
 import { Subscription } from 'rxjs';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import Swal from 'sweetalert2';
+import { DataForDialogEmail } from '../ship-reservation-history/ship-reservation-history.component';
 
 
 @Component({
@@ -19,87 +21,100 @@ import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 })
 export class DialogForReservationCottageComponent implements OnInit {
 
-
-  fullPrice: number = 0;
-  cottage!: CottageDto;
-  users!: PersonalData[];
-  id: any;
-  sub!: Subscription;
-  newReservation!: CottageReservation
   form!: FormGroup;
   formData!: FormData;
-
-
-
-
-  constructor(private userService: UserService, private reservationService: ReservationService, private route: Router, @Inject(MAT_DIALOG_DATA) public data: DataForDialogCottage, private cottageService: CottageService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
+  sub!: Subscription;
+  newReservation!: CottageReservation;
+  cottage!: CottageDto;
+  startAvailableDate: any = null;
+  endAvailableDate: any = null;
+  id: any;
+  constructor(private cottageService: CottageService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
     this.newReservation = {} as CottageReservation;
   }
-
-  ngOnInit() {
-    this.userService.findAll().subscribe((data) => {
-      this.users = data;
+  ngOnInit(): void {
+    this.id = +this.router.snapshot.paramMap.get('id')!;
+    this.cottageService.findbyId(this.id).subscribe({
+      next: (data: CottageDto) => {
+        this.cottage = data
+      },
     });
-    console.log(this.data.id)
 
 
-    this.cottageService.findbyId(this.data.id).subscribe((data) => {
-      this.cottage = data;
-    });
 
     this.form = new FormGroup({
-      clientEmail: new FormControl('', Validators.required),
       resStart: new FormControl('', Validators.required),
       resEnd: new FormControl('', Validators.required),
-      numberOfPerson: new FormControl('', Validators.required)
+      numberOfPerson: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
     })
-
   }
-
-
-
-
-  calcPrice() {
-
-
-
-
-  }
-
-
   reserved(): void {
-    this.reservateCottage();
-    this.sub = this.reservationService.reservatedCottage(this.newReservation)
-      .subscribe({
-        next: () => {
 
-          this.onNoClick();
-        }
-      });
+
+    this.reservatCottage();
+
+    if (this.form.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must fill in all fields!',
+      })
+
+    }
+
+
+    if (this.newReservation.resStart >= this.newReservation.resEnd) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date is greater or equal then end date!',
+      })
+    } else if (this.newReservation.resStart < new Date()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date must be greater then today!',
+      })
+    } else {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully booked a ship!',
+      })
+
+      console.log("siufsdfhdsfkjds" + this.newReservation)
+      this.sub = this.reservationService.reservatedCottage(this.newReservation)
+        .subscribe({
+          next: () => {
+
+            this.dialogRef.close();
+            window.location.reload();
+
+          }
+        });
+    }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  reservatCottage(): void {
 
-  reservateCottage(): void {
 
 
     let newStart = new Date(this.form.value.resStart)
     let newEnd = new Date(this.form.value.resEnd)
 
 
-    console.log(newStart)
-    console.log(newEnd)
+    console.log("dgwefedfsd" + this.data.clientEmail, this.data.id, this.form.value.price)
+
     this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
       this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
       this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
-    this.newReservation.price = this.cottage.price;
-    this.newReservation.clientEmail = this.form.value.clientEmail;
+    this.newReservation.price = this.form.value.price;
+    this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'COTTAGE';
 
   }
 }
-
 

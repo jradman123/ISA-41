@@ -1,17 +1,26 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CottageReservationViewDto;
+import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 
 import java.util.List;
 
 public interface ReservationService {
-    List<CottageReservationViewDto> getReservationsByCottage(Long id);
+    List<ReservationViewDto> getReservationsByCottage(Long id);
 
     List<ReservationDto> getReservationsByBoat(Long id);
 
     ReservationDto getById(Long id);
 
     void createReservation(CreateReservationDto createReservationDto);
+
+
+    void notifyUserForReservation(CreateReservationDto dto);
+
+    List<ReservationViewDto> getPastReservationsByCottage(Long id);
+
+    List<ReservationViewDto> getReservationsByShip(Long id);
+
+    List<ReservationViewDto> getPastReservationsByShip(Long id);
 }

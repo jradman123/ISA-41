@@ -58,6 +58,7 @@ import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-car
 
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
+
 import { AdventureBasicInfoComponent } from './components/adventure-basic-info/adventure-basic-info.component';
 import { AdventureRulesComponent } from './components/adventure-rules/adventure-rules.component';
 import { AdventureFishingEquipmentsComponent } from './components/adventure-fishing-equipments/adventure-fishing-equipments.component';
@@ -66,7 +67,21 @@ import { AdventureImagesComponent } from './components/adventure-images/adventur
 import { EditUtilityDialogComponent } from './components/edit-utility-dialog/edit-utility-dialog.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';import { DialogForAppointmentComponent } from './components/dialog-for-appointment/dialog-for-appointment.component';
+import { DialogForReportComponent } from './components/dialog-for-report/dialog-for-report.component';
+import { DialogForAddReportComponent } from './components/dialog-for-add-report/dialog-for-add-report.component';
+import { EditCottageUtilityDialogComponent } from './components/edit-cottage-utility-dialog/edit-cottage-utility-dialog.component';
+import { EditShipRulesComponent } from './components/edit-ship-rules/edit-ship-rules.component';
+import { EditShipUtilitiesComponent } from './components/edit-ship-utilities/edit-ship-utilities.component';
+import { ShipReservationHistoryComponent } from './components/ship-reservation-history/ship-reservation-history.component';
+import { EditShipNavigationComponent } from './components/edit-ship-navigation/edit-ship-navigation.component';
+import { ShipReservationComponent } from './components/ship-reservation/ship-reservation.component';
+import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
+import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
+
+
+
+
 
 
 @NgModule({
@@ -120,12 +135,26 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
     DialogForReservationCottageComponent,
     DialogForGuestDataComponent,
+
     AdventureBasicInfoComponent,
     AdventureRulesComponent,
     AdventureFishingEquipmentsComponent,
     AdventureUtilitiesComponent,
     AdventureImagesComponent,
     EditUtilityDialogComponent,
+
+    DialogForAppointmentComponent,
+    DialogForReportComponent,
+    DialogForAddReportComponent,
+    EditCottageUtilityDialogComponent,
+    EditShipRulesComponent,
+    EditShipUtilitiesComponent,
+    ShipReservationHistoryComponent,
+    EditShipNavigationComponent,
+    ShipReservationComponent,
+    ShipAddActionComponent,
+    DialogForReservationShipComponent
+,
     InstructorAvailabilityComponent
 
 

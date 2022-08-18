@@ -1,0 +1,35 @@
+<div class="container">
+    <h2 mat-dialog-title>Add report for reservation</h2>
+
+    <form class="form" [formGroup]="form">
+
+
+        <mat-form-field appearance="standard">
+            <mat-label>Comment of reservation</mat-label>
+            <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+        </mat-form-field>
+
+        <h4>Sanction the guest?</h4>
+        <div class="row" style="margin-left: 20px;">
+            <mat-radio-group formControlName="sanctioned">
+                <mat-radio-button value="1">YES</mat-radio-button>
+                <mat-radio-button value="2">NO</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <h4>Appeared the guest?</h4>
+        <div class="row" style="margin-left: 20px;">
+            <mat-radio-group formControlName="appeared">
+                <mat-radio-button value="1">YES </mat-radio-button>
+
+                <mat-radio-button value="2">NO</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+
+
+    </form>
+    <div class="button-container">
+        <button mat-flat-button color="primary" (click)="addReport()">Add</button>
+        <button mat-flat-button color="warn" (click)="close()">Close</button>
+    </div>
+</div>

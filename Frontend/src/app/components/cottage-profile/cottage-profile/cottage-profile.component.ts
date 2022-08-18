@@ -41,6 +41,7 @@ export interface DataForDialogGuest {
 
 export interface DataForDialogCottage {
   id: string;
+  clientEmail: string;
 }
 
 export interface DataForReport {
@@ -317,23 +318,28 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
+  addReservation(clientEmail: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForReservationCottageComponent, {
+
+      data: { clientEmail: clientEmail, id: this.id },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
 
 
+    });
 
-
-  reserved(): void {
-
-
-    this.reservateCottage();
-    this.sub = this.reservationService.reservatedCottage(this.newReservation)
-      .subscribe({
-        next: () => {
-
-          window.location.reload();
-
-        }
-      });
   }
+
+
+
+
+
 
   onNoClick(): void {
     window.location.reload();
@@ -342,25 +348,7 @@ export class CottageProfileComponent implements OnInit {
 
 
 
-  reservateCottage(): void {
 
-
-
-    let newStart = new Date(this.form.value.resStart)
-    let newEnd = new Date(this.form.value.resEnd)
-
-
-    console.log(newStart)
-    console.log(newEnd)
-    this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
-      this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
-      this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
-    this.newReservation.price = this.cottage.price;
-    this.newReservation.clientEmail = this.form.value.clientEmail;
-    this.newReservation.objectId = this.id;
-    this.newReservation.typeOfRes = 'COTTAGE';
-
-  }
 
   viewPersonalData(clientEmail: string) {
     const dialogConfig = new MatDialogConfig();

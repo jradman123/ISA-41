@@ -49,7 +49,10 @@ export class DialogForReservationShipComponent implements OnInit {
   reserved(): void {
 
 
+
     this.reservateShip();
+
+
     if (this.newReservation.resStart >= this.newReservation.resEnd) {
       Swal.fire({
         icon: 'error',

@@ -213,6 +213,7 @@ export class InstructorAvailabilityComponent implements OnInit {
           this.events = []
           this.availabilities = []
           this.getAvailabilities();
+          this.range.reset();
           
       }}
     );

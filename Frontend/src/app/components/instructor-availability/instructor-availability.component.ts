@@ -203,8 +203,10 @@ export class InstructorAvailabilityComponent implements OnInit {
   }
 
   addAvailability() {
-    this.newAvailability.startDate=this.chosenStartDate;
-    this.newAvailability.endDate = this.chosenEndDate;
+    const s = new Date( this.range.value.start.getTime() -  this.range.value.start.getTimezoneOffset() * 60000)
+    const e = new Date( this.range.value.end.getTime() -  this.range.value.end.getTimezoneOffset() * 60000)
+    this.newAvailability.startDate=s.toISOString();
+    this.newAvailability.endDate = e.toISOString();
     this.instructorAvailabilityService.addNewAvailability(this.newAvailability).subscribe(
       {
         next: (res) => {

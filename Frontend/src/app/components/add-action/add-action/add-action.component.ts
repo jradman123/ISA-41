@@ -81,6 +81,14 @@ export class AddActionComponent implements OnInit {
         title: 'Error',
         text: 'Valid until must be before start date!',
       })
+    }
+    else if (this.newAppointment.validUntil < new Date()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Valid date  must not be before today!',
+      })
+
     } else {
       Swal.fire({
         icon: 'success',

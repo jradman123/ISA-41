@@ -66,7 +66,7 @@ export class ShipAddActionComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'The appointment cannot be added.You must fill in all field!',
+        text: 'The appointment cannot be added.You must fill in all fields!',
       })
     } else if (this.newAppointment.startDate >= this.newAppointment.endDate) {
       Swal.fire({

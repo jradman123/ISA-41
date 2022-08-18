@@ -11,6 +11,7 @@ import { AdventureService } from 'src/app/services/AdventureService/adventure.se
 export class AdventuresListComponent implements OnInit {
 
   adventuresDto : AdventureDto[];
+  textForSearch = '';
   constructor(private adventureService : AdventureService,private router : Router) {
     this.adventuresDto = [] as AdventureDto[];
    }
@@ -24,5 +25,9 @@ export class AdventuresListComponent implements OnInit {
   view(id: string) {
     this.router.navigate(['instructor/adventure-profile/' + id]);
     console.log(id);
+  }
+
+  emitMe(searchText: any){
+    this.textForSearch = searchText.target.value
   }
   }

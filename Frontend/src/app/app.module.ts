@@ -79,6 +79,7 @@ import { EditShipNavigationComponent } from './components/edit-ship-navigation/e
 import { ShipReservationComponent } from './components/ship-reservation/ship-reservation.component';
 import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
+import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
 
 
 
@@ -129,21 +130,17 @@ import { DialogForReservationShipComponent } from './components/dialog-for-reser
     AllCottagesListComponent,
     CottagesSearchPipe,
     ShipSearchPipe,
-
     AdventuresListComponent,
     NewAdventureComponent,
     AdventureProfileComponent,
-
     DialogForReservationCottageComponent,
     DialogForGuestDataComponent,
-
     AdventureBasicInfoComponent,
     AdventureRulesComponent,
     AdventureFishingEquipmentsComponent,
     AdventureUtilitiesComponent,
     AdventureImagesComponent,
     EditUtilityDialogComponent,
-
     DialogForAppointmentComponent,
     DialogForReportComponent,
     DialogForAddReportComponent,
@@ -156,7 +153,8 @@ import { DialogForReservationShipComponent } from './components/dialog-for-reser
     ShipAddActionComponent,
     DialogForReservationShipComponent
 ,
-    InstructorAvailabilityComponent
+    InstructorAvailabilityComponent,
+    AdventureSearchPipe
 
 
   ],

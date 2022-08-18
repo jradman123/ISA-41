@@ -7,7 +7,13 @@ import { ReservationService } from 'src/app/services/ReservationService/reservat
 import { DialogForAddReportComponent } from '../dialog-for-add-report/dialog-for-add-report.component';
 import { DialogForGuestDataComponent } from '../dialog-for-guest-data/dialog-for-guest-data.component';
 import { DialogForReportComponent } from '../dialog-for-report/dialog-for-report.component';
+import { DialogForReservationShipComponent } from '../dialog-for-reservation-ship/dialog-for-reservation-ship.component';
+import { ShipReservationComponent } from '../ship-reservation/ship-reservation.component';
 
+export interface DataForDialogEmail {
+  clientEmail: string;
+  id: string;
+}
 @Component({
   selector: 'app-ship-reservation-history',
   templateUrl: './ship-reservation-history.component.html',
@@ -18,6 +24,7 @@ export class ShipReservationHistoryComponent implements OnInit {
   pastReservations!: MatTableDataSource<CottageReservation>;
   newReservation!: CottageReservation;
   reservations!: MatTableDataSource<CottageReservation>;
+  today!: Date
 
   id: any;
 
@@ -39,6 +46,7 @@ export class ShipReservationHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
+    this.today = new Date();
 
 
     this.findPastReservations();
@@ -125,11 +133,32 @@ export class ShipReservationHistoryComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogForGuestDataComponent, {
 
-      data: { clientEmail: clientEmail },
+      data: {
+        clientEmail: clientEmail
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.id = result;
+
+    });
+
+  }
+
+
+  addReservation(clientEmail: string) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    const dialogRef = this.dialog.open(DialogForReservationShipComponent, {
+
+      data: { clientEmail: clientEmail, id: this.id },
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
 
     });
 

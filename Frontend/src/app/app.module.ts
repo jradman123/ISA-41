@@ -76,6 +76,7 @@ import { ShipReservationHistoryComponent } from './components/ship-reservation-h
 import { EditShipNavigationComponent } from './components/edit-ship-navigation/edit-ship-navigation.component';
 import { ShipReservationComponent } from './components/ship-reservation/ship-reservation.component';
 import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
+import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 
 
 
@@ -149,7 +150,8 @@ import { ShipAddActionComponent } from './components/ship-add-action/ship-add-ac
     ShipReservationHistoryComponent,
     EditShipNavigationComponent,
     ShipReservationComponent,
-    ShipAddActionComponent
+    ShipAddActionComponent,
+    DialogForReservationShipComponent
 
 
 

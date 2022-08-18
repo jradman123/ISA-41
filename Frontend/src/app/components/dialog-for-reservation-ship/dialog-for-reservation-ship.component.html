@@ -1,0 +1,61 @@
+<div class="inner">
+    <form class="form" [formGroup]="form">
+
+
+        <div>
+            <label>Start date:</label>
+            <mat-form-field appearance="fill" style="width: 90%;">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="resStart">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <label>End date:</label>
+            <mat-form-field appearance="fill" style="width: 90%;">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="resEnd">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+
+        <div>
+            <label>Number of person:</label>
+            <mat-form-field appearance="fill" style="width: 90%;">
+                <mat-label>Add number of person</mat-label>
+                <input matInput type="number" min="1" max="{{this.ship.capacity}" placeholder="Number of person"
+                    formControlName="capacity" />
+            </mat-form-field>
+        </div>
+        <div>
+            <label>Price for reservation:</label>
+            <mat-form-field appearance="fill" style="width: 90%;">
+                <mat-label>Add price</mat-label>
+                <input matInput type="number" min="1" max="" placeholder="Price" formControlName="price" />
+            </mat-form-field>
+        </div>
+
+    </form>
+
+
+
+
+
+    <form>
+        <div class="button-container">
+            <button mat-flat-button color="primary" (click)="reserved()"
+                style="margin-left: 200px;width: 100px;margin-top: 400px;">Add</button>
+        </div>
+
+    </form>
+
+
+    <form>
+
+    </form>
+
+
+</div>

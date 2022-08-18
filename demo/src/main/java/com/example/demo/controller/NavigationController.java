@@ -9,6 +9,7 @@ import com.example.demo.service.NavigationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class NavigationController {
     private NavigationService navigationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value="/findNavigationbyBoat/{id}")
     public List<NavigationDto> findNavigationbyBoat(@PathVariable Long id) {
 
@@ -31,14 +33,14 @@ public class NavigationController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @PostMapping(value = "/createNavigation")
     public NavigationalEquipment createShipNavigation(@RequestBody NavigationDto newNavigation) {
         return this.navigationService.createNavigation(newNavigation);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @DeleteMapping(value = "/deleteNavigationByBoat/{id}/{idShip}")
     public ResponseEntity<Long> deleteNavigationByShip(@PathVariable Long id, @PathVariable Long idShip) {
         return this.navigationService.deleteNavigationByShip(id,idShip);

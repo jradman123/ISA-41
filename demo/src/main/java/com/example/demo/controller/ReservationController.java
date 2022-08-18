@@ -63,6 +63,7 @@ public class ReservationController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/findReservationsByBoat/{id}")
     public List<ReservationDto> getReservationsByBoat(@PathVariable Long id) {
         List<ReservationDto> reservationDtos = this.reservationService.getReservationsByBoat(id);
@@ -75,7 +76,7 @@ public class ReservationController {
         return this.reservationService.getById(id);
     }
 
-
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
     @PostMapping(value="/createReservation")
     public ResponseEntity<HttpStatus> createReservation(@RequestBody CreateReservationDto createReservationDto) {
         reservationService.createReservation(createReservationDto);

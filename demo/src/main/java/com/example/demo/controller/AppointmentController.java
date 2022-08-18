@@ -38,16 +38,13 @@ public class AppointmentController {
         return this.appointmentService.findAppbyShip(id);
     }
 
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+
     @DeleteMapping(value="/deleteApp/{id}")
     public ResponseEntity<Long> deleteApp(@PathVariable Long id) {
         return this.appointmentService.deleteApp(id);
     }
 
-    @GetMapping(value = "/search")
-    public List<AppointmentDto> search(AppointmentDto dto) {
-        return this.appointmentService.search(dto);
-    }
+
 
 
     @PostMapping(value="/createApp")

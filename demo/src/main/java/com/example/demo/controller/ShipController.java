@@ -54,13 +54,13 @@ public class ShipController {
         return this.shipService.createShip(newShip);
     }
 */
-     //isto radi vlasnik broda
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/findShip/{id}")
     public ShipDto findShip(@PathVariable Long id) {
         return this.shipService.findShip(id);
     }
 
-    //radi samo vlasnik broda
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @DeleteMapping(value = "/deleteShip/{id}")
     public ResponseEntity<Long> deleteShip(@PathVariable Long id) {
         return this.shipService.deleteShip(id);
@@ -68,7 +68,7 @@ public class ShipController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //isto radi vlasnik broda
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value="/findOwnerShips/{email}")
     public List<ShipDto> findOwnerShips(@PathVariable String email) {
         return this.shipService.getOwnerShips(email);
@@ -77,7 +77,7 @@ public class ShipController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @PutMapping(value = "/editShip")
     public ShipDto editShip(@RequestBody ShipDto newShip) {
         return this.shipService.editShip(newShip);

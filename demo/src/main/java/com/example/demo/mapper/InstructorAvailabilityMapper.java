@@ -7,6 +7,7 @@ import com.example.demo.model.users.InstructorAvailability;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class InstructorAvailabilityMapper {
@@ -23,8 +24,9 @@ public class InstructorAvailabilityMapper {
     public InstructorAvailability mapNewInstructorAvailabilityToEntity(NewInstructorAvailability newInstructorAvailability,
                                                                        Instructor instructor){
         InstructorAvailability instructorAvailability = new InstructorAvailability();
-        instructorAvailability.setStartDate(LocalDateTime.parse(newInstructorAvailability.getStartDate()));
-        instructorAvailability.setEndDate(LocalDateTime.parse(newInstructorAvailability.getEndDate()));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        instructorAvailability.setStartDate(LocalDateTime.parse(newInstructorAvailability.getStartDate(),formatter));
+        instructorAvailability.setEndDate(LocalDateTime.parse(newInstructorAvailability.getEndDate(),formatter));
         instructorAvailability.setInstructor(instructor);
         return instructorAvailability;
     }

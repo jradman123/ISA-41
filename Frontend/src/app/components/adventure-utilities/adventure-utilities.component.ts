@@ -25,6 +25,8 @@ export class AdventureUtilitiesComponent implements OnInit {
     'Price',
     'Buttons'
   ];
+
+
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,
     private adventureUtilityService : AdventureUtilityService,public dialog: MatDialog,
     private _snackBar : MatSnackBar) {

@@ -24,6 +24,10 @@ import {
 import { EventColor } from 'calendar-utils';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InstructorAvailabilityService } from 'src/app/services/InstructorAvailabilityService/instructor-availability.service';
+import { InstructorAvailabilityDto } from 'src/app/interfaces/instructor-availability-dto';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NewInstructorAvailability } from 'src/app/interfaces/new-instructor-availability';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -49,9 +53,11 @@ const colors: Record<string, EventColor> = {
 })
 export class InstructorAvailabilityComponent implements OnInit {
 
-  
-  ngOnInit(): void {
-  }
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+ 
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> | undefined;
 
@@ -85,51 +91,44 @@ export class InstructorAvailabilityComponent implements OnInit {
   ];
 
   refresh = new Subject<void>();
+  activeDayIsOpen: boolean = false;
+  availabilities : InstructorAvailabilityDto[];
+  startDate! : Date;
+  endDate! : Date;
+  chosenStartDate! : string;
+  chosenEndDate! : string;
+  newAvailability : NewInstructorAvailability;
+  todayDate:Date = new Date();
+
+  constructor(private modal: NgbModal,private instructorAvailabilityService : InstructorAvailabilityService,private _formBuilder: FormBuilder) {
+    this.availabilities = [] as InstructorAvailabilityDto[];
+    this.newAvailability = {} as NewInstructorAvailability;
+    this.range = this._formBuilder.group({
+      start: ['',Validators.required],
+      end: ['', Validators.required]
+    });
+  }
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors.red },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors.yellow },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors.blue },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors.yellow },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
   ];
+  ngOnInit(): void {
+    this.getAvailabilities(); 
+    
+  }
 
-  activeDayIsOpen: boolean = true;
+  getAvailabilities() {
+    this.instructorAvailabilityService.getAllForInstructor().subscribe({
+      next: (res) => {
+        this.availabilities = res
+        for(var i = 0; i < this.availabilities.length; i++){
+          this.startDate =  new Date(this.availabilities[0].startDate);   
+          this.endDate = new Date(this.availabilities[0].endDate);
+          this.addEvent(this.startDate,this.endDate);
+        }; 
+        
+    }}); 
+  }
 
-  constructor(private modal: NgbModal) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -168,14 +167,14 @@ export class InstructorAvailabilityComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
+  addEvent(start : Date,end : Date): void {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
+        title: 'Available',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.blue,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -196,6 +195,27 @@ export class InstructorAvailabilityComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+  dateRangeChange(dateRangeStart : HTMLInputElement, dateRangeEnd: HTMLInputElement){
+    this.chosenStartDate=new Date(dateRangeStart.value).toISOString();
+    console.log(dateRangeStart.value)
+    this.chosenEndDate=new Date(dateRangeEnd.value).toISOString();
+  }
+
+  addAvailability() {
+    this.newAvailability.startDate=this.chosenStartDate;
+    this.newAvailability.endDate = this.chosenEndDate;
+    this.instructorAvailabilityService.addNewAvailability(this.newAvailability).subscribe(
+      {
+        next: (res) => {
+          this.events = []
+          this.availabilities = []
+          this.getAvailabilities();
+          
+      }}
+    );
+  }
+
 }
 
 

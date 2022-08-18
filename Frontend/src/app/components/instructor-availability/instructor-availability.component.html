@@ -1,3 +1,5 @@
+<br/><br/>
+<div style="width: 1000px; height : 500px; margin-left: 100px;">
 <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -88,4 +90,24 @@
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-sm">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker" [min]="todayDate">
+          <input matStartDate placeholder="Start date"  formControlName="start" #dateRangeStart>
+          <input matEndDate placeholder="End date" formControlName="end" #dateRangeEnd (dateChange)="dateRangeChange(dateRangeStart,dateRangeEnd)" >
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+      <div class="col-sm">
+        <button mat-flat-button color="primary" (click)="addAvailability()">Add</button>
+      </div> 
+     </div>
+    </div>
+  </div>
   </div>

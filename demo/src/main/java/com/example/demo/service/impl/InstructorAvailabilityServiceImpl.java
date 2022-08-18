@@ -5,6 +5,8 @@ import com.example.demo.repository.InstructorAvailabilityRepository;
 import com.example.demo.service.InstructorAvailabilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.Index;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +33,14 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
 
     private List<InstructorAvailability> checkForOverlappingAvailabilities(List<InstructorAvailability> availabilityPeriods, InstructorAvailability newAvailability) {
         List<InstructorAvailability> newAvailabilities = new ArrayList<>();
+        //List<InstructorAvailability> toRemove = new ArrayList<>();
         for (InstructorAvailability availability : availabilityPeriods) {
             if (!availability.getId().equals(newAvailability.getId()) &&
                     (isBetweenAvailabilityDate(newAvailability.getStartDate(), availability)
                     || isBetweenAvailabilityDate(newAvailability.getEndDate(), availability))) {
                 LocalDateTime startDate = availability.getStartDate();
                 LocalDateTime endDate = availability.getEndDate();
-                availabilityPeriods.remove(availability);
+                instructorAvailabilityRepository.delete(availability);
                 availability = calculateNewAvailability(startDate, endDate, newAvailability);
             } else if (newAvailability.getStartDate().isBefore(availability.getStartDate())
                     && newAvailability.getEndDate().isAfter(availability.getEndDate())) {
@@ -46,6 +49,15 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
             }
             newAvailabilities.add(availability);
         }
+
+        /*List<InstructorAvailability> newOne = newAvailabilities;
+        for (InstructorAvailability remove : toRemove) {
+            for (InstructorAvailability saved: newAvailabilities) {
+                if(remove.getId().equals(saved.getId())){
+                    newOne.remove(newAvailabilities.indexOf(saved));
+                }
+            }
+        }*/
         return newAvailabilities;
     }
 

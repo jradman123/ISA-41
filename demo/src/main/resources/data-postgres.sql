@@ -122,18 +122,18 @@ INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,fal
 INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',1);
 
 ----appointments-----
-INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '06-13-2022 10:00',false,false,40.0, '06-01-2022 10:00', 3,'06-01-2022 10:00');
+INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '13-06-2022 10:00',false,false,40.0, '01-06-2022 10:00', 3,'01-06-2022 10:00');
 
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)
-	VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 3,'06-01-2022 10:00');
+	VALUES (5, '07-07-2022 10:00',false,false,50.0, '07-01-2022 10:00', 3,'06-01-2022 10:00');
 
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, ship_id,valid_until)
-	VALUES (5, '07-13-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1,'06-01-2022 10:00');
+	VALUES (5, '07-07-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1,'06-01-2022 10:00');
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'07-01-2022 09:00','05-01-2022 12:00',null,2,null,3,null,false);
-INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'08-20-2022 09:00','08-18-2022 12:00',null,2,null,3,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,2,null,3,null,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'07-01-2022 09:00','05-01-2022 12:00',null,2,null,null,1,false);
-INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'08-20-2022 09:00','08-18-2022 12:00',null,3,null,null,1,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,3,null,null,1,false);
 
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)

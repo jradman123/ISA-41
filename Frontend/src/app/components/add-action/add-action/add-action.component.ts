@@ -8,7 +8,7 @@ import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-action',
@@ -62,13 +62,39 @@ export class AddActionComponent implements OnInit {
       this.newAppointment.capacity == null ||
       this.newAppointment.price == null || this.newAppointment.validUntil == null) { alert("Please fill all fields!"); return; }
 
-    this.sub = this.appointmentService.createApp(this.newAppointment)
-      .subscribe({
-        next: () => {
+    if (this.newAppointment.startDate >= this.newAppointment.endDate) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date is greater or equal then end date!',
+      })
+    }
+    else if (this.newAppointment.startDate < new Date()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date must be greater then today!',
+      })
+    } else if (this.newAppointment.validUntil > this.newAppointment.startDate) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Valid until must be before start date!',
+      })
+    } else {
+      Swal.fire({
+        icon: 'success',
+        title: 'Good job!',
+        text: 'You have successfully added new appointment!',
+      })
+      this.sub = this.appointmentService.createApp(this.newAppointment)
+        .subscribe({
+          next: () => {
 
-          this.onNoClick();
-        }
-      });
+            this.onNoClick();
+          }
+        });
+    }
   }
 
   onNoClick(): void {

@@ -53,6 +53,17 @@ export class DialogForReservationCottageComponent implements OnInit {
 
 
     this.reservatCottage();
+
+    if (this.form.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must fill in all fields!',
+      })
+
+    }
+
+
     if (this.newReservation.resStart >= this.newReservation.resEnd) {
       Swal.fire({
         icon: 'error',

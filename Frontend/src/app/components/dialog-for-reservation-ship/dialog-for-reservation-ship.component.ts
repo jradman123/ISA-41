@@ -26,6 +26,8 @@ export class DialogForReservationShipComponent implements OnInit {
   newReservation!: CottageReservation;
   ship!: ShipDto;
   utilities!: UtilityDto[];
+  fullPrice: number = 0;
+  price!: any;
 
 
   id: any;
@@ -33,10 +35,11 @@ export class DialogForReservationShipComponent implements OnInit {
     this.newReservation = {} as CottageReservation;
   }
   ngOnInit(): void {
-    this.id = +this.router.snapshot.paramMap.get('id')!;
-    this.shipService.findbyId(this.id).subscribe({
+
+    this.shipService.findbyId(this.data.id).subscribe({
       next: (data: ShipDto) => {
         this.ship = data
+        this.price = data.price
       },
     });
     this.utilityService.findShipUtilityById(this.data.id).subscribe((data) => {
@@ -105,10 +108,22 @@ export class DialogForReservationShipComponent implements OnInit {
     this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
       this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
       this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
-    this.newReservation.price = this.form.value.price;
+    this.newReservation.price = this.fullPrice.toString();
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'BOAT';
+
+  }
+
+  total() {
+
+    var date1 = new Date(this.form.value.resStart);
+    var date2 = new Date(this.form.value.resEnd);
+
+    var Time = date2.getTime() - date1.getTime();
+    var Days = Time / (1000 * 3600 * 24);
+    this.fullPrice = Days * this.price;
+    console.log("vISEE JOOOJ" + this.price)
 
   }
 }

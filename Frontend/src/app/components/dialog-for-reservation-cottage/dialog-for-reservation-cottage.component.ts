@@ -8,7 +8,7 @@ import { DataForDialogCottage } from '../cottage-profile/cottage-profile/cottage
 import { PersonalData } from 'src/app/interfaces/personal-data';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { Subscription } from 'rxjs';
-import { DatePipe } from '@angular/common';
+
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import Swal from 'sweetalert2';
@@ -35,7 +35,7 @@ export class DialogForReservationCottageComponent implements OnInit {
   utilities!: UtilityDto[];
   fullPrice: number = 0;
   price!: any;
-  pipe = new DatePipe('en-US');
+
 
   constructor(private cottageService: CottageService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
     this.newReservation = {} as CottageReservation;

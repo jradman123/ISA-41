@@ -32,10 +32,8 @@
         </div>
         <div>
             <label>Price for reservation:</label>
-            <mat-form-field appearance="fill" style="width: 90%;">
-                <mat-label>Add price</mat-label>
-                <input matInput type="number" min="1" max="" placeholder="Price" formControlName="price" />
-            </mat-form-field>
+            {{fullPrice}} €
+            <button mat-raised-button style="margin-left: 10px;" (click)="total()">Calculate</button>
         </div>
 
     </form>

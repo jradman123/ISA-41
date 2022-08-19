@@ -45,17 +45,41 @@
 
 
     <form>
+
+
+        <table class="table" style=" margin-top: 23px;margin-left:40px;">
+
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Select</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let utility of utilities">
+                    <td>{{utility.name}}</td>
+                    <td>{{utility.price}}</td>
+                    <td>
+
+                        <input type="checkbox" id="customCheck1">
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
         <div class="button-container">
             <button mat-flat-button color="primary" (click)="reserved()"
-                style="margin-left: 200px;width: 100px;margin-top: 400px;">Add</button>
+                style="margin-left: 150px;width: 100px;margin-top: 170px;">Add</button>
         </div>
 
     </form>
 
 
-    <form>
 
-    </form>
 
 
 </div>

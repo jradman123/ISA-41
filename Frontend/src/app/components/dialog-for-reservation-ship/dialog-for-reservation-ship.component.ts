@@ -10,6 +10,8 @@ import { ShipService } from 'src/app/services/ShipService/ship.service';
 import { DataForDialogGuest } from '../reservation-history/reservation-history/reservation-history.component';
 import Swal from 'sweetalert2';
 import { DataForDialogEmail } from '../ship-reservation-history/ship-reservation-history.component';
+import { UtilityService } from 'src/app/services/UtilityService/utility.service';
+import { UtilityDto } from 'src/app/interfaces/utility-dto';
 
 @Component({
   selector: 'app-dialog-for-reservation-ship',
@@ -23,10 +25,11 @@ export class DialogForReservationShipComponent implements OnInit {
   sub!: Subscription;
   newReservation!: CottageReservation;
   ship!: ShipDto;
-  startAvailableDate: any = null;
-  endAvailableDate: any = null;
+  utilities!: UtilityDto[];
+
+
   id: any;
-  constructor(private shipService: ShipService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationShipComponent>) {
+  constructor(private shipService: ShipService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationShipComponent>) {
     this.newReservation = {} as CottageReservation;
   }
   ngOnInit(): void {
@@ -35,6 +38,9 @@ export class DialogForReservationShipComponent implements OnInit {
       next: (data: ShipDto) => {
         this.ship = data
       },
+    });
+    this.utilityService.findShipUtilityById(this.data.id).subscribe((data) => {
+      this.utilities = data;
     });
 
 

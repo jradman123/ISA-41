@@ -306,7 +306,7 @@
                 <ng-container matColumnDef="EndDate">
                     <th mat-header-cell *matHeaderCellDef>End date</th>
                     <td mat-cell *matCellDef="let element; let i = index">
-                        {{parseStringToDate(element.resStart) | date:'d/M/yyyy, h:mm a' }}
+                        {{parseStringToDate(element.resEnd) | date:'d/M/yyyy, h:mm a' }}
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="Price">

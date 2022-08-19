@@ -126,8 +126,7 @@ export class ShipReservationHistoryComponent implements OnInit {
   }
 
   addNew(element: any) {
-    console.log("fdffdfd" + element.resStart)
-    console.log("fsfsf" + new Date())
+
 
     return new Date(Date.parse(element.resStart)) <= new Date()
   }

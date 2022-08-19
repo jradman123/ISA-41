@@ -8,6 +8,7 @@ import { DataForDialogCottage } from '../cottage-profile/cottage-profile/cottage
 import { PersonalData } from 'src/app/interfaces/personal-data';
 import { UserService } from 'src/app/services/UserService/user.service';
 import { Subscription } from 'rxjs';
+import { DatePipe } from '@angular/common';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import Swal from 'sweetalert2';
@@ -28,10 +29,14 @@ export class DialogForReservationCottageComponent implements OnInit {
   sub!: Subscription;
   newReservation!: CottageReservation;
   cottage!: CottageDto;
-  startAvailableDate: any = null;
-  endAvailableDate: any = null;
+  start: any
+  end: any
   id: any;
   utilities!: UtilityDto[];
+  fullPrice: number = 0;
+  price!: any;
+  pipe = new DatePipe('en-US');
+
   constructor(private cottageService: CottageService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
     this.newReservation = {} as CottageReservation;
   }
@@ -40,6 +45,7 @@ export class DialogForReservationCottageComponent implements OnInit {
     this.cottageService.findbyId(this.data.id).subscribe({
       next: (data: CottageDto) => {
         this.cottage = data
+        this.price = data.price
       },
     });
     this.utilityService.findUtilityById(this.data.id).subscribe((data) => {
@@ -90,7 +96,7 @@ export class DialogForReservationCottageComponent implements OnInit {
         text: 'You have successfully booked a ship!',
       })
 
-      console.log("siufsdfhdsfkjds" + this.newReservation)
+
       this.sub = this.reservationService.reservatedCottage(this.newReservation)
         .subscribe({
           next: () => {
@@ -116,10 +122,21 @@ export class DialogForReservationCottageComponent implements OnInit {
     this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
       this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
       this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
-    this.newReservation.price = this.form.value.price;
+    this.newReservation.price = this.fullPrice.toString();
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'COTTAGE';
+
+  }
+
+  total() {
+
+    var date1 = new Date(this.form.value.resStart);
+    var date2 = new Date(this.form.value.resEnd);
+
+    var Time = date2.getTime() - date1.getTime();
+    var Days = Time / (1000 * 3600 * 24);
+    this.fullPrice = Days * this.price;
 
   }
 }

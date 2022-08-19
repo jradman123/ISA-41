@@ -32,10 +32,8 @@
         </div>
         <div>
             <label>Price for reservation:</label>
-            <mat-form-field appearance="fill" style="width: 90%;">
-                <mat-label>Add price</mat-label>
-                <input matInput type="number" min="1" max="" placeholder="Price" formControlName="price" />
-            </mat-form-field>
+            {{fullPrice}} €
+            <button mat-raised-button style="margin-left: 10px;" (click)="total()">Calculate</button>
         </div>
 
     </form>
@@ -47,7 +45,7 @@
     <form>
 
 
-        <table class="table" style=" margin-top: 23px;margin-left:40px;">
+        <table class="table" style=" margin-top: 23px;margin-left:30px;">
 
             <thead>
                 <tr>
@@ -73,7 +71,7 @@
 
         <div class="button-container">
             <button mat-flat-button color="primary" (click)="reserved()"
-                style="margin-left: 150px;width: 100px;margin-top: 170px;">Add</button>
+                style="margin-left: 120px;width: 100px;margin-top: 130px;">Add</button>
         </div>
 
     </form>

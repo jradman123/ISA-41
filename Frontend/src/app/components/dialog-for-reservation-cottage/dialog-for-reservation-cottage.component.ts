@@ -82,7 +82,15 @@ export class DialogForReservationCottageComponent implements OnInit {
         title: 'Error',
         text: 'Start date is greater or equal then end date!',
       })
-    } else if (this.newReservation.resStart < new Date()) {
+    }
+    else if (this.newReservation.price == "0") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must click the calculate button!',
+      })
+    }
+    else if (this.newReservation.resStart < new Date()) {
       Swal.fire({
         icon: 'error',
         title: 'Error',

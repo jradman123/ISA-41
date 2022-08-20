@@ -3,7 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.CottageAvailabilityDto;
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.ShipAvailabilityDto;
+import com.example.demo.dto.ShipUtilityDto;
 import com.example.demo.model.cottages.CottageAvailability;
+import com.example.demo.model.ships.ShipAvailability;
 import com.example.demo.service.AvailabilityService;
 import com.example.demo.service.impl.AvailabilityServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +37,20 @@ public class AvailabilityController {
     @PostMapping(value="/addCottageAvailability")
     public CottageAvailability addCottageAvailability(@RequestBody CottageAvailabilityDto cottageAvailabilityDto) {
         return availabilityService.add(cottageAvailabilityDto);
+    }
+
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/getByShip/{id}")
+    public List<ShipAvailabilityDto> getbyShip(@PathVariable Long id) {
+        return availabilityService.findByShip(id);
+    }
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping(value="/addShipAvailability")
+    public ShipAvailability addShipAvailability(@RequestBody ShipAvailabilityDto shipAvailabilityDto) {
+        return availabilityService.addShipAvailability(shipAvailabilityDto);
     }
 }

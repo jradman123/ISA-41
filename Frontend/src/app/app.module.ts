@@ -80,6 +80,7 @@ import { ShipReservationComponent } from './components/ship-reservation/ship-res
 import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
+import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
 
 
 
@@ -154,7 +155,8 @@ import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
     DialogForReservationShipComponent
 ,
     InstructorAvailabilityComponent,
-    AdventureSearchPipe
+    AdventureSearchPipe,
+    ShipAvailabilityComponent
 
 
   ],

@@ -6,6 +6,7 @@ import com.example.demo.service.impl.RuleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class RuleController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @DeleteMapping(value = "/deleteRyleByCottage/{id}/{idCottage}")
     public ResponseEntity<Long> deleteRuleByCottage(@PathVariable Long id,@PathVariable Long idCottage) {
         return this.ruleService.deleteRuleByCottage(id,idCottage);
@@ -28,7 +29,7 @@ public class RuleController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @DeleteMapping(value = "/deleteRyleByShip/{id}/{idShip}")
     public ResponseEntity<Long> deleteRuleByShip(@PathVariable Long id,@PathVariable Long idShip) {
         return this.ruleService.deleteRuleByShip(id,idShip);
@@ -37,31 +38,34 @@ public class RuleController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value="/findRulesByCottage/{id}")
     public List<RuleDto> getRulesByCottage(@PathVariable Long id) {
         return ruleService.getRulesByCottage(id);
     }
 
 
-
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/findRule/{id}")
     public RuleDto findRule(@PathVariable Long id) {
         return this.ruleService.findRule(id);
     }
 
 
-
-   public ResponseEntity<Long> deleteRule(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
+    public ResponseEntity<Long> deleteRule(@PathVariable Long id) {
         return this.ruleService.deleteRule(id);
     }
 
     @GetMapping(value="/findRulesByBoat/{id}")
-    public List<RuleDto> getRulesByBoat(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    public List<RuleDto> getRulesByBoat(@PathVariable Long id)
+    {
         return ruleService.getRulesByBoat(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value = "/createCottageRule")
     public Rules createCottageRule(@RequestBody RuleDto newRule) {
         return this.ruleService.createCottageRule(newRule);
@@ -69,7 +73,7 @@ public class RuleController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //ovo samo moze da radi vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @PostMapping(value = "/createShipRule")
     public Rules createShipRule(@RequestBody RuleDto newRule) {
         return this.ruleService.createShipRule(newRule);

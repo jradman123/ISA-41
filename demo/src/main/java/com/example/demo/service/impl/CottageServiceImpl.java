@@ -1,10 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.RoomDto;
-import com.example.demo.dto.RuleDto;
 import com.example.demo.model.Address;
-import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.Room;
 import com.example.demo.model.users.CottageOwner;
@@ -34,6 +33,8 @@ public class CottageServiceImpl implements CottageService {
     @Autowired
     private CottageOwnerRepository cottageOwnerRepository;
 
+    @Autowired
+    private ReservationServiceImpl reservationService;
 
 
     @Override
@@ -82,10 +83,15 @@ public class CottageServiceImpl implements CottageService {
 
     @Override
     public ResponseEntity<Long> deleteCottage(Long id) {
+        List<ReservationViewDto> reservations=reservationService.getReservationsByCottage(id);
+        if(!reservations.isEmpty()) {
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
 
         List<Cottage> cottages=this.cottageRepository.findAll();
         for (Cottage cottage: cottages)
         {
+
            if(cottage.getId()==id) {
                cottage.setDeleted(true);
                cottageRepository.save(cottage);

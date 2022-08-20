@@ -32,10 +32,8 @@
         </div>
         <div>
             <label>Price for reservation:</label>
-            <mat-form-field appearance="fill" style="width: 90%;">
-                <mat-label>Add price</mat-label>
-                <input matInput type="number" min="1" max="" placeholder="Price" formControlName="price" />
-            </mat-form-field>
+            {{fullPrice}} €
+            <button mat-raised-button style="margin-left: 10px;" (click)="total()">Calculate</button>
         </div>
 
     </form>
@@ -45,17 +43,41 @@
 
 
     <form>
+
+
+        <table class="table" style=" margin-top: 23px;margin-left:30px;">
+
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Select</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let utility of utilities">
+                    <td>{{utility.name}}</td>
+                    <td>{{utility.price}}</td>
+                    <td>
+
+                        <input type="checkbox" id="customCheck1">
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
         <div class="button-container">
             <button mat-flat-button color="primary" (click)="reserved()"
-                style="margin-left: 200px;width: 100px;margin-top: 400px;">Add</button>
+                style="margin-left: 120px;width: 100px;margin-top: 130px;">Add</button>
         </div>
 
     </form>
 
 
-    <form>
 
-    </form>
 
 
 </div>

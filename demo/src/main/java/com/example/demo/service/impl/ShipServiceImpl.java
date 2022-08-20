@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.Address;
 import com.example.demo.model.cottages.Cottage;
@@ -29,6 +30,9 @@ public class ShipServiceImpl  implements ShipService {
 
     @Autowired
     private ShipOwnerRepository shipOwnerRepository;
+
+    @Autowired
+    private ReservationServiceImpl reservationService;
 
 
 
@@ -129,6 +133,10 @@ public class ShipServiceImpl  implements ShipService {
 
     @Override
     public ResponseEntity<Long> deleteShip(Long id) {
+        List<ReservationViewDto> reservations=reservationService.getReservationsByShip(id);
+        if(!reservations.isEmpty()) {
+            return new ResponseEntity<>(id,HttpStatus.OK);
+        }
 
         List<Ship> ships=this.shipRepository.findAll();
         for (Ship ship: ships)

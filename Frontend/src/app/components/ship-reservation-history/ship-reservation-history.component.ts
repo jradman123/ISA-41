@@ -125,6 +125,12 @@ export class ShipReservationHistoryComponent implements OnInit {
 
   }
 
+  addNew(element: any) {
+
+
+    return new Date(Date.parse(element.resStart)) <= new Date()
+  }
+
   viewPersonalData(clientEmail: string) {
     const dialogConfig = new MatDialogConfig();
 

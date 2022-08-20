@@ -105,7 +105,7 @@ public class ReservationServiceImpl implements ReservationService
     public void notifyUserForReservation(CreateReservationDto dto) {
         emailSenderService.sendEmail(dto.getClientEmail(),"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Rezervacija traje od "+dto.getResStart() + " do " + dto.getResEnd() +
                 " po cijeni od " + dto.getPrice() + "€ za " + dto.getNumberOfPerson() + " osoba." +
-                "Molimo da potvrdite i provjerite detalje na svom profilu!");
+                "Molimo da potvrdite i provjerite detalje na svom profilu.Klikom na link potvrdjujete rezervaciju!");
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.example.demo.service.impl.UtilityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class UtilityController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @DeleteMapping(value = "/deleteUtilityByCottage/{id}/{idCottage}")
     public ResponseEntity<Long> deleteUtility(@PathVariable Long id,@PathVariable Long idCottage) {
         return this.utilityService.deleteUtiliry(id,idCottage);
@@ -29,13 +30,14 @@ public class UtilityController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    //radi samo vlasnik vikendice
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @DeleteMapping(value = "/deleteUtilityByShip/{id}/{idShip}")
     public ResponseEntity<Long> deleteUtilitybyShip(@PathVariable Long id,@PathVariable Long idShip) {
         return this.utilityService.deleteUtilirybyShip(id,idShip);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @GetMapping(value="/findUtilitiesByCottage/{id}")
     public List<CottageUtilityDto> getUtilitesByCottage(@PathVariable Long id) {
 
@@ -44,13 +46,14 @@ public class UtilityController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value="/findUtilitiesByBoat/{id}")
     public List<ShipUtilityDto> getUtilitiesbyBoat(@PathVariable Long id) {
 
 
         return utilityService.getUtilitiesbyBoat(id);
     }
-
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping(value="/addCottageUtility")
     public CottageUtility addCottageUtility(@RequestBody CottageUtilityDto cottageUtilityDto) {
@@ -59,6 +62,7 @@ public class UtilityController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @PostMapping(value="/addShipUtility")
     public ShipUtility addShipUtility(@RequestBody ShipUtilityDto shipUtilityDto) {
         return utilityService.addUtilityByShip(shipUtilityDto);

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,9 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     public CottageAvailability add(CottageAvailabilityDto cottageAvailabilityDto) {
         System.out.print("dsdsds" + cottageAvailabilityDto);
         Cottage cottage = cottageService.findCottageById(cottageAvailabilityDto.getCottageId());
-        CottageAvailability ca = new CottageAvailability(cottageAvailabilityDto.getStartDate(), cottageAvailabilityDto.getEndDate(), cottage);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+
+        CottageAvailability ca = new CottageAvailability(LocalDateTime.parse(cottageAvailabilityDto.getStartDate(),formatter),LocalDateTime.parse(cottageAvailabilityDto.getEndDate(),formatter), cottage);
         CottageAvailability cottageAvailability = cottageAvailabilityRepository.save(ca);
         List<CottageAvailability> availabilities = this.cottageAvailabilityRepository.getAllForCottage(cottageAvailability.getCottage().getId());
         List<CottageAvailability> newAvailabilities = checkForOverlappingAvailabilities(availabilities, cottageAvailability);

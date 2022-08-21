@@ -32,4 +32,9 @@ public class AdventureUtilityServiceImpl implements AdventureUtilityService {
         AdventureUtility saved = adventureUtilityRepository.save(adventureUtility);
         return saved;
     }
+
+    @Override
+    public AdventureUtility findById(Long id) {
+        return adventureUtilityRepository.findById(id).get();
+    }
 }

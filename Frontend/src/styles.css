@@ -2,21 +2,26 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .snack-bar {
-    background: black;
-    font-weight: 500;
-    color: white !important;
+  background: black;
+  font-weight: 500;
+  color: white !important;
 }
 
-.image{
-  height:-webkit-fill-available; 
-  background-size:cover;
-  width:auto;
-  background-image:url("assets/images/background1.jpg");
-
+.image {
+  height: -webkit-fill-available;
+  background-size: cover;
+  width: auto;
+  background-image: url("assets/images/background1.jpg");
 }
-

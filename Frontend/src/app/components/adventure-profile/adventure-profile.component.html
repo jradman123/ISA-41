@@ -17,7 +17,67 @@
     <mat-tab label="Fishing equipment">
       <app-adventure-fishing-equipments></app-adventure-fishing-equipments>
     </mat-tab>
-    <mat-tab label="Add reservation"> Content 3 </mat-tab>
+    <mat-tab label="Add quick reservation"> 
+      <mat-card>
+        <mat-card-title>Add quick reservation for adventure</mat-card-title>
+        <mat-card-content>
+      <form class="form-container" [formGroup]="detailsForm">
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field appearance="standard">
+              <label>Start date:</label>
+              <input matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" formControlName="startDate" />
+              <span [owlDateTimeTrigger]="dt1"><i class="bi bi-calendar"></i></span>
+              <owl-date-time #dt1></owl-date-time>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field appearance="standard">
+              <label>End date:</label>
+              <input matInput [owlDateTime]="dt2" [owlDateTimeTrigger]="dt2"  formControlName="startDate"/>
+              <span [owlDateTimeTrigger]="dt2"><i class="bi bi-calendar"></i></span>
+              <owl-date-time #dt2></owl-date-time>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field appearance="standard">
+              <label>Guest limit:</label>
+              <input matInput type="number" min="1" max="{{this.adventure.guestLimit}}" formControlName="guestLimit" />
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field appearance="standard">
+              <label>Price for quick reservation:</label>
+              <input matInput formControlName="price" />
+            </mat-form-field>
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-sm">
+                <mat-form-field style="width: 640px;" appearance="standard">
+                  <label>Valid until:</label>
+                  <input matInput [owlDateTime]="dt3" [owlDateTimeTrigger]="dt3"  />
+                  <span [owlDateTimeTrigger]="dt3"><i class="bi bi-calendar"></i></span>
+                  <owl-date-time #dt3></owl-date-time>
+                </mat-form-field>
+          </div>
+        </div>  
+        <div class="button-container">
+          <button mat-flat-button color="primary" class="button" (click)="add()">Add</button>
+          <button mat-flat-button color="warn"  class="button" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+        </mat-card-content>
+        </mat-card>
+    
+    </mat-tab>
+    <mat-tab label="Add reservation">
+
+    </mat-tab>
     <mat-tab label="Reservation history"> Content 3 </mat-tab>
    
   </mat-tab-group>

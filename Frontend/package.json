@@ -28,6 +28,8 @@
     "bootstrap-icons": "^1.9.1",
     "cors": "^2.8.5",
     "date-fns": "^2.29.1",
+    "ng-date-and-time-picker": "^13.1.0",
+    "ng-pick-datetime": "^7.0.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.4.28",
     "zone.js": "~0.11.4"

@@ -80,10 +80,7 @@ import { ShipReservationComponent } from './components/ship-reservation/ship-res
 import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
-
-
-
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-picker';
 
 
 @NgModule({
@@ -168,7 +165,9 @@ import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
     HttpClientModule,
     FormsModule,
     MatCarouselModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
   providers: [HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],

@@ -66,6 +66,23 @@
                 </mat-form-field>
           </div>
         </div>  
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field style="width: 640px;" appearance="standard">
+              <mat-label>Utilities</mat-label>
+              <mat-select [formControl]="adventuresUtilities" multiple>
+                <mat-select-trigger>
+                  {{utilities?.[0] || ''}}
+                  <span *ngIf="(utilities.length || 0) > 1" class="example-additional-selection">
+                    (+{{(utilities?.length || 0) - 1}} {{utilities?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let utility of utilities" [value]="utility">{{utility.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+          </div>
+        </div>  
         <div class="button-container">
           <button mat-flat-button color="primary" class="button" (click)="add()">Add</button>
           <button mat-flat-button color="warn"  class="button" (click)="cancel()">Cancel</button>

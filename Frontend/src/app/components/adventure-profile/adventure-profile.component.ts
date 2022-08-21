@@ -15,6 +15,7 @@ export class AdventureProfileComponent implements OnInit {
   id : any;
   utilities: ResponseUtility[];
   adventure : AdventureDto;
+  adventuresUtilities = new FormControl('');
 
   constructor(private activatedRoute: ActivatedRoute,private adventureService : AdventureService){
     this.utilities = [] as ResponseUtility[];
@@ -47,7 +48,7 @@ export class AdventureProfileComponent implements OnInit {
     price: new FormControl(null, [ Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
     guestLimit: new FormControl(null, [Validators.pattern('^\\d{1,3}$')]),
     startDate: new FormControl(null, [Validators.required]),
-    endDate: new FormControl(null, [Validators.required])
+    endDate: new FormControl(null, [Validators.required]),
 })
 
 cancel() { 

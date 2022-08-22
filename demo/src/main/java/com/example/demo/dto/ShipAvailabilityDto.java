@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.cottages.CottageAvailability;
+import com.example.demo.model.ships.ShipAvailability;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +13,17 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CottageAvailabilityDto {
+public class ShipAvailabilityDto {
 
     public String id;
     private String startDate;
     private String endDate;
-    private Long cottageId;
+    private Long shipId;
 
-    public CottageAvailabilityDto(CottageAvailability ca) {
+    public ShipAvailabilityDto(ShipAvailability ca) {
         this.id = Long.toString(ca.getId());
         this.startDate=ca.getStartDate().toString();
         this.endDate=ca.getEndDate().toString();
-        this.cottageId=ca.getCottage().getId();
+        this.shipId=ca.getShip().getId();
     }
 }

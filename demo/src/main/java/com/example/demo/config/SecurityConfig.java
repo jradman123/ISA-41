@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // svim korisnicima dopusti da pristupe sledecim putanjama:
                 .authorizeRequests().antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/signup").permitAll()
-                .antMatchers("/reservations/createReservation").permitAll()
+                .antMatchers("/cottages/getCottageReport/**").permitAll()
                 .antMatchers("/reservations/findReservationsByCottage/**").permitAll()
                 .antMatchers("/users/findByEmail/**").permitAll()
 

@@ -169,3 +169,11 @@ INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_i
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
 VALUES ('20-08-2022 10:00', '15-08-2022  10:00', 6);
 
+
+----review---
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('bad', 1, 1);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('vrh', 5, 2);
+
+

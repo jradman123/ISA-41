@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.dto.RoomDto;
-import com.example.demo.dto.RuleDto;
-import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.Room;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +31,6 @@ public interface CottageService {
     List<CottageDto> search(CottageDto dto);
 
     Cottage create(Cottage cottage);
+
+    AverageMarkDto getCottageReport(Long id);
 }

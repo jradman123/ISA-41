@@ -40,4 +40,8 @@ export class ShipListComponent implements OnInit {
     this.searchText = searchText;
   }
 
+  emitMe(searchText: any) {
+    this.searchText = searchText.target.value
+  }
+
 }

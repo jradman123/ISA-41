@@ -6,6 +6,10 @@ import com.example.demo.service.AdventureQuickReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdventureQuickReservationServiceImpl implements AdventureQuickReservationService {
 
@@ -15,5 +19,18 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
     @Override
     public AdventureQuickReservation addNewQuickReservation(AdventureQuickReservation newAdventureQuickReservation) {
         return adventureQuickReservationRepository.save(newAdventureQuickReservation);
+    }
+
+    @Override
+    public List<AdventureQuickReservation> findAllByAdventureId(int adventureId) {
+        List<AdventureQuickReservation> reservations = new ArrayList<>();
+        for (AdventureQuickReservation reservation : adventureQuickReservationRepository.findAllByAdventureId(adventureId)) {
+            if(reservation.getStartTime().isAfter(LocalDateTime.now())){
+                reservations.add(reservation);
+            }
+        }
+
+        return reservations;
+
     }
 }

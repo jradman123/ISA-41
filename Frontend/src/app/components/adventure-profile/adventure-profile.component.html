@@ -17,7 +17,7 @@
     <mat-tab label="Fishing equipment">
       <app-adventure-fishing-equipments></app-adventure-fishing-equipments>
     </mat-tab>
-    <mat-tab label="Add quick reservation"> 
+    <mat-tab label="Add promotion"> 
       <mat-card>
         <mat-card-title>Add quick reservation for adventure</mat-card-title>
         <mat-card-content>
@@ -92,7 +92,36 @@
         </mat-card>
     
     </mat-tab>
-    <mat-tab label="Add reservation">
+    <mat-tab label="Promotions">
+      <div class="card-holder" style="margin-left: 100px;margin-top: 30px;">
+        <div class="row">
+            <div class="card" style="margin: 10px; " *ngFor="let reservation of quickReservations ">
+
+
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                      <span> </span>
+                        <strong> From {{reservation.startTime | date:'d/M/yyyy hh:mm' }}<br/>To {{reservation.endTime | date:'d/M/yyyy hh:mm '}}</strong>
+                    </li>
+
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i><span> </span>{{reservation.price}} € for {{reservation.guestLimit}}
+                        person </li>
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i><span> </span> Promotion valid until {{reservation.validUntil | date:'d/M/yyyy hh:mm' }}
+                    </li>
+                    <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn" >Delete</button>
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
 
     </mat-tab>
     <mat-tab label="Reservation history"> Content 3 </mat-tab>

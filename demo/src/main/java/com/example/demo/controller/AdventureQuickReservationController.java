@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.dto.AdventureQuickReservationDto;
+import com.example.demo.dto.AdventureQuickReservationResponse;
 import com.example.demo.dto.ResponseUtility;
 import com.example.demo.mapper.AdventureQuickReservationMapper;
 import com.example.demo.model.adventures.Adventure;
@@ -17,7 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -49,5 +52,15 @@ public class AdventureQuickReservationController {
         }
         adventureQuickReservation.setAdventureUtilities(utilities);
         return new ResponseEntity<>(adventureQuickReservationService.addNewQuickReservation(adventureQuickReservation), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/all-quick-reservations-for-adventure/{id}")
+    public ResponseEntity<List<AdventureQuickReservationResponse>> getAllForAdventure(@PathVariable int id) {
+        List<AdventureQuickReservationResponse> reservations = new ArrayList<>();
+        for (AdventureQuickReservation reservation : adventureQuickReservationService.findAllByAdventureId(id)) {
+            reservations.add(adventureQuickReservationMapper.mapToAdventureQuickReservationResponse(reservation));
+        }
+        return new ResponseEntity<>(reservations,HttpStatus.OK);
     }
 }

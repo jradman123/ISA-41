@@ -41,7 +41,7 @@ export class ShipAddActionComponent implements OnInit {
       this.haveReservation = data;
     });
 
-    this.utilityService.findUtilityById(this.idShip).subscribe((data) => {
+    this.utilityService.findShipUtilityById(this.idShip).subscribe((data) => {
       this.utilities = data;
     });
 

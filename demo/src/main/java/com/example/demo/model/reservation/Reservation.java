@@ -49,6 +49,7 @@ public class Reservation {
      private Boolean isCanceled = false;
 
 
+
 	@Column(name = "isReserved", nullable = false)
 	private Boolean isReserved;
 

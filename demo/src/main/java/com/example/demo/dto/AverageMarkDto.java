@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AverageMarkDto {
 
-    public Double cottageMark;
+    public String cottageMark;
 
 
 

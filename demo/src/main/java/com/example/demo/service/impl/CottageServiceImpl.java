@@ -212,6 +212,9 @@ public class CottageServiceImpl implements CottageService {
             }
 
         }
+        if(reservations.size()==0) {
+            return sum=0.0;
+        }
         return sum/reservations.size();
     }
 
@@ -221,7 +224,7 @@ public class CottageServiceImpl implements CottageService {
     public AverageMarkDto getCottageReport(Long id) {
        AverageMarkDto report=new AverageMarkDto();
        Double marks=getAverageMarkByCottage(id);
-       report.setCottageMark(marks);
+       report.setCottageMark(marks.toString());
 
        return report;
     }

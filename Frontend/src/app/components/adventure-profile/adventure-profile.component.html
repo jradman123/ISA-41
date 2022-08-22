@@ -109,9 +109,11 @@
                         person </li>
                     <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i><span> </span> Promotion valid until {{reservation.validUntil | date:'d/M/yyyy hh:mm a' }}
                     </li>
+                    <li style="height: 70px;" class="list-group-item"> 
+                      <div *ngFor="let utility of reservation.utilities">{{utility.name}} </div><br/>
+                    </li>
                     <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn" *ngIf="!reservation.reserved" (click)="deleteQuickReservation(reservation.id)" >Delete</button>
                     </li>
-
 
                 </ul>
 

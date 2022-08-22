@@ -65,4 +65,8 @@ export class CottageListComponent implements OnInit {
 
   }
 
+  emitMe(searchText: any) {
+    this.searchText = searchText.target.value
+  }
+
 }

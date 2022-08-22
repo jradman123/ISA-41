@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.CottageReportDto;
+import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.model.Address;
@@ -214,9 +214,12 @@ public class CottageServiceImpl implements CottageService {
         }
         return sum/reservations.size();
     }
+
+
+
     @Override
-    public CottageReportDto getCottageReport(Long id) {
-       CottageReportDto report=new CottageReportDto();
+    public AverageMarkDto getCottageReport(Long id) {
+       AverageMarkDto report=new AverageMarkDto();
        Double marks=getAverageMarkByCottage(id);
        report.setCottageMark(marks);
 

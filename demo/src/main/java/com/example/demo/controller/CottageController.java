@@ -120,7 +120,7 @@ public class CottageController {
 
     @CrossOrigin(origins = "http://localhost:4200")
    @GetMapping(value = "/getCottageReport/{id}")
-    public CottageReportDto getCottageReport(@PathVariable Long id) {
+    public AverageMarkDto getCottageReport(@PathVariable Long id) {
         return this.cottageService.getCottageReport(id);
     }
 

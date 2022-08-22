@@ -9,12 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CottageReportDto {
+public class AverageMarkDto {
 
     public Double cottageMark;
-    public String reservationPerYear;
-    public String reservationPerWeek;
-    public String reservationPerMonth;
+
 
 
 }

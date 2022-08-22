@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.CottageReportDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.dto.RuleDto;
 import com.example.demo.model.Rules;
@@ -32,4 +33,6 @@ public interface CottageService {
     List<CottageDto> search(CottageDto dto);
 
     Cottage create(Cottage cottage);
+
+    CottageReportDto getCottageReport(Long id);
 }

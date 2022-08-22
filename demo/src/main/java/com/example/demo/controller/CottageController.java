@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.*;
 import com.example.demo.mapper.ImageMapper;
 import com.example.demo.model.Image;
-import com.example.demo.model.Rules;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.Room;
 import com.example.demo.repository.CottageRepository;
@@ -88,6 +87,7 @@ public class CottageController {
 
 
 
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value = "/createRoomByCottage")
@@ -116,6 +116,12 @@ public class CottageController {
     public CottageDto editCottage(@RequestBody CottageDto newCottage) {
         return this.cottageService.editCottage(newCottage);
 
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+   @GetMapping(value = "/getCottageReport/{id}")
+    public CottageReportDto getCottageReport(@PathVariable Long id) {
+        return this.cottageService.getCottageReport(id);
     }
 
 

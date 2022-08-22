@@ -1,17 +1,18 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.CottageDto;
+import com.example.demo.dto.CottageReportDto;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.model.Address;
+import com.example.demo.model.Review;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.cottages.Room;
 import com.example.demo.model.users.CottageOwner;
 import com.example.demo.model.users.User;
-import com.example.demo.repository.CottageOwnerRepository;
-import com.example.demo.repository.CottageRepository;
+import com.example.demo.repository.*;
 
-import com.example.demo.repository.RoomRepository;
 import com.example.demo.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -35,6 +36,14 @@ public class CottageServiceImpl implements CottageService {
 
     @Autowired
     private ReservationServiceImpl reservationService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private CottageReservationRepository cottageReservationRepository;
+
+
 
 
     @Override
@@ -189,6 +198,29 @@ public class CottageServiceImpl implements CottageService {
     @Override
     public Cottage create(Cottage cottage) {
         return cottageRepository.save(cottage);
+    }
+
+    public Double getAverageMarkByCottage(Long id) {
+        List<CottageReservation> reservations=this.cottageReservationRepository.getAllForCottage(id);
+        Double sum = 0.0;
+        for (Review review : this.reviewRepository.findAll()) {
+            for (CottageReservation reservation : reservations) {
+                   if(reservation.getId()==review.getReservation().getId()) {
+                       sum+=review.getMark();
+                         }
+
+            }
+
+        }
+        return sum/reservations.size();
+    }
+    @Override
+    public CottageReportDto getCottageReport(Long id) {
+       CottageReportDto report=new CottageReportDto();
+       Double marks=getAverageMarkByCottage(id);
+       report.setCottageMark(marks);
+
+       return report;
     }
 }
 

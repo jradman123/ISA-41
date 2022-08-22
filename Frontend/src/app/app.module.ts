@@ -82,6 +82,7 @@ import { ShipAddActionComponent } from './components/ship-add-action/ship-add-ac
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
 import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
+import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
 
 
 
@@ -157,7 +158,8 @@ import { ShipAvailabilityComponent } from './components/ship-availability/ship-a
     ,
     InstructorAvailabilityComponent,
     AdventureSearchPipe,
-    ShipAvailabilityComponent
+    ShipAvailabilityComponent,
+    CottageReportComponent
 
 
   ],

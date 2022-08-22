@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -153,7 +154,7 @@ import { ShipAvailabilityComponent } from './components/ship-availability/ship-a
     ShipReservationComponent,
     ShipAddActionComponent,
     DialogForReservationShipComponent
-,
+    ,
     InstructorAvailabilityComponent,
     AdventureSearchPipe,
     ShipAvailabilityComponent
@@ -170,6 +171,7 @@ import { ShipAvailabilityComponent } from './components/ship-availability/ship-a
     HttpClientModule,
     FormsModule,
     MatCarouselModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDjkYy-y0-wlKYTQC0cMskJm9DuCWMmvVE' }),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [HttpClientModule,

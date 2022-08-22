@@ -21,6 +21,9 @@
                     </li>
                     <li style="height: 70px;" class="list-group-item">
                         {{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}
+                        <agm-map width="100%" [latitude]="latitude" [longitude]="longitude">
+
+                        </agm-map>
                     </li>
                     <li style="height: 70px;" class="list-group-item">{{cottage.description}}</li>
                     <li style="height: 70px;" class="list-group-item">{{this.cottage.price}} € per day for

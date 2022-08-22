@@ -94,7 +94,8 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     public ShipAvailability addShipAvailability(ShipAvailabilityDto shipAvailabilityDto) {
         System.out.print("dsdsds" + shipAvailabilityDto);
         Ship ship = shipService.findShipById(shipAvailabilityDto.getShipId());
-        ShipAvailability ca = new ShipAvailability(shipAvailabilityDto.getStartDate(), shipAvailabilityDto.getEndDate(), ship);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        ShipAvailability ca = new ShipAvailability(LocalDateTime.parse(shipAvailabilityDto.getStartDate(),formatter),LocalDateTime.parse( shipAvailabilityDto.getEndDate(),formatter), ship);
         ShipAvailability shipAvailability = shipAvailabilityRepository.save(ca);
         List<ShipAvailability> availabilities = this.shipAvailabilityRepository.getAllForShip(shipAvailability.getShip().getId());
         List<ShipAvailability> newAvailabilities = checkForOverlappingShipAvailabilities(availabilities, shipAvailability);

@@ -94,7 +94,7 @@
     </mat-tab>
     <mat-tab label="Promotions">
       <div class="card-holder" style="margin-left: 100px;margin-top: 30px;">
-        <div class="row">
+        <div class="row" *ngIf="quickReservations.length != 0; else emptyTable">
             <div class="card" style="margin: 10px; " *ngFor="let reservation of quickReservations ">
 
 
@@ -102,14 +102,14 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
                       <span> </span>
-                        <strong> From {{reservation.startTime | date:'d/M/yyyy hh:mm' }}<br/>To {{reservation.endTime | date:'d/M/yyyy hh:mm '}}</strong>
+                        <strong> From {{reservation.startTime | date:'d/M/yyyy hh:mm a' }}<br/>To {{reservation.endTime | date:'d/M/yyyy hh:mm a'}}</strong>
                     </li>
 
                     <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i><span> </span>{{reservation.price}} € for {{reservation.guestLimit}}
                         person </li>
-                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i><span> </span> Promotion valid until {{reservation.validUntil | date:'d/M/yyyy hh:mm' }}
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i><span> </span> Promotion valid until {{reservation.validUntil | date:'d/M/yyyy hh:mm a' }}
                     </li>
-                    <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn" >Delete</button>
+                    <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn" *ngIf="!reservation.reserved" (click)="deleteQuickReservation(reservation.id)" >Delete</button>
                     </li>
 
 
@@ -117,10 +117,16 @@
 
 
             </div>
-
         </div>
-
-
+            <ng-template #emptyTable>
+              <div class="row" style="align-items: center; margin-left: 400px;">
+              <br><br><br><br>
+              <div class="d-flex justify-content-center ">
+                  <mat-card style="background-color: transparent; align-items: center;">No promotions.</mat-card>
+              </div>
+              <br/>
+            </div>
+          </ng-template>
     </div>
 
     </mat-tab>

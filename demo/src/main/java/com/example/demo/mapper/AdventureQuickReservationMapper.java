@@ -37,7 +37,9 @@ public class AdventureQuickReservationMapper {
         adventureQuickReservationResponse.setValidUntil(adventureQuickReservation.getValidUntil().toString());
         adventureQuickReservationResponse.setPrice(adventureQuickReservation.getPrice().toString());
         adventureQuickReservationResponse.setGuestLimit(String.valueOf(adventureQuickReservation.getGuestLimit()));
+        adventureQuickReservationResponse.setReserved(adventureQuickReservation.isReserved());
         adventureQuickReservationResponse.setUtilities(adventureUtilityMapper.mapAdventureUtilityToResponseUtility(adventureQuickReservation.getAdventureUtilities()));
+        adventureQuickReservationResponse.setId(adventureQuickReservation.getId().toString());
         return adventureQuickReservationResponse;
     }
 }

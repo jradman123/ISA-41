@@ -21,7 +21,10 @@ export class AdventureQuickReservationService {
   getAllForAdventure(id: string): Observable<AdventureQuickReservationResponse[]> {
     return this.http.get<AdventureQuickReservationResponse[]>(
       `${this.apiServerUrl}/adventure-quick-reservation/all-quick-reservations-for-adventure/${id}`);
+  }
 
-
+  deleteQuickReservation(id: string) {
+    return this.http.delete<string>(
+      `${this.apiServerUrl}/adventure-quick-reservation/${id}`);
   }
 }

@@ -1,12 +1,13 @@
 import { ResponseUtility } from "./response-utility";
 
 export interface AdventureQuickReservationResponse {
-    id : String;
+    id : string;
     startTime : Date;
     endTime : Date;
     validUntil : Date;
-    price : String;
-    adventureId : String
-    guestLimit : String;
+    price : string;
+    adventureId : string
+    guestLimit : string;
     utilities : ResponseUtility[];
+    reserved : boolean;
 }

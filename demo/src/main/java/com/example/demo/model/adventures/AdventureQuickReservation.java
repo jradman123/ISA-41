@@ -35,10 +35,13 @@ public class AdventureQuickReservation{
             inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
     private Set<AdventureUtility> adventureUtilities;
 
+    private boolean isReserved = false;
+    private boolean isDeleted = false;
+
     public AdventureQuickReservation() {
     }
 
-    public AdventureQuickReservation(Long id, LocalDateTime startTime, LocalDateTime endTime, Double price, LocalDateTime validUntil, Adventure adventure, int guestLimit, Set<AdventureUtility> adventureUtilities) {
+    public AdventureQuickReservation(Long id, LocalDateTime startTime, LocalDateTime endTime, Double price, LocalDateTime validUntil, Adventure adventure, int guestLimit, Set<AdventureUtility> adventureUtilities, boolean isReserved,boolean isDeleted) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -47,6 +50,8 @@ public class AdventureQuickReservation{
         this.adventure = adventure;
         this.guestLimit = guestLimit;
         this.adventureUtilities = adventureUtilities;
+        this.isReserved = isReserved;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -111,5 +116,21 @@ public class AdventureQuickReservation{
 
     public void setAdventureUtilities(Set<AdventureUtility> adventureUtilities) {
         this.adventureUtilities = adventureUtilities;
+    }
+
+    public boolean isReserved() {
+        return isReserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        isReserved = reserved;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

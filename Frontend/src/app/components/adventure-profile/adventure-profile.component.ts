@@ -77,9 +77,11 @@ cancel() {
 }
   
 add() {
+  const s = new Date( this.detailsForm.value.startDate.getTime() -  this.detailsForm.value.startDate.getTimezoneOffset() * 60000)
+  const e = new Date( this.detailsForm.value.endDate.getTime() -  this.detailsForm.value.endDate.getTimezoneOffset() * 60000)
   this.newAdventureQuickReservation = {
-    startTime: this.detailsForm.get('startDate')?.value,
-    endTime : this.detailsForm.get('endDate')?.value,
+    startTime: s.toISOString(),
+    endTime : e.toISOString(),
     validUntil : this.detailsForm.get('validUntil')?.value,
     price : this.detailsForm.get('price')?.value,
     guestLimit : this.detailsForm.get('guestLimit')?.value,
@@ -133,7 +135,7 @@ add() {
       Swal.fire({
         icon: 'success',
         title: 'Good job!',
-        text: 'You have successfully added new appointment!',
+        text: 'You have successfully added new quick reservation for adventure!',
       })
 
     }
@@ -145,5 +147,14 @@ add() {
     this.getQuickReservations();
     this.response = data;
   })
+}
+
+deleteQuickReservation(id: string) {
+  this.adventureQuickReservationService.deleteQuickReservation(id)
+    .subscribe(data => {
+      this.quickReservations = []
+      this.getQuickReservations();
+    });
+
 }
 }

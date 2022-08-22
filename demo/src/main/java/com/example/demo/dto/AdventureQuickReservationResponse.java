@@ -13,11 +13,12 @@ public class AdventureQuickReservationResponse {
     private String adventureId;
     private String guestLimit;
     private Set<ResponseUtility> utilities;
+    private boolean isReserved;
 
     public AdventureQuickReservationResponse() {
     }
 
-    public AdventureQuickReservationResponse(String id, String startTime, String endTime, String validUntil, String price, String adventureId, String guestLimit, Set<ResponseUtility> utilities) {
+    public AdventureQuickReservationResponse(String id, String startTime, String endTime, String validUntil, String price, String adventureId, String guestLimit, Set<ResponseUtility> utilities, boolean isReserved) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -26,6 +27,7 @@ public class AdventureQuickReservationResponse {
         this.adventureId = adventureId;
         this.guestLimit = guestLimit;
         this.utilities = utilities;
+        this.isReserved = isReserved;
     }
 
     public String getId() {
@@ -90,6 +92,14 @@ public class AdventureQuickReservationResponse {
 
     public void setUtilities(Set<ResponseUtility> utilities) {
         this.utilities = utilities;
+    }
+
+    public boolean isReserved() {
+        return isReserved;
+    }
+
+    public void setReserved(boolean reserved) {
+        isReserved = reserved;
     }
 }
 

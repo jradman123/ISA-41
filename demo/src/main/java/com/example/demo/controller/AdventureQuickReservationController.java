@@ -63,4 +63,15 @@ public class AdventureQuickReservationController {
         }
         return new ResponseEntity<>(reservations,HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteAdventureQuickReservation(@PathVariable Long id) {
+        AdventureQuickReservation reservation = adventureQuickReservationService.deleteAdventureQuickReservation(id);
+        if(reservation.isDeleted()) {
+            return new ResponseEntity<>("\"Success!\"", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("\"Error happened!\"", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

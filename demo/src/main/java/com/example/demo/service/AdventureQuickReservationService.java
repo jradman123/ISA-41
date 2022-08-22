@@ -7,4 +7,5 @@ import java.util.List;
 public interface AdventureQuickReservationService {
     AdventureQuickReservation addNewQuickReservation(AdventureQuickReservation newAdventureQuickReservation);
     List<AdventureQuickReservation> findAllByAdventureId(int adventureId);
+    AdventureQuickReservation deleteAdventureQuickReservation(Long id);
 }

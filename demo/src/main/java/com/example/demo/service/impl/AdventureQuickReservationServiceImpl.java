@@ -25,12 +25,19 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
     public List<AdventureQuickReservation> findAllByAdventureId(int adventureId) {
         List<AdventureQuickReservation> reservations = new ArrayList<>();
         for (AdventureQuickReservation reservation : adventureQuickReservationRepository.findAllByAdventureId(adventureId)) {
-            if(reservation.getStartTime().isAfter(LocalDateTime.now())){
+            if(reservation.getStartTime().isAfter(LocalDateTime.now()) && !reservation.isDeleted()){
                 reservations.add(reservation);
             }
         }
 
         return reservations;
 
+    }
+
+    @Override
+    public AdventureQuickReservation deleteAdventureQuickReservation(Long id) {
+        AdventureQuickReservation reservation = adventureQuickReservationRepository.findById(id).get();
+        reservation.setDeleted(true);
+        return adventureQuickReservationRepository.save(reservation);
     }
 }

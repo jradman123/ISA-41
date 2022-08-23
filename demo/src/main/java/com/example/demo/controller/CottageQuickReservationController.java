@@ -35,7 +35,7 @@ public class CottageQuickReservationController {
     public List<CottageQuickReservationResponse> getAllByCottage(@PathVariable Long id) {
         return this.cottageQuickReservationService.findApp(id);
     }
-
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @DeleteMapping(value="/deleteApp/{id}")
     public ResponseEntity<Long> deleteApp(@PathVariable Long id) {
         return this.cottageQuickReservationService.deleteApp(id);
@@ -44,6 +44,7 @@ public class CottageQuickReservationController {
 
 
 
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value="/createApp")
     public CottageQuickReservation createApp(@RequestBody CottageQuickReservationDto dto) {
         return this.cottageQuickReservationService.createAppointment(dto);

@@ -18,6 +18,7 @@ import { AppointmentService } from 'src/app/services/AppointmentService/appointm
 import Swal from 'sweetalert2';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { ShipQuickReservationResponse } from 'src/app/interfaces/ship-quick-reservation-response';
 @Component({
   selector: 'app-ship-profile',
   templateUrl: './ship-profile.component.html',
@@ -27,7 +28,7 @@ import { ReservationService } from 'src/app/services/ReservationService/reservat
 export class ShipProfileComponent implements OnInit {
 
   ship!: ShipDto;
-  appointments: AppointmentDto[] = []
+  appointments: ShipQuickReservationResponse[] = []
   id: any;
   rules: RuleDto[] = [];
   utilities: UtilityDto[] = [];

@@ -1,7 +1,7 @@
-package com.example.demo.model.cottages;
+package com.example.demo.model.ships;
 
-import com.example.demo.model.adventures.Adventure;
-import com.example.demo.model.adventures.AdventureUtility;
+import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageUtility;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +17,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cottageQuickReservation")
-public class CottageQuickReservation {
+@Table(name = "shipQuickReservation")
+public class ShipQuickReservation {
 
     @Id
     @Column(name = "id")
@@ -34,17 +34,17 @@ public class CottageQuickReservation {
     private LocalDateTime validUntil;
 
     @ManyToOne()
-    @JoinColumn(name = "cottage_id", nullable = false)
-    private Cottage cottage;
+    @JoinColumn(name = "ship_id", nullable = false)
+    private Ship ship;
 
     private int guestLimit;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
-            name = "cottage_quick_reservation_cottage_utility",
-            joinColumns = @JoinColumn(name = "cottage_quick_reservation_id"),
-            inverseJoinColumns = @JoinColumn(name = "cottage_utility_id"))
-    private Set<CottageUtility> cottageUtilities;
+            name = "ship_quick_reservation_ship_utility",
+            joinColumns = @JoinColumn(name = "ship_quick_reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "ship_utility_id"))
+    private Set<ShipUtility> shipUtilities;
 
     private boolean isReserved = false;
     private boolean isDeleted = false;

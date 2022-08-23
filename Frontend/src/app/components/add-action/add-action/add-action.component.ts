@@ -123,8 +123,7 @@ export class AddActionComponent implements OnInit {
     let newEnd = new Date(this.form.value.resEnd)
     let Valid = new Date(this.form.value.validUntil)
 
-    console.log(newStart)
-    console.log(newEnd)
+
     this.newAppointment.startTime = (new Date(newStart.setHours(14, 0, 0, 0))).toISOString();
     this.newAppointment.endTime = (new Date(newEnd.setHours(11, 0, 0, 0))).toISOString();
     this.newAppointment.guestLimit = this.form.value.capacity;

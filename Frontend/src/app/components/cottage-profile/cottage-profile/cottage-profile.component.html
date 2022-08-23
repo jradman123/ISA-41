@@ -198,11 +198,11 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <strong> from {{app.startDate | date:'d/M/yyyy' }} to {{app.endDate |
+                                <strong> from {{app.startTime| date:'d/M/yyyy' }} to {{app.endTime |
                                     date:'d/M/yyyy'}}</strong>
                             </li>
 
-                            <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.capacity}}
+                            <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.guestLimit}}
                                 person </li>
                             <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil |
                                 date:'d/M/yyyy, h:mm a' }}

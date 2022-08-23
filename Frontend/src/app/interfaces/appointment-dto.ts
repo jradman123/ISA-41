@@ -1,3 +1,5 @@
+import { ResponseUtility } from "./response-utility";
+
 export interface AppointmentDto {
 
     id: string;
@@ -9,6 +11,7 @@ export interface AppointmentDto {
     isReserved: Boolean;
     cottageId: String;
     shipId: String;
+    utilities: ResponseUtility[];
 
 
 

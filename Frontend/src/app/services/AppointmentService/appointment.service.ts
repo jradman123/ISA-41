@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
+import { CottageQuickReservationDto } from 'src/app/interfaces/cottage-quick-reservation';
+import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,9 @@ export class AppointmentService {
 
 
 
-  findAppByCottage(id: string): Observable<AppointmentDto[]> {
-    return this.http.get<AppointmentDto[]>(
-      `${this.apiServerUrl}/appointments/getAppByCottage/${id}`);
+  findAppByCottage(id: string): Observable<CottageQuickReservationResponse[]> {
+    return this.http.get<CottageQuickReservationResponse[]>(
+      `${this.apiServerUrl}/cottage-quick-reservation/getAppByCottage/${id}`);
 
 
   }
@@ -30,13 +32,15 @@ export class AppointmentService {
   }
 
   deleteApp(id: any) {
-    return this.http.delete<AppointmentDto>(
-      `${this.apiServerUrl}/appointments/deleteApp/${id}`);
+    return this.http.delete<CottageQuickReservationDto>(
+      `${this.apiServerUrl}/cottage-quick-reservation/createApp/deleteApp/${id}`);
   }
 
-  createApp(newAppointment: AppointmentDto) {
-    return this.http.post(`${this.apiServerUrl}/appointments/createApp`, newAppointment, {
+  createApp(newAppointment: CottageQuickReservationDto) {
+    console.log("ooop" + newAppointment)
+    return this.http.post(`${this.apiServerUrl}/cottage-quick-reservation/createApp`, newAppointment, {
       responseType: 'text',
     });
+
   }
 }

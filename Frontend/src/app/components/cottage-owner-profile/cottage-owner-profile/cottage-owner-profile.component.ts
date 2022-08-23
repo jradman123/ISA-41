@@ -23,6 +23,8 @@ export class CottageOwnerProfileComponent implements OnInit {
   request!: DeleteAccountRequest;
   constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
+    this.request = {} as DeleteAccountRequest;
+
   }
 
   @Input()
@@ -103,6 +105,7 @@ export class CottageOwnerProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => {
         if (data) {
+          console.log("IF" + data.reason)
           this.createDeleteAccountRequest(data);
           this.requestForDeletingAccountService.addNewRequest(this.request).subscribe((result: any) => {
             void (0)

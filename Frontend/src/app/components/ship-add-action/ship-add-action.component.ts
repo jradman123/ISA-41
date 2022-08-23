@@ -104,7 +104,7 @@ export class ShipAddActionComponent implements OnInit {
         icon: 'success',
         title: 'Good job!',
         text: 'You have successfully added a appointment!',
-      })
+      })/*
 
       this.sub = this.appointmentService.createApp(this.newAppointment)
         .subscribe({
@@ -112,7 +112,7 @@ export class ShipAddActionComponent implements OnInit {
 
             this.onNoClick();
           }
-        });
+        });*/
     }
 
 

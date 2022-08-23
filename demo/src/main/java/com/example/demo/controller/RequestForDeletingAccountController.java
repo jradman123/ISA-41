@@ -43,7 +43,7 @@ public class RequestForDeletingAccountController {
     }
 
     //samo admin ne moze da pristupi
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') or hasAuthority('CottageAdvertiser')")
     @PostMapping(value = "")
     public ResponseEntity<?> addNewRequest(@RequestBody DeleteAccountRequest deleteAccountRequest) {
         return new ResponseEntity<>(requestForDeletingAccountService.saveRequest(deleteAccountRequest), HttpStatus.CREATED);

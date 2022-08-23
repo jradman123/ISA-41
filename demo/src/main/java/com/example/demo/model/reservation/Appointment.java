@@ -3,6 +3,7 @@ package com.example.demo.model.reservation;
 import com.example.demo.dto.AppointmentDto;
 import com.example.demo.dto.CreateAppointmentDto;
 import com.example.demo.model.Utility;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.Ship;
@@ -64,6 +65,14 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ship_id",nullable = true)
     private Ship ship;
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "appointment_cottage_utility",
+            joinColumns = @JoinColumn(name = "cottage_appointment_id"),
+            inverseJoinColumns = @JoinColumn(name = "cottage_utility_id"))
+    private Set<CottageUtility> cottageUtilities;
+
 
     public Appointment(CreateAppointmentDto dto) {
 

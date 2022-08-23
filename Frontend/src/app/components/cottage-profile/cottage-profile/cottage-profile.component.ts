@@ -33,6 +33,7 @@ import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-
 import { ReportService } from 'src/app/services/ReportService/report.service';
 import { RoomService } from 'src/app/services/RoomService/room.service';
 import Swal from 'sweetalert2';
+import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -74,7 +75,7 @@ export class CottageProfileComponent implements OnInit {
   availabilities: CottageAvailability[] = [];
   startAvailableDate: any = null;
   endAvailableDate: any = null;
-  appointments: AppointmentDto[] = []
+  appointments: CottageQuickReservationResponse[] = []
   editMode = false
   viewOff = false;
   initialDetails: any
@@ -110,6 +111,7 @@ export class CottageProfileComponent implements OnInit {
     this.updateCottage = {} as CottageDto
     this.pastReservations = new MatTableDataSource<CottageReservation>();
     this.roomm = {} as RoomDto;
+    this.appointments = [] as CottageQuickReservationResponse[];
 
 
     this.image = {} as Image;
@@ -222,6 +224,8 @@ export class CottageProfileComponent implements OnInit {
   findAppointments() {
     this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
       this.appointments = data;
+      console.log("TERMIIIN" + this.appointments)
+
 
     });
   }

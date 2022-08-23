@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { CottageQuickReservationDto } from 'src/app/interfaces/cottage-quick-reservation';
+import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
 import { ResponseUtility } from 'src/app/interfaces/response-utility';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
@@ -19,7 +20,7 @@ import Swal from 'sweetalert2';
 })
 export class AddActionComponent implements OnInit {
 
-  appointments: AppointmentDto[] = [];
+  appointments: CottageQuickReservationResponse[] = [];
   newAppointment!: CottageQuickReservationDto;
   id: any;
   idCottage: any;
@@ -112,7 +113,9 @@ export class AddActionComponent implements OnInit {
   onNoClick(): void {
     this.form.reset();
     this.Utilities.reset();
-
+    this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
+      this.appointments = data;
+    });
   }
 
   App(): void {

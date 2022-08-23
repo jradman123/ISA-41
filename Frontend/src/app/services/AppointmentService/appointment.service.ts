@@ -33,7 +33,7 @@ export class AppointmentService {
 
   deleteApp(id: any) {
     return this.http.delete<CottageQuickReservationDto>(
-      `${this.apiServerUrl}/cottage-quick-reservation/createApp/deleteApp/${id}`);
+      `${this.apiServerUrl}/cottage-quick-reservation/deleteApp/${id}`);
   }
 
   createApp(newAppointment: CottageQuickReservationDto) {

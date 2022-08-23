@@ -23,4 +23,8 @@ public interface ReservationService {
     List<ReservationViewDto> getReservationsByShip(Long id);
 
     List<ReservationViewDto> getPastReservationsByShip(Long id);
+
+    List<ReservationViewDto> getPastReservationsForAdventure(int id);
+
+    List<ReservationViewDto> getReservationsForAdventure(int id);
 }

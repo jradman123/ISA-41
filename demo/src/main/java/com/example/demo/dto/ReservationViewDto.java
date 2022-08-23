@@ -28,6 +28,5 @@ public class ReservationViewDto {
         price=r.getPrice();
         clientEmail=r.getRegisteredUser().getEmail();
         haveReport=r.isHaveReport();
-
     }
 }

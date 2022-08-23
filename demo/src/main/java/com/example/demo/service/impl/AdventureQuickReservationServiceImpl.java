@@ -31,7 +31,6 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
         }
 
         return reservations;
-
     }
 
     @Override

@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reservations")
-
 public class ReservationController {
 
 
@@ -76,10 +75,30 @@ public class ReservationController {
         return this.reservationService.getById(id);
     }
 
-    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser') || hasAuthority('Instructor')")
     @PostMapping(value="/createReservation")
     public ResponseEntity<HttpStatus> createReservation(@RequestBody CreateReservationDto createReservationDto) {
         reservationService.createReservation(createReservationDto);
-    return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/find-past-reservations-by-adventure/{id}")
+    public ResponseEntity<List<ReservationViewDto>> getPastReservationsByAdventure(@PathVariable int id) {
+        List<ReservationViewDto> reservationDtos = this.reservationService.getPastReservationsForAdventure(id);
+        for(ReservationViewDto reservationViewDto:reservationDtos)
+            System.out.print(reservationViewDto.getResEnd());
+        return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/find-current-reservations-by-adventure/{id}")
+    public ResponseEntity<List<ReservationViewDto>> getReservationsByAdventure(@PathVariable int id) {
+        List<ReservationViewDto> reservationDtos = this.reservationService.getReservationsForAdventure(id);
+        return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
+    }
+
+
 }

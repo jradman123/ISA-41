@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 @Setter
 public class CreateReservationDto {
 
-
    public LocalDateTime resStart;
    public LocalDateTime resEnd;
    public Integer numberOfPerson;
-   public  Double price;
+   public Double price;
    public String clientEmail;
    public String typeOfRes;
    public String objectId;

@@ -1,15 +1,19 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
+import com.example.demo.model.adventures.Adventure;
+import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
+import com.example.demo.repository.AdventureReservationRepository;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.ShipReservationRepository;
+import com.example.demo.service.AdventureService;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +47,11 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private EmailSenderServiceImpl emailSenderService;
 
+    @Autowired
+    private AdventureService adventureService;
 
+    @Autowired
+    private AdventureReservationRepository adventureReservationRepository;
 
 
     @Override
@@ -148,6 +156,30 @@ public class ReservationServiceImpl implements ReservationService
         return reservationDtos;
     }
 
+    @Override
+    public List<ReservationViewDto> getPastReservationsForAdventure(int id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.findAll()) {
+            if(r.getAdventure().getId()==id && LocalDateTime.now().isAfter(r.getReservationEnd())) {
+                reservationDtos.add(new ReservationViewDto(r));
+
+            }
+        }
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getReservationsForAdventure(int id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.findAll()) {
+            if(r.getAdventure().getId()==id  && (LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isAfter(r.getReservationStart()))) {
+                reservationDtos.add(new ReservationViewDto(r));
+            }
+        }
+
+        return reservationDtos;
+    }
+
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
             CottageReservation cottageReservation=new CottageReservation();
@@ -172,7 +204,14 @@ public class ReservationServiceImpl implements ReservationService
 
 
         }else if(createReservationDto.typeOfRes.equals("ADVENTURE")) {
-
+            AdventureReservation adventureReservation=new AdventureReservation();
+            Adventure adventure=adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId()));
+            adventureReservation.setAdventure(adventure);
+            adventureReservation.setNumberOfPerson(createReservationDto.getNumberOfPerson());
+            Set<AdventureReservation> adventureReservations=adventure.getAdventureReservations();
+            adventureReservations.add(adventureReservation);
+            adventure.setAdventureReservations(adventureReservations);
+            return adventureReservation;
         }
         return null;
     }

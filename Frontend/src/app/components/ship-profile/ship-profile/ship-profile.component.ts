@@ -273,4 +273,15 @@ export class ShipProfileComponent implements OnInit {
 
   }
 
+  deleteApp(id: string) {
+    this.appointmentService.deleteAppbyShip(id)
+      .subscribe(data => {
+
+        this.appointments = []
+        this.findAppointments();
+
+      });
+
+  }
+
 }

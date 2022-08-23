@@ -216,7 +216,7 @@
                                 <div *ngFor="let utility of app.utilities">{{utility.name}} </div><br />
                             </li>
                             <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn"
-                                    *ngIf="!app.reserved">Delete</button>
+                                    *ngIf="!app.reserved" (click)="deleteApp(app.id)">Delete</button>
                             </li>
 
 

@@ -1,35 +1,16 @@
-<div class="container ">
-  <div class="navbar-inner">
-    <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
-      <img src="../../assets/images/logo.png" style="height: 32px" />
-      <a class="navbar-brand ml-3 ms-5" style="color:blue"> Adventure </a>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
 
-
-      <div class="d-flex flex-row ">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <button class="btn btn-primary" [routerLink]="['/cottageOwner/profile']"> Profile </button>
-        </div>
-      </div>
-
-      <div class="d-flex flex-row ">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <button class="btn btn-primary" [routerLink]="['/cottageOwner']"> Cottages</button>
-        </div>
-      </div>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <button class="btn btn-primary" [routerLink]=" ['/cottageOwner/add-cottage']">Add new</button>
-      </div>
-
-
-
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 950px;">
-        <button class="btn btn-primary" (click)="onLogout()">Logout</button>
-      </div>
-
-
-    </nav>
-
-  </div>
-</div>
+    <img src="../../assets/images/logo.png" style="height: 32px" />
+    <h1>A D V E N T U R E</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button class="nav-link" [routerLink]="['/cottageOwner']"> My cottages </a>
+      <a mat-button class="nav-link" [routerLink]=" ['/cottageOwner/add-cottage']"> Add new cottage </a>
+      <a mat-button class="nav-link" [routerLink]="['/cottageOwner/profile']">Profile</a>
+      <button mat-button *ngIf="authService.isLoggedIn" class="btn btn-primary btn-md" (click)="onLogout()">
+        Log out
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

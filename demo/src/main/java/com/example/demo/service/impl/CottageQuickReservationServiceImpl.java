@@ -9,6 +9,7 @@ import com.example.demo.model.cottages.CottageQuickReservation;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageQuickReservationRepository;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -61,6 +62,14 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
                     cottageQuickReservationResponse.setPrice(appointment.getPrice().toString());
                     cottageQuickReservationResponse.setGuestLimit(String.valueOf(appointment.getGuestLimit()));
                     cottageQuickReservationResponse.setId(appointment.getId().toString());
+                    Set<ResponseUtility>  responseUtilities= new HashSet<>();
+                    for (CottageUtility utility: appointment.getCottageUtilities()) {
+                        responseUtilities.add(new ResponseUtility(utility.getId().toString(),utility.getUtility().getName(),utility.getPrice().toString()));
+                    }
+
+                    cottageQuickReservationResponse.setUtilities(responseUtilities);
+
+                    appointmentDtos.add(cottageQuickReservationResponse);
 
 
                     appointmentDtos.add(cottageQuickReservationResponse);

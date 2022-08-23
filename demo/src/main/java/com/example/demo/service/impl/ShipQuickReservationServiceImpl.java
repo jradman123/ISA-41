@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageQuickReservation;
 import com.example.demo.model.cottages.CottageUtility;
@@ -114,7 +115,12 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
                     shipQuickReservationResponse.setPrice(appointment.getPrice().toString());
                     shipQuickReservationResponse.setGuestLimit(String.valueOf(appointment.getGuestLimit()));
                     shipQuickReservationResponse.setId(appointment.getId().toString());
+                    Set<ResponseUtility>  responseUtilities= new HashSet<>();
+                    for (ShipUtility utility: appointment.getShipUtilities()) {
+                        responseUtilities.add(new ResponseUtility(utility.getId().toString(),utility.getUtility().getName(),utility.getPrice().toString()));
+                    }
 
+                    shipQuickReservationResponse.setUtilities(responseUtilities);
 
                     appointmentDtos.add(shipQuickReservationResponse);
                 }

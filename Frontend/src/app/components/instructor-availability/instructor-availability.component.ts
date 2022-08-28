@@ -121,8 +121,8 @@ export class InstructorAvailabilityComponent implements OnInit {
       next: (res) => {
         this.availabilities = res
         for(var i = 0; i < this.availabilities.length; i++){
-          this.startDate =  new Date(this.availabilities[0].startDate);   
-          this.endDate = new Date(this.availabilities[0].endDate);
+          this.startDate =  new Date(this.availabilities[i].startDate);   
+          this.endDate = new Date(this.availabilities[i].endDate);
           this.addEvent(this.startDate,this.endDate);
         }; 
         

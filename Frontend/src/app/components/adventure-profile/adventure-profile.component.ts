@@ -286,11 +286,11 @@ dialogReport(id: any) {
 
       data: { clientEmail: clientEmail, id: this.id },
     })
-    dialogRef.afterClosed().subscribe(result => {
+    /*dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
 
 
-    });
+    });*/
 
   }
 

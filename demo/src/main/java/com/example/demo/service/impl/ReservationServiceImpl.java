@@ -3,16 +3,14 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.*;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureReservation;
+import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
-import com.example.demo.repository.AdventureReservationRepository;
-import com.example.demo.repository.CottageReservationRepository;
-import com.example.demo.repository.ReservationRepository;
-import com.example.demo.repository.ShipReservationRepository;
+import com.example.demo.repository.*;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -52,6 +51,9 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private AdventureReservationRepository adventureReservationRepository;
+
+    @Autowired
+    private AdventureUtilityRepository adventureUtilityRepository;
 
 
     @Override
@@ -209,6 +211,12 @@ public class ReservationServiceImpl implements ReservationService
             adventureReservation.setAdventure(adventure);
             adventureReservation.setNumberOfPerson(createReservationDto.getNumberOfPerson());
             Set<AdventureReservation> adventureReservations=adventure.getAdventureReservations();
+            adventureReservation.setInstructorId(adventure.getInstructor().getId());
+            Set<AdventureUtility> utilities = new HashSet<>();
+            for (ResponseUtility dto : createReservationDto.getUtilities()) {
+                utilities.add(adventureUtilityRepository.findById(Long.parseLong(dto.getId())).get());
+            }
+            adventureReservation.setUtilities(utilities);
             adventureReservations.add(adventureReservation);
             adventure.setAdventureReservations(adventureReservations);
             return adventureReservation;

@@ -55,18 +55,16 @@ export class DialogForReservationAdventureComponent implements OnInit {
   }
 
   reserveAdventure(): void {
-
-
-
-    let newStart = new Date(this.form.value.resStart)
-    let newEnd = new Date(this.form.value.resEnd)
-    this.newReservation.resStart = new Date(newStart.setHours(14, 0, 0, 0)),
-    this.newReservation.resEnd = new Date(newEnd.setHours(11, 0, 0, 0)),
+    const s = new Date( this.form.value.resStart.getTime() -  this.form.value.resStart.getTimezoneOffset() * 60000)
+    const e = new Date( this.form.value.resEnd.getTime() -  this.form.value.resEnd.getTimezoneOffset() * 60000)
+    this.newReservation.resStart = s,
+    this.newReservation.resEnd = e,
     this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
     this.newReservation.price = this.fullPrice.toString();
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'ADVENTURE';
+    this.newReservation.utilities = this.adventuresUtilities.value;
     console.log(this.form.value)
 
   }
@@ -86,7 +84,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
     }
 
 
-    if (this.newReservation.resStart >= this.newReservation.resEnd) {
+    if (this.newReservation.resStart > this.newReservation.resEnd) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -131,7 +129,10 @@ export class DialogForReservationAdventureComponent implements OnInit {
   }
 
   total() {
-    this.fullPrice = this.form.value.numberOfPerson * this.price;
+    this.fullPrice = this.form.value.numberOfPerson * this.price; 
+    for(let i=0; i < this.adventuresUtilities.value.length; i++){
+      this.fullPrice += Number(this.adventuresUtilities.value[i].price);
+    }
   }
 
 }

@@ -31,14 +31,14 @@ public class AdventureReservation extends Reservation {
 	    private Adventure adventure;
 
 	    @Column(name = "instructor_id")
-	    private Long instructorId;
+	    private int instructorId;
 
 	   @ManyToMany
 	   @JoinTable(
-	            name = "adventure_reservation_utilities",
+	            name = "adventure_reservation_adventure_utilities",
 	            joinColumns = @JoinColumn(name = "adventure_reservation_id"),
 	            inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
-	    private Set<Utility> utilities;
+	    private Set<AdventureUtility> utilities;
 	
 
 

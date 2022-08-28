@@ -1,3 +1,5 @@
+import { ResponseUtility } from "./response-utility";
+
 export interface AdventureReservation {
     resStart: Date,
     resEnd: Date,
@@ -7,4 +9,5 @@ export interface AdventureReservation {
     objectId: string,
     typeOfRes: string
     haveReport: boolean;
+    utilities : ResponseUtility[];
 }

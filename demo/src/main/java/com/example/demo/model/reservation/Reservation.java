@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.example.demo.model.Report;
+import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -59,6 +60,14 @@ public class Reservation {
 
 	@Column(name = "haveReport",nullable = false)
 	private boolean haveReport=false;
+
+
+	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "cottage_reservation_cottage_utility",
+			joinColumns = @JoinColumn(name = "cottage_reservation_id"),
+			inverseJoinColumns = @JoinColumn(name = "cottage_utility_id"))
+	private Set<CottageUtility> cottageUtilities;
 	
 	 public Reservation() {
 		super();

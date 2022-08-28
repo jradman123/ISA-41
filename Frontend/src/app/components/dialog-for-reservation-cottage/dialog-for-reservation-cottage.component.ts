@@ -16,6 +16,7 @@ import { DataForDialogEmail } from '../ship-reservation-history/ship-reservation
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { HttpResponse } from '@angular/common/http';
+import { ResponseUtility } from 'src/app/interfaces/response-utility';
 
 
 @Component({
@@ -36,10 +37,14 @@ export class DialogForReservationCottageComponent implements OnInit {
   utilities!: UtilityDto[];
   fullPrice: number = 0;
   price!: any;
+  Utilities = new FormControl('');
+
 
 
   constructor(private cottageService: CottageService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
     this.newReservation = {} as CottageReservation;
+    this.utilities = [] as UtilityDto[];
+
   }
   ngOnInit(): void {
 
@@ -107,7 +112,7 @@ export class DialogForReservationCottageComponent implements OnInit {
             } else {
 
               this.dialogRef.close();
-              window.location.reload();
+              //   window.location.reload();
 
             }
           }
@@ -116,7 +121,6 @@ export class DialogForReservationCottageComponent implements OnInit {
   }
 
   reservatCottage(): void {
-
 
 
     let newStart = new Date(this.form.value.resStart)
@@ -132,6 +136,7 @@ export class DialogForReservationCottageComponent implements OnInit {
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'COTTAGE';
+    this.newReservation.utilities = this.Utilities.value;
 
   }
 
@@ -140,9 +145,11 @@ export class DialogForReservationCottageComponent implements OnInit {
     var date1 = new Date(this.form.value.resStart);
     var date2 = new Date(this.form.value.resEnd);
 
+
     var Time = date2.getTime() - date1.getTime();
     var Days = Time / (1000 * 3600 * 24);
     this.fullPrice = Days * this.price;
+
 
   }
 }

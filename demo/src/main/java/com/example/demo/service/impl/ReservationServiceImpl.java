@@ -4,6 +4,7 @@ import com.example.demo.dto.*;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageReservation;
+import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipAvailability;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,6 +41,9 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private CottageReservationRepository cottageReservationRepository;
+
+    @Autowired
+    private CottageUtilityRepository cottageUtilityRepository;
 
     @Autowired
     private ShipReservationRepository shipReservationRepository;
@@ -138,6 +143,14 @@ public class ReservationServiceImpl implements ReservationService
                            reservation.setReservationStart(createReservationDto.resStart);
                            reservation.setReservationEnd(createReservationDto.resEnd);
                            reservation.setIsReserved(false);
+                           Set<CottageUtility> utilities = new HashSet<>();
+                           for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
+                               utilities.add(cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get());
+                           }
+                           reservation.setCottageUtilities(utilities);
+
+
+
                            notifyUserForReservation(createReservationDto);
                            reservationRepository.save(reservation);
 
@@ -159,7 +172,7 @@ public class ReservationServiceImpl implements ReservationService
         User user=userService.findByEmail(createReservationDto.clientEmail);
 
         for(ShipReservation ct:shipReservationRepository.getAllForShip(Long.parseLong(createReservationDto.getObjectId()))) {
-           
+
 
             if(createReservationDto.getResStart().equals(ct.getReservationStart()) || createReservationDto.getResEnd().equals(ct.getReservationEnd()) ||
                     createReservationDto.getResStart().equals(ct.getReservationEnd()) ||
@@ -182,7 +195,8 @@ public class ReservationServiceImpl implements ReservationService
                         reservation.setReservationStart(createReservationDto.resStart);
                         reservation.setReservationEnd(createReservationDto.resEnd);
                         reservation.setIsReserved(false);
-                        notifyUserForReservation(createReservationDto);
+
+                     notifyUserForReservation(createReservationDto);
                         reservationRepository.save(reservation);
 
                         return reservation;

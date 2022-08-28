@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { DataForDialogEmail } from '../ship-reservation-history/ship-reservation-history.component';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -66,14 +67,7 @@ export class DialogForReservationCottageComponent implements OnInit {
 
     this.reservatCottage();
 
-    if (this.form.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'You must fill in all fields!',
-      })
 
-    }
 
 
     if (this.newReservation.resStart >= this.newReservation.resEnd) {
@@ -98,20 +92,24 @@ export class DialogForReservationCottageComponent implements OnInit {
       })
     } else {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully booked a ship!',
-      })
+
 
 
       this.sub = this.reservationService.reservatedCottage(this.newReservation)
         .subscribe({
-          next: () => {
+          next: (response) => {
+            if (response == "NO!") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'This appointment is already reserved! ',
+              })
+            } else {
 
-            this.dialogRef.close();
-            window.location.reload();
+              this.dialogRef.close();
+              window.location.reload();
 
+            }
           }
         });
     }

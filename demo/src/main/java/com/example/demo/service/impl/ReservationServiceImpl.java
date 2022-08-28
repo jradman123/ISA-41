@@ -2,11 +2,13 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
+import com.example.demo.repository.CottageAvailabilityRepository;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.ShipReservationRepository;
@@ -33,6 +35,9 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private ShipServiceImpl shipService;
+
+    @Autowired
+    private CottageAvailabilityRepository cottageAvailabilityRepository;
 
     @Autowired
     private CottageReservationRepository cottageReservationRepository;
@@ -101,6 +106,49 @@ public class ReservationServiceImpl implements ReservationService
 
     }
 
+    @Override
+    public Reservation createCottageReservation(CreateReservationDto createReservationDto) {
+
+        User user=userService.findByEmail(createReservationDto.clientEmail);
+
+
+        for(CottageReservation ct:cottageReservationRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
+
+            if(createReservationDto.getResStart().equals(ct.getReservationStart()) || createReservationDto.getResEnd().equals(ct.getReservationEnd()) ||
+                    createReservationDto.getResStart().equals(ct.getReservationEnd()) ||
+                    createReservationDto.getResEnd().equals(ct.getReservationStart()) ||
+                    (createReservationDto.getResEnd().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
+                    || (createReservationDto.getResStart().isBefore(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())) ||
+                    (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
+            ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
+            {
+                return null;
+            }else{
+
+               
+
+                if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+
+                    Reservation reservation=typeOfReservation(createReservationDto);
+                    reservation.setPrice(createReservationDto.getPrice());
+                    reservation.setRegisteredUser(user);
+                    reservation.setHaveReport(false);
+                    reservation.setReservationStart(createReservationDto.resStart);
+                    reservation.setReservationEnd(createReservationDto.resEnd);
+                    reservation.setIsReserved(false);
+                    notifyUserForReservation(createReservationDto);
+                    reservationRepository.save(reservation);
+
+                    return reservation;
+
+                } else {
+                    throw new RuntimeException();
+                }
+
+
+            }}
+        return null;
+    }
 
 
     @Override
@@ -152,8 +200,7 @@ public class ReservationServiceImpl implements ReservationService
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
-            List<CottageReservation> cottageReservations=getReservationsByCottage(Long.parseLong(createReservationDto.getObjectId()));
-            CottageReservation cottageReservation=new CottageReservation();
+           CottageReservation cottageReservation=new CottageReservation();
             Cottage cottage=cottageService.findCottageById(Long.parseLong(createReservationDto.getObjectId()));
             cottageReservation.setCottage(cottage);
             cottageReservation.setNumberOfPerson(createReservationDto.getNumberOfPerson());

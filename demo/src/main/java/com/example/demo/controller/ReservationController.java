@@ -5,6 +5,7 @@ import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 import com.example.demo.dto.ShipReservationViewDto;
+import com.example.demo.model.reservation.Reservation;
 import com.example.demo.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +82,15 @@ public class ReservationController {
     public ResponseEntity<HttpStatus> createReservation(@RequestBody CreateReservationDto createReservationDto) {
         reservationService.createReservation(createReservationDto);
     return ResponseEntity.noContent().build();
+    }
+
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
+    @PostMapping(value="/createCottageReservation")
+    public ResponseEntity<String> createCottageReservation(@RequestBody CreateReservationDto createReservationDto) {
+        Reservation reservation= reservationService.createCottageReservation(createReservationDto);
+        if(reservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
     }
 }

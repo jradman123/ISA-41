@@ -84,10 +84,20 @@ public class ReservationController {
     return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value="/createCottageReservation")
     public ResponseEntity<String> createCottageReservation(@RequestBody CreateReservationDto createReservationDto) {
         Reservation reservation= reservationService.createCottageReservation(createReservationDto);
+        if(reservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PostMapping(value="/createShipReservation")
+    public ResponseEntity<String> createShipReservation(@RequestBody CreateReservationDto createReservationDto) {
+        Reservation reservation= reservationService.createShipReservation(createReservationDto);
         if(reservation==null) {
             return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
         }

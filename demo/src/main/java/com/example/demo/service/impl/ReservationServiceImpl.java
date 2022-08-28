@@ -6,12 +6,10 @@ import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.ships.ShipAvailability;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
-import com.example.demo.repository.CottageAvailabilityRepository;
-import com.example.demo.repository.CottageReservationRepository;
-import com.example.demo.repository.ReservationRepository;
-import com.example.demo.repository.ShipReservationRepository;
+import com.example.demo.repository.*;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +42,10 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private ShipReservationRepository shipReservationRepository;
+
+    @Autowired
+    private ShipAvailabilityRepository shipAvailabilityRepository;
+
 
     @Autowired
     private EmailSenderServiceImpl emailSenderService;
@@ -146,7 +148,51 @@ public class ReservationServiceImpl implements ReservationService
                        }
                    }
 
-               
+
+            }}
+        return null;
+    }
+
+    @Override
+    public Reservation createShipReservation(CreateReservationDto createReservationDto) {
+
+        User user=userService.findByEmail(createReservationDto.clientEmail);
+
+        for(ShipReservation ct:shipReservationRepository.getAllForShip(Long.parseLong(createReservationDto.getObjectId()))) {
+           
+
+            if(createReservationDto.getResStart().equals(ct.getReservationStart()) || createReservationDto.getResEnd().equals(ct.getReservationEnd()) ||
+                    createReservationDto.getResStart().equals(ct.getReservationEnd()) ||
+                    createReservationDto.getResEnd().equals(ct.getReservationStart()) ||
+                    (createReservationDto.getResEnd().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
+                    || (createReservationDto.getResStart().isBefore(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())) ||
+                    (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
+                    ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResStart().isBefore(ct.getReservationEnd())&& createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
+            {
+                return null;
+            }else{
+
+
+                    if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+
+                        Reservation reservation = typeOfReservation(createReservationDto);
+                        reservation.setPrice(createReservationDto.getPrice());
+                        reservation.setRegisteredUser(user);
+                        reservation.setHaveReport(false);
+                        reservation.setReservationStart(createReservationDto.resStart);
+                        reservation.setReservationEnd(createReservationDto.resEnd);
+                        reservation.setIsReserved(false);
+                        notifyUserForReservation(createReservationDto);
+                        reservationRepository.save(reservation);
+
+                        return reservation;
+
+                    } else {
+                        throw new RuntimeException();
+                    }
+
+
+
             }}
         return null;
     }
@@ -156,7 +202,7 @@ public class ReservationServiceImpl implements ReservationService
     public void notifyUserForReservation(CreateReservationDto dto) {
         emailSenderService.sendEmail(dto.getClientEmail(),"Obavijest o rezervaciji","Rezervacija u dogovoru sa vlasnikom je kreirana.Rezervacija traje od "+dto.getResStart() + " do " + dto.getResEnd() +
                 " po cijeni od " + dto.getPrice() + "€ za " + dto.getNumberOfPerson() + " osoba." +
-                "Molimo da potvrdite i provjerite detalje na svom profilu.Klikom na link potvrdjujete rezervaciju!");
+                "Molimo da provjerite detalje na svom profilu!");
     }
 
     @Override

@@ -19,6 +19,7 @@ public interface ReservationService {
 
     Reservation createCottageReservation(CreateReservationDto createReservationDto);
 
+    Reservation createShipReservation(CreateReservationDto createReservationDto);
     void notifyUserForReservation(CreateReservationDto dto);
 
     List<ReservationViewDto> getPastReservationsByCottage(Long id);

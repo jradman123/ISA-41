@@ -20,6 +20,12 @@ export class ReservationService {
       responseType: 'text',
     });
   }
+  reservatedShip(newReservation: CottageReservation) {
+    console.log(newReservation.price)
+    return this.http.post(`${this.apiServerUrl}/reservations/createShipReservation`, newReservation, {
+      responseType: 'text',
+    });
+  }
 
   getPastCottageReservationById(id: string): Observable<CottageReservation[]> {
 

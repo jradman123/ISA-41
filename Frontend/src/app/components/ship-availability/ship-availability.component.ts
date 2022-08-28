@@ -30,6 +30,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AvailabilityService } from 'src/app/services/availabilityService/availability.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ShipAvailability } from 'src/app/interfaces/ship-availability';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -93,6 +95,8 @@ export class ShipAvailabilityComponent implements OnInit {
   refresh = new Subject<void>();
   activeDayIsOpen: boolean = false;
   availabilities: ShipAvailability[];
+  reservations: CottageReservation[]
+  pastReservations: CottageReservation[]
   startDate!: Date;
   endDate!: Date;
   chosenStartDate!: string;
@@ -101,8 +105,10 @@ export class ShipAvailabilityComponent implements OnInit {
   todayDate: Date = new Date();
   id!: any;
 
-  constructor(private router: ActivatedRoute, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
+  constructor(private router: ActivatedRoute, private reservationService: ReservationService, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
     this.availabilities = [] as ShipAvailability[];
+    this.pastReservations = [] as CottageReservation[];
+    this.reservations = [] as CottageReservation[];
     this.newAvailability = {} as ShipAvailability;
     this.range = this._formBuilder.group({
       start: ['', Validators.required],
@@ -116,21 +122,82 @@ export class ShipAvailabilityComponent implements OnInit {
 
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.getAvailabilities();
+    this.getShipPastReservations();
+    this.getShipCurrentReservations();
 
   }
+  getShipPastReservations() {
+    this.reservationService.getPastCottageReservationById(this.id).subscribe({
+      next: (res) => {
+        this.pastReservations = res
+        for (var i = 0; i < this.pastReservations.length; i++) {
+          this.startDate = new Date(this.pastReservations[i].resStart);
+          this.endDate = new Date(this.pastReservations[i].resEnd);
+          this.addPastReservationEvent(this.startDate, this.endDate, this.pastReservations[0].clientEmail, this.pastReservations[0].numberOfPerson, this.pastReservations[i].price);
+        }
+      }
+    });
+  }
 
+  getShipCurrentReservations() {
+    this.reservationService.getCottageReservationById(this.id).subscribe({
+      next: (res) => {
+        this.reservations = res
+        for (var i = 0; i < this.reservations.length; i++) {
+          this.startDate = new Date(this.reservations[i].resStart);
+          this.endDate = new Date(this.reservations[i].resEnd);
+
+          this.addReservationEvent(this.startDate, this.endDate, this.reservations[i].clientEmail, this.reservations[i].numberOfPerson, this.reservations[i].price);
+        }
+      }
+    });
+  }
   getAvailabilities() {
     this.cottageAvailabilityService.findAvailabilityByShip(this.id).subscribe({
       next: (res) => {
         this.availabilities = res
         for (var i = 0; i < this.availabilities.length; i++) {
-          this.startDate = new Date(this.availabilities[0].startDate);
-          this.endDate = new Date(this.availabilities[0].endDate);
+          this.startDate = new Date(this.availabilities[i].startDate);
+          this.endDate = new Date(this.availabilities[i].endDate);
           this.addEvent(this.startDate, this.endDate);
         };
 
       }
     });
+  }
+  addReservationEvent(start: Date, end: Date, email: any, person: any, price: any): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Reservation by ' + email + ' for ' + person + ' person for ' + price + ' €',
+        start: startOfDay(start),
+        end: endOfDay(end),
+
+        color: colors.red,
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addPastReservationEvent(start: Date, end: Date, email: any, person: any, price: any): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Past reservation by ' + email + ' for ' + person + ' person for ' + price + ' €',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.yellow,
+        draggable: false,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
   }
 
 

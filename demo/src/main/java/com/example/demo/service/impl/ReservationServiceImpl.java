@@ -120,32 +120,34 @@ public class ReservationServiceImpl implements ReservationService
                     (createReservationDto.getResEnd().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
                     || (createReservationDto.getResStart().isBefore(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())) ||
                     (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
-            ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
+                    ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResStart().isBefore(ct.getReservationEnd())&& createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
             {
                 return null;
             }else{
 
-               
-
-                if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-
-                    Reservation reservation=typeOfReservation(createReservationDto);
-                    reservation.setPrice(createReservationDto.getPrice());
-                    reservation.setRegisteredUser(user);
-                    reservation.setHaveReport(false);
-                    reservation.setReservationStart(createReservationDto.resStart);
-                    reservation.setReservationEnd(createReservationDto.resEnd);
-                    reservation.setIsReserved(false);
-                    notifyUserForReservation(createReservationDto);
-                    reservationRepository.save(reservation);
-
-                    return reservation;
-
-                } else {
-                    throw new RuntimeException();
-                }
+               for(CottageAvailability ca:cottageAvailabilityRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
 
 
+                             if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+
+                                 Reservation reservation = typeOfReservation(createReservationDto);
+                                 reservation.setPrice(createReservationDto.getPrice());
+                                 reservation.setRegisteredUser(user);
+                                 reservation.setHaveReport(false);
+                                 reservation.setReservationStart(createReservationDto.resStart);
+                                 reservation.setReservationEnd(createReservationDto.resEnd);
+                                 reservation.setIsReserved(false);
+                                 notifyUserForReservation(createReservationDto);
+                                 reservationRepository.save(reservation);
+
+                                 return reservation;
+
+                             } else {
+                                 throw new RuntimeException();
+                             }
+
+
+               }
             }}
         return null;
     }

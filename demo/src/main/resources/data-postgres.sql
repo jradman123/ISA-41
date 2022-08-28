@@ -121,6 +121,8 @@ INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,fal
 
 
 INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',3);
+INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220913 10:00:00 AM', '20220920 10:00:00 AM',3);
+
 
 ----appointments-----
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '01-06-2022 10:00',false,false,40.0, '05-06-2022 10:00', 3,'01-06-2022 10:00');

@@ -102,7 +102,7 @@ export class DialogForReservationCottageComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'This appointment is already reserved! ',
+                text: 'This appointment is already reserved or cottage is not available during a period!',
               })
             } else {
 

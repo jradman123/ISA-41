@@ -16,11 +16,16 @@ public class AddressDto {
     private String streetNumber;
     private String city;
     private String country;
+    private Double latitude;
+    private Double longitude;
 
     public AddressDto(Address address){
         this.streetName = address.getStreetName();
         this.streetNumber = address.getStreetNumber();
         this.city = address.getCity();
         this.country = address.getCountry();
+        this.latitude=address.getLatitude();
+        this.longitude=address.getLongitude();
+
     }
 }

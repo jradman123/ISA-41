@@ -33,16 +33,25 @@ public class Address {
 	 
 	 @Column(name="country", nullable = false)
      private String country;
+
+	@Column(name = "longitude", unique = false, nullable = false)
+	private double longitude;
+
+	@Column(name = "latitude", unique = false, nullable = false)
+	private double latitude;
 	
 	public Address() {
 		super();
 	}
 
-	public Address(String streetName, String streetNumber, String city, String country) {
+	public Address(String streetName, String streetNumber, String city, String country,double longitude,double latitude) {
 		this.streetName = streetName;
 		this.streetNumber = streetNumber;
 		this.city = city;
 		this.country = country;
+		this.longitude=longitude;
+		this.latitude=latitude;
+
 	}
 
 	@Override

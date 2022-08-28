@@ -31,6 +31,8 @@ public class ShipDto {
     private String cancelationConditions;
     private String fishingEquipment;
     private String ownerEmail;
+    private Double longitude;
+    private Double latitude;
 
 
     public ShipDto(Ship ship) {
@@ -51,5 +53,7 @@ public class ShipDto {
         this.cancelationConditions=Integer.toString(ship.getCancelationConditions());
         this.fishingEquipment=ship.getFishingEquipment();
         this.ownerEmail=ship.getShipOwner().getEmail();
+        this.latitude=ship.getAddress().getLatitude();
+        this.longitude=ship.getAddress().getLongitude();
     }
 }

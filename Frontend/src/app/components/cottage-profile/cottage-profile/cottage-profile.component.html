@@ -115,9 +115,8 @@
 
         <mat-tab label="Maps">
 
-            <h1>{{ title }}</h1>
-            <agm-map [latitude]="lat" [longitude]="lng">
-                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            <agm-map [latitude]="cottage.latitude" [longitude]="cottage.longitude">
+                <agm-marker [latitude]="cottage.latitude" [longitude]="cottage.longitude"></agm-marker>
             </agm-map>
 
         </mat-tab>

@@ -57,7 +57,7 @@ export interface DataForReport {
   styleUrls: ['./cottage-profile.component.css']
 })
 export class CottageProfileComponent implements OnInit {
-  title = 'My first AGM project';
+
   lat = 51.678418;
   lng = 7.809007;
 
@@ -439,7 +439,9 @@ export class CottageProfileComponent implements OnInit {
         country: this.detailsForm.get('country')?.value,
         id: this.id,
         ownerEmail: this.email,
-        numberOfPeople: this.detailsForm.get('numberOfPeople')?.value
+        numberOfPeople: this.detailsForm.get('numberOfPeople')?.value,
+        longitude: this.cottage.longitude,
+        latitude: this.cottage.latitude,
       }
       this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
         this.updateCottage = data

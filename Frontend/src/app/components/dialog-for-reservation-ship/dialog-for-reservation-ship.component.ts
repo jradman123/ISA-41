@@ -89,13 +89,13 @@ export class DialogForReservationShipComponent implements OnInit {
         text: 'You have successfully booked a ship!',
       })
 
-      console.log("siufsdfhdsfkjds" + this.newReservation)
+      console.log("siufsdfhdsfkjds" + this.newReservation.clientEmail)
       this.sub = this.reservationService.reservatedCottage(this.newReservation)
         .subscribe({
           next: () => {
 
             this.dialogRef.close();
-            window.location.reload();
+            //     window.location.reload();
 
           }
         });

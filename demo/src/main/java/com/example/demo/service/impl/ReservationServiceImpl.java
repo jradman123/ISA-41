@@ -77,11 +77,11 @@ public class ReservationServiceImpl implements ReservationService
     public void createReservation(CreateReservationDto createReservationDto) {
         User user=userService.findByEmail(createReservationDto.clientEmail);
         Reservation reservation=typeOfReservation(createReservationDto);
-
-       System.out.print("OPPPPPPPPEPEEEEEEEETJOOOOOJ"+createReservationDto.getPrice());
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
         reservation.setHaveReport(false);
+
+
 
 
       if(createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
@@ -100,6 +100,8 @@ public class ReservationServiceImpl implements ReservationService
 
 
     }
+
+
 
     @Override
     public void notifyUserForReservation(CreateReservationDto dto) {
@@ -150,6 +152,7 @@ public class ReservationServiceImpl implements ReservationService
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
+            List<CottageReservation> cottageReservations=getReservationsByCottage(Long.parseLong(createReservationDto.getObjectId()));
             CottageReservation cottageReservation=new CottageReservation();
             Cottage cottage=cottageService.findCottageById(Long.parseLong(createReservationDto.getObjectId()));
             cottageReservation.setCottage(cottage);

@@ -127,27 +127,26 @@ public class ReservationServiceImpl implements ReservationService
 
                for(CottageAvailability ca:cottageAvailabilityRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
 
+                       if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
 
-                             if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+                           Reservation reservation = typeOfReservation(createReservationDto);
+                           reservation.setPrice(createReservationDto.getPrice());
+                           reservation.setRegisteredUser(user);
+                           reservation.setHaveReport(false);
+                           reservation.setReservationStart(createReservationDto.resStart);
+                           reservation.setReservationEnd(createReservationDto.resEnd);
+                           reservation.setIsReserved(false);
+                           notifyUserForReservation(createReservationDto);
+                           reservationRepository.save(reservation);
 
-                                 Reservation reservation = typeOfReservation(createReservationDto);
-                                 reservation.setPrice(createReservationDto.getPrice());
-                                 reservation.setRegisteredUser(user);
-                                 reservation.setHaveReport(false);
-                                 reservation.setReservationStart(createReservationDto.resStart);
-                                 reservation.setReservationEnd(createReservationDto.resEnd);
-                                 reservation.setIsReserved(false);
-                                 notifyUserForReservation(createReservationDto);
-                                 reservationRepository.save(reservation);
+                           return reservation;
 
-                                 return reservation;
+                       } else {
+                           throw new RuntimeException();
+                       }
+                   }
 
-                             } else {
-                                 throw new RuntimeException();
-                             }
-
-
-               }
+               
             }}
         return null;
     }

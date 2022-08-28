@@ -145,6 +145,13 @@
             </mat-card>
 
         </mat-tab>
+        <mat-tab label="Maps">
+
+
+            <agm-map [latitude]="ship.latitude" [longitude]="ship.longitude">
+                <agm-marker [latitude]="ship.latitude" [longitude]="ship.longitude"></agm-marker>
+            </agm-map>
+        </mat-tab>
 
         <mat-tab label="Edit images">
             <div>

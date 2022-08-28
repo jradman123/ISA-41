@@ -14,6 +14,7 @@ import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
+import { AgmCoreModule } from '@agm/core';
 
 import Swal from 'sweetalert2';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
@@ -50,6 +51,7 @@ export class ShipProfileComponent implements OnInit {
     this.image = {} as Image;
     this.imagesResponse = {} as ImagesResponse;
     this.images = [] as Image[];
+    this.ship = {} as ShipDto;
 
 
 
@@ -78,6 +80,7 @@ export class ShipProfileComponent implements OnInit {
         this.detailsForm.controls['length'].setValue(data.length)
         this.detailsForm.controls['cancelationConditions'].setValue(data.cancelationConditions)
         this.detailsForm.controls['fishingEquipment'].setValue(data.fishingEquipment)
+
       },
     });
 
@@ -238,7 +241,9 @@ export class ShipProfileComponent implements OnInit {
         numberOfEngine: this.detailsForm.get('numberOfEngine')?.value,
         length: this.detailsForm.get('length')?.value,
         cancelationConditions: this.detailsForm.get('cancelationConditions')?.value,
-        fishingEquipment: this.detailsForm.get('fishingEquipment')?.value
+        fishingEquipment: this.detailsForm.get('fishingEquipment')?.value,
+        longitude: this.ship.longitude,
+        latitude: this.ship.latitude,
       }
       this.shipService.editShip(this.updateShip).subscribe((data) => {
         this.updateShip = data

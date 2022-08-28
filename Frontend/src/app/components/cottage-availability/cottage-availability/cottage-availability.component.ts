@@ -59,6 +59,7 @@ export class CottageAvailabilityComponent implements OnInit {
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
+
   });
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> | undefined;
@@ -97,6 +98,7 @@ export class CottageAvailabilityComponent implements OnInit {
   availabilities: CottageAvailability[];
   startDate!: Date;
   endDate!: Date;
+  clientEmail!: any
   chosenStartDate!: string;
   chosenEndDate!: string;
   newAvailability: CottageAvailability;
@@ -133,11 +135,10 @@ export class CottageAvailabilityComponent implements OnInit {
         for (var i = 0; i < this.pastReservations.length; i++) {
           this.startDate = new Date(this.pastReservations[i].resStart);
           this.endDate = new Date(this.pastReservations[i].resEnd);
-          this.addPastReservationEvent(this.startDate, this.endDate);
+          this.addPastReservationEvent(this.startDate, this.endDate, this.clientEmail, this.currentReservations[i].numberOfPerson, this.currentReservations[i].price);
         }
       }
     });
-
   }
 
   getCottageCurrentReservations() {
@@ -147,7 +148,9 @@ export class CottageAvailabilityComponent implements OnInit {
         for (var i = 0; i < this.currentReservations.length; i++) {
           this.startDate = new Date(this.currentReservations[i].resStart);
           this.endDate = new Date(this.currentReservations[i].resEnd);
-          this.addReservationEvent(this.startDate, this.endDate);
+          this.clientEmail = this.currentReservations[i].clientEmail;
+
+          this.addReservationEvent(this.startDate, this.endDate, this.clientEmail, this.currentReservations[i].numberOfPerson, this.currentReservations[i].price);
         }
       }
     });
@@ -221,13 +224,14 @@ export class CottageAvailabilityComponent implements OnInit {
     ];
   }
 
-  addReservationEvent(start: Date, end: Date): void {
+  addReservationEvent(start: Date, end: Date, email: any, person: any, price: any): void {
     this.events = [
       ...this.events,
       {
-        title: 'Reservation',
+        title: 'Reservation by ' + email + ' for ' + person + ' person for ' + price + ' €',
         start: startOfDay(start),
         end: endOfDay(end),
+
         color: colors.red,
         draggable: true,
         resizable: {
@@ -238,11 +242,11 @@ export class CottageAvailabilityComponent implements OnInit {
     ];
   }
 
-  addPastReservationEvent(start: Date, end: Date): void {
+  addPastReservationEvent(start: Date, end: Date, email: any, person: any, price: any): void {
     this.events = [
       ...this.events,
       {
-        title: 'Past reservation',
+        title: 'Past reservation by ' + email + ' for ' + person + ' person for ' + price + ' €',
         start: startOfDay(start),
         end: endOfDay(end),
         color: colors.yellow,

@@ -150,6 +150,11 @@ export class DialogForReservationCottageComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24);
     this.fullPrice = Days * this.price;
 
+    for (let i = 0; i < this.Utilities.value.length; i++) {
+      this.fullPrice += Number(this.Utilities.value[i].price)
+
+    }
+
 
   }
 }

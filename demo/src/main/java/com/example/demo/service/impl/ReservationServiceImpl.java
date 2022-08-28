@@ -140,7 +140,7 @@ public class ReservationServiceImpl implements ReservationService
                for(CottageAvailability ca:cottageAvailabilityRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
 
                        if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-                           double price=createReservationDto.getPrice();
+
                            Reservation reservation = typeOfReservation(createReservationDto);
 
                            reservation.setRegisteredUser(user);
@@ -148,15 +148,16 @@ public class ReservationServiceImpl implements ReservationService
                            reservation.setReservationStart(createReservationDto.resStart);
                            reservation.setReservationEnd(createReservationDto.resEnd);
                            reservation.setIsReserved(false);
+                           reservation.setPrice(createReservationDto.getPrice());
                            Set<CottageUtility> utilities = new HashSet<>();
                            for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
                                CottageUtility utility=cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
                                utilities.add(utility);
-                               price+=utility.getPrice();
+
 
                            }
                            reservation.setCottageUtilities(utilities);
-                           reservation.setPrice(price);
+
 
 
 
@@ -196,23 +197,23 @@ public class ReservationServiceImpl implements ReservationService
 
 
                     if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-                        double price=createReservationDto.getPrice();
                         Reservation reservation = typeOfReservation(createReservationDto);
                         reservation.setPrice(createReservationDto.getPrice());
                         reservation.setRegisteredUser(user);
                         reservation.setHaveReport(false);
                         reservation.setReservationStart(createReservationDto.resStart);
                         reservation.setReservationEnd(createReservationDto.resEnd);
+                        reservation.setPrice(createReservationDto.getPrice());
                         reservation.setIsReserved(false);
                         Set<ShipUtility> utilities = new HashSet<>();
                         for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
                             ShipUtility utility=shipUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
                             utilities.add(utility);
-                            price+=utility.getPrice();
+
 
                         }
                         reservation.setShipUtilities(utilities);
-                        reservation.setPrice(price);
+
 
                      notifyUserForReservation(createReservationDto);
                         reservationRepository.save(reservation);

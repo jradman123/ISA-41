@@ -31,6 +31,8 @@ import { AvailabilityService } from 'src/app/services/availabilityService/availa
 import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -100,10 +102,14 @@ export class CottageAvailabilityComponent implements OnInit {
   newAvailability: CottageAvailability;
   todayDate: Date = new Date();
   id!: any;
+  pastReservations: CottageReservation[];
+  currentReservations: CottageReservation[];
 
-  constructor(private router: ActivatedRoute, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
+  constructor(private router: ActivatedRoute, private modal: NgbModal, private reservationService: ReservationService, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
     this.availabilities = [] as CottageAvailability[];
+    this.pastReservations = [] as CottageReservation[];
     this.newAvailability = {} as CottageAvailability;
+    this.currentReservations = [] as CottageReservation[]
     this.range = this._formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required]
@@ -116,7 +122,35 @@ export class CottageAvailabilityComponent implements OnInit {
 
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.getAvailabilities();
+    this.getCottagePastReservations();
+    this.getCottageCurrentReservations();
 
+  }
+  getCottagePastReservations() {
+    this.reservationService.getPastCottageReservationById(this.id).subscribe({
+      next: (res) => {
+        this.pastReservations = res
+        for (var i = 0; i < this.pastReservations.length; i++) {
+          this.startDate = new Date(this.pastReservations[i].resStart);
+          this.endDate = new Date(this.pastReservations[i].resEnd);
+          this.addPastReservationEvent(this.startDate, this.endDate);
+        }
+      }
+    });
+
+  }
+
+  getCottageCurrentReservations() {
+    this.reservationService.getCottageReservationById(this.id).subscribe({
+      next: (res) => {
+        this.currentReservations = res
+        for (var i = 0; i < this.currentReservations.length; i++) {
+          this.startDate = new Date(this.currentReservations[i].resStart);
+          this.endDate = new Date(this.currentReservations[i].resEnd);
+          this.addReservationEvent(this.startDate, this.endDate);
+        }
+      }
+    });
   }
 
   getAvailabilities() {
@@ -179,6 +213,40 @@ export class CottageAvailabilityComponent implements OnInit {
         end: endOfDay(end),
         color: colors.blue,
         draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addReservationEvent(start: Date, end: Date): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Reservation',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.red,
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addPastReservationEvent(start: Date, end: Date): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Past reservation',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.yellow,
+        draggable: false,
         resizable: {
           beforeStart: true,
           afterEnd: true,

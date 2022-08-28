@@ -112,7 +112,7 @@ export class DialogForReservationCottageComponent implements OnInit {
             } else {
 
               this.dialogRef.close();
-              //   window.location.reload();
+              window.location.reload();
 
             }
           }

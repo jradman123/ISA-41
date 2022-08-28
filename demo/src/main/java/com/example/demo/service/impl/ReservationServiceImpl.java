@@ -135,9 +135,9 @@ public class ReservationServiceImpl implements ReservationService
                for(CottageAvailability ca:cottageAvailabilityRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
 
                        if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-
+                           double price=createReservationDto.getPrice();
                            Reservation reservation = typeOfReservation(createReservationDto);
-                           reservation.setPrice(createReservationDto.getPrice());
+
                            reservation.setRegisteredUser(user);
                            reservation.setHaveReport(false);
                            reservation.setReservationStart(createReservationDto.resStart);
@@ -145,9 +145,13 @@ public class ReservationServiceImpl implements ReservationService
                            reservation.setIsReserved(false);
                            Set<CottageUtility> utilities = new HashSet<>();
                            for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
-                               utilities.add(cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get());
+                               CottageUtility utility=cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
+                               utilities.add(utility);
+                               price+=utility.getPrice();
+
                            }
                            reservation.setCottageUtilities(utilities);
+                           reservation.setPrice(price);
 
 
 

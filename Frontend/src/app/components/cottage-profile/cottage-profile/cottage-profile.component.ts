@@ -34,6 +34,7 @@ import { ReportService } from 'src/app/services/ReportService/report.service';
 import { RoomService } from 'src/app/services/RoomService/room.service';
 import Swal from 'sweetalert2';
 import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
+import { AgmCoreModule } from '@agm/core';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -56,7 +57,9 @@ export interface DataForReport {
   styleUrls: ['./cottage-profile.component.css']
 })
 export class CottageProfileComponent implements OnInit {
-
+  title = 'My first AGM project';
+  lat = 51.678418;
+  lng = 7.809007;
 
   fullPrice: number = 0;
 
@@ -84,6 +87,9 @@ export class CottageProfileComponent implements OnInit {
   pastReservations!: MatTableDataSource<CottageReservation>;
   roomm!: RoomDto
   haveReservations!: CottageReservation[]
+
+
+
 
 
   uploaded: boolean = false;

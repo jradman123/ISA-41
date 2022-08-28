@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { DialogForAddReportComponent } from '../dialog-for-add-report/dialog-for-add-report.component';
 import { DialogForGuestDataComponent } from '../dialog-for-guest-data/dialog-for-guest-data.component';
 import { DialogForReportComponent } from '../dialog-for-report/dialog-for-report.component';
+import { DialogForReservationAdventureComponent } from '../dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
 import { DialogForReservationCottageComponent } from '../dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 
 @Component({
@@ -272,9 +273,6 @@ dialogReport(id: any) {
 }
 
   addNew(element: any) {
-    console.log("fdffdfd" + element.resStart)
-    console.log("fsfsf" + new Date())
-
     return new Date(Date.parse(element.resStart)) <= new Date()
   }
 
@@ -284,7 +282,7 @@ dialogReport(id: any) {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    const dialogRef = this.dialog.open(DialogForReservationCottageComponent, {
+    const dialogRef = this.dialog.open(DialogForReservationAdventureComponent, {
 
       data: { clientEmail: clientEmail, id: this.id },
     })

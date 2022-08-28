@@ -56,6 +56,13 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/find-current-reservations-by-adventure/${id}`);
   }
 
+  reserveAdventure(newReservation: AdventureReservation) {
+    console.log(newReservation.price)
+    return this.http.post(`${this.apiServerUrl}/reservations/createReservation`, newReservation, {
+      responseType: 'text',
+    });
+  }
+
 
 
 }

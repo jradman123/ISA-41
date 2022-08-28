@@ -81,6 +81,7 @@ import { ShipAddActionComponent } from './components/ship-add-action/ship-add-ac
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-picker';
+import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
 
 
 @NgModule({
@@ -151,7 +152,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-pic
     DialogForReservationShipComponent
 ,
     InstructorAvailabilityComponent,
-    AdventureSearchPipe
+    AdventureSearchPipe,
+    DialogForReservationAdventureComponent
 
 
   ],

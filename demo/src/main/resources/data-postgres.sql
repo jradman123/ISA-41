@@ -149,7 +149,7 @@ INSERT INTO public.adventure(cancellation_conditions, deleted, description, gues
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Pecanje sa obale i sa rijeke.', 7, 'Magija na vodi', 20, 6, 6);
 	INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES
-    ('AdventureReservation',false,false,true,2,30.0,'25-08-2022 09:00','23-08-2022 12:00',6,7,1,null,null,false);
+    ('AdventureReservation',false,false,true,2,30.0,'30-08-2022 09:00','28-08-2022 08:00',6,7,1,null,null,false);
 
 
 --INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);
@@ -173,5 +173,5 @@ INSERT INTO public.adventure_utility(is_deleted, name, price) VALUES (false,'Div
 INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (1, 1);
 
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
-VALUES ('20-08-2022 10:00', '15-08-2022  10:00', 6);
+VALUES ('30-08-2022 10:00', '28-08-2022  08:00', 6);
 

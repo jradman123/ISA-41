@@ -28,6 +28,7 @@ export class DialogForReservationShipComponent implements OnInit {
   utilities!: UtilityDto[];
   fullPrice: number = 0;
   price!: any;
+  Utilities = new FormControl('');
 
 
   id: any;
@@ -128,6 +129,8 @@ export class DialogForReservationShipComponent implements OnInit {
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'BOAT';
+    this.newReservation.utilities = this.Utilities.value;
+
 
   }
 
@@ -139,7 +142,7 @@ export class DialogForReservationShipComponent implements OnInit {
     var Time = date2.getTime() - date1.getTime();
     var Days = Time / (1000 * 3600 * 24);
     this.fullPrice = Days * this.price;
-    console.log("vISEE JOOOJ" + this.price)
+
 
   }
 }

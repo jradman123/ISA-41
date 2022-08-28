@@ -9,6 +9,7 @@ import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipAvailability;
 import com.example.demo.model.ships.ShipReservation;
+import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
 import com.example.demo.service.ReservationService;
@@ -47,6 +48,10 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private ShipReservationRepository shipReservationRepository;
+
+    @Autowired
+    private ShipUtilityRepository shipUtilityRepository;
+
 
     @Autowired
     private ShipAvailabilityRepository shipAvailabilityRepository;
@@ -191,7 +196,7 @@ public class ReservationServiceImpl implements ReservationService
 
 
                     if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-
+                        double price=createReservationDto.getPrice();
                         Reservation reservation = typeOfReservation(createReservationDto);
                         reservation.setPrice(createReservationDto.getPrice());
                         reservation.setRegisteredUser(user);
@@ -199,6 +204,15 @@ public class ReservationServiceImpl implements ReservationService
                         reservation.setReservationStart(createReservationDto.resStart);
                         reservation.setReservationEnd(createReservationDto.resEnd);
                         reservation.setIsReserved(false);
+                        Set<ShipUtility> utilities = new HashSet<>();
+                        for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
+                            ShipUtility utility=shipUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
+                            utilities.add(utility);
+                            price+=utility.getPrice();
+
+                        }
+                        reservation.setShipUtilities(utilities);
+                        reservation.setPrice(price);
 
                      notifyUserForReservation(createReservationDto);
                         reservationRepository.save(reservation);

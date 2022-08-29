@@ -155,7 +155,7 @@ public class ReservationServiceImpl implements ReservationService
                 return reservation;
 
             } else {
-                throw new RuntimeException();
+               return null;
             }
 
 
@@ -199,8 +199,11 @@ return null;
         User user=userService.findByEmail(createReservationDto.clientEmail);
 
 
-          boolean availability=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
-          if(availability) {
+          boolean reservations=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+        boolean availability=checkAvailability(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+
+
+        if(reservations && availability) {
 
               if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
                   Reservation reservation = typeOfReservation(createReservationDto);
@@ -228,7 +231,7 @@ return null;
                   return reservation;
 
               } else {
-                  throw new RuntimeException();
+                 return null;
               }
 
 

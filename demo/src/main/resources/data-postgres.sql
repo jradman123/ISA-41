@@ -184,4 +184,8 @@ VALUES ('bad', 1, 1);
 INSERT INTO public.review(comment, mark, reservation_id)
 VALUES ('vrh', 5, 2);
 
+INSERT INTO public.adventure_users(
+	adventure_id, users_id)
+	VALUES (1, 7);
+
 

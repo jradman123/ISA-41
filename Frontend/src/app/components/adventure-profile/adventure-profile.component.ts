@@ -277,11 +277,8 @@ dialogReport(id: any) {
     data: { idReservation: id },
   })
   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-
-    window.location.reload()
-
-
+    this.pastAdventureReservations.data =[];
+    this.findPastReservations();
   });
 }
 
@@ -301,7 +298,7 @@ dialogReport(id: any) {
     })
     dialogRef.afterClosed().subscribe(result => {
       this.futureAdventureReservations.data = [];
-      this.getFutureReservations();
+      this.findFutureReservations();
     });
 
   }

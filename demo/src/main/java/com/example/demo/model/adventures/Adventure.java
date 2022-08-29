@@ -22,6 +22,7 @@ import com.example.demo.model.Image;
 import com.example.demo.model.Utility;
 import com.example.demo.model.users.Instructor;
 
+import com.example.demo.model.users.RegisteredUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -97,13 +98,18 @@ public class Adventure {
 			joinColumns = @JoinColumn(name = "adventure_id"),
 			inverseJoinColumns = @JoinColumn(name = "adventure_utility_id"))
 	private Set<AdventureUtility> utilities;
-	
+
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "adventure_users",
+			joinColumns = @JoinColumn(name = "adventure_id"),
+			inverseJoinColumns = @JoinColumn(name = "users_id"))
+	private Set<RegisteredUser> subscribers;
 
 	public Adventure() {
 		super();
 	}
 
-	public Adventure(Integer id, Instructor instructor, String name, Address address, String description, Set<Image> images, Set<AdventureReservation> adventureReservations, Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions, Double price, boolean deleted, Set<AdventureUtility> utilities) {
+	public Adventure(Integer id, Instructor instructor, String name, Address address, String description, Set<Image> images, Set<AdventureReservation> adventureReservations, Integer guestLimit, Set<AdventureRule> rules, Set<FishingEquipment> fishingEquipments, Double cancellationConditions, Double price, boolean deleted, Set<AdventureUtility> utilities, Set<RegisteredUser> subscribers) {
 		this.id = id;
 		this.instructor = instructor;
 		this.name = name;
@@ -118,5 +124,6 @@ public class Adventure {
 		this.price = price;
 		this.deleted = deleted;
 		this.utilities = utilities;
+		this.subscribers = subscribers;
 	}
 }

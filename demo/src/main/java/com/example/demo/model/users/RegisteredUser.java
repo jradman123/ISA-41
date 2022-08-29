@@ -10,6 +10,7 @@ import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +21,9 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "userId")
 @DiscriminatorValue("REGISTERED_USER")
 public class RegisteredUser extends User{
-	
-	 @OneToMany(mappedBy = "registeredUser")
+
+	 @JsonManagedReference
+	 @OneToMany(mappedBy = "registeredUser",fetch = FetchType.EAGER)
 	 private Set<AdventureReservation> adventureReservations;
 	
 	 @OneToMany(mappedBy = "registeredUser")

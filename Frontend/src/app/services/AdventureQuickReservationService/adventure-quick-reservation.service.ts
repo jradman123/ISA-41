@@ -15,7 +15,9 @@ export class AdventureQuickReservationService {
   constructor(private http: HttpClient) { }
 
   addAdventaddAdventureQuickReservation(adventureQuickReservation: AdventureQuickReservationDto) {
-    return this.http.post(`${this.apiServerUrl}/adventure-quick-reservation`, adventureQuickReservation);
+    return this.http.post(`${this.apiServerUrl}/adventure-quick-reservation`, adventureQuickReservation,{
+      responseType: 'text',
+    });
   }
 
   getAllForAdventure(id: string): Observable<AdventureQuickReservationResponse[]> {

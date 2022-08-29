@@ -34,6 +34,7 @@ export class AdventureProfileComponent implements OnInit {
   quickReservations : AdventureQuickReservationResponse[];
   pastAdventureReservations!: MatTableDataSource<AdventureReservation>;
   reservations!: MatTableDataSource<AdventureReservation>;
+  futureAdventureReservations!: MatTableDataSource<AdventureReservation>;
 
   columnsToDisplayAdventureReservations: string[] = [
     'No.',
@@ -55,7 +56,8 @@ export class AdventureProfileComponent implements OnInit {
     this.newAdventureQuickReservation = {} as AdventureQuickReservationDto;
     this.quickReservations = [] as AdventureQuickReservationResponse[];
     this.pastAdventureReservations = new MatTableDataSource<AdventureReservation>();
-    this.reservations = new MatTableDataSource<AdventureReservation>(); 
+    this.reservations = new MatTableDataSource<AdventureReservation>();
+    this.futureAdventureReservations = new MatTableDataSource<AdventureReservation>(); 
   }
 
   ngOnInit(): void {
@@ -67,6 +69,17 @@ export class AdventureProfileComponent implements OnInit {
       this.haveReservations = data;
     });
     this.findReservations();
+    this.findPastReservations();
+    this.findFutureReservations();
+  }
+
+  findFutureReservations() {
+    this.reservationService.getFutureReservationByAdventure(this.id)
+      .subscribe({
+        next: (futureReservations: AdventureReservation[]) => {
+          this.futureAdventureReservations.data = futureReservations;
+        },
+      });
   }
 
   parseStringToDate(dateTime: string) {
@@ -286,11 +299,10 @@ dialogReport(id: any) {
 
       data: { clientEmail: clientEmail, id: this.id },
     })
-    /*dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-
-
-    });*/
+    dialogRef.afterClosed().subscribe(result => {
+      this.futureAdventureReservations.data = [];
+      this.getFutureReservations();
+    });
 
   }
 

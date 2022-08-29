@@ -27,4 +27,6 @@ public interface ReservationService {
     List<ReservationViewDto> getPastReservationsForAdventure(int id);
 
     List<ReservationViewDto> getReservationsForAdventure(int id);
+
+    List<ReservationViewDto> getFutureReservationsForAdventure(int id);
 }

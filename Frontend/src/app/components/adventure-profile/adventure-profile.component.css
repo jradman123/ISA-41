@@ -93,4 +93,14 @@ table {
 
 }
 
+table {
+  display:unset;
+  width: 600px;
+  height: 50px;
+  overflow-y: scroll;
+}
+
+
+  
+
   

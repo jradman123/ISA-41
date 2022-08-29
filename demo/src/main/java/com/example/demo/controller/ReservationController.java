@@ -87,8 +87,6 @@ public class ReservationController {
     @GetMapping(value = "/find-past-reservations-by-adventure/{id}")
     public ResponseEntity<List<ReservationViewDto>> getPastReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getPastReservationsForAdventure(id);
-        for(ReservationViewDto reservationViewDto:reservationDtos)
-            System.out.print(reservationViewDto.getResEnd());
         return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
     }
 
@@ -97,6 +95,15 @@ public class ReservationController {
     @GetMapping(value = "/find-current-reservations-by-adventure/{id}")
     public ResponseEntity<List<ReservationViewDto>> getReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getReservationsForAdventure(id);
+        return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/find-future-reservations-by-adventure/{id}")
+    public ResponseEntity<List<ReservationViewDto>> getFutureReservationsByAdventure(@PathVariable int id) {
+        List<ReservationViewDto> reservationDtos = this.reservationService.getFutureReservationsForAdventure(id);
         return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
     }
 

@@ -182,6 +182,18 @@ public class ReservationServiceImpl implements ReservationService
         return reservationDtos;
     }
 
+    @Override
+    public List<ReservationViewDto> getFutureReservationsForAdventure(int id) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.findAll()) {
+            if(r.getAdventure().getId()==id  && (LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isBefore(r.getReservationStart()))) {
+                reservationDtos.add(new ReservationViewDto(r));
+            }
+        }
+
+        return reservationDtos;
+    }
+
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
             CottageReservation cottageReservation=new CottageReservation();

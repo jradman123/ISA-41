@@ -63,6 +63,11 @@ export class ReservationService {
     });
   }
 
+  getFutureReservationByAdventure(id: string): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(
+      `${this.apiServerUrl}/reservations/find-future-reservations-by-adventure/${id}`);
+  }
+
 
 
 }

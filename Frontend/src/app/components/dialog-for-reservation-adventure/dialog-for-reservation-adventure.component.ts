@@ -30,6 +30,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
   utilities: ResponseUtility[];
   fullPrice: number = 0;
   price!: any;
+  guestLimit! : number;
   constructor(private adventureService: AdventureService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, 
   private reservationService: ReservationService, public dialog: MatDialog, 
   private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationAdventureComponent>) { 
@@ -40,6 +41,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
   ngOnInit(): void {
     this.adventureService.findById(this.data.id).subscribe({
       next: (data: AdventureDto) => {
+        this.guestLimit = Number(data.guestLimit);
         this.adventure = data
         this.price = data.price
       },
@@ -121,7 +123,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
           next: () => {
 
             this.dialogRef.close();
-            window.location.reload();
+            //window.location.reload();
 
           }
         });

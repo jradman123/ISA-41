@@ -122,56 +122,64 @@ public class ReservationServiceImpl implements ReservationService
     public Reservation createCottageReservation(CreateReservationDto createReservationDto) {
 
         User user=userService.findByEmail(createReservationDto.clientEmail);
+        boolean availability=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+
+        if(availability) {
 
 
-        for(CottageReservation ct:cottageReservationRepository.getAllForCottage(Long.parseLong(createReservationDto.getObjectId()))) {
+            if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
 
-            if(createReservationDto.getResStart().equals(ct.getReservationStart()) || createReservationDto.getResEnd().equals(ct.getReservationEnd()) ||
-                    createReservationDto.getResStart().equals(ct.getReservationEnd()) ||
-                    createReservationDto.getResEnd().equals(ct.getReservationStart()) ||
-                    (createReservationDto.getResEnd().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
-                    || (createReservationDto.getResStart().isBefore(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())) ||
-                    (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
-                    ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResStart().isBefore(ct.getReservationEnd())&& createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
-            {
-                return null;
-            }else {
+                Reservation reservation = typeOfReservation(createReservationDto);
 
-
-                if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-
-                    Reservation reservation = typeOfReservation(createReservationDto);
-
-                    reservation.setRegisteredUser(user);
-                    reservation.setHaveReport(false);
-                    reservation.setReservationStart(createReservationDto.resStart);
-                    reservation.setReservationEnd(createReservationDto.resEnd);
-                    reservation.setIsReserved(false);
-                    reservation.setPrice(createReservationDto.getPrice());
-                    Set<CottageUtility> utilities = new HashSet<>();
-                    for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
-                        CottageUtility utility = cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
-                        utilities.add(utility);
+                reservation.setRegisteredUser(user);
+                reservation.setHaveReport(false);
+                reservation.setReservationStart(createReservationDto.resStart);
+                reservation.setReservationEnd(createReservationDto.resEnd);
+                reservation.setIsReserved(false);
+                reservation.setPrice(createReservationDto.getPrice());
+                Set<CottageUtility> utilities = new HashSet<>();
+                for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
+                    CottageUtility utility = cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
+                    utilities.add(utility);
 
 
-                    }
-                    reservation.setCottageUtilities(utilities);
-
-
-                    notifyUserForReservation(createReservationDto);
-                    reservationRepository.save(reservation);
-
-                    return reservation;
-
-                } else {
-                    throw new RuntimeException();
                 }
+                reservation.setCottageUtilities(utilities);
 
-               }
 
+                notifyUserForReservation(createReservationDto);
+                reservationRepository.save(reservation);
+
+                return reservation;
+
+            } else {
+                throw new RuntimeException();
+            }
+
+
+        }
+
+return null;
+    }
+
+    private boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for (CottageReservation ct : cottageReservationRepository.getAllForCottage(Long.parseLong(objectId))) {
+
+            if (startDate.equals(ct.getReservationStart()) ||
+                    startDate.equals(ct.getReservationEnd()) ||
+
+                    endDate.equals(ct.getReservationEnd()) ||
+                    endDate.equals(ct.getReservationStart())  ||
+                    (startDate.isAfter(ct.getReservationStart()) && startDate.isBefore(ct.getReservationEnd()) && endDate.isAfter(ct.getReservationEnd()))
+                    || (endDate.isAfter(ct.getReservationStart()) && endDate.isBefore(ct.getReservationEnd()))
+                    || (startDate.isBefore(ct.getReservationStart()) && endDate.isAfter(ct.getReservationEnd())) ||
+                    (startDate.isAfter(ct.getReservationStart()) && endDate.isBefore(ct.getReservationEnd())))
+                    {
+             return false;
 
             }
-        return null;
+        }
+        return true;
     }
 
     @Override
@@ -179,53 +187,44 @@ public class ReservationServiceImpl implements ReservationService
 
         User user=userService.findByEmail(createReservationDto.clientEmail);
 
-        for(ShipReservation ct:shipReservationRepository.getAllForShip(Long.parseLong(createReservationDto.getObjectId()))) {
+
+          boolean availability=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+          if(availability) {
+
+              if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
+                  Reservation reservation = typeOfReservation(createReservationDto);
+                  reservation.setPrice(createReservationDto.getPrice());
+                  reservation.setRegisteredUser(user);
+                  reservation.setHaveReport(false);
+                  reservation.setReservationStart(createReservationDto.resStart);
+                  reservation.setReservationEnd(createReservationDto.resEnd);
+                  reservation.setPrice(createReservationDto.getPrice());
+                  reservation.setIsReserved(false);
+                  reservation.setId(Long.parseLong(createReservationDto.getObjectId()));
+                  Set<ShipUtility> utilities = new HashSet<>();
+                  for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
+                      ShipUtility utility = shipUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
+                      utilities.add(utility);
 
 
-            if(createReservationDto.getResStart().equals(ct.getReservationStart()) || createReservationDto.getResEnd().equals(ct.getReservationEnd()) ||
-                    createReservationDto.getResStart().equals(ct.getReservationEnd()) ||
-                    createReservationDto.getResEnd().equals(ct.getReservationStart()) ||
-                    (createReservationDto.getResEnd().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
-                    || (createReservationDto.getResStart().isBefore(ct.getReservationStart()) && createReservationDto.getResEnd().isAfter(ct.getReservationEnd())) ||
-                    (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResEnd().isBefore(ct.getReservationEnd()))
-                    ||  (createReservationDto.getResStart().isAfter(ct.getReservationStart()) && createReservationDto.getResStart().isBefore(ct.getReservationEnd())&& createReservationDto.getResEnd().isAfter(ct.getReservationEnd())))
-            {
-                return null;
-            }else{
+                  }
+                  reservation.setShipUtilities(utilities);
 
 
-                    if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
-                        Reservation reservation = typeOfReservation(createReservationDto);
-                        reservation.setPrice(createReservationDto.getPrice());
-                        reservation.setRegisteredUser(user);
-                        reservation.setHaveReport(false);
-                        reservation.setReservationStart(createReservationDto.resStart);
-                        reservation.setReservationEnd(createReservationDto.resEnd);
-                        reservation.setPrice(createReservationDto.getPrice());
-                        reservation.setIsReserved(false);
-                        Set<ShipUtility> utilities = new HashSet<>();
-                        for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
-                            ShipUtility utility=shipUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
-                            utilities.add(utility);
+                  notifyUserForReservation(createReservationDto);
+                  reservationRepository.save(reservation);
+
+                  return reservation;
+
+              } else {
+                  throw new RuntimeException();
+              }
 
 
-                        }
-                        reservation.setShipUtilities(utilities);
+          }
 
+          return null;
 
-                     notifyUserForReservation(createReservationDto);
-                        reservationRepository.save(reservation);
-
-                        return reservation;
-
-                    } else {
-                        throw new RuntimeException();
-                    }
-
-
-
-            }}
-        return null;
     }
 
 

@@ -1,7 +1,7 @@
 ----address---
 
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Lasla Gala','9',19.844961, 45.254708);
-INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Blagoja Parovica','3',17.217609,44.832512);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Blagoja Parovica','3',20.415410,44.773590);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12',19.239510, 44.660480);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22',19.844961, 45.254708);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Majska','22', 20.501251, 44.743571);

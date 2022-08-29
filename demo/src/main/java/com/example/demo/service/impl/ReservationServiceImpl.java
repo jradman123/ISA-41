@@ -13,9 +13,11 @@ import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
 import com.example.demo.service.ReservationService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -122,9 +124,9 @@ public class ReservationServiceImpl implements ReservationService
     public Reservation createCottageReservation(CreateReservationDto createReservationDto) {
 
         User user=userService.findByEmail(createReservationDto.clientEmail);
-        boolean availability=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
-
-        if(availability) {
+        boolean reservations=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+        boolean availability=checkAvailability(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+        if(reservations && availability) {
 
 
             if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
@@ -160,6 +162,15 @@ public class ReservationServiceImpl implements ReservationService
         }
 
 return null;
+    }
+
+    private boolean checkAvailability(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for(CottageAvailability ca:this.cottageAvailabilityRepository.getAllForCottage(Long.parseLong(objectId))) {
+            if(startDate.isAfter(ca.getStartDate()) && endDate.isBefore(ca.getEndDate())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {

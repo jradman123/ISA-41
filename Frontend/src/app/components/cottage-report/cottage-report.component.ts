@@ -12,7 +12,10 @@ export class CottageReportComponent implements OnInit {
   id: any;
   cottageMark!: MarkDto
 
-  constructor(private cottageService: CottageService, private router: ActivatedRoute) { }
+  constructor(private cottageService: CottageService, private router: ActivatedRoute) {
+    this.cottageMark = {} as MarkDto;
+
+  }
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;

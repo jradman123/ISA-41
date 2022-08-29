@@ -215,10 +215,10 @@ public class CottageServiceImpl implements CottageService {
             }
 
         }
-        if(reservations.size()==0) {
+        if(this.reviewRepository.findAll().size()==0) {
             return sum=0.0;
         }
-        return sum/reservations.size();
+        return sum/this.reviewRepository.findAll().size();
     }
 
 

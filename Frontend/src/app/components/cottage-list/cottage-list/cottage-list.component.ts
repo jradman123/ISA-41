@@ -54,11 +54,20 @@ export class CottageListComponent implements OnInit {
   }
   delete(id: string) {
     this.cottageService.deleteCottage(id)
-      .subscribe(data => {
+      .subscribe(response => {
 
-        this.cottages = []
-        this.findCottages();
 
+        if (response == null) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'The ship cannot be deleted because it has a reservation!',
+          })
+
+        } else {
+          this.cottages = []
+          this.findCottages();
+        }
       },
 
       );

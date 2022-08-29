@@ -93,9 +93,7 @@ public class CottageServiceImpl implements CottageService {
     @Override
     public ResponseEntity<Long> deleteCottage(Long id) {
         List<ReservationViewDto> reservations=reservationService.getReservationsByCottage(id);
-        if(!reservations.isEmpty()) {
-            return new ResponseEntity<>(id,HttpStatus.OK);
-        }
+        if(reservations.isEmpty()) {
 
         List<Cottage> cottages=this.cottageRepository.findAll();
         for (Cottage cottage: cottages)
@@ -107,7 +105,12 @@ public class CottageServiceImpl implements CottageService {
            }
 
         }
-        return new ResponseEntity<>(id, HttpStatus.OK);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+
+
 
     }
 

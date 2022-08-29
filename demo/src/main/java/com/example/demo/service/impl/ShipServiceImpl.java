@@ -134,20 +134,22 @@ public class ShipServiceImpl  implements ShipService {
     @Override
     public ResponseEntity<Long> deleteShip(Long id) {
         List<ReservationViewDto> reservations=reservationService.getReservationsByShip(id);
-        if(!reservations.isEmpty()) {
-            return new ResponseEntity<>(id,HttpStatus.OK);
-        }
+        if(reservations.isEmpty()) {
 
-        List<Ship> ships=this.shipRepository.findAll();
-        for (Ship ship: ships)
-        {
-            if(ship.getId()==id) {
-                ship.setDeleted(true);
-                shipRepository.save(ship);
+            List<Ship> ships = this.shipRepository.findAll();
+            for (Ship ship : ships) {
+                if (ship.getId() == id) {
+                    ship.setDeleted(true);
+                    shipRepository.save(ship);
+                }
+
             }
+            return new ResponseEntity<>(id, HttpStatus.OK);
 
+        }else {
+            return new ResponseEntity<>(null,HttpStatus.OK);
         }
-        return new ResponseEntity<>(id, HttpStatus.OK);
+
 
     }
 

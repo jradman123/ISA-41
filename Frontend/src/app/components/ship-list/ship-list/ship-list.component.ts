@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ShipService } from 'src/app/services/ShipService/ship.service';
 
 @Component({
@@ -16,23 +17,39 @@ export class ShipListComponent implements OnInit {
   constructor(private shipService: ShipService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.findShips();
+  }
+
+  findShips() {
     this.shipService.findByEmail().subscribe((data) => {
       this.ships = data;
 
     });
-  }
 
+  }
   view(id: string) {
     this.router.navigate(['shipOwner/ship-profile/' + id]);
 
   }
   delete(id: string) {
     this.shipService.deleteShip(id)
-      .subscribe(data => {
+      .subscribe(response => {
 
-        window.location.reload();
 
-      });
+        if (response == null) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'The ship cannot be deleted because it has a reservation!',
+          })
+
+        } else {
+          this.ships = []
+          this.findShips();
+        }
+      },
+
+      );
 
   }
 

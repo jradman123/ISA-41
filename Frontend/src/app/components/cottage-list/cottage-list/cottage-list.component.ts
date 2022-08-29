@@ -61,7 +61,7 @@ export class CottageListComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'The ship cannot be deleted because it has a reservation!',
+            text: 'The cottage cannot be deleted because it has a reservation!',
           })
 
         } else {

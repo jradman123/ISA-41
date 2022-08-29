@@ -1,4 +1,4 @@
-<app-cottage-owner-navbar (searchInput)="handleMe($event)"></app-cottage-owner-navbar>
+<app-cottage-owner-navbar></app-cottage-owner-navbar>
 
 
 
@@ -9,6 +9,14 @@
 
 
     <div class="card-holder" style="margin-left: 15px;margin-top: 50px;">
+        <div class="search-bar" style="margin-left: 600px;margin-top: 50px;">
+            <form class="search-form d-flex align-items-center">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput type="search" placeholder="Search..." (input)="emitMe($event)">
+            </form>
+        </div>
+
+
         <div class="row">
             <div class="card" style="margin: 10px; " *ngFor="let cottage of cottages | cottagesSearch : searchText ">
 
@@ -21,6 +29,9 @@
                     </li>
                     <li style="height: 70px;" class="list-group-item">
                         {{this.cottage.streetName}},{{this.cottage.streetNumber}},{{this.cottage.city}},{{this.cottage.country}}
+                        <agm-map width="100%" [latitude]="latitude" [longitude]="longitude">
+
+                        </agm-map>
                     </li>
                     <li style="height: 70px;" class="list-group-item">{{cottage.description}}</li>
                     <li style="height: 70px;" class="list-group-item">{{this.cottage.price}} € per day for

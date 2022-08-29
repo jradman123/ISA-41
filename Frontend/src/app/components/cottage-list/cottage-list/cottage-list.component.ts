@@ -18,6 +18,8 @@ export class CottageListComponent implements OnInit {
   images: ImageDto[] = [];
   id: any;
   image!: ImageDto;
+  latitude = 45.2889;
+  longitude = 19.7245;
 
   constructor(private cottageService: CottageService, private route: ActivatedRoute, private imageService: ImageService, private router: Router) { }
 
@@ -61,6 +63,10 @@ export class CottageListComponent implements OnInit {
 
       );
 
+  }
+
+  emitMe(searchText: any) {
+    this.searchText = searchText.target.value
   }
 
 }

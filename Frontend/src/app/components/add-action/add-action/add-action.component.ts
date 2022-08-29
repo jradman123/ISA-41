@@ -25,6 +25,7 @@ export class AddActionComponent implements OnInit {
   form!: FormGroup;
   formData!: FormData;
   sub!: Subscription;
+  Utilities = new FormControl('');
   utilities!: UtilityDto[];
   constructor(private utilityService: UtilityService, private appointmentService: AppointmentService, private router: ActivatedRoute, private route: Router, private cottageService: CottageService) {
     this.newAppointment = {} as AppointmentDto;
@@ -46,7 +47,7 @@ export class AddActionComponent implements OnInit {
     this.form = new FormGroup({
       resStart: new FormControl('', Validators.required),
       resEnd: new FormControl('', Validators.required),
-      capacity: new FormControl('', Validators.required),
+      capacity: new FormControl('', [Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
       price: new FormControl('', Validators.required),
       validUntil: new FormControl('', Validators.required),
 
@@ -106,7 +107,8 @@ export class AddActionComponent implements OnInit {
   }
 
   onNoClick(): void {
-    window.location.reload();
+    this.form.reset();
+    this.Utilities.reset();
 
   }
 

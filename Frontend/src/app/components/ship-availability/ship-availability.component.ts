@@ -1,3 +1,4 @@
+
 import {
   Component,
   OnInit,
@@ -26,11 +27,9 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CottageAvailability } from 'src/app/interfaces/cottage-availability';
 import { AvailabilityService } from 'src/app/services/availabilityService/availability.service';
-import { CottageDto } from 'src/app/interfaces/cottage-list-view';
-import { CottageService } from 'src/app/services/CottageService/cottage.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ShipAvailability } from 'src/app/interfaces/ship-availability';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -47,12 +46,13 @@ const colors: Record<string, EventColor> = {
   },
 };
 
+
 @Component({
-  selector: 'app-cottage-availability',
-  templateUrl: './cottage-availability.component.html',
-  styleUrls: ['./cottage-availability.component.css']
+  selector: 'app-ship-availability',
+  templateUrl: './ship-availability.component.html',
+  styleUrls: ['./ship-availability.component.css']
 })
-export class CottageAvailabilityComponent implements OnInit {
+export class ShipAvailabilityComponent implements OnInit {
 
   range = new FormGroup({
     start: new FormControl(),
@@ -92,18 +92,18 @@ export class CottageAvailabilityComponent implements OnInit {
 
   refresh = new Subject<void>();
   activeDayIsOpen: boolean = false;
-  availabilities: CottageAvailability[];
+  availabilities: ShipAvailability[];
   startDate!: Date;
   endDate!: Date;
   chosenStartDate!: string;
   chosenEndDate!: string;
-  newAvailability: CottageAvailability;
+  newAvailability: ShipAvailability;
   todayDate: Date = new Date();
   id!: any;
 
   constructor(private router: ActivatedRoute, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
-    this.availabilities = [] as CottageAvailability[];
-    this.newAvailability = {} as CottageAvailability;
+    this.availabilities = [] as ShipAvailability[];
+    this.newAvailability = {} as ShipAvailability;
     this.range = this._formBuilder.group({
       start: ['', Validators.required],
       end: ['', Validators.required]
@@ -120,7 +120,7 @@ export class CottageAvailabilityComponent implements OnInit {
   }
 
   getAvailabilities() {
-    this.cottageAvailabilityService.findAvailabilityByCottage(this.id).subscribe({
+    this.cottageAvailabilityService.findAvailabilityByShip(this.id).subscribe({
       next: (res) => {
         this.availabilities = res
         for (var i = 0; i < this.availabilities.length; i++) {
@@ -211,8 +211,8 @@ export class CottageAvailabilityComponent implements OnInit {
     const e = new Date(this.range.value.end.getTime() - this.range.value.end.getTimezoneOffset() * 60000)
     this.newAvailability.startDate = s.toISOString();
     this.newAvailability.endDate = e.toISOString();
-    this.newAvailability.cottageId = this.id;
-    this.cottageAvailabilityService.addAvailabilityCottage(this.newAvailability).subscribe(
+    this.newAvailability.shipId = this.id;
+    this.cottageAvailabilityService.addAvailabilityShip(this.newAvailability).subscribe(
       {
         next: (res) => {
           this.events = []
@@ -226,5 +226,6 @@ export class CottageAvailabilityComponent implements OnInit {
   }
 
 }
+
 
 

@@ -1,10 +1,9 @@
-
-export interface CottageAvailability {
+export interface ShipAvailability {
 
     id: string;
     startDate: string;
     endDate: string;
-    cottageId: string;
+    shipId: string;
 
 
 }

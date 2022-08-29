@@ -7,6 +7,7 @@ import { CottageDto } from 'src/app/interfaces/cottage-list-view';
 import { RoomDto } from 'src/app/interfaces/room-dto';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { MarkDto } from 'src/app/interfaces/mark-dto';
 @Injectable({
   providedIn: 'root'
 })
@@ -67,5 +68,13 @@ export class CottageService {
     return this.http.get<ImagesResponse>(
       `${this.apiServerUrl}/cottages/${id}/images`);
   }
+
+
+  getCottageMark(id: string) {
+    return this.http.get<MarkDto>(
+      `${this.apiServerUrl}/cottages/getCottageReport/${id}`);
+  }
+
+
 }
 

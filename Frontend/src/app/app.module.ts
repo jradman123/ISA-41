@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -80,8 +81,11 @@ import { ShipReservationComponent } from './components/ship-reservation/ship-res
 import { ShipAddActionComponent } from './components/ship-add-action/ship-add-action.component';
 import { DialogForReservationShipComponent } from './components/dialog-for-reservation-ship/dialog-for-reservation-ship.component';
 import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
+
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-picker';
+import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
 import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
+import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
 
 
 @NgModule({
@@ -149,11 +153,12 @@ import { DialogForReservationAdventureComponent } from './components/dialog-for-
     EditShipNavigationComponent,
     ShipReservationComponent,
     ShipAddActionComponent,
-    DialogForReservationShipComponent
-,
+    DialogForReservationShipComponent,
     InstructorAvailabilityComponent,
     AdventureSearchPipe,
-    DialogForReservationAdventureComponent
+    DialogForReservationAdventureComponent,
+    ShipAvailabilityComponent,
+    CottageReportComponent
 
 
   ],
@@ -168,8 +173,12 @@ import { DialogForReservationAdventureComponent } from './components/dialog-for-
     FormsModule,
     MatCarouselModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    OwlDateTimeModule, 
-    OwlNativeDateTimeModule
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDjkYy-y0-wlKYTQC0cMskJm9DuCWMmvVE' }),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+
   ],
   providers: [HttpClientModule,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],

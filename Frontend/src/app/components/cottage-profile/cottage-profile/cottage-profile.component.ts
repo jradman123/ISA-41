@@ -368,24 +368,7 @@ export class CottageProfileComponent implements OnInit {
 
   }
 
-  addAvailability() {
 
-    let startDate = new Date(this.startAvailableDate);
-    let endDate = new Date(this.endAvailableDate);
-    this.newAvailability.cottageId = this.cottage.id;
-    this.newAvailability.startDate = startDate;
-    this.newAvailability.endDate = endDate;
-    console.log("fedfefdfdf0" + this.newAvailability.startDate)
-
-    this.availabilityService.addAvailabilityCottage(this.newAvailability).subscribe((data) => {
-
-      console.log(this.cottage)
-      this.availabilities = []
-      this.findAvailability();
-
-    });
-
-  }
 
   deleteApp(id: string) {
     this.appointmentService.deleteApp(id)

@@ -73,7 +73,6 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
                     appointmentDtos.add(cottageQuickReservationResponse);
 
 
-                    appointmentDtos.add(cottageQuickReservationResponse);
                 }
             }
         }
@@ -122,7 +121,7 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
     public void notifyUserForCottage(String email, CottageQuickReservation reservation) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        emailSenderService.sendEmail(email,"Akcija!","Za vikendicu " + reservation.getCottage().getName() +
+        emailSenderService.sendEmail(email,"Akcija!","Za brod " + reservation.getCottage().getName() +
                 " definisana je nova akcija.Za " + reservation.getPrice() + " € rezervišite termin za "  + reservation.getGuestLimit() + " osoba.Termin rezervacije je definisan od " +
                 reservation.getStartTime().format(formatter) + " do " + reservation.getEndTime().format(formatter) + ".Akcija važi do " +
                 reservation.getValidUntil().format(formatter) + ".Sve detalje možete pogledati na našem sajtu.");

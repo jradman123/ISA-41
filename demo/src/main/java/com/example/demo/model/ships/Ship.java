@@ -23,6 +23,7 @@ import com.example.demo.model.Address;
 import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.enumeration.EquipmentType;
+import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.ShipOwner;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -119,7 +120,13 @@ public class Ship {
 	 @Column(name = "deleted")
 	 private boolean deleted = false;
 
-	public Ship(String name, String description, double price, Address address, ShipOwner owner, int capacity, double maxSpeed, int cancelationConditions, double length, double strengthOfEngine, String fishingEquipment, String numberOfEngine, String type) {
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "ship_users",
+			joinColumns = @JoinColumn(name = "ship_id"),
+			inverseJoinColumns = @JoinColumn(name = "users_id"))
+	private Set<RegisteredUser> subscribers;
+
+	public Ship(String name, String description, double price, Address address, ShipOwner owner, int capacity, double maxSpeed, int cancelationConditions, double length, double strengthOfEngine, String fishingEquipment, String numberOfEngine, String type,Set<RegisteredUser> subscribers) {
 	this.name=name;
 	this.description=description;
 	this.price=price;
@@ -133,6 +140,7 @@ public class Ship {
 	this.fishingEquipment=fishingEquipment;
 	this.numberOfEngine=numberOfEngine;
 	this.type=type;
+	this.subscribers=subscribers;
 
 	}
 

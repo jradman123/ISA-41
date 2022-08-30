@@ -103,7 +103,7 @@ public class ShipServiceImpl  implements ShipService {
 
             if (owner.getEmail().equals(user.getEmail())) {
                 Address address = new Address(newShip.getStreetName(), newShip.getStreetNumber(), newShip.getCity(), newShip.getCountry(), newShip.getLongitude(), newShip.getLongitude());
-                Ship ship = new Ship(newShip.getName(), newShip.getDescription(), Double.parseDouble(newShip.getPrice()),address, owner,Integer.parseInt(newShip.getCapacity()),Double.parseDouble(newShip.getMaxSpeed()),Integer.parseInt(newShip.getCancelationConditions()),Double.parseDouble(newShip.getLength()),Double.parseDouble(newShip.getStrengthOfEngine()),newShip.getFishingEquipment(),newShip.getNumberOfEngine(),newShip.getType());
+                Ship ship = new Ship(newShip.getName(), newShip.getDescription(), Double.parseDouble(newShip.getPrice()),address, owner,Integer.parseInt(newShip.getCapacity()),Double.parseDouble(newShip.getMaxSpeed()),Integer.parseInt(newShip.getCancelationConditions()),Double.parseDouble(newShip.getLength()),Double.parseDouble(newShip.getStrengthOfEngine()),newShip.getFishingEquipment(),newShip.getNumberOfEngine(),newShip.getType(),null);
                 return this.shipRepository.save(ship);
             }
         }

@@ -188,3 +188,7 @@ INSERT INTO public.cottage_users(
 	cottage_id, users_id)
 	VALUES (3, 7);
 
+
+INSERT INTO public.ship_users(
+	ship_id, users_id)
+	VALUES (1, 7);

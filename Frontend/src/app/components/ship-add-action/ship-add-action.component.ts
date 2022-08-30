@@ -114,9 +114,7 @@ export class ShipAddActionComponent implements OnInit {
       this.sub = this.appointmentService.createAppbyShip(this.newAppointment)
         .subscribe({
           next: () => {
-
-            this.form.reset();
-            this.Utilities.reset();
+            window.location.reload();
 
           }
         });

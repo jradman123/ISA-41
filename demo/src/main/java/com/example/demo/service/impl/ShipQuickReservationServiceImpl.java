@@ -8,6 +8,7 @@ import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipQuickReservation;
 import com.example.demo.model.ships.ShipUtility;
+import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageQuickReservationRepository;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -70,20 +71,25 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
         if (dto.getShipId() != null) {
             Ship ship = shipService.findShipById(Long.parseLong(dto.getShipId()));
             appointment.setShip(ship);
+            Set<RegisteredUser> subscribers = ship.getSubscribers();
+            for (RegisteredUser client : subscribers) {
+                notifyUserForCottage(client.getEmail(), appointment);
+            }
             shipQuickReservationRepository.save(appointment);
 
-            for (User user : userService.findAll()) {
-                notifyUserForCottage(user.getEmail(), ship.getName(), appointment.getValidUntil());
-            }
+
             return appointment;
 
         }
         return null;
     }
 
-    public void notifyUserForCottage(String email, String name, LocalDateTime date) {
-        emailSenderService.sendEmail(email, "Obavijest o novim terminima za rezervaciju", "Imate nove termine za vikendicu " + name + "." + "Akcija vazi do  " + date + "." +
-                "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
+    public void notifyUserForCottage(String email,ShipQuickReservation reservation) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        emailSenderService.sendEmail(email,"Akcija!","Za vikendicu " + reservation.getShip().getName() +
+                " definisana je nova akcija.Za " + reservation.getPrice() + " € rezervišite termin za "  + reservation.getGuestLimit() + " osoba.Termin rezervacije je definisan od " +
+                reservation.getStartTime().format(formatter) + " do " + reservation.getEndTime().format(formatter) + ".Akcija važi do " +
+                reservation.getValidUntil().format(formatter) + ".Sve detalje možete pogledati na našem sajtu.");
     }
     @Override
     public ResponseEntity<Long> deleteApp(Long id) {

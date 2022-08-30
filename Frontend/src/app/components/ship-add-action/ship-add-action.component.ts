@@ -115,7 +115,9 @@ export class ShipAddActionComponent implements OnInit {
         .subscribe({
           next: () => {
 
-            //   this.onNoClick();
+            this.form.reset();
+            this.Utilities.reset();
+
           }
         });
     }

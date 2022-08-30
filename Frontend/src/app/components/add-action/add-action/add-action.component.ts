@@ -104,19 +104,12 @@ export class AddActionComponent implements OnInit {
         .subscribe({
           next: () => {
 
-            this.onNoClick();
+            window.location.reload();
           }
         });
     }
   }
 
-  onNoClick(): void {
-    this.form.reset();
-    this.Utilities.reset();
-    this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
-      this.appointments = data;
-    });
-  }
 
   App(): void {
     let newStart = new Date(this.form.value.resStart)

@@ -10,6 +10,7 @@ import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipUtility;
+import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageQuickReservationRepository;
 import com.example.demo.repository.CottageUtilityRepository;
@@ -100,11 +101,17 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
         if (dto.getCottageId() != null) {
             Cottage cottage = cottageService.findCottageById(Long.parseLong(dto.getCottageId()));
             appointment.setCottage(cottage);
+
+            Set<RegisteredUser> subscribers = cottage.getSubscribers();
+            for (RegisteredUser client : subscribers) {
+                notifyUserForCottage(client.getEmail(), appointment);
+            }
             cottageQuickReservationRepository.save(appointment);
 
-            for (User user : userService.findAll()) {
-                notifyUserForCottage(user.getEmail(), appointment);
-            }
+
+
+
+
             return appointment;
 
 
@@ -115,7 +122,7 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
     public void notifyUserForCottage(String email, CottageQuickReservation reservation) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        emailSenderService.sendEmail(email,"Akcija!","Za avanturu " + reservation.getCottage().getName() +
+        emailSenderService.sendEmail(email,"Akcija!","Za vikendicu " + reservation.getCottage().getName() +
                 " definisana je nova akcija.Za " + reservation.getPrice() + " € rezervišite termin za "  + reservation.getGuestLimit() + " osoba.Termin rezervacije je definisan od " +
                 reservation.getStartTime().format(formatter) + " do " + reservation.getEndTime().format(formatter) + ".Akcija važi do " +
                 reservation.getValidUntil().format(formatter) + ".Sve detalje možete pogledati na našem sajtu.");

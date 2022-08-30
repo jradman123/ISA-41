@@ -103,7 +103,7 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
             cottageQuickReservationRepository.save(appointment);
 
             for (User user : userService.findAll()) {
-                notifyUserForCottage(user.getEmail(), cottage.getName(), appointment.getValidUntil());
+                notifyUserForCottage(user.getEmail(), appointment);
             }
             return appointment;
 
@@ -113,10 +113,13 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
         return null;
     }
 
-    public void notifyUserForCottage(String email, String name, LocalDateTime date) {
-        emailSenderService.sendEmail(email, "Obavijest o novim terminima za rezervaciju", "Imate nove termine za vikendicu " + name + "." + "Akcija vazi do  " + date + "." +
-                "Mozete se prijaviti na nas sajt kako biste vidjeli detalje novog termina!");
-    }
+    public void notifyUserForCottage(String email, CottageQuickReservation reservation) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        emailSenderService.sendEmail(email,"Akcija!","Za avanturu " + reservation.getCottage().getName() +
+                " definisana je nova akcija.Za " + reservation.getPrice() + " € rezervišite termin za "  + reservation.getGuestLimit() + " osoba.Termin rezervacije je definisan od " +
+                reservation.getStartTime().format(formatter) + " do " + reservation.getEndTime().format(formatter) + ".Akcija važi do " +
+                reservation.getValidUntil().format(formatter) + ".Sve detalje možete pogledati na našem sajtu.");
+    }    
 
     @Override
     public ResponseEntity<Long> deleteApp(Long id) {

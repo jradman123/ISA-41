@@ -314,15 +314,12 @@ export class CottageProfileComponent implements OnInit {
   deletePicture(idP: any) {
 
 
-    this.imageService.deletePicture(idP, this.id)
-      .subscribe(data => {
-        window.location.reload();
 
 
 
 
 
-      });
+
 
   }
 
@@ -557,8 +554,7 @@ export class CottageProfileComponent implements OnInit {
     }
   }
   addNew(element: any) {
-    console.log("fdffdfd" + element.resStart)
-    console.log("fsfsf" + new Date())
+
 
     return new Date(Date.parse(element.resStart)) <= new Date()
   }

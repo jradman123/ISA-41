@@ -28,11 +28,7 @@ export class CottageListComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id')!;
     this.findCottages();
 
-    this.imageService.findImageByCottageId(this.id).subscribe((data) => {
-      this.images = data;
-      console.log(this.images);
 
-    });
 
   }
 

@@ -68,6 +68,11 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/find-future-reservations-by-adventure/${id}`);
   }
 
+  reservationsExistForAdventure(id: string): Observable<string> {
+    return this.http.get<string>(
+      `${this.apiServerUrl}/reservations/reservations-exist-for-adventure/${id}`);
+  }
+
 
 
 }

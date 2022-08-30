@@ -151,7 +151,7 @@ INSERT INTO public.adventure(cancellation_conditions, deleted, description, gues
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
     VALUES ('AdventureReservation',false,false,true,4,60.0,'18-08-2022 12:00','18-08-2022 08:00',6,7,1,null,null,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
-    VALUES ('AdventureReservation',false,false,true,2,30.0,'30-08-2022 09:00','28-08-2022 08:00',6,7,1,null,null,false);
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'31-08-2022 09:00','28-08-2022 08:00',6,7,1,null,null,false);
 
 
 --INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);

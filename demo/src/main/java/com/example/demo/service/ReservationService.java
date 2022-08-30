@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
+import com.example.demo.model.adventures.AdventureReservation;
+import com.example.demo.model.reservation.Reservation;
 
 import java.util.List;
 
@@ -29,4 +31,7 @@ public interface ReservationService {
     List<ReservationViewDto> getReservationsForAdventure(int id);
 
     List<ReservationViewDto> getFutureReservationsForAdventure(int id);
+
+    boolean  reservationsExistForAdventure(int id);
+
 }

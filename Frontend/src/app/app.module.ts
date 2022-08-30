@@ -85,6 +85,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-pic
 import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
 import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
+import { DialogForDeletingAdventureComponent } from './components/dialog-for-deleting-adventure/dialog-for-deleting-adventure.component';
 
 
 @NgModule({
@@ -157,7 +158,8 @@ import { CottageReportComponent } from './components/cottage-report/cottage-repo
     AdventureSearchPipe,
     DialogForReservationAdventureComponent,
     ShipAvailabilityComponent,
-    CottageReportComponent
+    CottageReportComponent,
+    DialogForDeletingAdventureComponent
 
 
   ],

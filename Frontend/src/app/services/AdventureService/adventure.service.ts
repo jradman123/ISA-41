@@ -63,4 +63,9 @@ export class AdventureService {
       `${this.apiServerUrl}/adventures/${id}/utilities`);
   }
 
+  deleteAdventure(id : string){
+    return this.http.delete<String>(
+      `${this.apiServerUrl}/adventures/${id}`);
+  }
+
 }

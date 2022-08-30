@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AdventureDto } from 'src/app/interfaces/adventure-dto';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adventure-basic-info',
@@ -16,8 +18,10 @@ export class AdventureBasicInfoComponent implements OnInit {
   initialDetails: any;
   adventureForUpdate : AdventureDto;
   editMode = false;
+  reservationsExist! : string;
 
-  constructor(private adventureService : AdventureService,private router: ActivatedRoute) {
+  constructor(private adventureService : AdventureService,private router: ActivatedRoute,
+    private reservationService : ReservationService) {
     this.adventure = {} as AdventureDto;
     this.adventureForUpdate = {} as AdventureDto;
    }
@@ -38,6 +42,13 @@ export class AdventureBasicInfoComponent implements OnInit {
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['guestLimit'].setValue(data.guestLimit)
         this.detailsForm.controls['biography'].setValue(data.instructorsBiography)
+      },
+    });
+
+    this.reservationService.reservationsExistForAdventure(this.id)
+    .subscribe({
+      next: (result: any) => {
+        this.reservationsExist = result;
       },
     });
   }
@@ -109,7 +120,19 @@ cancel() {
   this.detailsForm.controls['country'].setValue(this.initialDetails.country)
   this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
 }
-  
+
+checkIfEditIsPossible(){
+  if(this.reservationsExist === 'TRUE'){
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Adventure cannot be edited!',
+    });
+    return;
+  }else{
+    this.editMode = true;
   }
+  
+}
 
-
+}

@@ -5,6 +5,8 @@ import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 import com.example.demo.dto.ShipReservationViewDto;
+import com.example.demo.model.adventures.AdventureReservation;
+import com.example.demo.model.reservation.Reservation;
 import com.example.demo.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,6 +107,17 @@ public class ReservationController {
     public ResponseEntity<List<ReservationViewDto>> getFutureReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getFutureReservationsForAdventure(id);
         return new ResponseEntity<>(reservationDtos,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/reservations-exist-for-adventure/{id}")
+    public ResponseEntity<String> reservationsExistForAdventure(@PathVariable int id) {
+        if(reservationService.reservationsExistForAdventure(id)){
+            return new ResponseEntity<>("\"TRUE\"",HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("\"FALSE\"",HttpStatus.OK);
+        }
     }
 
 

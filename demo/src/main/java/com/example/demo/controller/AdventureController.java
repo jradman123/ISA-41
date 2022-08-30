@@ -136,4 +136,15 @@ public class AdventureController {
                 HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('Instructor')")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteAdventure(@PathVariable int id) {
+        Adventure adventure = this.adventureService.deleteAdventure(id);
+        if(adventure.isDeleted()){
+            return new ResponseEntity<>("\"Success!\"",HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("\"Error!\"",HttpStatus.OK);
+        }
+    }
+
 }

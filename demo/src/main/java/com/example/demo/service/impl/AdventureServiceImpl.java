@@ -1,12 +1,12 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Utility;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureRule;
 import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.adventures.FishingEquipment;
 import com.example.demo.repository.AdventureRepository;
 import com.example.demo.service.AdventureService;
+import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,9 @@ public class AdventureServiceImpl implements AdventureService {
 
     @Autowired
     private AdventureRepository adventureRepository;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @Override
     public List<Adventure> getAllForInstructor(int instructorId) {
@@ -124,5 +127,14 @@ public class AdventureServiceImpl implements AdventureService {
             }
         }
         return adventureUtilities;
+    }
+
+    @Override
+    public Adventure deleteAdventure(int id) {
+        Adventure adventure = adventureRepository.findById(id).get();
+        if(!reservationService.reservationsExistForAdventure(id)) {
+            adventure.setDeleted(true);
+        }
+        return adventureRepository.save(adventure);
     }
 }

@@ -13,6 +13,7 @@ import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.ReservationService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -192,6 +193,24 @@ public class ReservationServiceImpl implements ReservationService
         }
 
         return reservationDtos;
+    }
+
+    @Override
+    public boolean reservationsExistForAdventure(int id) {
+        List<AdventureReservation> reservations = new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.findAll()){
+            int nesto = r.getAdventure().getId();
+            if(r.getAdventure().getId() == id &&
+                    ((LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isBefore(r.getReservationStart())) ||
+                    (LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isAfter(r.getReservationStart())))) {
+                reservations.add(r);
+            }
+        }
+        if (reservations.isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {

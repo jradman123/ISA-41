@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AdventureRepository extends JpaRepository<Adventure, Integer> {
 
-    @Query(value = "select * from adventure a where instructor = ?1", nativeQuery = true)
+    @Query(value = "select * from adventure a where instructor = ?1 and deleted = false", nativeQuery = true)
     List<Adventure> getAllForInstructor(int instructorId);
 }

@@ -24,5 +24,6 @@ public interface AdventureService {
     Set<FishingEquipment> getFishingEquipmentByAdventure(Adventure adventure);
     Adventure addUtility(int id, AdventureUtility utility);
     Set<AdventureUtility> getUtilitiesByAdventure(Adventure adventure);
+    Adventure deleteAdventure(int id);
 
 }

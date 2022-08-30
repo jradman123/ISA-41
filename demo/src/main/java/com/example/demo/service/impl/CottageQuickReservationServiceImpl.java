@@ -6,6 +6,7 @@ import com.example.demo.dto.ResponseUtility;
 import com.example.demo.model.adventures.AdventureUtility;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageQuickReservation;
+import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.ships.Ship;
@@ -42,6 +43,9 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private ReservationServiceImpl reservationService;
 
     @Autowired
     private CottageUtilityRepository cottageUtilityRepository;
@@ -86,6 +90,13 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
         appointment.setStartTime(LocalDateTime.parse(dto.getStartTime(), formatter));
         appointment.setEndTime(LocalDateTime.parse(dto.getEndTime(), formatter));
+
+        boolean reservations=this.reservationService.checkDates(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
+        boolean availability=this.reservationService.checkAvailability(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
+        boolean app=this.checkApp(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
+
+
+        if(reservations && availability && app) {
         appointment.setGuestLimit(Integer.parseInt(dto.getGuestLimit()));
         appointment.setPrice(Double.parseDouble(dto.getPrice()));
         appointment.setValidUntil(LocalDateTime.parse(dto.getValidUntil(), formatter));
@@ -108,15 +119,34 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
             cottageQuickReservationRepository.save(appointment);
 
 
-
-
-
             return appointment;
+        }else {return null;
+        }
 
 
         }
 
         return null;
+    }
+
+    public boolean checkApp(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for (CottageQuickReservation ct : cottageQuickReservationRepository.getAllForCottage(Long.parseLong(objectId))) {
+
+            if (startDate.equals(ct.getStartTime()) ||
+                    startDate.equals(ct.getEndTime()) ||
+
+                    endDate.equals(ct.getEndTime()) ||
+                    endDate.equals(ct.getStartTime())  ||
+                    (startDate.isAfter(ct.getStartTime()) && startDate.isBefore(ct.getEndTime()) && endDate.isAfter(ct.getEndTime()))
+                    || (endDate.isAfter(ct.getStartTime()) && endDate.isBefore(ct.getEndTime()))
+                    || (startDate.isBefore(ct.getStartTime()) && endDate.isAfter(ct.getEndTime())) ||
+                    (startDate.isAfter(ct.getStartTime()) && endDate.isBefore(ct.getEndTime())))
+            {
+                return false;
+
+            }
+        }
+        return true;
     }
 
     public void notifyUserForCottage(String email, CottageQuickReservation reservation) {

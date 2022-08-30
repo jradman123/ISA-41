@@ -95,16 +95,27 @@ export class AddActionComponent implements OnInit {
       })
 
     } else {
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully added new appointment!',
-      })
+
       this.sub = this.appointmentService.createApp(this.newAppointment)
         .subscribe({
-          next: () => {
+          next: (response) => {
 
-            window.location.reload();
+            if (response == "NO!") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'This appointment is already reserved or cottage is not available during a period!',
+              })
+            } else {
+              Swal.fire({
+                icon: 'success',
+                title: 'Good job!',
+                text: 'You have successfully added new appointment!',
+              })
+              window.location.reload();
+
+            }
+
           }
         });
     }

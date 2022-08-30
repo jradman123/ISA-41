@@ -164,7 +164,7 @@ public class ReservationServiceImpl implements ReservationService
 return null;
     }
 
-    private boolean checkAvailability(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+    public boolean checkAvailability(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
         for(CottageAvailability ca:this.cottageAvailabilityRepository.getAllForCottage(Long.parseLong(objectId))) {
             if(startDate.isAfter(ca.getStartDate()) && endDate.isBefore(ca.getEndDate())) {
                 return true;
@@ -173,7 +173,7 @@ return null;
         return false;
     }
 
-    private boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+    public boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
         for (CottageReservation ct : cottageReservationRepository.getAllForCottage(Long.parseLong(objectId))) {
 
             if (startDate.equals(ct.getReservationStart()) ||

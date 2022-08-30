@@ -46,8 +46,13 @@ public class CottageQuickReservationController {
 
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
     @PostMapping(value="/createApp")
-    public CottageQuickReservation createApp(@RequestBody CottageQuickReservationDto dto) {
-        return this.cottageQuickReservationService.createAppointment(dto);
+    public ResponseEntity<String> createApp(@RequestBody CottageQuickReservationDto dto) {
+        CottageQuickReservation cottageQuickReservation=cottageQuickReservationService.createAppointment(dto);
+        if(cottageQuickReservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
     }
+
 
 }

@@ -67,7 +67,7 @@
                                 <mat-form-field appearance="standard">
                                     <mat-label>The percentage of the price that is retained</mat-label>
                                     <input matInput placeholder="The percentage of the price that is retained"
-                                        [readonly]="!editMode" />
+                                        formControlName="cancelled" [readonly]="!editMode" />
                                 </mat-form-field>
                             </div>
                         </div>
@@ -95,6 +95,16 @@
             </mat-card>
 
         </mat-tab>
+
+
+
+        <mat-tab label="Maps">
+
+            <agm-map [latitude]="cottage.latitude" [longitude]="cottage.longitude">
+                <agm-marker [latitude]="cottage.latitude" [longitude]="cottage.longitude"></agm-marker>
+            </agm-map>
+
+        </mat-tab>
         <mat-tab label="Edit images">
             <div>
                 <mat-carousel timings="250ms ease-in" color="primary" maxWidth="auto" maxHeight="auto" [loop]="true"
@@ -112,14 +122,6 @@
             </div>
         </mat-tab>
 
-
-        <mat-tab label="Maps">
-
-            <agm-map [latitude]="cottage.latitude" [longitude]="cottage.longitude">
-                <agm-marker [latitude]="cottage.latitude" [longitude]="cottage.longitude"></agm-marker>
-            </agm-map>
-
-        </mat-tab>
 
 
         <mat-tab label="Edit rules">

@@ -84,6 +84,10 @@ public class Cottage {
 	@JsonManagedReference
 	private Set<CottageAvailability> availabilities;
 
+	@Column(name = "cancelationConditions", nullable = false)
+	private Integer cancelationConditions;// 0% for free
+
+
 
 
 
@@ -94,7 +98,7 @@ public class Cottage {
 	    @JoinColumn(name = "cottageOwner")
 	    private CottageOwner cottageOwner;
 
-	public Cottage(String name, String description, Double price, Address address,CottageOwner owner,int numberOfPerson) {
+	public Cottage(String name, String description, Double price, Address address,CottageOwner owner,int numberOfPerson,Integer cancelationConditions) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -102,6 +106,7 @@ public class Cottage {
 		this.address = address;
 		this.numberOfPerson=numberOfPerson;
 		this.cottageOwner=owner;
+		this.cancelationConditions=cancelationConditions;
 
 
 	}

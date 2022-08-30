@@ -27,6 +27,7 @@ public class CottageDto {
     public String price;
     public String numberOfPeople;
     public String ownerEmail;
+    public Integer cancelled_conditions;
 
     public  CottageDto(Cottage cottage){
         this.id = Long.toString(cottage.getId());
@@ -41,6 +42,8 @@ public class CottageDto {
         this.ownerEmail=cottage.getCottageOwner().getEmail();
         this.latitude=cottage.getAddress().getLatitude();
         this.longitude=cottage.getAddress().getLongitude();
+        this.cancelled_conditions=cottage.getCancelationConditions();
     }
+
 
 }

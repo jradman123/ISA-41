@@ -62,7 +62,7 @@ public class CottageServiceImpl implements CottageService {
         for (CottageOwner owner : this.cottageOwnerRepository.findAll()) {
             if (owner.getEmail().equals(user.getEmail())) {
                 Address address = new Address(newCottage.getStreetName(), newCottage.getStreetNumber(), newCottage.getCity(), newCottage.getCountry(),newCottage.getLongitude(),newCottage.getLatitude());
-                Cottage cottage = new Cottage(newCottage.getName(),newCottage.getDescription(),Double.parseDouble(newCottage.getPrice()),address,owner,Integer.parseInt(newCottage.getNumberOfPeople()));
+                Cottage cottage = new Cottage(newCottage.getName(),newCottage.getDescription(),Double.parseDouble(newCottage.getPrice()),address,owner,Integer.parseInt(newCottage.getNumberOfPeople()),null);
                 return this.cottageRepository.save(cottage);
             }
         }

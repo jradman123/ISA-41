@@ -12,4 +12,5 @@ export interface CottageDto {
     price: string;
     numberOfPeople: string;
     ownerEmail: string;
+    cancelled_conditions: number;
 }

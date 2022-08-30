@@ -185,6 +185,7 @@ export class CottageProfileComponent implements OnInit {
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['numberOfPeople'].setValue(data.numberOfPeople)
+        this.detailsForm.controls['cancelled'].setValue(data.cancelled_conditions)
       },
     });
   }
@@ -214,7 +215,10 @@ export class CottageProfileComponent implements OnInit {
       Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
     ]),
     price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
-    numberOfPeople: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
+    numberOfPeople: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')]),
+
+    cancelled: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
+
   })
 
   findAvailability() {
@@ -228,7 +232,6 @@ export class CottageProfileComponent implements OnInit {
   findAppointments() {
     this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
       this.appointments = data;
-      console.log("TERMIIIN" + this.appointments)
 
 
     });
@@ -437,6 +440,7 @@ export class CottageProfileComponent implements OnInit {
         numberOfPeople: this.detailsForm.get('numberOfPeople')?.value,
         longitude: this.cottage.longitude,
         latitude: this.cottage.latitude,
+        cancelled_conditions: this.detailsForm.get('cancelled')?.value,
       }
       this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
         this.updateCottage = data
@@ -462,6 +466,7 @@ export class CottageProfileComponent implements OnInit {
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
     this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
+    this.detailsForm.controls['cancelled'].setValue(this.initialDetails.cancellationConditions)
   }
 
   dialogReport(id: any) {

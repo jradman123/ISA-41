@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <mat-card style="margin-top: 50px;">
+  <mat-card style="margin-top: 20px;">
     <mat-card-title style="text-align: center;">Add new cottage </mat-card-title>
     <br />
     <mat-card-content>
@@ -113,6 +113,37 @@
             <div class="col-sm">
               <div style="width: 100%; display: flex">
                 <mat-form-field appearance="fill">
+                  <mat-label>Longitude</mat-label>
+                  <input type="number" matInput formControlName="longitude" />
+                  <mat-error *ngIf="
+                !createForm?.get('longitude')?.valid &&
+                createForm?.get('longitude')?.touched &&
+                createForm?.get('longitude')?.errors?.required
+              ">Longitude is required</mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Latitude</mat-label>
+                  <input type="number" matInput formControlName="latitude" />
+                  <mat-error *ngIf="
+                !createForm?.get('latitude')?.valid &&
+                createForm?.get('latitude')?.touched &&
+                createForm?.get('latitude')?.errors?.required
+              ">Latitude is required</mat-error>
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
                   <mat-label>Number of people</mat-label>
                   <input type="number" matInput formControlName="numberOfPeople" />
                   <mat-error *ngIf="
@@ -122,7 +153,24 @@
               ">numberOfPeople is required</mat-error>
                 </mat-form-field>
               </div>
+
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>The percentage of the price that is retained</mat-label>
+                  <input type="number" matInput formControlName="cancelled" />
+                  <mat-error *ngIf="
+              !createForm?.get('cancelled')?.valid &&
+              createForm?.get('cancelled')?.touched &&
+              createForm?.get('cancelled')?.errors?.required
+            ">Percentage is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
           </div>
 
         </div>

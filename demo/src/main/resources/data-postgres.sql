@@ -34,15 +34,15 @@ INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com')
 INSERT INTO public.request_for_deleting_account(email,reason) VALUES ('raandmjenale@gmail.com','Ne želim više koristiti usluge vašeg sajta.');
 
 ---cottage---
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-    	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,subscribers)
+	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false,1);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,subscribers)
+	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false,1);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,subscribers)
+    	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false,1);
 
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-    	VALUES ('Small and sweet  cottage', 'Marija', 50, 1,2,3,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,subscribers)
+    	VALUES ('Small and sweet  cottage', 'Marija', 50, 1,2,3,false,1);
 
 ---ships---
 
@@ -178,5 +178,10 @@ INSERT INTO public.review(comment, mark, reservation_id)
 VALUES ('bad', 1, 1);
 INSERT INTO public.review(comment, mark, reservation_id)
 VALUES ('vrh', 5, 2);
+
+INSERT INTO public.cottage_users(
+	cottage_id, users_id)
+	VALUES (1, 7);
+
 
 

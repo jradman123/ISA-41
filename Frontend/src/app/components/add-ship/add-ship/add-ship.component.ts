@@ -92,6 +92,13 @@ export class AddShipComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
       ]),
+      longitude: new FormControl(null, [
+        Validators.required,
+      ]),
+      latitude: new FormControl(null, [
+        Validators.required,
+      ]),
+
 
 
 
@@ -158,7 +165,8 @@ export class AddShipComponent implements OnInit {
     this.newShip.type = this.createForm.value.typeofShip;
     this.newShip.cancelationConditions = this.createForm.value.cancelationConditions;
     this.newShip.fishingEquipment = this.createForm.value.fishingEquipment;
-
+    this.newShip.longitude = this.createForm.value.longitude;
+    this.newShip.latitude = this.createForm.value.latitude;
     this.newShip.ownerEmail = this.email;
 
   }

@@ -20,7 +20,7 @@
         <div class="row">
             <div class="card" style="margin: 10px; " *ngFor="let cottage of cottages | cottagesSearch : searchText ">
 
-                <img :src="assets/images/cottage.jpg" class="card-img-top" sty alt="image of cottage">
+                <img :src="assets/images/{{cottage.name}}.jpg" class="card-img-top" sty alt="image of cottage">
 
 
                 <ul class="list-group list-group-flush">

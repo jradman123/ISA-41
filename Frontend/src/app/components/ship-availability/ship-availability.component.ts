@@ -127,7 +127,7 @@ export class ShipAvailabilityComponent implements OnInit {
 
   }
   getShipPastReservations() {
-    this.reservationService.getPastCottageReservationById(this.id).subscribe({
+    this.reservationService.getPastShipReservationById(this.id).subscribe({
       next: (res) => {
         this.pastReservations = res
         for (var i = 0; i < this.pastReservations.length; i++) {
@@ -140,7 +140,7 @@ export class ShipAvailabilityComponent implements OnInit {
   }
 
   getShipCurrentReservations() {
-    this.reservationService.getCottageReservationById(this.id).subscribe({
+    this.reservationService.getShipReservationById(this.id).subscribe({
       next: (res) => {
         this.reservations = res
         for (var i = 0; i < this.reservations.length; i++) {

@@ -99,11 +99,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         Ship ship = shipService.findShipById(shipAvailabilityDto.getShipId());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         ShipAvailability ca = new ShipAvailability(LocalDateTime.parse(shipAvailabilityDto.getStartDate(),formatter),LocalDateTime.parse( shipAvailabilityDto.getEndDate(),formatter), ship);
-        ShipAvailability shipAvailability = shipAvailabilityRepository.save(ca);
-        List<ShipAvailability> availabilities = this.shipAvailabilityRepository.getAllForShip(shipAvailability.getShip().getId());
-        List<ShipAvailability> newAvailabilities = checkForOverlappingShipAvailabilities(availabilities, shipAvailability);
-        shipAvailabilityRepository.saveAll(newAvailabilities);
-        return shipAvailability;
+   //     ShipAvailability shipAvailability = shipAvailabilityRepository.save(ca);
+        List<ShipAvailability> availabilities = this.shipAvailabilityRepository.getAllForShip(ca.getShip().getId());
+        List<ShipAvailability> newAvailabilities = checkForOverlappingShipAvailabilities(availabilities, ca);
+        for(ShipAvailability saa:newAvailabilities) {
+            shipAvailabilityRepository.save(saa);
+        }
+
+        return ca;
     }
 
     private List<ShipAvailability> checkForOverlappingShipAvailabilities(List<ShipAvailability> availabilities, ShipAvailability shipAvailability) {

@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.users.InstructorAvailability;
 import com.example.demo.repository.InstructorAvailabilityRepository;
 import com.example.demo.service.InstructorAvailabilityService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +24,37 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
     }
 
     @Override
+    public List<InstructorAvailability> getAllCurrentAndFutureForInstructor(int instructorId) {
+        return instructorAvailabilityRepository.getAllCurrentAndFutureForInstructor(instructorId, LocalDateTime.now());
+    }
+
+    @Override
     public InstructorAvailability addNewAvailability(InstructorAvailability instructorAvailability) {
-        InstructorAvailability newAvailability = instructorAvailabilityRepository.save(instructorAvailability);
+        //InstructorAvailability newAvailability = instructorAvailabilityRepository.save(instructorAvailability);
         List<InstructorAvailability> availabilities = getAllForInstructor(instructorAvailability.getInstructor().getId());
-        List<InstructorAvailability> newAvailabilities = checkForOverlappingAvailabilities(availabilities, newAvailability);
-        instructorAvailabilityRepository.saveAll(newAvailabilities);
-        return newAvailability;
+        List<InstructorAvailability> newAvailabilities = checkForOverlappingAvailabilities(availabilities, instructorAvailability);
+        for (InstructorAvailability ia: newAvailabilities) {
+            instructorAvailabilityRepository.save(ia);
+        }
+        return instructorAvailability;
+    }
+
+    @Override
+    public boolean isInstructorAvailable(int id, LocalDateTime startTime, LocalDateTime endTime) {
+        for (InstructorAvailability availability : getAllForInstructor(id)) {
+            if(LocalDateTime.now().isBefore(availability.getStartDate())){
+
+            }
+        }
+        return false;
+    }
+
+    private boolean hasInstructorReservations(int id, LocalDateTime startTime, LocalDateTime endTime){
+        return false;
     }
 
     private List<InstructorAvailability> checkForOverlappingAvailabilities(List<InstructorAvailability> availabilityPeriods, InstructorAvailability newAvailability) {
         List<InstructorAvailability> newAvailabilities = new ArrayList<>();
-        //List<InstructorAvailability> toRemove = new ArrayList<>();
         for (InstructorAvailability availability : availabilityPeriods) {
             if (!availability.getId().equals(newAvailability.getId()) &&
                     (isBetweenAvailabilityDate(newAvailability.getStartDate(), availability)
@@ -50,14 +71,6 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
             newAvailabilities.add(availability);
         }
 
-        /*List<InstructorAvailability> newOne = newAvailabilities;
-        for (InstructorAvailability remove : toRemove) {
-            for (InstructorAvailability saved: newAvailabilities) {
-                if(remove.getId().equals(saved.getId())){
-                    newOne.remove(newAvailabilities.indexOf(saved));
-                }
-            }
-        }*/
         return newAvailabilities;
     }
 
@@ -75,6 +88,8 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
 
         return newAvailability;
     }
+
+
 
 
 }

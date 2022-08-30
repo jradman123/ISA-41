@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class InstructorAvailabilityController {
 
     @PreAuthorize("hasAuthority('Instructor')")
     @PostMapping(value="/add-new-period")
-    public ResponseEntity<InstructorAvailabilityDto> addNewPeriod(@RequestBody NewInstructorAvailability newInstructorAvailability,
+    public ResponseEntity<String> addNewPeriod(@RequestBody NewInstructorAvailability newInstructorAvailability,
                                                                         HttpServletRequest request) {
         String token = tokenUtils.getToken(request);
         String email = tokenUtils.getEmailFromToken(token);
@@ -62,9 +63,9 @@ public class InstructorAvailabilityController {
         InstructorAvailability instructorAvailability = instructorAvailabilityMapper.mapNewInstructorAvailabilityToEntity(newInstructorAvailability,instructor);
         InstructorAvailability saved = instructorAvailabilityService.addNewAvailability(instructorAvailability);
         if(saved == null) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("\"Error!\"", HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
-            return new ResponseEntity<>(instructorAvailabilityMapper.mapToInstructorAvailabilityDto(saved), HttpStatus.CREATED);
+            return new ResponseEntity<>("\"Success!\"", HttpStatus.CREATED);
         }
     }
 }

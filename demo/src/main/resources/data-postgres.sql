@@ -175,7 +175,13 @@ INSERT INTO public.adventure_utility(is_deleted, name, price) VALUES (false,'Div
 INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (1, 1);
 
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
-VALUES ('30-08-2022 10:00', '28-08-2022  08:00', 6);
+VALUES ('30-08-2022 14:00', '28-08-2022  08:00', 6);
+INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
+VALUES ('05-09-2022 10:00', '31-08-2022  08:00', 6);
+INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
+VALUES ('12-09-2022 20:00', '06-09-2022  08:00', 6);
+INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
+VALUES ('30-09-2022 20:00', '14-09-2022  08:00', 6);
 
 
 ----review---

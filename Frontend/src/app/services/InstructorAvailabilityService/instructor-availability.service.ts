@@ -20,7 +20,9 @@ export class InstructorAvailabilityService {
   }
 
   addNewAvailability(availability: NewInstructorAvailability) {
-    return this.http.post(`${this.apiServerUrl}/instructor-availabilities/add-new-period`, availability);
+    return this.http.post(`${this.apiServerUrl}/instructor-availabilities/add-new-period`, availability,{
+      responseType: 'text',
+    });
   }
 
 }

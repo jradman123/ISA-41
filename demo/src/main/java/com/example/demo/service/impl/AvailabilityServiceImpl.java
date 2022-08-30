@@ -66,11 +66,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 
         CottageAvailability ca = new CottageAvailability(LocalDateTime.parse(cottageAvailabilityDto.getStartDate(),formatter),LocalDateTime.parse(cottageAvailabilityDto.getEndDate(),formatter), cottage);
-        CottageAvailability cottageAvailability = cottageAvailabilityRepository.save(ca);
-        List<CottageAvailability> availabilities = this.cottageAvailabilityRepository.getAllForCottage(cottageAvailability.getCottage().getId());
-        List<CottageAvailability> newAvailabilities = checkForOverlappingAvailabilities(availabilities, cottageAvailability);
-        cottageAvailabilityRepository.saveAll(newAvailabilities);
-        return cottageAvailability;
+       // CottageAvailability cottageAvailability = cottageAvailabilityRepository.save(ca);
+        List<CottageAvailability> availabilities = this.cottageAvailabilityRepository.getAllForCottage(ca.getCottage().getId());
+        List<CottageAvailability> newAvailabilities = checkForOverlappingAvailabilities(availabilities, ca);
+        for(CottageAvailability caa:newAvailabilities) {
+            cottageAvailabilityRepository.save(caa);
+        }
+
+        return ca;
 
 
     }

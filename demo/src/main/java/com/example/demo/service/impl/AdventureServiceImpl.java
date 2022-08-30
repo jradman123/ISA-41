@@ -41,15 +41,17 @@ public class AdventureServiceImpl implements AdventureService {
     @Override
     public Adventure updateAdventure(Adventure updatedAdventure,int id) {
         Adventure adventure = adventureRepository.findById(id).get();
-        adventure.setName(updatedAdventure.getName());
-        adventure.setDescription(updatedAdventure.getDescription());
-        adventure.setPrice(updatedAdventure.getPrice());
-        adventure.getAddress().setStreetNumber(updatedAdventure.getAddress().getStreetNumber());
-        adventure.getAddress().setStreetName(updatedAdventure.getAddress().getStreetName());
-        adventure.getAddress().setCity(updatedAdventure.getAddress().getCity());
-        adventure.getAddress().setCountry(updatedAdventure.getAddress().getCountry());
-        adventure.setGuestLimit(updatedAdventure.getGuestLimit());
-        adventure.setCancellationConditions(updatedAdventure.getCancellationConditions());
+        if(!reservationService.reservationsExistForAdventure(id)) {
+            adventure.setName(updatedAdventure.getName());
+            adventure.setDescription(updatedAdventure.getDescription());
+            adventure.setPrice(updatedAdventure.getPrice());
+            adventure.getAddress().setStreetNumber(updatedAdventure.getAddress().getStreetNumber());
+            adventure.getAddress().setStreetName(updatedAdventure.getAddress().getStreetName());
+            adventure.getAddress().setCity(updatedAdventure.getAddress().getCity());
+            adventure.getAddress().setCountry(updatedAdventure.getAddress().getCountry());
+            adventure.setGuestLimit(updatedAdventure.getGuestLimit());
+            adventure.setCancellationConditions(updatedAdventure.getCancellationConditions());
+        }
         Adventure saved = adventureRepository.save(adventure);
         return saved;
     }

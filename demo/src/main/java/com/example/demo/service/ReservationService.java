@@ -6,6 +6,7 @@ import com.example.demo.dto.ReservationDto;
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.reservation.Reservation;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReservationService {
@@ -34,5 +35,7 @@ public interface ReservationService {
     boolean  reservationsExistForAdventure(int id);
 
     String createAdventureReservation(CreateReservationDto createReservationDto);
+
+    boolean hasInstructorReservationsForRange(int id, LocalDateTime startTime, LocalDateTime endTime);
 
 }

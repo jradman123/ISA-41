@@ -214,13 +214,14 @@ public class ReservationServiceImpl implements ReservationService
 
     @Override
     public String createAdventureReservation(CreateReservationDto createReservationDto) {
-        Adventure adventure=adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId()));
-        boolean result = instructorAvailabilityService.isInstructorAvailable(adventure.getInstructor().getId(),createReservationDto.getResStart(),createReservationDto.getResEnd());
-        if(result){
+        int instructorId = adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId())).getInstructor().getId();
+        boolean available = instructorAvailabilityService.isInstructorAvailable(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
+        boolean hasReservations = hasInstructorReservationsForRange(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
+        if(available && !hasReservations){
             createReservation(createReservationDto);
             return "Success!";
         }else{
-            return "Appointment is not free!";
+            return "Date range is not free!";
         }
     }
 
@@ -255,8 +256,10 @@ public class ReservationServiceImpl implements ReservationService
             Set<AdventureReservation> adventureReservations=adventure.getAdventureReservations();
             adventureReservation.setInstructorId(adventure.getInstructor().getId());
             Set<AdventureUtility> utilities = new HashSet<>();
-            for (ResponseUtility dto : createReservationDto.getUtilities()) {
-                utilities.add(adventureUtilityRepository.findById(Long.parseLong(dto.getId())).get());
+            if(createReservationDto.getUtilities() != null) {
+                for (ResponseUtility dto : createReservationDto.getUtilities()) {
+                    utilities.add(adventureUtilityRepository.findById(Long.parseLong(dto.getId())).get());
+                }
             }
             adventureReservation.setUtilities(utilities);
             adventureReservations.add(adventureReservation);
@@ -264,5 +267,22 @@ public class ReservationServiceImpl implements ReservationService
             return adventureReservation;
         }
         return null;
+    }
+
+    @Override
+    public boolean hasInstructorReservationsForRange(int id, LocalDateTime startTime, LocalDateTime endTime) {
+        for (AdventureReservation reservation : getAllInstructorsAdventures(id)) {
+            if((startTime.isAfter(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd())) ||
+                    (startTime.isBefore(reservation.getReservationStart()) && endTime.isAfter(reservation.getReservationEnd())) ||
+                    (startTime.isBefore(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd()) && endTime.isAfter(reservation.getReservationStart())) ||
+                    (startTime.isBefore(reservation.getReservationEnd()) && endTime.isAfter(reservation.getReservationEnd()) && startTime.isAfter(reservation.getReservationStart()))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<AdventureReservation> getAllInstructorsAdventures(int id){
+        return adventureReservationRepository.getAllInstructorsReservations(id,LocalDateTime.now());
     }
 }

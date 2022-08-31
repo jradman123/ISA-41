@@ -67,6 +67,9 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
                     && newAvailability.getEndDate().isAfter(availability.getEndDate())) {
                 availability.setStartDate(newAvailability.getStartDate());
                 availability.setEndDate(newAvailability.getEndDate());
+            }else if(newAvailability.getStartDate().isAfter(availability.getStartDate())
+                    && newAvailability.getEndDate().isAfter(availability.getEndDate())){
+                newAvailabilities.add(newAvailability);
             }
             newAvailabilities.add(availability);
         }

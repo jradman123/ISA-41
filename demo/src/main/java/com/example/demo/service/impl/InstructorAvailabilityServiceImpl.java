@@ -41,9 +41,9 @@ public class InstructorAvailabilityServiceImpl implements InstructorAvailability
 
     @Override
     public boolean isInstructorAvailable(int id, LocalDateTime startTime, LocalDateTime endTime) {
-        for (InstructorAvailability availability : getAllForInstructor(id)) {
-            if(LocalDateTime.now().isBefore(availability.getStartDate())){
-
+        for (InstructorAvailability availability : getAllCurrentAndFutureForInstructor(id)) {
+            if((startTime.isAfter(availability.getStartDate())) && (endTime.isBefore(availability.getEndDate()))){
+                return true;
             }
         }
         return false;

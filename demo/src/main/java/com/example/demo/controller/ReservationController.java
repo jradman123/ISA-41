@@ -79,9 +79,13 @@ public class ReservationController {
 
     @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser') || hasAuthority('Instructor')")
     @PostMapping(value="/createReservation")
-    public ResponseEntity<HttpStatus> createReservation(@RequestBody CreateReservationDto createReservationDto) {
-        reservationService.createReservation(createReservationDto);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> createReservation(@RequestBody CreateReservationDto createReservationDto) {
+        String result = reservationService.createAdventureReservation(createReservationDto);
+        if(result.equals("Success!")) {
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @CrossOrigin(origins = "http://localhost:4200")

@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -109,26 +110,35 @@ export class DialogForReservationAdventureComponent implements OnInit {
         text: 'Start date must be greater then today!',
       })
       return;
-    } else {
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully booked an adventure!',
-      })
+    }
 
 
       this.sub = this.reservationService.reserveAdventure(this.newReservation)
-        .subscribe({
-          next: () => {
+        .subscribe(
+          (res: string) => {
 
             this.dialogRef.close();
-            //window.location.reload();
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: res,
+            })
+            
+          },
+          (err) => {
+            let parts = err.error.split(':');
+            let mess = parts[parts.length - 1];
+            let description = mess.substring(0, mess.length);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: description
+            })
+          });
+        }
+         
+    
 
-          }
-        });
-    }
-  }
 
   total() {
     this.fullPrice = this.form.value.numberOfPerson * this.price; 

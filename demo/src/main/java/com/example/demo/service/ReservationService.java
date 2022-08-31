@@ -17,7 +17,6 @@ public interface ReservationService {
 
     void createReservation(CreateReservationDto createReservationDto);
 
-
     void notifyUserForReservation(CreateReservationDto dto);
 
     List<ReservationViewDto> getPastReservationsByCottage(Long id);
@@ -33,5 +32,7 @@ public interface ReservationService {
     List<ReservationViewDto> getFutureReservationsForAdventure(int id);
 
     boolean  reservationsExistForAdventure(int id);
+
+    String createAdventureReservation(CreateReservationDto createReservationDto);
 
 }

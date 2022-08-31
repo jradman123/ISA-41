@@ -12,8 +12,8 @@ import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
 import com.example.demo.service.AdventureService;
+import com.example.demo.service.InstructorAvailabilityService;
 import com.example.demo.service.ReservationService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +56,8 @@ public class ReservationServiceImpl implements ReservationService
     @Autowired
     private AdventureUtilityRepository adventureUtilityRepository;
 
+    @Autowired
+    private InstructorAvailabilityService instructorAvailabilityService;
 
     @Override
     public List<ReservationViewDto> getReservationsByCottage(Long id) {
@@ -106,9 +108,6 @@ public class ReservationServiceImpl implements ReservationService
        }else { throw new RuntimeException();}
 
         reservationRepository.save(reservation);
-
-
-
 
     }
 
@@ -210,6 +209,18 @@ public class ReservationServiceImpl implements ReservationService
             return false;
         }else{
             return true;
+        }
+    }
+
+    @Override
+    public String createAdventureReservation(CreateReservationDto createReservationDto) {
+        Adventure adventure=adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId()));
+        boolean result = instructorAvailabilityService.isInstructorAvailable(adventure.getInstructor().getId(),createReservationDto.getResStart(),createReservationDto.getResEnd());
+        if(result){
+            createReservation(createReservationDto);
+            return "Success!";
+        }else{
+            return "Appointment is not free!";
         }
     }
 

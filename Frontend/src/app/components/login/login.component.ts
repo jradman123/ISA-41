@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/AuthService/auth.service';
 import { UserService } from 'src/app/services/UserService/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -58,8 +59,11 @@ export class LoginComponent implements OnInit {
             let parts = err.error.split(':');
             let mess = parts[parts.length - 1];
             let description = mess.substring(0, mess.length);
-            this._snackBar.open(description,  '',
-            {duration : 3000,panelClass: ['snack-bar']});
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: description
+            })
         }};
      
      this._service.login(this.form.getRawValue()).subscribe(loginObserver);

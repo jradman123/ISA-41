@@ -47,7 +47,7 @@ public class InstructorAvailabilityController {
         String token = tokenUtils.getToken(request);
         String email = tokenUtils.getEmailFromToken(token);
         List<InstructorAvailabilityDto> instructorAvailabilities = new ArrayList<>();
-        for (InstructorAvailability availability : instructorAvailabilityService.getAllForInstructor(userService.findByEmail(email).getId())) {
+        for (InstructorAvailability availability : instructorAvailabilityService.getAllCurrentAndFutureForInstructor(userService.findByEmail(email).getId())) {
             instructorAvailabilities.add(instructorAvailabilityMapper.mapToInstructorAvailabilityDto(availability));
         }
         return new ResponseEntity<>(instructorAvailabilities, HttpStatus.OK);

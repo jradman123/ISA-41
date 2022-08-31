@@ -63,6 +63,8 @@ public class ReservationServiceImpl implements ReservationService
     private EmailSenderServiceImpl emailSenderService;
 
 
+    @Autowired
+    private CottageQuickReservationServiceImpl cottageQuickReservationService;
 
 
     @Override
@@ -126,7 +128,10 @@ public class ReservationServiceImpl implements ReservationService
         User user=userService.findByEmail(createReservationDto.clientEmail);
         boolean reservations=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
         boolean availability=checkAvailability(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
-        if(reservations && availability) {
+        boolean app=this.cottageQuickReservationService.checkApp(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+
+
+        if(reservations && availability && app) {
 
 
             if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {

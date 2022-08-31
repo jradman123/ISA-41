@@ -31,7 +31,7 @@ public class AdventureReservation extends Reservation {
 	    private Adventure adventure;
 
 	    @Column(name = "instructor_id")
-	    private int instructorId;
+	    private Integer instructorId;
 
 	   @ManyToMany
 	   @JoinTable(

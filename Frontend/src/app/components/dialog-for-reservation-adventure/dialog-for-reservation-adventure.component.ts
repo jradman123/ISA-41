@@ -27,7 +27,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
   start: any
   end: any
   id: any;
-  adventuresUtilities = new FormControl('');
+  adventuresUtilities = new FormControl();
   utilities: ResponseUtility[];
   fullPrice: number = 0;
   price!: any;
@@ -142,7 +142,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
 
   total() {
     this.fullPrice = this.form.value.numberOfPerson * this.price; 
-    for(let i=0; i < this.adventuresUtilities.value.length; i++){
+    for(let i=0; i < this.adventuresUtilities.value?.length; i++){
       this.fullPrice += Number(this.adventuresUtilities.value[i].price);
     }
   }

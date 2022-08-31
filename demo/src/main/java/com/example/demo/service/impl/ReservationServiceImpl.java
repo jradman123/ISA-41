@@ -215,9 +215,11 @@ public class ReservationServiceImpl implements ReservationService
     @Override
     public String createAdventureReservation(CreateReservationDto createReservationDto) {
         int instructorId = adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId())).getInstructor().getId();
+        int clientId = userService.findByEmail(createReservationDto.getClientEmail()).getId();
         boolean available = instructorAvailabilityService.isInstructorAvailable(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
         boolean hasReservations = hasInstructorReservationsForRange(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
-        if(available && !hasReservations){
+        boolean hasClientReservations = hasClientReservations(clientId,createReservationDto.getResStart(),createReservationDto.getResEnd());
+        if(available && !hasReservations && !hasClientReservations){
             createReservation(createReservationDto);
             return "Success!";
         }else{
@@ -285,4 +287,21 @@ public class ReservationServiceImpl implements ReservationService
     private List<AdventureReservation> getAllInstructorsAdventures(int id){
         return adventureReservationRepository.getAllInstructorsReservations(id,LocalDateTime.now());
     }
+
+    private List<Reservation> getCurrentAndFutureForClient(int id){
+        return reservationRepository.getCurrentAndFutureForClient(id,LocalDateTime.now());
+    }
+
+    private boolean hasClientReservations(int clientId,LocalDateTime startTime,LocalDateTime endTime) {
+        for (Reservation reservation : getCurrentAndFutureForClient(clientId)) {
+            if ((startTime.isAfter(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd())) ||
+                    (startTime.isBefore(reservation.getReservationStart()) && endTime.isAfter(reservation.getReservationEnd())) ||
+                    (startTime.isBefore(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd()) && endTime.isAfter(reservation.getReservationStart())) ||
+                    (startTime.isBefore(reservation.getReservationEnd()) && endTime.isAfter(reservation.getReservationEnd()) && startTime.isAfter(reservation.getReservationStart()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

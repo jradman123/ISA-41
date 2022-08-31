@@ -194,4 +194,5 @@ INSERT INTO public.adventure_users(
 	adventure_id, users_id)
 	VALUES (1, 7);
 
-
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+VALUES ('CottageReservation',false,false,true,2,50.0,'16-09-2022 09:00','16-09-2022 19:00',null,7,null,3,null,false);

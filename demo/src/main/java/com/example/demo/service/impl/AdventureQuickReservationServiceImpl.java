@@ -75,7 +75,8 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
 
     @Override
     public boolean hasQuickReservation(int instructorId, LocalDateTime startTime, LocalDateTime endTime) {
-        for(Adventure adventure : adventureService.getAllForInstructor(instructorId)){
+        List<Adventure> adventures = adventureService.getAllForInstructor(instructorId);
+        for(Adventure adventure : adventures){
             for(AdventureQuickReservation quickReservation : adventureQuickReservationRepository.findAll()){
                 if(quickReservation.getAdventure().getId() == adventure.getId()){
                     if((startTime.isAfter(quickReservation.getStartTime()) && endTime.isBefore(quickReservation.getEndTime())) ||

@@ -11,6 +11,7 @@ import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
+import com.example.demo.service.AdventureQuickReservationService;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.InstructorAvailabilityService;
 import com.example.demo.service.ReservationService;
@@ -59,6 +60,9 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private InstructorAvailabilityService instructorAvailabilityService;
+
+    @Autowired
+    private AdventureQuickReservationService adventureQuickReservationService;
 
     @Override
     public List<ReservationViewDto> getReservationsByCottage(Long id) {
@@ -199,7 +203,6 @@ public class ReservationServiceImpl implements ReservationService
     public boolean reservationsExistForAdventure(int id) {
         List<AdventureReservation> reservations = new ArrayList<>();
         for(AdventureReservation r : adventureReservationRepository.findAll()){
-            int nesto = r.getAdventure().getId();
             if(r.getAdventure().getId() == id &&
                     ((LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isBefore(r.getReservationStart())) ||
                     (LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isAfter(r.getReservationStart())))) {
@@ -220,7 +223,8 @@ public class ReservationServiceImpl implements ReservationService
         boolean available = instructorAvailabilityService.isInstructorAvailable(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
         boolean hasReservations = hasInstructorReservationsForRange(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
         boolean hasClientReservations = hasClientReservations(clientId,createReservationDto.getResStart(),createReservationDto.getResEnd());
-        if(available && !hasReservations && !hasClientReservations){
+        boolean hasQuickReservations = adventureQuickReservationService.hasQuickReservation(instructorId,createReservationDto.getResStart(),createReservationDto.getResEnd());
+        if(available && !hasReservations && !hasClientReservations && !hasQuickReservations){
             createReservation(createReservationDto);
             return "Success!";
         }else{

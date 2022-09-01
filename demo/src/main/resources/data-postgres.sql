@@ -198,3 +198,7 @@ VALUES ('CottageReservation',false,false,true,2,50.0,'16-09-2022 19:00','16-09-2
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
 VALUES ('ShipReservation',false,false,true,2,50.0,'16-09-2022 22:15','16-09-2022 20:00',null,7,null,null,1,false);
+
+INSERT INTO public.adventure_quick_reservation(
+end_time, guest_limit, is_deleted, is_reserved, price, start_time, valid_until, adventure_id)
+	VALUES ('22-09-2022 17:00', 3, false, false, 20.0, '22-09-2022 12:00', '21-09-2022 23:59', 1);

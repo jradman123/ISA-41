@@ -289,8 +289,28 @@ public class ReservationServiceImpl implements ReservationService
         return false;
     }
 
+    @Override
+    public List<ReservationViewDto> getAllCurrentAndFutureInstructorsReservations(int instructorId) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.getAllCurrentAndFutureInstructorsReservations(instructorId,LocalDateTime.now())) {
+                reservationDtos.add(new ReservationViewDto(r));
+        }
+
+        return reservationDtos;
+    }
+
+    @Override
+    public List<ReservationViewDto> getAllInstructorsReservations(int instructorId) {
+        List<ReservationViewDto> reservationDtos=new ArrayList<>();
+        for(AdventureReservation r : adventureReservationRepository.getAllInstructorsReservations(instructorId)) {
+            reservationDtos.add(new ReservationViewDto(r));
+        }
+
+        return reservationDtos;
+    }
+
     private List<AdventureReservation> getAllInstructorsAdventures(int id){
-        return adventureReservationRepository.getAllInstructorsReservations(id,LocalDateTime.now());
+        return adventureReservationRepository.getAllCurrentAndFutureInstructorsReservations(id,LocalDateTime.now());
     }
 
     private List<Reservation> getCurrentAndFutureForClient(int id){
@@ -310,4 +330,6 @@ public class ReservationServiceImpl implements ReservationService
         }
         return false;
     }
+
+
 }

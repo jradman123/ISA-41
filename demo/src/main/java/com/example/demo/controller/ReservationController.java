@@ -7,14 +7,18 @@ import com.example.demo.dto.ReservationDto;
 import com.example.demo.dto.ShipReservationViewDto;
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.reservation.Reservation;
+import com.example.demo.security.TokenUtils;
 import com.example.demo.service.ReservationService;
+import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,6 +29,12 @@ public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    private TokenUtils tokenUtils;
+
+    @Autowired
+    private UserService userService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
@@ -122,6 +132,16 @@ public class ReservationController {
         }else{
             return new ResponseEntity<>("\"FALSE\"",HttpStatus.OK);
         }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/all-instructors")
+    public List<ReservationViewDto> getReservationsForInstructor(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        String email = tokenUtils.getEmailFromToken(token);
+        List<ReservationViewDto> reservationViewDtos=reservationService.getAllInstructorsReservations(userService.findByEmail(email).getId());
+        return reservationViewDtos;
     }
 
 

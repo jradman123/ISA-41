@@ -55,7 +55,6 @@ import { AdventuresListComponent } from './components/adventures-list/adventures
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { MatCarouselComponent, MatCarouselModule } from '@ngbmodule/material-carousel';
-
 import { DialogForReservationCottageComponent } from './components/dialog-for-reservation-cottage/dialog-for-reservation-cottage.component';
 import { DialogForGuestDataComponent } from './components/dialog-for-guest-data/dialog-for-guest-data.component';
 
@@ -86,6 +85,7 @@ import { ShipAvailabilityComponent } from './components/ship-availability/ship-a
 import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
 import { DialogForDeletingAdventureComponent } from './components/dialog-for-deleting-adventure/dialog-for-deleting-adventure.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -182,7 +182,7 @@ import { DialogForDeletingAdventureComponent } from './components/dialog-for-del
 
   ],
   providers: [HttpClientModule,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

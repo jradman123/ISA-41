@@ -73,6 +73,12 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/reservations-exist-for-adventure/${id}`);
   }
 
+  getReservationsForInstructor(): Observable<AdventureReservation[]> {
+    return this.http.get<AdventureReservation[]>(
+      `${this.apiServerUrl}/reservations/all-instructors`);
+  }
+
+
 
 
 }

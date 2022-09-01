@@ -28,6 +28,9 @@ import { InstructorAvailabilityService } from 'src/app/services/InstructorAvaila
 import { InstructorAvailabilityDto } from 'src/app/interfaces/instructor-availability-dto';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewInstructorAvailability } from 'src/app/interfaces/new-instructor-availability';
+import { AdventureReservation } from 'src/app/interfaces/adventure-reservation';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { DatePipe } from '@angular/common';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -99,10 +102,14 @@ export class InstructorAvailabilityComponent implements OnInit {
   chosenEndDate! : string;
   newAvailability : NewInstructorAvailability;
   todayDate:Date = new Date();
+  reservations : AdventureReservation[];
+  clientEmail!: any
 
-  constructor(private modal: NgbModal,private instructorAvailabilityService : InstructorAvailabilityService,private _formBuilder: FormBuilder) {
+  constructor(private modal: NgbModal,private instructorAvailabilityService : InstructorAvailabilityService,private _formBuilder: FormBuilder,
+    private reservationService : ReservationService,public datepipe: DatePipe) {
     this.availabilities = [] as InstructorAvailabilityDto[];
     this.newAvailability = {} as NewInstructorAvailability;
+    this.reservations = [] as AdventureReservation[];
     this.range = this._formBuilder.group({
       start: ['',Validators.required],
       end: ['', Validators.required]
@@ -112,10 +119,25 @@ export class InstructorAvailabilityComponent implements OnInit {
   events: CalendarEvent[] = [
   ];
   ngOnInit(): void {
-    this.getAvailabilities(); 
+    this.getAvailabilities();
+    this.getReservations(); 
     
   }
 
+  getReservations(){
+    this.reservationService.getReservationsForInstructor().subscribe({
+      next: (res) => {
+        this.reservations = res
+        for (var i = 0; i < this.reservations.length; i++) {
+          this.startDate = new Date(this.reservations[i].resStart);
+          this.endDate = new Date(this.reservations[i].resEnd);
+          this.clientEmail = this.reservations[i].clientEmail;
+
+          this.addReservationEvent(this.startDate, this.endDate, this.clientEmail, this.reservations[i].numberOfPerson, this.reservations[i].price);
+        
+    }}}); 
+
+  }
   getAvailabilities() {
     this.instructorAvailabilityService.getAllForInstructor().subscribe({
       next: (res) => {
@@ -175,6 +197,25 @@ export class InstructorAvailabilityComponent implements OnInit {
         start: startOfDay(start),
         end: endOfDay(end),
         color: colors.blue,
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addReservationEvent(start: Date, end: Date, email: any, person: any, price: any): void {
+    let s = start;
+    let e = end;
+    this.events = [
+      ...this.events,
+      {
+        title: 'Reservation by ' + email + ' for ' + person + ' person - ' + price + ' €.Start date: ' + this.datepipe.transform(s, 'MMM d, y, h:mm a') + '. End date: ' + this.datepipe.transform(e, 'MMM d, y, h:mm a') + '.',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.red,
         draggable: true,
         resizable: {
           beforeStart: true,

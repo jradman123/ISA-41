@@ -38,4 +38,7 @@ public interface ReservationService {
 
     boolean hasInstructorReservationsForRange(int id, LocalDateTime startTime, LocalDateTime endTime);
 
+    List<ReservationViewDto> getAllCurrentAndFutureInstructorsReservations(int instructorId);
+    
+    List<ReservationViewDto> getAllInstructorsReservations(int instructorId);
 }

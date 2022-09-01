@@ -91,6 +91,17 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
         return false;
     }
 
+    @Override
+    public List<AdventureQuickReservation> findAllForInstructor(int id) {
+        List<AdventureQuickReservation> reservations = new ArrayList<>();
+        for (AdventureQuickReservation quickReservation : adventureQuickReservationRepository.findAll()) {
+            if(quickReservation.getAdventure().getInstructor().getId() == id && !quickReservation.isDeleted()){
+                reservations.add(quickReservation);
+            }
+        }
+        return reservations;
+    }
+
     private void notifySubscribers(String email,AdventureQuickReservation reservation){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         emailSenderService.sendEmail(email,"Akcija!","Za avanturu " + reservation.getAdventure().getName() +

@@ -11,4 +11,5 @@ public interface AdventureQuickReservationService {
     List<AdventureQuickReservation> findAllByAdventureId(int adventureId);
     AdventureQuickReservation deleteAdventureQuickReservation(Long id);
     boolean hasQuickReservation(int instructorId, LocalDateTime startTime, LocalDateTime endTime);
+    List<AdventureQuickReservation> findAllForInstructor(int id);
 }

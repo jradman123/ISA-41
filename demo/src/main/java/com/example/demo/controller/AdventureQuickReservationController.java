@@ -8,15 +8,19 @@ import com.example.demo.mapper.AdventureQuickReservationMapper;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureQuickReservation;
 import com.example.demo.model.adventures.AdventureUtility;
+import com.example.demo.security.TokenUtils;
 import com.example.demo.service.AdventureQuickReservationService;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.AdventureUtilityService;
+import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +44,12 @@ public class AdventureQuickReservationController {
 
     @Autowired
     private AdventureUtilityService adventureUtilityService;
+
+    @Autowired
+    private TokenUtils tokenUtils;
+
+    @Autowired
+    private UserService userService;
 
     @PreAuthorize("hasAuthority('Instructor')")
     @PostMapping()
@@ -80,5 +90,17 @@ public class AdventureQuickReservationController {
         }else{
             return new ResponseEntity<>("\"Error happened!\"", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/all-for-instructor")
+    public ResponseEntity<List<AdventureQuickReservationResponse>> findAllForInstructor(HttpServletRequest request) {
+        String token = tokenUtils.getToken(request);
+        int id = userService.findByEmail(tokenUtils.getEmailFromToken(token)).getId();
+        List<AdventureQuickReservationResponse> reservations = new ArrayList<>();
+        for (AdventureQuickReservation reservation : adventureQuickReservationService.findAllForInstructor(id)) {
+            reservations.add(adventureQuickReservationMapper.mapToAdventureQuickReservationResponse(reservation));
+        }
+        return new ResponseEntity<>(reservations,HttpStatus.OK);
     }
 }

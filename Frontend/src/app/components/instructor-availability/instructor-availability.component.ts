@@ -31,6 +31,9 @@ import { NewInstructorAvailability } from 'src/app/interfaces/new-instructor-ava
 import { AdventureReservation } from 'src/app/interfaces/adventure-reservation';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { DatePipe } from '@angular/common';
+import { AdventureQuickReservationService } from 'src/app/services/AdventureQuickReservationService/adventure-quick-reservation.service';
+import { AdventureQuickReservationDto } from 'src/app/interfaces/adventure-quick-reservation-dto';
+import { AdventureQuickReservationResponse } from 'src/app/interfaces/adventure-quick-reservation-response';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -103,13 +106,15 @@ export class InstructorAvailabilityComponent implements OnInit {
   newAvailability : NewInstructorAvailability;
   todayDate:Date = new Date();
   reservations : AdventureReservation[];
-  clientEmail!: any
+  clientEmail!: any;
+  quickReservations : AdventureQuickReservationResponse[];
 
   constructor(private modal: NgbModal,private instructorAvailabilityService : InstructorAvailabilityService,private _formBuilder: FormBuilder,
-    private reservationService : ReservationService,public datepipe: DatePipe) {
+    private reservationService : ReservationService,public datepipe: DatePipe, private adventureQuickReservationService : AdventureQuickReservationService) {
     this.availabilities = [] as InstructorAvailabilityDto[];
     this.newAvailability = {} as NewInstructorAvailability;
     this.reservations = [] as AdventureReservation[];
+    this.quickReservations = [] as AdventureQuickReservationResponse[];
     this.range = this._formBuilder.group({
       start: ['',Validators.required],
       end: ['', Validators.required]
@@ -120,10 +125,23 @@ export class InstructorAvailabilityComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.getAvailabilities();
-    this.getReservations(); 
+    this.getReservations();
+    this.getQuickReservations(); 
     
   }
 
+  getQuickReservations() {
+    this.adventureQuickReservationService.getAllForInstructor().subscribe({
+      next: (res) => {
+        this.quickReservations = res
+        for (var i = 0; i < this.quickReservations.length; i++) {
+          this.startDate = new Date(this.quickReservations[i].startTime);
+          this.endDate = new Date(this.quickReservations[i].endTime);
+
+          this.addQuickReservationEvent(this.startDate, this.endDate, this.quickReservations[i].guestLimit, this.quickReservations[i].price);
+        
+    }}}); 
+  }
   getReservations(){
     this.reservationService.getReservationsForInstructor().subscribe({
       next: (res) => {
@@ -216,6 +234,25 @@ export class InstructorAvailabilityComponent implements OnInit {
         start: startOfDay(start),
         end: endOfDay(end),
         color: colors.red,
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+
+  addQuickReservationEvent(start: Date, end: Date,person: any, price: any): void {
+    let s = start;
+    let e = end;
+    this.events = [
+      ...this.events,
+      {
+        title: 'Promotion for ' + person + ' person - ' + price + ' €.Start date: ' + this.datepipe.transform(s, 'MMM d, y, h:mm a') + '. End date: ' + this.datepipe.transform(e, 'MMM d, y, h:mm a') + '.',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.yellow,
         draggable: true,
         resizable: {
           beforeStart: true,

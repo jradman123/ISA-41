@@ -22,9 +22,12 @@ public class CottageDto {
     public String streetName;
     public String city;
     public String country;
+    public Double latitude;
+    public Double longitude;
     public String price;
     public String numberOfPeople;
     public String ownerEmail;
+    public Integer cancelled_conditions;
 
     public  CottageDto(Cottage cottage){
         this.id = Long.toString(cottage.getId());
@@ -37,6 +40,10 @@ public class CottageDto {
         this.price = Double.toString(cottage.getPrice());
         this.numberOfPeople = Integer.toString(cottage.getNumberOfPerson());
         this.ownerEmail=cottage.getCottageOwner().getEmail();
+        this.latitude=cottage.getAddress().getLatitude();
+        this.longitude=cottage.getAddress().getLongitude();
+        this.cancelled_conditions=cottage.getCancelationConditions();
     }
+
 
 }

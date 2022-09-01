@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/UserService/user.service';
 import { DialogForChangingPasswordComponent } from '../../dialog-for-changing-password/dialog-for-changing-password.component';
 import { DialogForDeletingAccountComponent } from '../../dialog-for-deleting-account/dialog-for-deleting-account.component';
 
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-cottage-owner-profile',
   templateUrl: './cottage-owner-profile.component.html',
@@ -23,6 +23,8 @@ export class CottageOwnerProfileComponent implements OnInit {
   request!: DeleteAccountRequest;
   constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
+    this.request = {} as DeleteAccountRequest;
+
   }
 
   @Input()
@@ -103,9 +105,15 @@ export class CottageOwnerProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data => {
         if (data) {
+          console.log("IF" + data.reason)
           this.createDeleteAccountRequest(data);
           this.requestForDeletingAccountService.addNewRequest(this.request).subscribe((result: any) => {
             void (0)
+            Swal.fire({
+              icon: 'success',
+              title: 'Good job!',
+              text: 'You have successfully add request for deleting account!',
+            })
           })
         }
       }

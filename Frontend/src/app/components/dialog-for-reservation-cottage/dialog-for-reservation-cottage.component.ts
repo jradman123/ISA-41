@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 import { DataForDialogEmail } from '../ship-reservation-history/ship-reservation-history.component';
 import { UtilityService } from 'src/app/services/UtilityService/utility.service';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
+import { HttpResponse } from '@angular/common/http';
+import { ResponseUtility } from 'src/app/interfaces/response-utility';
 
 
 @Component({
@@ -35,10 +37,14 @@ export class DialogForReservationCottageComponent implements OnInit {
   utilities!: UtilityDto[];
   fullPrice: number = 0;
   price!: any;
+  Utilities = new FormControl('');
+
 
 
   constructor(private cottageService: CottageService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationCottageComponent>) {
     this.newReservation = {} as CottageReservation;
+    this.utilities = [] as UtilityDto[];
+
   }
   ngOnInit(): void {
 
@@ -66,14 +72,7 @@ export class DialogForReservationCottageComponent implements OnInit {
 
     this.reservatCottage();
 
-    if (this.form.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'You must fill in all fields!',
-      })
 
-    }
 
 
     if (this.newReservation.resStart >= this.newReservation.resEnd) {
@@ -98,27 +97,30 @@ export class DialogForReservationCottageComponent implements OnInit {
       })
     } else {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully booked a ship!',
-      })
+
 
 
       this.sub = this.reservationService.reservatedCottage(this.newReservation)
         .subscribe({
-          next: () => {
+          next: (response) => {
+            if (response == "NO!") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'This appointment is already reserved or cottage is not available during a period!',
+              })
+            } else {
 
-            this.dialogRef.close();
-            window.location.reload();
+              this.dialogRef.close();
+              window.location.reload();
 
+            }
           }
         });
     }
   }
 
   reservatCottage(): void {
-
 
 
     let newStart = new Date(this.form.value.resStart)
@@ -134,6 +136,7 @@ export class DialogForReservationCottageComponent implements OnInit {
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'COTTAGE';
+    this.newReservation.utilities = this.Utilities.value;
 
   }
 
@@ -142,9 +145,16 @@ export class DialogForReservationCottageComponent implements OnInit {
     var date1 = new Date(this.form.value.resStart);
     var date2 = new Date(this.form.value.resEnd);
 
+
     var Time = date2.getTime() - date1.getTime();
     var Days = Time / (1000 * 3600 * 24);
     this.fullPrice = Days * this.price;
+
+    for (let i = 0; i < this.Utilities.value.length; i++) {
+      this.fullPrice += Number(this.Utilities.value[i].price)
+
+    }
+
 
   }
 }

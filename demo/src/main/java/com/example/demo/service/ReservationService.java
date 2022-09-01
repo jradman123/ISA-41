@@ -3,7 +3,11 @@ package com.example.demo.service;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
+
 import com.example.demo.model.adventures.AdventureReservation;
+
+import com.example.demo.model.cottages.CottageReservation;
+
 import com.example.demo.model.reservation.Reservation;
 
 import java.time.LocalDateTime;
@@ -17,6 +21,11 @@ public interface ReservationService {
     ReservationDto getById(Long id);
 
     void createReservation(CreateReservationDto createReservationDto);
+
+
+    Reservation createCottageReservation(CreateReservationDto createReservationDto);
+
+    Reservation createShipReservation(CreateReservationDto createReservationDto);
 
     void notifyUserForReservation(CreateReservationDto dto);
 

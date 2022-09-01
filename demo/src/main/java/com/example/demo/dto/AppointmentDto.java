@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Utility;
 import com.example.demo.model.reservation.Appointment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,8 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +26,7 @@ public class AppointmentDto {
     private Boolean isReserved;
     private String cottageId;
     private String shipId;
+    private Set<Utility> utilities;
 
 
     public AppointmentDto(Appointment a) {
@@ -33,6 +37,7 @@ public class AppointmentDto {
         this.price = Double.toString(a.getPrice());
         this.validUntil=a.getValidUntil().toString();
         this.isReserved = a.getIsReserved();
+        this.utilities=a.getUtilities();
 
         if (a.getCottage() != null) {
             this.cottageId = Long.toString(a.getCottage().getId());

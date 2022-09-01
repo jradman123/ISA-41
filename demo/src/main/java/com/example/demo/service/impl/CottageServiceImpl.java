@@ -61,8 +61,8 @@ public class CottageServiceImpl implements CottageService {
         User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
         for (CottageOwner owner : this.cottageOwnerRepository.findAll()) {
             if (owner.getEmail().equals(user.getEmail())) {
-                Address address = new Address(newCottage.getStreetName(), newCottage.getStreetNumber(), newCottage.getCity(), newCottage.getCountry());
-                Cottage cottage = new Cottage(newCottage.getName(),newCottage.getDescription(),Double.parseDouble(newCottage.getPrice()),address,owner,Integer.parseInt(newCottage.getNumberOfPeople()));
+                Address address = new Address(newCottage.getStreetName(), newCottage.getStreetNumber(), newCottage.getCity(), newCottage.getCountry(),newCottage.getLongitude(),newCottage.getLatitude());
+                Cottage cottage = new Cottage(newCottage.getName(),newCottage.getDescription(),Double.parseDouble(newCottage.getPrice()),address,owner,Integer.parseInt(newCottage.getNumberOfPeople()),newCottage.getCancelled_conditions(),null);
                 return this.cottageRepository.save(cottage);
             }
         }
@@ -93,9 +93,7 @@ public class CottageServiceImpl implements CottageService {
     @Override
     public ResponseEntity<Long> deleteCottage(Long id) {
         List<ReservationViewDto> reservations=reservationService.getReservationsByCottage(id);
-        if(!reservations.isEmpty()) {
-            return new ResponseEntity<>(id,HttpStatus.OK);
-        }
+        if(reservations.isEmpty()) {
 
         List<Cottage> cottages=this.cottageRepository.findAll();
         for (Cottage cottage: cottages)
@@ -107,7 +105,12 @@ public class CottageServiceImpl implements CottageService {
            }
 
         }
-        return new ResponseEntity<>(id, HttpStatus.OK);
+            return new ResponseEntity<>(id, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+
+
 
     }
 
@@ -212,10 +215,10 @@ public class CottageServiceImpl implements CottageService {
             }
 
         }
-        if(reservations.size()==0) {
+        if(this.reviewRepository.findAll().size()==0) {
             return sum=0.0;
         }
-        return sum/reservations.size();
+        return sum/this.reviewRepository.findAll().size();
     }
 
 

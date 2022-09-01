@@ -59,11 +59,19 @@ export class AddCottageComponent implements OnInit {
       ]),
       price: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
       ]),
+      longitude: new FormControl(null, [
+        Validators.required,
+      ]),
+      latitude: new FormControl(null, [
+        Validators.required,
+      ]),
+
       numberOfPeople: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+      ]),
+      cancelled: new FormControl(null, [
+        Validators.required,
       ]),
 
 
@@ -124,6 +132,8 @@ export class AddCottageComponent implements OnInit {
     this.newCottage.price = this.createForm.value.price;
     this.newCottage.numberOfPeople = this.createForm.value.numberOfPeople;
     this.newCottage.ownerEmail = this.email;
-
+    this.newCottage.cancelled_conditions = this.createForm.value.cancelled;
+    this.newCottage.latitude = this.createForm.value.latitude;
+    this.newCottage.longitude = this.createForm.value.longitude;
   }
 }

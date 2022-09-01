@@ -33,6 +33,8 @@ import { DialogForAddReportComponent } from '../../dialog-for-add-report/dialog-
 import { ReportService } from 'src/app/services/ReportService/report.service';
 import { RoomService } from 'src/app/services/RoomService/room.service';
 import Swal from 'sweetalert2';
+import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
+import { AgmCoreModule } from '@agm/core';
 
 export interface DataForDialogGuest {
   clientEmail: string;
@@ -74,7 +76,7 @@ export class CottageProfileComponent implements OnInit {
   availabilities: CottageAvailability[] = [];
   startAvailableDate: any = null;
   endAvailableDate: any = null;
-  appointments: AppointmentDto[] = []
+  appointments: CottageQuickReservationResponse[] = []
   editMode = false
   viewOff = false;
   initialDetails: any
@@ -83,6 +85,9 @@ export class CottageProfileComponent implements OnInit {
   pastReservations!: MatTableDataSource<CottageReservation>;
   roomm!: RoomDto
   haveReservations!: CottageReservation[]
+
+
+
 
 
   uploaded: boolean = false;
@@ -110,6 +115,7 @@ export class CottageProfileComponent implements OnInit {
     this.updateCottage = {} as CottageDto
     this.pastReservations = new MatTableDataSource<CottageReservation>();
     this.roomm = {} as RoomDto;
+    this.appointments = [] as CottageQuickReservationResponse[];
 
 
     this.image = {} as Image;
@@ -179,6 +185,7 @@ export class CottageProfileComponent implements OnInit {
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['numberOfPeople'].setValue(data.numberOfPeople)
+        this.detailsForm.controls['cancelled'].setValue(data.cancelled_conditions)
       },
     });
   }
@@ -208,7 +215,10 @@ export class CottageProfileComponent implements OnInit {
       Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
     ]),
     price: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
-    numberOfPeople: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
+    numberOfPeople: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')]),
+
+    cancelled: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}$')])
+
   })
 
   findAvailability() {
@@ -222,6 +232,7 @@ export class CottageProfileComponent implements OnInit {
   findAppointments() {
     this.appointmentService.findAppByCottage(this.id).subscribe((data) => {
       this.appointments = data;
+
 
     });
   }
@@ -306,15 +317,12 @@ export class CottageProfileComponent implements OnInit {
   deletePicture(idP: any) {
 
 
-    this.imageService.deletePicture(idP, this.id)
-      .subscribe(data => {
-        window.location.reload();
 
 
 
 
 
-      });
+
 
   }
 
@@ -429,7 +437,10 @@ export class CottageProfileComponent implements OnInit {
         country: this.detailsForm.get('country')?.value,
         id: this.id,
         ownerEmail: this.email,
-        numberOfPeople: this.detailsForm.get('numberOfPeople')?.value
+        numberOfPeople: this.detailsForm.get('numberOfPeople')?.value,
+        longitude: this.cottage.longitude,
+        latitude: this.cottage.latitude,
+        cancelled_conditions: this.detailsForm.get('cancelled')?.value,
       }
       this.cottageService.editCottage(this.updateCottage).subscribe((data) => {
         this.updateCottage = data
@@ -455,6 +466,7 @@ export class CottageProfileComponent implements OnInit {
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
     this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
+    this.detailsForm.controls['cancelled'].setValue(this.initialDetails.cancellationConditions)
   }
 
   dialogReport(id: any) {
@@ -547,8 +559,7 @@ export class CottageProfileComponent implements OnInit {
     }
   }
   addNew(element: any) {
-    console.log("fdffdfd" + element.resStart)
-    console.log("fsfsf" + new Date())
+
 
     return new Date(Date.parse(element.resStart)) <= new Date()
   }

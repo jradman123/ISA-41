@@ -28,6 +28,7 @@ export class DialogForReservationShipComponent implements OnInit {
   utilities!: UtilityDto[];
   fullPrice: number = 0;
   price!: any;
+  Utilities = new FormControl('');
 
 
   id: any;
@@ -83,20 +84,29 @@ export class DialogForReservationShipComponent implements OnInit {
       })
     } else {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully booked a ship!',
-      })
 
-      console.log("siufsdfhdsfkjds" + this.newReservation)
-      this.sub = this.reservationService.reservatedCottage(this.newReservation)
+
+      console.log("siufsdfhdsfkjds" + this.newReservation.clientEmail)
+      this.sub = this.reservationService.reservatedShip(this.newReservation)
         .subscribe({
-          next: () => {
+          next: (response) => {
+            if (response == "NO!") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'This appointment is already reserved or ship is not available during a period!',
+              })
+            } else {
+              Swal.fire({
+                icon: 'success',
+                title: 'Good job!',
+                text: 'You have successfully booked a ship!',
+              })
 
-            this.dialogRef.close();
-            window.location.reload();
+              this.dialogRef.close();
+              window.location.reload();
 
+            }
           }
         });
     }
@@ -119,6 +129,8 @@ export class DialogForReservationShipComponent implements OnInit {
     this.newReservation.clientEmail = this.data.clientEmail;
     this.newReservation.objectId = this.data.id;
     this.newReservation.typeOfRes = 'BOAT';
+    this.newReservation.utilities = this.Utilities.value;
+
 
   }
 
@@ -130,7 +142,11 @@ export class DialogForReservationShipComponent implements OnInit {
     var Time = date2.getTime() - date1.getTime();
     var Days = Time / (1000 * 3600 * 24);
     this.fullPrice = Days * this.price;
-    console.log("vISEE JOOOJ" + this.price)
+    for (let i = 0; i < this.Utilities.value.length; i++) {
+      this.fullPrice += Number(this.Utilities.value[i].price)
+
+    }
+
 
   }
 }

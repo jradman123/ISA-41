@@ -47,19 +47,7 @@ export class DialogForAppointmentComponent implements OnInit {
 
 
 
-    this.App();
-    if (this.newAppointment.startDate == null
-      || this.newAppointment.endDate == null ||
-      this.newAppointment.capacity == null ||
-      this.newAppointment.price == null || this.newAppointment.validUntil == null) { alert("Please fill all fields!"); return; }
 
-    this.sub = this.appointmentService.createApp(this.newAppointment)
-      .subscribe({
-        next: () => {
-
-          this.onNoClick();
-        }
-      });
   }
 
   onNoClick(): void {

@@ -13,6 +13,10 @@ mat-tab-group {
 
 }
 
+agm-map {
+  height: 600px;
+}
+
 .btn {
   transform: scale(1.10);
   width: 120px;

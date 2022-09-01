@@ -1,5 +1,8 @@
 package com.example.demo.dto;
 
+import lombok.Getter;
+
+@Getter
 public class AdministratorRegistrationDto {
 
         private String firstName;
@@ -11,6 +14,8 @@ public class AdministratorRegistrationDto {
         private String phoneNumber;
         private String email;
         private String password;
+        private Double longitude;
+        private Double latitude;
 
         public AdministratorRegistrationDto() {
         }

@@ -5,7 +5,10 @@ import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
 import com.example.demo.dto.ShipReservationViewDto;
+
 import com.example.demo.model.adventures.AdventureReservation;
+
+
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.ReservationService;
@@ -98,6 +101,7 @@ public class ReservationController {
         }
     }
 
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value = "/find-past-reservations-by-adventure/{id}")
@@ -144,5 +148,26 @@ public class ReservationController {
         return reservationViewDtos;
     }
 
+
+
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PostMapping(value="/createCottageReservation")
+    public ResponseEntity<String> createCottageReservation(@RequestBody CreateReservationDto createReservationDto) {
+        Reservation reservation= reservationService.createCottageReservation(createReservationDto);
+        if(reservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PostMapping(value="/createShipReservation")
+    public ResponseEntity<String> createShipReservation(@RequestBody CreateReservationDto createReservationDto) {
+        Reservation reservation= reservationService.createShipReservation(createReservationDto);
+        if(reservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
+    }
 
 }

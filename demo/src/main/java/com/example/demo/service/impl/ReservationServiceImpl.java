@@ -14,6 +14,7 @@ import com.example.demo.repository.*;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.InstructorAvailabilityService;
 import com.example.demo.service.ReservationService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -292,8 +293,10 @@ public class ReservationServiceImpl implements ReservationService
         return reservationRepository.getCurrentAndFutureForClient(id,LocalDateTime.now());
     }
 
+
     private boolean hasClientReservations(int clientId,LocalDateTime startTime,LocalDateTime endTime) {
-        for (Reservation reservation : getCurrentAndFutureForClient(clientId)) {
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllReservationsForClient(clientId,LocalDateTime.now());
+        for (AdventureReservation reservation : reservations) {
             if ((startTime.isAfter(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd())) ||
                     (startTime.isBefore(reservation.getReservationStart()) && endTime.isAfter(reservation.getReservationEnd())) ||
                     (startTime.isBefore(reservation.getReservationStart()) && endTime.isBefore(reservation.getReservationEnd()) && endTime.isAfter(reservation.getReservationStart())) ||
@@ -303,5 +306,4 @@ public class ReservationServiceImpl implements ReservationService
         }
         return false;
     }
-
 }

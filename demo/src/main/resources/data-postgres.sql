@@ -143,7 +143,6 @@ INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_o
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,3,null,null,1,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'29-08-2022 09:00','25-08-2022 12:00',null,3,null,null,1,false);
 
-
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 15, 5, 6);
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
@@ -195,4 +194,7 @@ INSERT INTO public.adventure_users(
 	VALUES (1, 7);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
-VALUES ('CottageReservation',false,false,true,2,50.0,'16-09-2022 09:00','16-09-2022 19:00',null,7,null,3,null,false);
+VALUES ('CottageReservation',false,false,true,2,50.0,'16-09-2022 19:00','16-09-2022 09:00',null,7,null,3,null,false);
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+VALUES ('ShipReservation',false,false,true,2,50.0,'16-09-2022 22:15','16-09-2022 20:00',null,7,null,null,1,false);

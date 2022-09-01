@@ -35,6 +35,7 @@ import { AdventuresListComponent } from './components/adventures-list/adventures
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
+import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -236,7 +237,12 @@ const routes: Routes = [
 
       },
     ],
+
   },
+  {
+    path: 'statistic',
+    component: AdventureStatisticComponent,
+  }
 
 
 ];

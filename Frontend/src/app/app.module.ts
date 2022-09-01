@@ -82,10 +82,12 @@ import { AdventureSearchPipe } from './pipes/adventure-search.pipe';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-picker';
 import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
-import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
+
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
 import { DialogForDeletingAdventureComponent } from './components/dialog-for-deleting-adventure/dialog-for-deleting-adventure.component';
 import { DatePipe } from '@angular/common';
+import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
+import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 
 
 @NgModule({
@@ -159,7 +161,8 @@ import { DatePipe } from '@angular/common';
     DialogForReservationAdventureComponent,
     ShipAvailabilityComponent,
     CottageReportComponent,
-    DialogForDeletingAdventureComponent
+    DialogForDeletingAdventureComponent,
+    AdventureStatisticComponent
 
 
   ],

@@ -9,6 +9,7 @@ INSERT INTO public.address(city, country, street_name,street_number,longitude,la
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22',19.844961, 45.254708);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Majska','22', 20.501251, 44.743571);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50',19.844961, 45.254708);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','10',0.0, 0.0);
 
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123

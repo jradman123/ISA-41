@@ -43,15 +43,22 @@ public class AdventureQuickReservationController {
 
     @PreAuthorize("hasAuthority('Instructor')")
     @PostMapping()
-    public ResponseEntity<AdventureQuickReservation> addNewAdventureQuickReservation(@Valid @RequestBody AdventureQuickReservationDto adventureQuickReservationDto) {
+    public ResponseEntity<String> addNewAdventureQuickReservation(@Valid @RequestBody AdventureQuickReservationDto adventureQuickReservationDto) {
         Adventure adventure = adventureService.findAdventure(Integer.parseInt(adventureQuickReservationDto.getAdventureId()));
         AdventureQuickReservation adventureQuickReservation = adventureQuickReservationMapper.mapToAdventureQuickReservation(adventureQuickReservationDto,adventure);
         Set<AdventureUtility> utilities = new HashSet<>();
-        for (ResponseUtility responseUtility : adventureQuickReservationDto.getUtilities()) {
-            utilities.add(adventureUtilityService.findById(Long.parseLong(responseUtility.getId())));
+        if(adventureQuickReservationDto.getUtilities() != null) {
+            for (ResponseUtility responseUtility : adventureQuickReservationDto.getUtilities()) {
+                utilities.add(adventureUtilityService.findById(Long.parseLong(responseUtility.getId())));
+            }
         }
         adventureQuickReservation.setAdventureUtilities(utilities);
-        return new ResponseEntity<>(adventureQuickReservationService.addNewQuickReservation(adventureQuickReservation), HttpStatus.CREATED);
+        String result = adventureQuickReservationService.addNewQuickReservation(adventureQuickReservation);
+        if(result.equals("Success!")) {
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PreAuthorize("hasAuthority('Instructor')")

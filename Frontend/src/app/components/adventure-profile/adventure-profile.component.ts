@@ -200,22 +200,32 @@ add() {
       })
       return;
 
-    } else {
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully added new quick reservation for adventure!',
-      })
-
     }
 
-  this.adventureQuickReservationService.addAdventaddAdventureQuickReservation(this.newAdventureQuickReservation).subscribe((data) => {
-    this.detailsForm.reset();
-    this.adventuresUtilities.reset();
-    this.quickReservations = [];
-    this.getQuickReservations();
-    this.response = data;
-  })
+  this.adventureQuickReservationService.addAdventaddAdventureQuickReservation(this.newAdventureQuickReservation).subscribe(
+    (data) => {
+      this.detailsForm.reset();
+      this.adventuresUtilities.reset();
+      this.quickReservations = [];
+      this.getQuickReservations();
+      this.response = data;
+      Swal.fire({
+        icon: 'success',
+        title: 'Succes',
+        text: 'Success!'
+      })
+      
+    },
+    (err) => {
+      let parts = err.error.split(':');
+      let mess = parts[parts.length - 1];
+      let description = mess.substring(0, mess.length);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: description
+      })
+    });
 }
 
 deleteQuickReservation(id: string) {

@@ -1,11 +1,10 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureQuickReservation;
 import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.repository.AdventureQuickReservationRepository;
-import com.example.demo.service.AdventureQuickReservationService;
-import com.example.demo.service.AdventureService;
-import com.example.demo.service.EmailSenderService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +26,34 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
     @Autowired
     private EmailSenderService emailSenderService;
 
+    @Autowired
+    private InstructorAvailabilityService instructorAvailabilityService;
+
+    @Autowired
+    private ReservationService reservationService;
+
     @Override
-    public AdventureQuickReservation addNewQuickReservation(AdventureQuickReservation newAdventureQuickReservation) {
-        AdventureQuickReservation saved = adventureQuickReservationRepository.save(newAdventureQuickReservation);
-        Set<RegisteredUser> subscribers = adventureService.findAdventure(newAdventureQuickReservation.getAdventure().getId()).getSubscribers();
-        for (RegisteredUser client : subscribers) {
-            notifySubscribers(client.getEmail(),newAdventureQuickReservation);
+    public String addNewQuickReservation(AdventureQuickReservation newAdventureQuickReservation) {
+        if(canBeAdded(newAdventureQuickReservation)) {
+            adventureQuickReservationRepository.save(newAdventureQuickReservation);
+            Set<RegisteredUser> subscribers = adventureService.findAdventure(newAdventureQuickReservation.getAdventure().getId()).getSubscribers();
+            for (RegisteredUser client : subscribers) {
+                notifySubscribers(client.getEmail(), newAdventureQuickReservation);
+            }
+            return "Success!";
         }
-        return saved;
+        return "Date range is not free!";
     }
 
+    private boolean canBeAdded(AdventureQuickReservation newAdventureQuickReservation){
+        boolean isInstructorAvailable = instructorAvailabilityService.isInstructorAvailable(newAdventureQuickReservation.getAdventure().getInstructor().getId(),newAdventureQuickReservation.getStartTime(),newAdventureQuickReservation.getEndTime());
+        boolean hasInstructorReservations  = reservationService.hasInstructorReservationsForRange(newAdventureQuickReservation.getAdventure().getInstructor().getId(),newAdventureQuickReservation.getStartTime(),newAdventureQuickReservation.getEndTime());
+        boolean hasQuickReservations = hasQuickReservation(newAdventureQuickReservation.getAdventure().getInstructor().getId(),newAdventureQuickReservation.getStartTime(),newAdventureQuickReservation.getEndTime());
+        if(isInstructorAvailable && !hasInstructorReservations && !hasQuickReservations) {
+            return true;
+        }
+        return false;
+    }
     @Override
     public List<AdventureQuickReservation> findAllByAdventureId(int adventureId) {
         List<AdventureQuickReservation> reservations = new ArrayList<>();
@@ -56,6 +73,23 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
         return adventureQuickReservationRepository.save(reservation);
     }
 
+    @Override
+    public boolean hasQuickReservation(int instructorId, LocalDateTime startTime, LocalDateTime endTime) {
+        for(Adventure adventure : adventureService.getAllForInstructor(instructorId)){
+            for(AdventureQuickReservation quickReservation : adventureQuickReservationRepository.findAll()){
+                if(quickReservation.getAdventure().getId() == adventure.getId()){
+                    if((startTime.isAfter(quickReservation.getStartTime()) && endTime.isBefore(quickReservation.getEndTime())) ||
+                            (startTime.isBefore(quickReservation.getStartTime()) && endTime.isAfter(quickReservation.getEndTime())) ||
+                            (startTime.isBefore(quickReservation.getStartTime()) && endTime.isBefore(quickReservation.getEndTime()) && endTime.isAfter(quickReservation.getStartTime())) ||
+                            (startTime.isBefore(quickReservation.getEndTime()) && endTime.isAfter(quickReservation.getEndTime()) && startTime.isAfter(quickReservation.getStartTime()))){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     private void notifySubscribers(String email,AdventureQuickReservation reservation){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         emailSenderService.sendEmail(email,"Akcija!","Za avanturu " + reservation.getAdventure().getName() +
@@ -63,5 +97,7 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
                 reservation.getStartTime().format(formatter) + " do " + reservation.getEndTime().format(formatter) + ".Akcija važi do " +
                 reservation.getValidUntil().format(formatter) + ".Sve detalje možete pogledati na našem sajtu.");
     }
+
+
 
 }

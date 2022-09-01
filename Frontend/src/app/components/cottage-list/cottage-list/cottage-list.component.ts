@@ -28,11 +28,7 @@ export class CottageListComponent implements OnInit {
     this.id = +this.route.snapshot.paramMap.get('id')!;
     this.findCottages();
 
-    this.imageService.findImageByCottageId(this.id).subscribe((data) => {
-      this.images = data;
-      console.log(this.images);
 
-    });
 
   }
 
@@ -54,11 +50,20 @@ export class CottageListComponent implements OnInit {
   }
   delete(id: string) {
     this.cottageService.deleteCottage(id)
-      .subscribe(data => {
+      .subscribe(response => {
 
-        this.cottages = []
-        this.findCottages();
 
+        if (response == null) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'The cottage cannot be deleted because it has a reservation!',
+          })
+
+        } else {
+          this.cottages = []
+          this.findCottages();
+        }
       },
 
       );

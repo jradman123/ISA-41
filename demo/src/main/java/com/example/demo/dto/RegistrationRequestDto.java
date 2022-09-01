@@ -1,6 +1,9 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.Address;
+import lombok.Getter;
+
+@Getter
 
 public class RegistrationRequestDto {
 
@@ -10,6 +13,8 @@ public class RegistrationRequestDto {
     private String streetName;
     private String city;
     private String country;
+    private Double longitude;
+    private Double latitude;
     private String phoneNumber;
     private String email;
     private String password;
@@ -20,7 +25,7 @@ public class RegistrationRequestDto {
     public RegistrationRequestDto() {
     }
 
-    public RegistrationRequestDto(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email, String password, String repeatedPassword, String typeOfRegistration, String descriptionOfRegistration) {
+    public RegistrationRequestDto(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email, String password, String repeatedPassword, String typeOfRegistration, String descriptionOfRegistration,Double latitude,Double longitude) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetNumber = streetNumber;
@@ -33,6 +38,8 @@ public class RegistrationRequestDto {
         this.repeatedPassword = repeatedPassword;
         this.typeOfRegistration = typeOfRegistration;
         this.descriptionOfRegistration = descriptionOfRegistration;
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
 
     public String getFirstName() {

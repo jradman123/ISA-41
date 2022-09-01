@@ -22,6 +22,7 @@ export class ShipOwnerProfileComponent implements OnInit {
   sub!: Subscription;
   constructor(private userService: UserService, private requestForDeletingAccountService: RequestForDeletingAccountServiceService, public dialog: MatDialog) {
     this.personalData = {} as PersonalData;
+    this.request = {} as DeleteAccountRequest;
   }
 
   @Input()

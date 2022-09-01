@@ -102,8 +102,8 @@ public class ShipServiceImpl  implements ShipService {
         for (ShipOwner owner : this.shipOwnerRepository.findAll()) {
 
             if (owner.getEmail().equals(user.getEmail())) {
-                Address address = new Address(newShip.getStreetName(), newShip.getStreetNumber(), newShip.getCity(), newShip.getCountry());
-                Ship ship = new Ship(newShip.getName(), newShip.getDescription(), Double.parseDouble(newShip.getPrice()),address, owner,Integer.parseInt(newShip.getCapacity()),Double.parseDouble(newShip.getMaxSpeed()),Integer.parseInt(newShip.getCancelationConditions()),Double.parseDouble(newShip.getLength()),Double.parseDouble(newShip.getStrengthOfEngine()),newShip.getFishingEquipment(),newShip.getNumberOfEngine(),newShip.getType());
+                Address address = new Address(newShip.getStreetName(), newShip.getStreetNumber(), newShip.getCity(), newShip.getCountry(), newShip.getLongitude(), newShip.getLongitude());
+                Ship ship = new Ship(newShip.getName(), newShip.getDescription(), Double.parseDouble(newShip.getPrice()),address, owner,Integer.parseInt(newShip.getCapacity()),Double.parseDouble(newShip.getMaxSpeed()),Integer.parseInt(newShip.getCancelationConditions()),Double.parseDouble(newShip.getLength()),Double.parseDouble(newShip.getStrengthOfEngine()),newShip.getFishingEquipment(),newShip.getNumberOfEngine(),newShip.getType(),null);
                 return this.shipRepository.save(ship);
             }
         }
@@ -134,20 +134,22 @@ public class ShipServiceImpl  implements ShipService {
     @Override
     public ResponseEntity<Long> deleteShip(Long id) {
         List<ReservationViewDto> reservations=reservationService.getReservationsByShip(id);
-        if(!reservations.isEmpty()) {
-            return new ResponseEntity<>(id,HttpStatus.OK);
-        }
+        if(reservations.isEmpty()) {
 
-        List<Ship> ships=this.shipRepository.findAll();
-        for (Ship ship: ships)
-        {
-            if(ship.getId()==id) {
-                ship.setDeleted(true);
-                shipRepository.save(ship);
+            List<Ship> ships = this.shipRepository.findAll();
+            for (Ship ship : ships) {
+                if (ship.getId() == id) {
+                    ship.setDeleted(true);
+                    shipRepository.save(ship);
+                }
+
             }
+            return new ResponseEntity<>(id, HttpStatus.OK);
 
+        }else {
+            return new ResponseEntity<>(null,HttpStatus.OK);
         }
-        return new ResponseEntity<>(id, HttpStatus.OK);
+
 
     }
 

@@ -1,3 +1,4 @@
+<app-ship-owner-navbar></app-ship-owner-navbar>
 <div class="container">
 
     <br /><br /><br />
@@ -144,6 +145,13 @@
             </mat-card>
 
         </mat-tab>
+        <mat-tab label="Maps">
+
+
+            <agm-map [latitude]="ship.latitude" [longitude]="ship.longitude">
+                <agm-marker [latitude]="ship.latitude" [longitude]="ship.longitude"></agm-marker>
+            </agm-map>
+        </mat-tab>
 
         <mat-tab label="Edit images">
             <div>
@@ -190,27 +198,33 @@
 
         </mat-tab>
 
-        <mat-tab label="Edit appointments">
+        <mat-tab label="Promotions">
 
 
-            <div class="card-holder" style="margin-left: 15px;margin-top: 30px;">
-                <div class="row">
+            <div class="card-holder" style="margin-left: 100px;margin-top: 30px;">
+                <div class="row" *ngIf="appointments.length != 0; else emptyTable">
                     <div class="card" style="margin: 10px; " *ngFor="let app of appointments ">
 
 
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <strong> from {{app.startDate | date:'d/M/yyyy' }} to {{app.endDate |
+                            <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                                <strong> From {{app.startTime | date:'d/M/yyyy' }} to {{app.endTime |
                                     date:'d/M/yyyy'}}</strong>
                             </li>
 
-                            <li style="height: 70px;" class="list-group-item">{{app.price}} € for {{app.capacity}}
+                            <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack"
+                                    style="font-size: 20px;"></i>{{app.price}} € for {{app.guestLimit}}
                                 person </li>
-                            <li style="height: 70px;" class="list-group-item"> Promotion valid until {{app.validUntil |
+                            <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                                Promotion valid until {{app.validUntil |
                                 date:'d/M/yyyy, h:mm a' }}
                             </li>
-                            <li style="height: 70px;" class="list-group-item"> <button>Delete</button>
+                            <li style="height: 70px;" class="list-group-item">
+                                <div *ngFor="let utility of app.utilities">{{utility.name}} </div><br />
+                            </li>
+                            <li style="height: 70px;" class="list-group-item"> <button mat-button color="warn"
+                                    *ngIf="!app.reserved" (click)="deleteApp(app.id)">Delete</button>
                             </li>
 
 
@@ -220,6 +234,16 @@
                     </div>
 
                 </div>
+                <ng-template #emptyTable>
+                    <div class="row" style="align-items: center; margin-left: 400px;">
+                        <br><br><br><br>
+                        <div class="d-flex justify-content-center ">
+                            <mat-card style="background-color: transparent; align-items: center;">No promotions.
+                            </mat-card>
+                        </div>
+                        <br />
+                    </div>
+                </ng-template>
 
 
             </div>

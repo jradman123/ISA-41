@@ -27,6 +27,7 @@
     "angular-calendar": "^0.29.0",
     "bootstrap": "^4.5.0",
     "bootstrap-icons": "^1.9.1",
+    "chart.js": "^3.9.1",
     "cors": "^2.8.5",
     "date-fns": "^2.29.1",
     "ng-date-and-time-picker": "^13.1.0",

@@ -1,6 +1,7 @@
+<app-ship-owner-navbar></app-ship-owner-navbar>
 <div class="container">
 
-    <mat-card style="margin-top: 50px;">
+    <mat-card style="margin-top: 20px;">
         <mat-card-title style="text-align: center;">Add new ship </mat-card-title>
         <br />
         <mat-card-content>
@@ -97,6 +98,38 @@
                         <div class="col-sm">
                             <div style="width: 100%; display: flex">
                                 <mat-form-field appearance="fill">
+                                    <mat-label>Latitude</mat-label>
+                                    <input type="number" matInput formControlName="latitude" />
+                                    <mat-error *ngIf="
+                              !createForm?.get('latitude')?.valid &&
+                              createForm?.get('latitude')?.touched &&
+                              createForm?.get('latitude')?.errors?.required
+                            ">Latitude is required</mat-error>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div style="width: 100%; display: flex">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Longitude</mat-label>
+                                    <input type="number" matInput formControlName="longitude" />
+                                    <mat-error *ngIf="
+                              !createForm?.get('longitude')?.valid &&
+                              createForm?.get('longitude')?.touched &&
+                              createForm?.get('longitude')?.errors?.required
+                            ">Longitude is required</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div style="width: 100%; display: flex">
+                                <mat-form-field appearance="fill">
                                     <mat-label>Price for one day</mat-label>
                                     <input type="number" matInput formControlName="price" />
                                     <mat-error *ngIf="
@@ -108,6 +141,7 @@
                                 </mat-form-field>
                             </div>
                         </div>
+
 
                         <div class="col-sm">
                             <div style="width: 100%; display: flex">

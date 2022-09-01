@@ -1,12 +1,15 @@
 ----address---
 
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('London', 'UK', 'Fleet Street','22');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Paris', 'France', 'Avenija Fos','25');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Beograd', 'Srbija', 'Majska','22');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50');
-INSERT INTO public.address(city, country, street_name,street_number) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','25');
+
+
+
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Lasla Gala','9',19.844961, 45.254708);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Blagoja Parovica','3',20.415410,44.773590);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Bijeljina', 'Bosna i Hercegovina', 'Nikola Tesla','12',19.239510, 44.660480);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22',19.844961, 45.254708);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Majska','22', 20.501251, 44.743571);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50',19.844961, 45.254708);
+
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address)
@@ -38,15 +41,15 @@ INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com')
 INSERT INTO public.request_for_deleting_account(email,reason) VALUES ('raandmjenale@gmail.com','Ne želim više koristiti usluge vašeg sajta.');
 
 ---cottage---
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false);
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-    	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
+	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false,5.0);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
+	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false,5.0);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
+    	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false,0.0);
 
-INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted)
-    	VALUES ('Small and sweet  cottage', 'Marija', 50, 1,2,3,false);
+INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
+    	VALUES ('Small and sweet  cottage', 'Marija', 50, 1,2,3,false,10.0);
 
 ---ships---
 
@@ -123,25 +126,37 @@ INSERT INTO public.rooms(number_of_beds, cottage_id,is_deleted)	VALUES (4, 2,fal
 
 ----cottage-availability-----
 
-INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',1);
+
+INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220506 10:00:00 AM', '20220531 10:00:00 AM',3);
+INSERT INTO public.cottage_availability(start_date, end_date,cottage_id)	VALUES ('20220913 10:00:00 AM', '20220920 10:00:00 AM',3);
+
+INSERT INTO public.ship_availability(start_date, end_date,ship_id)	VALUES ('20220913 10:00:00 AM', '20220920 10:00:00 AM',1);
+
 
 ----appointments-----
-INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '13-06-2022 10:00',false,false,40.0, '01-06-2022 10:00', 3,'01-06-2022 10:00');
+INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)	VALUES (5, '06-01-2022 10:00',false,false,40.0, '06-05-2022 10:00', 3,'06-01-2022 10:00');
 
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, cottage_id,valid_until)
-	VALUES (5, '07-07-2022 10:00',false,false,50.0, '07-01-2022 10:00', 3,'06-01-2022 10:00');
+	VALUES (5, '07-07-2022 10:00',false,false,50.0, '01-07-2022 10:00', 3,'30-06-2022 10:00');
 
 INSERT INTO public.appointments(capacity, end_date,is_deleted,is_reserved,price,start_date, ship_id,valid_until)
-	VALUES (5, '07-07-2022 10:00',false,false,50.0, '07-01-2022 10:00', 1,'06-01-2022 10:00');
+	VALUES (5, '07-07-2022 10:00',false,false,50.0, '01-07-2022 10:00', 1,'30-06-2022 10:00');
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'31-08-2022 09:00','28-08-2022 12:00',null,2,null,3,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,300.0,'09-10-2022 09:00','09-03-2022 12:00',null,2,null,3,null,false);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'07-01-2022 09:00','05-01-2022 12:00',null,2,null,3,null,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('CottageReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,2,null,3,null,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'07-01-2022 09:00','05-01-2022 12:00',null,2,null,null,1,false);
 
-INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,3,null,null,1,false);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'20-08-2022 09:00','18-08-2022 12:00',null,3,null,null,1,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'29-08-2022 09:00','25-08-2022 12:00',null,3,null,null,1,false);
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'29-08-2022 09:00','25-08-2022 12:00',null,3,null,null,1,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'31-08-2022 09:00','29-08-2022 12:00',null,3,null,null,1,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'10-09-2022 09:00','05-09-2022 12:00',null,3,null,null,1,false);
+
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 15, 5, 6);
@@ -174,6 +189,7 @@ INSERT INTO public.adventure_utility(is_deleted, name, price) VALUES (false,'Div
 INSERT INTO public.adventure_adventure_utility(adventure_id, adventure_utility_id) VALUES (1, 1);
 
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
+
 VALUES ('30-08-2022 14:00', '28-08-2022  08:00', 6);
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
 VALUES ('05-09-2022 10:00', '31-08-2022  08:00', 6);
@@ -182,6 +198,9 @@ VALUES ('12-09-2022 20:00', '06-09-2022  08:00', 6);
 INSERT INTO public.instructor_availability(end_date, start_date, instructor_id)
 VALUES ('30-09-2022 20:00', '14-09-2022  08:00', 6);
 
+VALUES ('08-20-2022 10:00', '08-15-2022  10:00', 6);
+
+
 
 ----review---
 INSERT INTO public.review(comment, mark, reservation_id)
@@ -189,16 +208,26 @@ VALUES ('bad', 1, 1);
 INSERT INTO public.review(comment, mark, reservation_id)
 VALUES ('vrh', 5, 2);
 
+
 INSERT INTO public.adventure_users(
 	adventure_id, users_id)
 	VALUES (1, 7);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
-VALUES ('CottageReservation',false,false,true,2,50.0,'16-09-2022 19:00','16-09-2022 09:00',null,7,null,3,null,false);
+VALUES ('CottageReservation',false,false,true,2,50.0,'18-09-2022 09:00','16-09-2022 12:00',null,7,null,3,null,false);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
-VALUES ('ShipReservation',false,false,true,2,50.0,'16-09-2022 22:15','16-09-2022 20:00',null,7,null,null,1,false);
+VALUES ('ShipReservation',false,false,true,2,50.0,'23-09-2022 09:00','20-09-2022 12:00',null,7,null,null,1,false);
 
 INSERT INTO public.adventure_quick_reservation(
 end_time, guest_limit, is_deleted, is_reserved, price, start_time, valid_until, adventure_id)
 	VALUES ('22-09-2022 17:00', 3, false, false, 20.0, '22-09-2022 12:00', '21-09-2022 23:59', 1);
+
+INSERT INTO public.cottage_users(
+	cottage_id, users_id)
+	VALUES (3, 7);
+
+
+INSERT INTO public.ship_users(
+	ship_id, users_id)
+	VALUES (1, 7);

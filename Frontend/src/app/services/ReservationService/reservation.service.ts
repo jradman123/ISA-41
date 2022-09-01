@@ -17,7 +17,13 @@ export class ReservationService {
 
   reservatedCottage(newReservation: CottageReservation) {
     console.log(newReservation.price)
-    return this.http.post(`${this.apiServerUrl}/reservations/createReservation`, newReservation, {
+    return this.http.post(`${this.apiServerUrl}/reservations/createCottageReservation`, newReservation, {
+      responseType: 'text',
+    });
+  }
+  reservatedShip(newReservation: CottageReservation) {
+    console.log(newReservation.price)
+    return this.http.post(`${this.apiServerUrl}/reservations/createShipReservation`, newReservation, {
       responseType: 'text',
     });
   }

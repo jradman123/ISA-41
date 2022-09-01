@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { ResponseUtility } from 'src/app/interfaces/response-utility';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
+import { ShipQuickReservationDto } from 'src/app/interfaces/ship-quick-reservation';
 import { UtilityDto } from 'src/app/interfaces/utility-dto';
 import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
@@ -19,18 +21,21 @@ import Swal from 'sweetalert2';
 })
 export class ShipAddActionComponent implements OnInit {
 
-  appointments: AppointmentDto[] = [];
-  newAppointment!: AppointmentDto;
+  appointments: ShipQuickReservationDto[] = [];
+  newAppointment!: ShipQuickReservationDto;
   id: any;
   idShip: any;
   shipDto!: ShipDto;
   form!: FormGroup;
   formData!: FormData;
   sub!: Subscription;
-  utilities!: UtilityDto[];
+
   haveReservation!: CottageReservation[]
+  Utilities = new FormControl('');
+  utilities!: ResponseUtility[];
   constructor(private utilityService: UtilityService, private reservationService: ReservationService, private appointmentService: AppointmentService, private router: ActivatedRoute, private route: Router, private shipService: ShipService) {
-    this.newAppointment = {} as AppointmentDto;
+    this.newAppointment = {} as ShipQuickReservationDto;
+    this.utilities = [] as ResponseUtility[];
   }
   ngOnInit(): void {
     this.idShip = +this.router.snapshot.paramMap.get('id')!;
@@ -68,20 +73,20 @@ export class ShipAddActionComponent implements OnInit {
         title: 'Error',
         text: 'The appointment cannot be added.You must fill in all fields!',
       })
-    } else if (this.newAppointment.startDate >= this.newAppointment.endDate) {
+    } else if (new Date(this.newAppointment.startTime) >= new Date(this.newAppointment.endTime)) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Start date is greater or equal then end date!',
       })
-    } else if (this.newAppointment.startDate < new Date()) {
+    } else if (new Date(this.newAppointment.startTime) < new Date()) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Start date must be greater then today!',
       })
 
-    } else if (this.newAppointment.validUntil > this.newAppointment.startDate) {
+    } else if (new Date(this.newAppointment.validUntil) > new Date(this.newAppointment.startTime)) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -89,7 +94,7 @@ export class ShipAddActionComponent implements OnInit {
       })
 
     }
-    else if (this.newAppointment.validUntil < new Date()) {
+    else if (new Date(this.newAppointment.validUntil) < new Date()) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -106,11 +111,11 @@ export class ShipAddActionComponent implements OnInit {
         text: 'You have successfully added a appointment!',
       })
 
-      this.sub = this.appointmentService.createApp(this.newAppointment)
+      this.sub = this.appointmentService.createAppbyShip(this.newAppointment)
         .subscribe({
           next: () => {
+            window.location.reload();
 
-            this.onNoClick();
           }
         });
     }
@@ -129,13 +134,13 @@ export class ShipAddActionComponent implements OnInit {
 
     console.log(newStart)
     console.log(newEnd)
-    this.newAppointment.startDate = new Date(newStart.setHours(14, 0, 0, 0));
-    this.newAppointment.endDate = new Date(newEnd.setHours(11, 0, 0, 0));
-    this.newAppointment.capacity = this.form.value.capacity;
+    this.newAppointment.startTime = new Date(newStart.setHours(14, 0, 0, 0)).toISOString();
+    this.newAppointment.endTime = new Date(newEnd.setHours(11, 0, 0, 0)).toISOString();
+    this.newAppointment.guestLimit = this.form.value.capacity;
     this.newAppointment.price = this.form.value.price;
     this.newAppointment.shipId = this.idShip;
-    this.newAppointment.validUntil = new Date(Valid.setHours(14, 0, 0, 0));
-
+    this.newAppointment.validUntil = new Date(Valid.setHours(14, 0, 0, 0)).toISOString();
+    this.newAppointment.utilities = this.Utilities.value;
 
   }
 

@@ -12,7 +12,7 @@ public class AdventureMapper {
     public Adventure mapNewAdventureDtoToAdventure(NewAdventureDto newAdventureDto) {
         Adventure adventure = new Adventure();
         Address address = new Address(newAdventureDto.getStreetName(), newAdventureDto.getStreetNumber(),
-                newAdventureDto.getCity(), newAdventureDto.getCountry());
+                newAdventureDto.getCity(), newAdventureDto.getCountry(),newAdventureDto.getLongitude(),newAdventureDto.getLatitude());
         adventure.setAddress(address);
         adventure.setPrice(Double.parseDouble(newAdventureDto.getPrice()));
         adventure.setCancellationConditions(Double.parseDouble(newAdventureDto.getCancellationConditions()));
@@ -41,7 +41,7 @@ public class AdventureMapper {
     public Adventure mapAdventureDtoToAdventure(AdventureDto adventureDto) {
         Adventure adventure = new Adventure();
         Address address = new Address(adventureDto.getStreetName(), adventureDto.getStreetNumber(),
-                adventureDto.getCity(), adventureDto.getCountry());
+                adventureDto.getCity(), adventureDto.getCountry(),adventureDto.getLongitude(),adventureDto.getLatitude());
         adventure.setAddress(address);
         adventure.setPrice(Double.parseDouble(adventureDto.getPrice()));
         adventure.setCancellationConditions(Double.parseDouble(adventureDto.getCancellationConditions()));

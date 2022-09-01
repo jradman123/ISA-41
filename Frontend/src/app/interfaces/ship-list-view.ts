@@ -17,6 +17,8 @@ export interface ShipDto {
     cancelationConditions: string;
     fishingEquipment: string;
     ownerEmail: string;
+    longitude: number;
+    latitude: number;
 
 
 

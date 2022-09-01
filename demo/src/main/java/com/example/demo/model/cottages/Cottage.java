@@ -9,6 +9,7 @@ import com.example.demo.model.Image;
 import com.example.demo.model.Rules;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.users.CottageOwner;
+import com.example.demo.model.users.RegisteredUser;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -84,6 +85,10 @@ public class Cottage {
 	@JsonManagedReference
 	private Set<CottageAvailability> availabilities;
 
+	@Column(name = "cancelationConditions", nullable = false)
+	private Integer cancelationConditions;// 0% for free
+
+
 
 
 
@@ -94,7 +99,13 @@ public class Cottage {
 	    @JoinColumn(name = "cottageOwner")
 	    private CottageOwner cottageOwner;
 
-	public Cottage(String name, String description, Double price, Address address,CottageOwner owner,int numberOfPerson) {
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "cottage_users",
+			joinColumns = @JoinColumn(name = "cottage_id"),
+			inverseJoinColumns = @JoinColumn(name = "users_id"))
+	private Set<RegisteredUser> subscribers;
+
+	public Cottage(String name, String description, Double price, Address address,CottageOwner owner,int numberOfPerson,Integer cancelationConditions,Set<RegisteredUser> subscribers) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -102,6 +113,8 @@ public class Cottage {
 		this.address = address;
 		this.numberOfPerson=numberOfPerson;
 		this.cottageOwner=owner;
+		this.cancelationConditions=cancelationConditions;
+		this.subscribers=subscribers;
 
 
 	}

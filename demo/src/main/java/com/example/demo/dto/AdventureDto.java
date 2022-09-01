@@ -1,5 +1,8 @@
 package com.example.demo.dto;
 
+import lombok.Getter;
+
+@Getter
 public class AdventureDto {
 
     private String id;
@@ -13,11 +16,13 @@ public class AdventureDto {
     private String country;
     private String cancellationConditions;
     private String instructorsBiography;
+    private Double longitude;
+    private Double latitude;
 
     public AdventureDto() {
     }
 
-    public AdventureDto(String id, String name, String description, String guestLimit, String price, String streetName, String streetNumber, String city, String country, String cancellationConditions, String instructorsBiography) {
+    public AdventureDto(String id, String name, String description, String guestLimit, String price, String streetName, String streetNumber, String city, String country, String cancellationConditions, String instructorsBiography,Double longitude,Double latitude) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,6 +34,8 @@ public class AdventureDto {
         this.country = country;
         this.cancellationConditions = cancellationConditions;
         this.instructorsBiography = instructorsBiography;
+        this.longitude=longitude;
+        this.latitude=latitude;
     }
 
     public String getId() {

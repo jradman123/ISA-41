@@ -1,9 +1,12 @@
 package com.example.demo.dto;
 
+import lombok.Getter;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Getter
 public class NewAdventureDto {
 
     @NotBlank
@@ -25,10 +28,15 @@ public class NewAdventureDto {
     @NotBlank
     private String cancellationConditions;
 
+
+    private Double longitude;
+
+    private Double latitude;
+
     public NewAdventureDto() {
     }
 
-    public NewAdventureDto(String name, String description, String streetName, String city, String country, String streetNumber, String guestLimit, String price, String cancellationConditions) {
+    public NewAdventureDto(String name, String description, String streetName, String city, String country, String streetNumber, String guestLimit, String price, String cancellationConditions,Double longitude,Double latitude) {
         this.name = name;
         this.description = description;
         this.streetName = streetName;
@@ -38,6 +46,8 @@ public class NewAdventureDto {
         this.guestLimit = guestLimit;
         this.price = price;
         this.cancellationConditions = cancellationConditions;
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
     public String getName() {

@@ -1,3 +1,5 @@
+import { UtilityDto } from "./utility-dto";
+
 export interface CottageReservation {
     resStart: Date,
     resEnd: Date,
@@ -7,4 +9,5 @@ export interface CottageReservation {
     objectId: string,
     typeOfRes: string
     haveReport: boolean;
+    utilities: UtilityDto[];
 }

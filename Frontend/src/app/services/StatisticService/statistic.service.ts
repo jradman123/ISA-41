@@ -12,7 +12,15 @@ export class StatisticService {
   private apiServerUrl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
-  getAllForAdventure(id : string) {
+  getAllForAdventurePerDays(id : string) {
     return this.http.get(`${this.apiServerUrl}/statistics/adventure/${id}/per-days`);
+  }
+
+  getAllForAdventurePerMonth(id : string) {
+    return this.http.get(`${this.apiServerUrl}/statistics/adventure/${id}/per-month`);
+  }
+
+  getAllForAdventurePerYear(id : string) {
+    return this.http.get(`${this.apiServerUrl}/statistics/adventure/${id}/per-year`);
   }
 }

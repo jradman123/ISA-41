@@ -6,4 +6,6 @@ import java.util.Map;
 public interface StatisticService {
 
     Map<String,Integer> numberOfReservationPerDaysInWeekForAdventure(int id);
+    Map<String,Integer> numberOfReservationPerMonthForAdventure(int id);
+    Map<String,Integer> numberOfReservationPerYearForAdventure(int id);
 }

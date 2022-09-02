@@ -30,8 +30,22 @@ public class StatisticController {
 
     @PreAuthorize("hasAuthority('Instructor')")
     @GetMapping(value = "/adventure/{id}/per-days")
-    public ResponseEntity<Map<String,Integer>> getStatisticPerDaysForInstructor(@PathVariable int id) {
+    public ResponseEntity<Map<String,Integer>> getStatisticPerDaysForAdventure(@PathVariable int id) {
         return new ResponseEntity<>(statisticService.numberOfReservationPerDaysInWeekForAdventure(id), HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/adventure/{id}/per-month")
+    public ResponseEntity<Map<String,Integer>> getStatisticPerMonthForAdventure(@PathVariable int id) {
+        return new ResponseEntity<>(statisticService.numberOfReservationPerMonthForAdventure(id), HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/adventure/{id}/per-year")
+    public ResponseEntity<Map<String,Integer>> getStatisticInLastCoupleYear(@PathVariable int id) {
+        return new ResponseEntity<>(statisticService.numberOfReservationPerYearForAdventure(id), HttpStatus.OK);
 
     }
 }

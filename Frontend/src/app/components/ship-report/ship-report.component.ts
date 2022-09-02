@@ -117,7 +117,7 @@ export class ShipReportComponent implements OnInit {
       });
     });
 
-    this.statisticService.getNumberPerMonthShip(this.id).subscribe((data) => {
+    this.statisticService.getNumberPerYearShip(this.id).subscribe((data) => {
       let years = Object.keys(data)
       let numbers = Object.values(data)
       const myYearsChart = new Chart('myYearsChart', {
@@ -149,16 +149,16 @@ export class ShipReportComponent implements OnInit {
         }
       });
     });
-    this.statisticService.getNumberPerMonthShip(this.id).subscribe((data) => {
+    this.statisticService.getNumberPerYearShip(this.id).subscribe((data) => {
       let months = Object.keys(data)
       let numbers = Object.values(data)
       const myPriceChart = new Chart('myChart', {
         type: 'bar',
         data: {
-          labels: ['2020', '2021', '2022'],
+          labels: months,
           datasets: [{
             label: 'Number of reservations',
-            data: [1.0, 13.0, 9.0],
+            data: numbers,
             backgroundColor: [
               'rgba(0, 200, 32,0.6)',
               'rgba(255, 0, 71, 1)',

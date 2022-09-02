@@ -14,8 +14,7 @@ export class CottageReportComponent implements OnInit {
   id: any;
   cottageMark!: MarkDto
   statisticPerDays: number[];
-  canvas: any;
-  ctx: any;
+
 
 
   constructor(private cottageService: CottageService, private router: ActivatedRoute) {

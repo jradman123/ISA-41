@@ -236,13 +236,15 @@ const routes: Routes = [
         canActivate: [AuthGuard]
 
       },
+      {
+        path: 'report/:id',
+        component: AdventureStatisticComponent,
+        canActivate : [AuthGuard]
+      }
     ],
 
   },
-  {
-    path: 'statistic',
-    component: AdventureStatisticComponent,
-  }
+  
 
 
 ];

@@ -73,4 +73,9 @@ export class AdventuresListComponent implements OnInit {
     });
   
   }
+
+  report(id : string){
+    this.router.navigate(['instructor/report/' + id]);
+    console.log(id);
+  }
   }

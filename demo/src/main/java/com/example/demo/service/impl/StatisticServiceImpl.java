@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {
@@ -23,46 +25,22 @@ public class StatisticServiceImpl implements StatisticService {
 
 
     @Override
-    public List<Integer> numberOfReservationPerDaysInWeekForInstructor(int id) {
-        List<Integer> result = new ArrayList<Integer>();
-        int monday =0;
-        int tuesday = 0;
-        int wednesday = 0;
-        int thursday = 0;
-        int friday = 0;
-        int saturday = 0;
-        int sunday = 0;
-        List<AdventureReservation> reservations =adventureReservationRepository.getAllInForInstructorLastWeek(LocalDateTime.now().minusDays(7), LocalDateTime.now(),id);
+    public Map<String, Integer> numberOfReservationPerDaysInWeekForAdventure(int id) {
+        Map<String,Integer> result = new HashMap<>();
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllInForAdventureLastWeek(LocalDateTime.now().minusDays(7), LocalDateTime.now(), id);
+        for (DayOfWeek day : DayOfWeek.values()) {
+            result.put(day.toString(),countReservationsForDayInLastWeek(day,reservations));
+        }
+        return result;
+    }
+
+    private Integer countReservationsForDayInLastWeek(DayOfWeek day,List<AdventureReservation> reservations){
+        int i=0;
         for (AdventureReservation r : reservations) {
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.MONDAY)){
-                monday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.TUESDAY)){
-                tuesday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.WEDNESDAY)){
-                wednesday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.THURSDAY)){
-                thursday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.FRIDAY)){
-                friday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.SATURDAY)){
-                saturday++;
-            }
-            if(r.getReservationStart().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
-                sunday++;
+            if (r.getReservationStart().getDayOfWeek().equals(day)) {
+                i++;
             }
         }
-        result.add(monday);
-        result.add(tuesday);
-        result.add(wednesday);
-        result.add(thursday);
-        result.add(friday);
-        result.add(saturday);
-        result.add(sunday);
-        return result;
+        return i;
     }
 }

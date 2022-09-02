@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/statistics", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,11 +29,9 @@ public class StatisticController {
     private UserService userService;
 
     @PreAuthorize("hasAuthority('Instructor')")
-    @GetMapping(value = "/statistic-per-days")
-    public ResponseEntity<List<Integer>> getStatisticPerDaysForInstructor(HttpServletRequest request) {
-        String token = tokenUtils.getToken(request);
-        String email = tokenUtils.getEmailFromToken(token);
-        return new ResponseEntity<>(statisticService.numberOfReservationPerDaysInWeekForInstructor(userService.findByEmail(email).getId()), HttpStatus.OK);
+    @GetMapping(value = "/adventure/{id}/per-days")
+    public ResponseEntity<Map<String,Integer>> getStatisticPerDaysForInstructor(@PathVariable int id) {
+        return new ResponseEntity<>(statisticService.numberOfReservationPerDaysInWeekForAdventure(id), HttpStatus.OK);
 
     }
 }

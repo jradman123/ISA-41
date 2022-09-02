@@ -44,6 +44,11 @@ export class CottageListComponent implements OnInit {
     this.searchText = searchText;
   }
 
+  statistics(id: string) {
+    this.router.navigate(['cottageOwner/cottage-statistics/' + id]);
+    console.log(id);
+  }
+
   view(id: string) {
     this.router.navigate(['cottageOwner/cottage-profile/' + id]);
     console.log(id);

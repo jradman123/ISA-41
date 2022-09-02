@@ -35,6 +35,7 @@ import { AdventuresListComponent } from './components/adventures-list/adventures
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
+import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -88,6 +89,12 @@ const routes: Routes = [
       {
         path: 'cottage-profile/:id',
         component: CottageProfileComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'cottage-statistics/:id',
+        component: CottageReportComponent,
         canActivate: [AuthGuard]
 
       },

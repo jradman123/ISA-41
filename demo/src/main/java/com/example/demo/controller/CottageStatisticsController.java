@@ -36,7 +36,7 @@ public class CottageStatisticsController {
     }
 
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
-    @GetMapping(value = "/ship/per-years/{id}")
+    @GetMapping(value = "/per-years/{id}")
     public ResponseEntity<Map<String,Integer>> getStatisticPerYearsForCottage(@PathVariable Long id) {
         return new ResponseEntity<>(cottageStatisticService.numberOfReservationPerYearsForCottage(id), HttpStatus.OK);
 

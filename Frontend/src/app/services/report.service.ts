@@ -15,7 +15,7 @@ export class ReportService {
   }
 
   getNumberPerYear(id: string) {
-    return this.http.get(`${this.apiServerUrl}/cottage-statistics/per-year/${id}`);
+    return this.http.get(`${this.apiServerUrl}/cottage-statistics/per-years/${id}`);
   }
 
 
@@ -30,7 +30,7 @@ export class ReportService {
     return this.http.get(`${this.apiServerUrl}/ship-statistics/per-days/${id}`);
   }
   getNumberPerMonthShip(id: string) {
-    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-month/${id}`);
+    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-months/${id}`);
   }
 
 }

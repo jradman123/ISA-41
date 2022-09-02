@@ -187,6 +187,12 @@ VALUES ('bad', 1, 1);
 INSERT INTO public.review(comment, mark, reservation_id)
 VALUES ('vrh', 5, 2);
 
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('vrh', 5, 6);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('vrh', 5, 5);
+
+
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
 VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255856', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 1);
 

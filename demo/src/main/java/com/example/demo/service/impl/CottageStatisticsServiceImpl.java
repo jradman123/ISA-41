@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.service.CottageStatisticsService;
@@ -39,15 +40,28 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
     @Override
     public Map<String, Integer> numberOfReservationPerYearsForCottage(Long id) {
         Map<String,Integer> result = new LinkedHashMap<>();
-        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
-
-
-
-
-
-
-
+        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottageInDateRange(LocalDateTime.now().minusYears(4), LocalDateTime.now(), id);
+        List<Integer> years = new ArrayList<>();
+        for(int i=3; i>=0; i--) {
+            years.add(LocalDateTime.now().getYear() - i);
+        }
+        for (Integer year : years) {
+            result.put(year.toString(),countReservationsForDayInLastCoupleYears(year,reservations));
+        }
         return result;
+
+
+
+    }
+
+    private Integer countReservationsForDayInLastCoupleYears(Integer year, List<CottageReservation> reservations) {
+        int i=0;
+        for (CottageReservation r : reservations) {
+            if (r.getReservationStart().getYear() == year) {
+                i++;
+            }
+        }
+        return i;
     }
 
     private Integer countReservationsForMonth(Month month, List<CottageReservation> reservations) {
@@ -60,11 +74,7 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
         return i;
     }
 
-    private Integer countReservationsForYear(Year year, List<CottageReservation> reservations) {
-        int i=0;
-
-        return i;
-    }
+ 
 
     private Integer countReservationsForDays(DayOfWeek day,List<CottageReservation> reservations){
         int i=0;

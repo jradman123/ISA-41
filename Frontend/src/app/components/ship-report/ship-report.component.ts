@@ -41,7 +41,10 @@ export class ShipReportComponent implements OnInit {
 
 
     this.id = +this.router.snapshot.paramMap.get('id')!;
+    this.shipService.getShipMark(this.id).subscribe((data) => {
+      this.shipMark = data;
 
+    });
 
 
 
@@ -114,33 +117,37 @@ export class ShipReportComponent implements OnInit {
       });
     });
 
-    const myYearsChart = new Chart('myYearsChart', {
-      type: 'line',
-      data: {
-        labels: ['2020', '2021', '2022'],
-        datasets: [{
-          label: 'Number of reservations',
-          data: [1.0, 13.0, 9.0],
-          backgroundColor: [
-            'rgba(0, 200, 32,0.6)',
-            'rgba(255, 0, 71, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ]
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          },
-          legend: {
-            display: false
-          }
+    this.statisticService.getNumberPerMonthShip(this.id).subscribe((data) => {
+      let years = Object.keys(data)
+      let numbers = Object.values(data)
+      const myYearsChart = new Chart('myYearsChart', {
+        type: 'line',
+        data: {
+          labels: years,
+          datasets: [{
+            label: 'Number of reservations',
+            data: numbers,
+            backgroundColor: [
+              'rgba(0, 200, 32,0.6)',
+              'rgba(255, 0, 71, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ]
+          }]
         },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            legend: {
+              display: false
+            }
+          },
 
-      }
+        }
+      });
     });
     this.statisticService.getNumberPerMonthShip(this.id).subscribe((data) => {
       let months = Object.keys(data)
@@ -173,6 +180,6 @@ export class ShipReportComponent implements OnInit {
         }
       });
     });
-  }
 
+  }
 }

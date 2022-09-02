@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.cottages.Cottage;
@@ -27,4 +28,6 @@ public interface ShipService {
     Ship findShipById(Long objectId);
 
     Ship create(Ship ship);
+
+    AverageMarkDto getShipReport(Long id);
 }

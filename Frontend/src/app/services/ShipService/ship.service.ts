@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ShipDto } from 'src/app/interfaces/ship-list-view';
 import { Image } from 'src/app/interfaces/image';
 import { ImagesResponse } from 'src/app/interfaces/images-response';
+import { MarkDto } from 'src/app/interfaces/mark-dto';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,6 +55,12 @@ export class ShipService {
     return this.http.get<ImagesResponse>(
       `${this.apiServerUrl}/ships/${id}/images`);
   }
+
+  getShipMark(id: string) {
+    return this.http.get<MarkDto>(
+      `${this.apiServerUrl}/ships/getShipReport/${id}`);
+  }
+
 
 }
 

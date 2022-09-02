@@ -26,6 +26,8 @@ VALUES ('SHIP_OWNER', false, 'imam vise brodova na izdavanje', 'milica@gmail.com
 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
 VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', true, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2,0, 3);
+INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
+VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255800', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 1);
 
 --registration requests
 INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com');
@@ -146,10 +148,14 @@ INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_o
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'08-31-2022 09:00','08-29-2022 12:00',null,3,null,null,1,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report) VALUES ('ShipReservation',false,false,true,2,50.0,'09-10-2022 09:00','09-05-2022 12:00',null,3,null,null,1,false);
 
+
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 50, 5, 6);
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Pecanje sa obale i sa rijeke.', 7, 'Magija na vodi', 54, 6, 6);
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'09-02-2022 09:00','08-31-2022 08:00',6,7,1,null,null,false);
 
 --INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);
 --INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 5);

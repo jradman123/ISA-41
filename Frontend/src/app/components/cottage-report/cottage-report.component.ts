@@ -1,6 +1,7 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Chart } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip, BarElement, BarController } from 'chart.js';
+
 import { MarkDto } from 'src/app/interfaces/mark-dto';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
 
@@ -12,16 +13,20 @@ import { CottageService } from 'src/app/services/CottageService/cottage.service'
 export class CottageReportComponent implements OnInit {
   id: any;
   cottageMark!: MarkDto
+  statisticPerDays: number[];
+  canvas: any;
+  ctx: any;
 
 
-  constructor(private cottageService: CottageService, private router: ActivatedRoute, private elementRef: ElementRef) {
+  constructor(private cottageService: CottageService, private router: ActivatedRoute) {
+    Chart.register(BarController, BarElement, CategoryScale, Tooltip, Legend, LineController, LineElement, PointElement, LinearScale, Title);
+
     this.cottageMark = {} as MarkDto;
+    this.statisticPerDays = [] as number[];
 
 
   }
-  canvas: any
-  ctx: any
-  myChart: any;
+
 
 
   ngOnInit(): void {
@@ -32,65 +37,35 @@ export class CottageReportComponent implements OnInit {
 
 
     });
-    let htmlRef = this.elementRef.nativeElement.querySelector(`#myChart`);
 
-
-    // this.ctx = this.canvas.getContext('2d');
-
-    var myChart = new Chart(htmlRef, {
+    const myChart = new Chart('myChart', {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3],
+          label: 'Number of reservations',
+          data: [1.0, 5.0, 9.0, 7.0, 13.0, 21.0, 30.0],
           backgroundColor: [
-            'rgba(255,99,132,0.2)',
-            'rgba(54,162,235,0.2)',
-            'rgba(255,206,86,0.2)',
-            'rgba(75,192,192,0.2)',
-            'rgba(153,182,255,0.2)',
-            'rgba(255,150,64,0.2)'
-
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54,162,235,1)',
-            'rgba(255,206,86,1)',
-            'rgba(75,192,192,1)',
-            'rgba(153,102,255,1)'
-          ],
-          borderWidth: 1
-
+            'rgba(0, 200, 32,0.6)',
+            'rgba(255, 0, 71, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ]
         }]
       },
       options: {
         scales: {
-          x: {
-            ticks: {
-              display: true,
-
-            },
-          },
           y: {
-            ticks: {
-              display: true,
-            },
+            beginAtZero: true
           },
-
-
-
-
-        }
+          legend: {
+            display: false
+          }
+        },
 
       }
-
-    }
-
-
-
-
-    )
+    });
   }
 
 }

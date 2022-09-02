@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -50,6 +51,29 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
         }
         return result;
 
+
+
+    }
+
+    @Override
+    public Map<String, Double> priceOfPeriod(String start, String end,Long id) {
+        double sum=0;
+        Map<String,Double> result = new LinkedHashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime startDate=LocalDateTime.parse(start,formatter);
+        LocalDateTime endDate=LocalDateTime.parse(end,formatter);
+
+        List<CottageReservation> reservations = cottageReservationRepository.getByDate(startDate,endDate,id);
+        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+            for (CottageReservation res : reservations) {
+                sum += res.getPrice();
+                result.put(start.toString(), sum);
+            }
+            startDate.plusDays(1);
+        }
+
+
+        return result;
 
 
     }

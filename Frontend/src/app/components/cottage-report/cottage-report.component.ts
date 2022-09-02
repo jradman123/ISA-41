@@ -15,8 +15,10 @@ import { ReportService } from 'src/app/services/report.service';
 export class CottageReportComponent implements OnInit {
   id: any;
   cottageMark!: MarkDto
+  date: string[];
+  numbers!: string[];
   todayDate: Date = new Date();
-  statisticPerDays: number[];
+
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl(),
@@ -29,7 +31,8 @@ export class CottageReportComponent implements OnInit {
     Chart.register(BarController, BarElement, CategoryScale, Tooltip, Legend, LineController, LineElement, PointElement, LinearScale, Title, PieController, ArcElement, PolarAreaController, RadialLinearScale);
 
     this.cottageMark = {} as MarkDto;
-    this.statisticPerDays = [] as number[];
+    this.date = [] as string[];
+    this.numbers = [] as string[];
 
 
   }
@@ -149,37 +152,47 @@ export class CottageReportComponent implements OnInit {
         }
       });
     });
-    this.statisticService.getNumberPerMonth(this.id).subscribe((data) => {
-      let months = Object.keys(data)
-      let numbers = Object.values(data)
-      const myPriceChart = new Chart('myChart', {
-        type: 'polarArea',
-        data: {
-          labels: ['2020', '2021', '2022'],
-          datasets: [{
-            label: 'Number of reservations',
-            data: [1.0, 13.0, 9.0],
-            backgroundColor: [
-              'rgba(0, 200, 32,0.6)',
-              'rgba(255, 0, 71, 1)',
-              'rgba(75, 192, 192, 1)',
 
-            ]
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            },
-            legend: {
-              display: false
-            }
+    const myPriceChart = new Chart('myChart', {
+      type: 'polarArea',
+      data: {
+        labels: this.date,
+        datasets: [{
+          label: 'Number of reservations',
+          data: this.numbers,
+          backgroundColor: [
+            'rgba(0, 200, 32,0.6)',
+            'rgba(255, 0, 71, 1)',
+            'rgba(75, 192, 192, 1)',
+
+          ]
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
           },
+          legend: {
+            display: false
+          }
+        },
 
-        }
-      });
+      }
+    });
+
+
+
+  }
+  addDate() {
+    const s = new Date(this.range.value.start.getTime() - this.range.value.start.getTimezoneOffset() * 60000)
+    const e = new Date(this.range.value.end.getTime() - this.range.value.end.getTimezoneOffset() * 60000)
+    console.log("fdfdff" + e)
+    this.statisticService.getPrice(s.toISOString(), e.toISOString(), this.id).subscribe((data) => {
+      this.date = Object.keys(data)
+      this.numbers = Object.values(data)
     });
   }
+
 
 }

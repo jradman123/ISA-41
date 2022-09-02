@@ -13,8 +13,5 @@ public interface CottageStatisticsService {
     Map<String,Integer> numberOfReservationPerYearsForCottage(Long id);
 
 
-
-
-
-
+    Map<String,Double> priceOfPeriod(String start, String end,Long id);
 }

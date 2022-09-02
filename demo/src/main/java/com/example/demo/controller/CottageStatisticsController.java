@@ -42,6 +42,13 @@ public class CottageStatisticsController {
 
     }
 
+    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @GetMapping(value = "/price/{start}/{end}/{id}")
+    public ResponseEntity<Map<String,Double>> getPrice(@PathVariable String start,String end,Long id) {
+        return new ResponseEntity<>(cottageStatisticService.priceOfPeriod(start,end,id), HttpStatus.OK);
+
+    }
+
 
 
 

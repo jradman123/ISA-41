@@ -16,4 +16,6 @@ public interface CottageReservationRepository extends JpaRepository<CottageReser
     @Query(value = "select * from reservation a where cottage_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end", nativeQuery = true)
     List<CottageReservation> getAllForCottageInDateRange(LocalDateTime start, LocalDateTime end, Long id);
 
+    @Query(value = "select * from reservation a where cottage_id = ?3 and  reservation_end <= ?2 and  ?1 <= reservation_start", nativeQuery = true)
+    List<CottageReservation> getByDate(LocalDateTime startDate, LocalDateTime endDate, Long id);
 }

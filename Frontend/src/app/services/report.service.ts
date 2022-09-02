@@ -24,13 +24,16 @@ export class ReportService {
   }
 
   getNumberPerYearShip(id: string) {
-    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-year/${id}`);
+    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-years/${id}`);
   }
   getNumberPerDaysShip(id: string) {
     return this.http.get(`${this.apiServerUrl}/ship-statistics/per-days/${id}`);
   }
   getNumberPerMonthShip(id: string) {
     return this.http.get(`${this.apiServerUrl}/ship-statistics/per-months/${id}`);
+  }
+  getPrice(start: string, end: string, id: any) {
+    return this.http.get(`${this.apiServerUrl}/cottage-statistics/price/${start}/${end}/${id}`);
   }
 
 }

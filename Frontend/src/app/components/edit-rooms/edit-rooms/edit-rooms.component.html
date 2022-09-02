@@ -5,7 +5,7 @@
             <h1>Rooms of cottage</h1>
             <hr />
             <div *ngFor="let room of rooms" class="containter">
-                <h3> {{ room.number}} beds <button style="margin-left:900px" class="btn"
+                <h3> {{ room.number}} beds <button style="margin-left:900px;width: 100px;" mat-flat-button color="warn"
                         (click)="deleteRoom(room.id)">Delete </button>
                     <hr />
                 </h3>
@@ -19,20 +19,21 @@
 
 
 
-<div class="container" style="margin-top:20px">
+<div class="container" style="text-align: center;margin-top: 20px;">
     <div class="containter">
         <div>
             <h1> Add room of cottage</h1>
-            <hr />
+
             <div>
-                <input class="form-control" type="text" placeholder="Enter your rule" [(ngModel)]="room" />
+                <input class="form-control" style="width: 400px;margin-left: 330px;" type="text"
+                    placeholder="Enter your room" [(ngModel)]="room" />
             </div>
         </div>
 
     </div>
     <div class="container">
         <div>
-            <button class="btn" (click)="addRoom()">Add</button>
+            <button mat-flat-button color="primary" style="width:150px;margin-top:20px" (click)="addRoom()">Add</button>
         </div>
         <br /> <br />
     </div>

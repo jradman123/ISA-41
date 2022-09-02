@@ -36,6 +36,7 @@ import { NewAdventureComponent } from './components/new-adventure/new-adventure.
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
+import { ShipReportComponent } from './components/ship-report/ship-report.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -176,6 +177,12 @@ const routes: Routes = [
         path: 'ship-profile/:id',
         component: ShipProfileComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'ship-statistics/:id',
+        component: ShipReportComponent,
+        canActivate: [AuthGuard]
+
       },
       {
         path: 'profile',

@@ -86,6 +86,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-pic
 
 import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
+import { ShipReportComponent } from './components/ship-report/ship-report.component';
 
 
 
@@ -163,7 +164,8 @@ import { CottageReportComponent } from './components/cottage-report/cottage-repo
     InstructorAvailabilityComponent,
     AdventureSearchPipe,
     ShipAvailabilityComponent,
-    CottageReportComponent
+    CottageReportComponent,
+    ShipReportComponent
 
 
   ],

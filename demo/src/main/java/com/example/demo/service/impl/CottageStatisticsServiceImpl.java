@@ -7,13 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.YearMonth;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.*;
+import java.util.*;
 
 @Service
 public class CottageStatisticsServiceImpl implements CottageStatisticsService {
@@ -23,7 +18,7 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
 
     @Override
     public Map<String, Integer> numberOfReservationPerDaysInWeekForCottage(Long id) {
-        Map<String,Integer> result = new HashMap<>();
+        Map<String,Integer> result = new LinkedHashMap<>();
         List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
         for (DayOfWeek day : DayOfWeek.values()) {
             result.put(day.toString(),countReservationsForDays(day,reservations));
@@ -33,11 +28,25 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
 
     @Override
     public Map<String, Integer> numberOfReservationPerMonthForCottage(Long id) {
-        Map<String,Integer> result = new HashMap<>();
+        Map<String,Integer> result = new LinkedHashMap<>();
         List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
         for (Month month : Month.values()) {
             result.put(month.toString(),countReservationsForMonth(month,reservations));
         }
+        return result;
+    }
+
+    @Override
+    public Map<String, Integer> numberOfReservationPerYearsForCottage(Long id) {
+        Map<String,Integer> result = new LinkedHashMap<>();
+        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
+
+
+
+
+
+
+
         return result;
     }
 
@@ -48,6 +57,12 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
                 i++;
             }
         }
+        return i;
+    }
+
+    private Integer countReservationsForYear(Year year, List<CottageReservation> reservations) {
+        int i=0;
+
         return i;
     }
 

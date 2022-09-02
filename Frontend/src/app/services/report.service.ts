@@ -14,9 +14,23 @@ export class ReportService {
     return this.http.get(`${this.apiServerUrl}/cottage-statistics/per-days/${id}`);
   }
 
+  getNumberPerYear(id: string) {
+    return this.http.get(`${this.apiServerUrl}/cottage-statistics/per-year/${id}`);
+  }
+
 
   getNumberPerMonth(id: string) {
     return this.http.get(`${this.apiServerUrl}/cottage-statistics/per-months/${id}`);
+  }
+
+  getNumberPerYearShip(id: string) {
+    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-year/${id}`);
+  }
+  getNumberPerDaysShip(id: string) {
+    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-days/${id}`);
+  }
+  getNumberPerMonthShip(id: string) {
+    return this.http.get(`${this.apiServerUrl}/ship-statistics/per-month/${id}`);
   }
 
 }

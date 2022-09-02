@@ -9,4 +9,12 @@ public interface CottageStatisticsService {
     Map<String,Integer> numberOfReservationPerDaysInWeekForCottage(Long id);
 
     Map<String,Integer> numberOfReservationPerMonthForCottage(Long id);
+
+    Map<String,Integer> numberOfReservationPerYearsForCottage(Long id);
+
+
+
+
+
+
 }

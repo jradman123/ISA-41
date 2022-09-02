@@ -31,6 +31,11 @@ export class ShipListComponent implements OnInit {
     this.router.navigate(['shipOwner/ship-profile/' + id]);
 
   }
+
+  statistics(id: string) {
+    this.router.navigate(['shipOwner/ship-statistics/' + id]);
+    console.log(id);
+  }
   delete(id: string) {
     this.shipService.deleteShip(id)
       .subscribe(response => {

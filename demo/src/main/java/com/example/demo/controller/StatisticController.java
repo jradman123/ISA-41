@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DateRange;
 import com.example.demo.security.TokenUtils;
 import com.example.demo.service.StatisticService;
 import com.example.demo.service.UserService;
@@ -46,6 +47,12 @@ public class StatisticController {
     @GetMapping(value = "/adventure/{id}/per-year")
     public ResponseEntity<Map<String,Integer>> getStatisticInLastCoupleYear(@PathVariable int id) {
         return new ResponseEntity<>(statisticService.numberOfReservationPerYearForAdventure(id), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PostMapping(value = "/adventure/{id}/income")
+    public ResponseEntity<Map<String,Double>> getPrice(@PathVariable int id,@RequestBody DateRange range) {
+        return new ResponseEntity<>(statisticService.getIncomeForPeriod(range.getStart(),range.getEnd(),id), HttpStatus.OK);
 
     }
 }

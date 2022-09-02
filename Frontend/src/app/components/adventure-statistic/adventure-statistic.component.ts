@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale, Legend, Tooltip, BarElement, BarController, PieController, ArcElement, PolarAreaController, RadialLinearScale } from 'chart.js';
+import { DateRange } from 'src/app/interfaces/date-range';
 import { StatisticService } from 'src/app/services/StatisticService/statistic.service';
 
 @Component({
@@ -12,10 +14,24 @@ export class AdventureStatisticComponent implements OnInit {
 
   statisticPerDays : number[];
   id : any;
-  constructor(private statisticService : StatisticService,private activatedRoute: ActivatedRoute) {
-    //Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+  date: string[];
+  numbers!: string[];
+  todayDate: Date = new Date();
+  show : boolean = false;
+  dateRange : DateRange;
+  ctx! : any;
+  canvas! : any;
+  incomeChart! : any;
+  constructor(private statisticService : StatisticService,private activatedRoute: ActivatedRoute) {;
     Chart.register(BarController,BarElement,CategoryScale,Tooltip,Legend,LineController, LineElement, PointElement, LinearScale, Title,PieController,ArcElement,PolarAreaController,RadialLinearScale );
     this.statisticPerDays = [] as number[];
+    this.date = [] as string[];
+    this.numbers = [] as string[];
+    this.dateRange = {} as DateRange;
   }
   
 
@@ -59,7 +75,7 @@ export class AdventureStatisticComponent implements OnInit {
     let months = Object.keys(data)
     let numbers = Object.values(data)
     
-    const myChart = new Chart("monthChart", {
+    const monthChart = new Chart("monthChart", {
           type: 'line',
           data: {
               labels: months,
@@ -93,8 +109,8 @@ export class AdventureStatisticComponent implements OnInit {
     let years = Object.keys(data)
     let numbers = Object.values(data)
     
-    const myChart = new Chart("yearChart", {
-          type: 'polarArea',
+    const yearChart = new Chart("yearChart", {
+          type: 'line',
           data: {
               labels: years,
               datasets: [{
@@ -122,6 +138,55 @@ export class AdventureStatisticComponent implements OnInit {
           }
       });
   });
+  
+  }
+    createIncomeChart(date: string[], numbers: string[]) {
+        this.canvas = document.getElementById('incomeChart');
+        this.ctx = this.canvas.getContext('2d');
+        //this.incomeChart.destroy();
+        this.incomeChart = new Chart("incomeChart", {
+            type: 'polarArea',
+            data: {
+                labels: date,
+                datasets: [{
+                    label : 'Number of reservations',
+                    data: numbers,
+                    backgroundColor: [
+                        'rgba(0, 200, 32,0.6)',
+                        'rgba(255, 0, 71, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    },
+                    legend: {
+                      display: false
+                  }
+                },
+              
+            }
+        });
+    }
+
+  addDate() {
+    const s = new Date(this.range.value.start.getTime() - this.range.value.start.getTimezoneOffset() * 60000)
+    const e = new Date(this.range.value.end.getTime() - this.range.value.end.getTimezoneOffset() * 60000)
+    this.dateRange = {
+        start : s.toISOString(),
+        end : e.toISOString()
+    }
+    this.statisticService.getIncome(this.id,this.dateRange).subscribe((data) => {
+      this.date = Object.keys(data)
+      this.numbers = Object.values(data)
+      this.show = true;
+      this.createIncomeChart(this.date,this.numbers);
+    });
   }
 
 }

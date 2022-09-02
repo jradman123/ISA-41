@@ -14,6 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -26,9 +27,8 @@ public class StatisticServiceImpl implements StatisticService {
     @Override
     public Map<String, Integer> numberOfReservationPerDaysInWeekForAdventure(int id) {
         Map<String,Integer> result = new LinkedHashMap<>();
-        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusDays(7), LocalDateTime.now(), id);
         for (DayOfWeek day : DayOfWeek.values()) {
-            result.put(day.toString(),countReservationsForDayInLastWeek(day,reservations));
+            result.put(day.toString(),countReservationsForDayInLastWeek(day,id));
         }
         return result;
     }
@@ -36,9 +36,8 @@ public class StatisticServiceImpl implements StatisticService {
     @Override
     public Map<String, Integer> numberOfReservationPerMonthForAdventure(int id) {
         Map<String,Integer> result = new LinkedHashMap<>();
-        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusYears(1), LocalDateTime.now(), id);
         for (Month month : Month.values()) {
-            result.put(month.toString(),countReservationsForMonthInLastYear(month,reservations));
+            result.put(month.toString(),countReservationsForMonthInLastYear(month,id));
         }
         return result;
     }
@@ -46,18 +45,33 @@ public class StatisticServiceImpl implements StatisticService {
     @Override
     public Map<String, Integer> numberOfReservationPerYearForAdventure(int id) {
         Map<String,Integer> result = new LinkedHashMap<>();
-        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusYears(4), LocalDateTime.now(), id);
         List<Integer> years = new ArrayList<>();
         for(int i=3; i>=0; i--) {
             years.add(LocalDateTime.now().getYear() - i);
         }
         for (Integer year : years) {
-            result.put(year.toString(),countReservationsForDayInLastCoupleYears(year,reservations));
+            result.put(year.toString(),countReservationsForDayInLastCoupleYears(year,id));
         }
         return result;
     }
 
-    private Integer countReservationsForDayInLastWeek(DayOfWeek day,List<AdventureReservation> reservations){
+    @Override
+    public Map<String, Double> getIncomeForPeriod(String start, String end, int id) {
+        Map<String,Double> result = new LinkedHashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime startDate=LocalDateTime.parse(start,formatter);
+        LocalDateTime endDate=LocalDateTime.parse(end,formatter);
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(startDate,endDate,id);
+        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+            result.put(startDate.toLocalDate().toString(), countIncome(startDate,reservations));
+            startDate = startDate.plusDays(1);
+        }
+
+        return result;
+    }
+
+    private Integer countReservationsForDayInLastWeek(DayOfWeek day,int id){
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusDays(7), LocalDateTime.now(), id);
         int i=0;
         for (AdventureReservation r : reservations) {
             if (r.getReservationStart().getDayOfWeek().equals(day)) {
@@ -67,7 +81,8 @@ public class StatisticServiceImpl implements StatisticService {
         return i;
     }
 
-    private Integer countReservationsForMonthInLastYear(Month month, List<AdventureReservation> reservations){
+    private Integer countReservationsForMonthInLastYear(Month month, int id){
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusYears(1), LocalDateTime.now(), id);
         int i=0;
         for (AdventureReservation r : reservations) {
             if (r.getReservationStart().getMonth().equals(month)) {
@@ -77,7 +92,8 @@ public class StatisticServiceImpl implements StatisticService {
         return i;
     }
 
-    private Integer countReservationsForDayInLastCoupleYears(int year, List<AdventureReservation> reservations){
+    private Integer countReservationsForDayInLastCoupleYears(int year,int id){
+        List<AdventureReservation> reservations = adventureReservationRepository.getAllForAdventureInDateRange(LocalDateTime.now().minusYears(4), LocalDateTime.now(), id);
         int i=0;
         for (AdventureReservation r : reservations) {
             if (r.getReservationStart().getYear() == year) {
@@ -86,4 +102,15 @@ public class StatisticServiceImpl implements StatisticService {
         }
         return i;
     }
+
+    private Double countIncome(LocalDateTime startDate, List<AdventureReservation> reservations){
+        Double income = 0.0;
+        for (AdventureReservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                income += res.getPrice();
+            }
+        }
+        return income;
+    }
+
 }

@@ -1,19 +1,47 @@
-<div class="container" style="background-color: white !important;" >
+<div class="container" style="background-color: white !important; height: 800px;" >
+    <br/>
     <h1 style="text-align: center;">Adventure report</h1>
+    <br/><br/>
     <div class="row" >
-        <div id="divThirdChart" class="col-sm">
-            <h6 style="align-self: center; font-style: italic;">Number of reservations per month in last four years</h6>
-            <canvas id="yearChart"></canvas>
-        </div>
         <div id="divFirstChart" class="col-sm">
-            <h6 style="align-self: center; font-style: italic;">Number of reservations per days in last week</h6>
+            <h6 style="align-self: center; font-style: italic; font-size:15px;">Number of reservations per days in last week</h6>
             <canvas id="myChart"></canvas>
         </div>
         <div id="divSecondChart" class="col-sm" >
-            <h6 style="align-self: center; font-style: italic;">Number of reservations per month in last year</h6>
+            <h6 style="align-self: center; font-style: italic; font-size:15px;">Number of reservations per month in last year</h6>
             <canvas id="monthChart"></canvas>
         </div>
-        
+        <div id="divThirdChart" class="col-sm">
+            <h6 style="align-self: center; font-style: italic; font-size:15px;">Number of reservations per month in last four years</h6>
+            <canvas id="yearChart"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="margin-left: 100px;">
+            <br /> <br /> 
+            <h3 style="font-style: italic;">Select date range:</h3>
+
+
+            <mat-form-field appearance="fill" style="background-color: white;">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker" style="width:200px">
+                    <input matStartDate placeholder="Start date" formControlName="start" #dateRangeStart>
+                    <input matEndDate placeholder="End date" formControlName="end" #dateRangeEnd>
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            <div class="col">
+                <br />
+                <button mat-flat-button color="primary" style="margin-left: 80px;" (click)="addDate()">Search</button>
+            </div>
+        </div>
+        <div id="divFourthChart" class="col" style="width: 400px;" >
+            <br/><br/>
+            <h3 style=" font-style: italic;">Income for specific period</h3>
+            <canvas id="incomeChart" style="width: 400px;"></canvas>
+        </div>
     </div>
 </div>
 <hr/>

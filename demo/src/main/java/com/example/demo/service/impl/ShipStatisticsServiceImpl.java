@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ShipStatisticsServiceImpl implements ShipStatisticsService {
@@ -45,7 +43,26 @@ public class ShipStatisticsServiceImpl implements ShipStatisticsService {
 
     @Override
     public Map<String, Integer> numberOfReservationPerYearsForShip(Long id) {
-        return null;
+        Map<String,Integer> result = new LinkedHashMap<>();
+        List<ShipReservation> reservations = shipReservationRepository.getAllForShipInDateRange(LocalDateTime.now().minusYears(4), LocalDateTime.now(), id);
+        List<Integer> years = new ArrayList<>();
+        for(int i=3; i>=0; i--) {
+            years.add(LocalDateTime.now().getYear() - i);
+        }
+        for (Integer year : years) {
+            result.put(year.toString(),countReservationsForDayInLastCoupleYears(year,reservations));
+        }
+        return result;
+    }
+
+    private Integer countReservationsForDayInLastCoupleYears(Integer year, List<ShipReservation> reservations) {
+        int i=0;
+        for (ShipReservation r : reservations) {
+            if (r.getReservationStart().getYear() == year) {
+                i++;
+            }
+        }
+        return i;
     }
 
     private Integer countReservationsForMonth(Month month, List<ShipReservation> reservations) {

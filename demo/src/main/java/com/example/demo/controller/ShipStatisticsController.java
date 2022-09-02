@@ -33,7 +33,7 @@ public class ShipStatisticsController {
 
     }
 
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/per-years/{id}")
     public ResponseEntity<Map<String,Integer>> getStatisticPerYearsForShip(@PathVariable Long id) {
         return new ResponseEntity<>(shipStatisticsService.numberOfReservationPerYearsForShip(id), HttpStatus.OK);

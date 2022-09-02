@@ -1,22 +1,22 @@
 <app-cottage-owner-navbar></app-cottage-owner-navbar>
-<div class="image3">
+<div class="container">
     <div>
-        <h2 style="text-align: center;">Cottage report:</h2><br>
+        <h2 style="align-self: center; font-style: italic,bold;margin-left: 500px;">Cottage report:</h2><br>
         <h3 style="text-align: center;">Average mark: {{this.cottageMark.cottageMark}}</h3><br><br>
     </div>
     <div class="container">
         <div class="row">
-            <div id="divFirstChart" class="col" style="width: 200px;">
-                <h6 style="align-self: center; font-style: italic;">Number of reservations per days in last week</h6>
-                <canvas id="myChart"></canvas>
+            <div id="divFirstChart" class="col">
+                <h3 style=" font-style: italic;">Number of reservations per weeks</h3>
+                <canvas id="myWeekChart" style="width: 400px;"></canvas>
             </div>
             <div id="divFirstChart" class="col" style="width: 200px;">
-                <h6 style="align-self: center; font-style: italic;">Number of reservations per days in last week</h6>
-                <canvas id="myChart"></canvas>
+                <h3 style=" font-style: italic;">Number of reservations per months</h3>
+                <canvas id="myMonthChart" style="width: 400px;"></canvas>
             </div>
             <div id="divFirstChart" class="col" style="width: 200px;">
-                <h6 style="align-self: center; font-style: italic;">Number of reservations per days in last week</h6>
-                <canvas id="myChart"></canvas>
+                <h3 style="font-style: italic;">Number of reservations per years</h3>
+                <canvas id="myYearsChart" style="width: 400px;"></canvas>
             </div>
 
         </div>
@@ -28,27 +28,6 @@
 
 
 
-        <div style="text-align: center;">
-            <br>
-            <h2 style="text-align: center;">Total price in specific period: </h2><br>
-            <h3>Total in selected period: {{this.cottageMark.cottageMark}}</h3>
-            <label style="margin-bottom: 10px;">Start date:</label>
-            <mat-form-field appearance="fill">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <label style="margin-bottom: 10px">End date:</label>
-            <mat-form-field appearance="fill">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-            <button class="btn btn-primary">Select</button><br>
 
-
-            <br /><br /><br />
-        </div>
     </div>
+</div>

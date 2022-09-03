@@ -1,10 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.adventures.Adventure;
-import com.example.demo.model.adventures.AdventureRule;
-import com.example.demo.model.adventures.AdventureUtility;
-import com.example.demo.model.adventures.FishingEquipment;
+import com.example.demo.dto.AdventureAverageRating;
+import com.example.demo.dto.AverageMarkDto;
+import com.example.demo.model.Review;
+import com.example.demo.model.adventures.*;
+import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.repository.AdventureRepository;
+import com.example.demo.repository.AdventureReservationRepository;
+import com.example.demo.repository.ReviewRepository;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,12 @@ public class AdventureServiceImpl implements AdventureService {
 
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private AdventureReservationRepository adventureReservationRepository;
 
     @Override
     public List<Adventure> getAllForInstructor(int instructorId) {
@@ -139,4 +148,27 @@ public class AdventureServiceImpl implements AdventureService {
         }
         return adventureRepository.save(adventure);
     }
+
+    @Override
+    public AdventureAverageRating getRatingForAdventure(int id) {
+        AdventureAverageRating averageRating=new AdventureAverageRating();
+        Double rating=calculateAverageRating(id);
+        averageRating.setAverageRating(rating.toString());
+        return averageRating;
+    }
+
+    private Double calculateAverageRating(int id) {
+        List<AdventureReservation> reservations=adventureReservationRepository.getAllForAdventure(id);
+        Double sum = 0.0;
+        int numberOfRatings = 0;
+        for (AdventureReservation reservation : reservations) {
+            for (Review review : this.reviewRepository.findAllForReservation(reservation.getId())) {
+                numberOfRatings++;
+                sum+=review.getMark();
+            }
+        }
+        return sum/numberOfRatings;
+    }
+
+
 }

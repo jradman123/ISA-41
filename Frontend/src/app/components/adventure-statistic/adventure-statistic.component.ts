@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale, Legend, Tooltip, BarElement, BarController, PieController, ArcElement, PolarAreaController, RadialLinearScale } from 'chart.js';
+import { AdventureAverageRating } from 'src/app/interfaces/adventure-average-rating';
 import { DateRange } from 'src/app/interfaces/date-range';
+import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
 import { StatisticService } from 'src/app/services/StatisticService/statistic.service';
 
 @Component({
@@ -26,17 +28,26 @@ export class AdventureStatisticComponent implements OnInit {
   ctx! : any;
   canvas! : any;
   incomeChart! : any;
-  constructor(private statisticService : StatisticService,private activatedRoute: ActivatedRoute) {;
+  adventureAverageRating! : AdventureAverageRating;
+
+  constructor(private statisticService : StatisticService,private activatedRoute: ActivatedRoute,private adventureService : AdventureService) {;
     Chart.register(BarController,BarElement,CategoryScale,Tooltip,Legend,LineController, LineElement, PointElement, LinearScale, Title,PieController,ArcElement,PolarAreaController,RadialLinearScale );
     this.statisticPerDays = [] as number[];
     this.date = [] as string[];
     this.numbers = [] as string[];
     this.dateRange = {} as DateRange;
+    this.adventureAverageRating = {} as AdventureAverageRating;
   }
   
 
   ngOnInit(): void {
     this.id = +this.activatedRoute.snapshot.paramMap.get('id')!;
+
+    this.adventureService.getAverageRatingForAdventure(this.id).subscribe((data) => {
+        this.adventureAverageRating = data;
+        console.log(this.id)
+    });
+
     this.statisticService.getAllForAdventurePerDays(this.id).subscribe((data) => {
     let days = Object.keys(data)
     let numbers = Object.values(data)

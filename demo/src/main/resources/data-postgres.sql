@@ -232,3 +232,10 @@ INSERT INTO public.cottage_users(
 INSERT INTO public.ship_users(
 	ship_id, users_id)
 	VALUES (1, 7);
+
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('I am disappointed', 1, 11);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('It could be better.', 3, 11);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('Adventure is interesting.', 5, 11);

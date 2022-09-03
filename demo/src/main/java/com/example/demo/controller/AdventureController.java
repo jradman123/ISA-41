@@ -147,4 +147,10 @@ public class AdventureController {
         }
     }
 
+    @PreAuthorize("hasAuthority('Instructor')")
+    @GetMapping(value = "/{id}/average-rating")
+    public ResponseEntity<AdventureAverageRating> getAdventureAverageRating(@PathVariable int id) {
+        return new ResponseEntity<>(adventureService.getRatingForAdventure(id), HttpStatus.OK);
+    }
+
 }

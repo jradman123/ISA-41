@@ -9,6 +9,7 @@ import { ImagesResponse } from 'src/app/interfaces/images-response';
 import { ResponseRules } from 'src/app/interfaces/response-rules';
 import { ResponseFishingEquipment } from 'src/app/interfaces/response-fishing-equipment';
 import { ResponseUtility } from 'src/app/interfaces/response-utility';
+import { AdventureAverageRating } from 'src/app/interfaces/adventure-average-rating';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,11 @@ export class AdventureService {
   deleteAdventure(id : string){
     return this.http.delete<String>(
       `${this.apiServerUrl}/adventures/${id}`);
+  }
+
+  getAverageRatingForAdventure(id: string) {
+    return this.http.get<AdventureAverageRating>(
+      `${this.apiServerUrl}/adventures/${id}/average-rating`);
   }
 
 }

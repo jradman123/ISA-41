@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.AdventureAverageRating;
+import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.dto.CottageDto;
 import com.example.demo.model.Rules;
 import com.example.demo.model.Utility;
@@ -25,5 +27,6 @@ public interface AdventureService {
     Adventure addUtility(int id, AdventureUtility utility);
     Set<AdventureUtility> getUtilitiesByAdventure(Adventure adventure);
     Adventure deleteAdventure(int id);
+    AdventureAverageRating getRatingForAdventure(int id);
 
 }

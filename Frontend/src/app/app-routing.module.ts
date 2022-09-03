@@ -36,6 +36,7 @@ import { NewAdventureComponent } from './components/new-adventure/new-adventure.
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
+import { AdminReportComponent } from './components/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -58,13 +59,18 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'addNewAdmin',
+        path: 'add-new-admin',
         component: AdminRegistrationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'requestsForDeleting',
+        path: 'requests-for-deleting',
         component: RequestsForDeletingAccountComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'reports',
+        component: AdminReportComponent,
         canActivate: [AuthGuard]
       },
     ],

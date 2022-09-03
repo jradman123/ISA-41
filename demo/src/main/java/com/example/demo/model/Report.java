@@ -30,9 +30,6 @@ public class Report {
     @JsonManagedReference
     private Reservation reservation;
 
-
-
-
     @Column(name = "comment", nullable = false)
     private String comment;
 
@@ -47,6 +44,9 @@ public class Report {
 
     @Column(name = "approvedbyAdmin")
     private boolean approvedbyAdmin;
+
+    @Column(name = "unapprovedbyAdmin")
+    private boolean unapprovedbyAdmin;
 
 
 

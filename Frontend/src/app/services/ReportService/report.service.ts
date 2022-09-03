@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HaveReportDto } from 'src/app/interfaces/have-report';
 import { ReportDto } from 'src/app/interfaces/report-dto';
+import { ReportResponse } from 'src/app/interfaces/report-response';
 import { environment } from 'src/environments/environment';
 
 
@@ -33,6 +34,21 @@ export class ReportService {
       `${this.apiServerUrl}/reports/findReportByResId/${id}`);
 
   }
+
+  getAllUnseen() : Observable<ReportResponse[]> {
+    return this.http.get<ReportResponse[]>(
+      `${this.apiServerUrl}/reports/unseen`);
+
+  }
+
+  approveReport(id : string)  {
+    return this.http.get(`${this.apiServerUrl}/reports/approve/${id}`);
+  }
+
+  rejectReport(id : string)  {
+    return this.http.get(`${this.apiServerUrl}/reports/reject/${id}`);
+  }
+
 
 
 }

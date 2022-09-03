@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.HaveReportDto;
-import com.example.demo.dto.ReportDto;
-import com.example.demo.dto.RoomDto;
+import com.example.demo.dto.*;
+import com.example.demo.mapper.ReportMapper;
 import com.example.demo.model.Report;
 import com.example.demo.model.cottages.Room;
 import com.example.demo.service.ReportService;
@@ -16,17 +14,19 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reports")
 public class ReportController {
 
-
-
-
     @Autowired
     private ReportServiceImpl reportService;
+
+    @Autowired
+    private ReportMapper reportMapper;
 
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -62,6 +62,31 @@ public class ReportController {
             haveReportDto.setMessage("FALSE");
         }
         return new ResponseEntity<HaveReportDto>(haveReportDto, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping("/unseen")
+    public ResponseEntity<List<ReportResponse>> getAllReports(){
+        List<ReportResponse> response = new ArrayList<>();
+        for (Report report: reportService.getAllUnseen()) {
+            response.add(reportMapper.mapToResponse(report));
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping("/approve/{id}")
+    public void approveReport(@PathVariable Long id){
+        reportService.approveReport(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping("/reject/{id}")
+    public void rejectReport(@PathVariable Long id){
+        reportService.rejectReport(id);
     }
 
 }

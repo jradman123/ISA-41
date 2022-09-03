@@ -11,10 +11,11 @@
         <button class="dropdown" mat-button [matMenuTriggerFor]="menu">Requests</button>
         <mat-menu #menu="matMenu">
           <a mat-button  class="nav-link" routerLinkActive="active" [routerLink]="['/admin']"> Registration requests </a>
-          <a mat-button  class="nav-link" routerLinkActive="active" [routerLink]="['/admin/requestsForDeleting']"> Requests for deleting account </a>
+          <a mat-button  class="nav-link" routerLinkActive="active" [routerLink]="['/admin/requests-for-deleting']"> Requests for deleting account </a>
         </mat-menu>
+        <a mat-button class="nav-link"  [routerLink]="['/admin/reports']"> Reports </a>
         <a mat-button class="nav-link"  [routerLink]="['/admin/profile']"> Profile </a>
-        <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/addNewAdmin']"> Add new administrator </a>
+        <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/add-new-admin']"> Add new administrator </a>
           <button
             mat-button
             *ngIf="authService.isLoggedIn"

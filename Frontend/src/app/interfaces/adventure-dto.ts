@@ -10,4 +10,6 @@ export interface AdventureDto {
     country : string;
     cancellationConditions : string;
     instructorsBiography : string;
+    longitude : number;
+    latitude : number;
 }

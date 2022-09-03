@@ -35,6 +35,8 @@ public class AdventureMapper {
         adventureDto.setStreetNumber(adventure.getAddress().getStreetNumber());
         adventureDto.setPrice(adventure.getPrice().toString());
         adventureDto.setInstructorsBiography(adventure.getInstructor().getBiography());
+        adventureDto.setLatitude(adventure.getAddress().getLatitude());
+        adventureDto.setLongitude(adventure.getAddress().getLongitude());
         return adventureDto;
     }
 

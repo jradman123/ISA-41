@@ -6,7 +6,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Getter
 public class NewAdventureDto {
 
     @NotBlank
@@ -27,10 +26,7 @@ public class NewAdventureDto {
     private String price;
     @NotBlank
     private String cancellationConditions;
-
-
     private Double longitude;
-
     private Double latitude;
 
     public NewAdventureDto() {
@@ -122,4 +118,19 @@ public class NewAdventureDto {
         this.cancellationConditions = cancellationConditions;
     }
 
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
 }

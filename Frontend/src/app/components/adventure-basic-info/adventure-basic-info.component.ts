@@ -42,6 +42,8 @@ export class AdventureBasicInfoComponent implements OnInit {
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['guestLimit'].setValue(data.guestLimit)
         this.detailsForm.controls['biography'].setValue(data.instructorsBiography)
+        this.detailsForm.controls['longitude'].setValue(data.longitude)
+        this.detailsForm.controls['latitude'].setValue(data.latitude)
       },
     });
 
@@ -81,6 +83,8 @@ export class AdventureBasicInfoComponent implements OnInit {
     cancellationConditions: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,3}$')]),
     guestLimit: new FormControl(null, [Validators.required,Validators.pattern('^\\d{1,3}$')]),
     biography : new FormControl(null),
+    longitude: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,7}$')]),
+    latitude: new FormControl(null, [Validators.required, Validators.pattern('^\\d{1,3}.?\\d{1,7}$')]),
   })
 
   edit() {
@@ -98,7 +102,9 @@ export class AdventureBasicInfoComponent implements OnInit {
       country: this.detailsForm.get('country')?.value,
       id : this.id,
       guestLimit : this.detailsForm.get('guestLimit')?.value,
-      instructorsBiography : this.detailsForm.get('biography')?.value
+      instructorsBiography : this.detailsForm.get('biography')?.value,
+      longitude : this.detailsForm.get('longitude')?.value,
+      latitude : this.detailsForm.get('latitude')?.value
     }
     this.adventureService.updateAdventure(this.id,this.adventureForUpdate).subscribe((data) => {
       this.adventureForUpdate = data
@@ -119,6 +125,8 @@ cancel() {
   this.detailsForm.controls['city'].setValue(this.initialDetails.city)
   this.detailsForm.controls['country'].setValue(this.initialDetails.country)
   this.detailsForm.controls['guestLimit'].setValue(this.initialDetails.guestLimit)
+  this.detailsForm.controls['longitude'].setValue(this.initialDetails.longitude)
+  this.detailsForm.controls['latitude'].setValue(this.initialDetails.latitude)
 }
 
 checkIfEditIsPossible(){

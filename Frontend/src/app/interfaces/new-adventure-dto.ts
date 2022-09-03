@@ -8,4 +8,6 @@ export interface NewAdventureDto {
     guestLimit : string;
     price : string;
     cancellationConditions : string;
+    longitude : number;
+    latitude : number;
 }

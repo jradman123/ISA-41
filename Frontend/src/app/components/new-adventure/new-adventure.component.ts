@@ -56,6 +56,14 @@ export class NewAdventureComponent implements OnInit {
       description: new FormControl(null, [
         Validators.required,
         Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
+      ]),
+      longitude: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+      ]),
+      latitude: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
       ])
     });
   }
@@ -78,7 +86,9 @@ export class NewAdventureComponent implements OnInit {
       country: this.createForm.get('country')?.value,
       description: this.createForm.get('description')?.value,
       cancellationConditions: this.createForm.get('cancellationConditions')?.value,
-      price: this.createForm.get('price')?.value
+      price: this.createForm.get('price')?.value,
+      longitude: this.createForm.get('longitude')?.value,
+      latitude: this.createForm.get('latitude')?.value
     }
     this.adventureService.createNewAdventure(this.adventure).subscribe((res) => {
       this._snackBar.open(
@@ -86,7 +96,7 @@ export class NewAdventureComponent implements OnInit {
         '',
         {duration : 3000,panelClass: ['snack-bar']}
       );
-      this.router.navigate(['/instructor/adventures']);
+      this.router.navigate(['/instructor']);
     },
     (err) => {
       let parts = err.error.split(':');

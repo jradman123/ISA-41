@@ -58,6 +58,8 @@ public class AdventureServiceImpl implements AdventureService {
             adventure.getAddress().setStreetName(updatedAdventure.getAddress().getStreetName());
             adventure.getAddress().setCity(updatedAdventure.getAddress().getCity());
             adventure.getAddress().setCountry(updatedAdventure.getAddress().getCountry());
+            adventure.getAddress().setLongitude(updatedAdventure.getAddress().getLongitude());
+            adventure.getAddress().setLatitude(updatedAdventure.getAddress().getLatitude());
             adventure.setGuestLimit(updatedAdventure.getGuestLimit());
             adventure.setCancellationConditions(updatedAdventure.getCancellationConditions());
         }

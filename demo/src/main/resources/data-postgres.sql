@@ -179,6 +179,8 @@ INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_o
     VALUES ('AdventureReservation',false,false,true,2,30.0,'02-06-2022 09:00','02-06-2022 08:00',6,8,1,null,null,false);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
     VALUES ('AdventureReservation',false,false,true,2,30.0,'03-06-2022 09:00','03-06-2022 08:00',6,8,1,null,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'02-09-2022 09:00','02-09-2022 08:00',6,8,1,null,null,false);
 
 
 

@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AdventureReservation } from 'src/app/interfaces/adventure-reservation';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { DetailsAboutReservation } from 'src/app/interfaces/details-about-reservation';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -82,6 +83,11 @@ export class ReservationService {
   getReservationsForInstructor(): Observable<AdventureReservation[]> {
     return this.http.get<AdventureReservation[]>(
       `${this.apiServerUrl}/reservations/all-instructors`);
+  }
+
+  getDetails(id : string): Observable<DetailsAboutReservation> {
+    return this.http.get<DetailsAboutReservation>(
+      `${this.apiServerUrl}/reservations/${id}/details`);
   }
 
 

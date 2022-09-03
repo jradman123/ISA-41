@@ -7,16 +7,18 @@ public class ReportResponse {
     private String appeared;
     private String sanctioned;
     private String date;
+    private String reservationId;
 
     public ReportResponse() {
     }
 
-    public ReportResponse(String id, String comment, String appeared, String sanctioned, String date) {
+    public ReportResponse(String id, String comment, String appeared, String sanctioned, String date, String reservationId) {
         this.id = id;
         this.comment = comment;
         this.appeared = appeared;
         this.sanctioned = sanctioned;
         this.date = date;
+        this.reservationId = reservationId;
     }
 
     public String getId() {
@@ -57,5 +59,13 @@ public class ReportResponse {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(String reservationId) {
+        this.reservationId = reservationId;
     }
 }

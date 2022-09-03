@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
+import com.example.demo.mapper.ReservationMapper;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.adventures.AdventureUtility;
@@ -89,6 +90,9 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private AdventureQuickReservationService adventureQuickReservationService;
+
+    @Autowired
+    private ReservationMapper reservationMapper;
 
     @Override
     public List<ReservationViewDto> getReservationsByCottage(Long id) {
@@ -458,6 +462,20 @@ return null;
         }
 
         return reservationDtos;
+    }
+
+    @Override
+    public DetailsAboutReservation getDetails(Long id) {
+        DetailsAboutReservation details = new DetailsAboutReservation();
+        String type = reservationRepository.getReservationType(id);
+        if(type.equals("AdventureReservation")){
+            return reservationMapper.fromAdventureReservation(adventureReservationRepository.findById(id).get());
+        }else if(type.equals("ShipReservation")){
+            return reservationMapper.fromShipReservation(shipReservationRepository.findById(Integer.parseInt(id.toString())).get());
+        }else{
+            return reservationMapper.fromCottageReservation(cottageReservationRepository.findById(id).get());
+        }
+
     }
 
     private List<AdventureReservation> getAllInstructorsAdventures(int id){

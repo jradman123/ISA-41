@@ -15,10 +15,6 @@ table {
   }
  
 
-  button {
-    width: 50;
-  }
-
   mat-card {
     align-self: center;
     align-items: center;

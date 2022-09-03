@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dto.ReservationViewDto;
-import com.example.demo.dto.CreateReservationDto;
-import com.example.demo.dto.ReservationDto;
-import com.example.demo.dto.ShipReservationViewDto;
+import com.example.demo.dto.*;
 
 import com.example.demo.model.adventures.AdventureReservation;
 
@@ -168,6 +165,13 @@ public class ReservationController {
             return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
         }
         return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping(value = "/{id}/details")
+    public ResponseEntity<DetailsAboutReservation> getDetails(@PathVariable Long id) {
+        return new ResponseEntity<>(reservationService.getDetails(id),HttpStatus.OK);
     }
 
 }

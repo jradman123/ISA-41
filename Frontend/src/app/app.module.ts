@@ -89,6 +89,7 @@ import { DatePipe } from '@angular/common';
 import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
+import { DialogReservationViewComponent } from './components/dialog-reservation-view/dialog-reservation-view.component';
 
 
 @NgModule({
@@ -164,7 +165,8 @@ import { AdminReportComponent } from './components/admin-report/admin-report.com
     CottageReportComponent,
     DialogForDeletingAdventureComponent,
     AdventureStatisticComponent,
-    AdminReportComponent
+    AdminReportComponent,
+    DialogReservationViewComponent
 
 
   ],

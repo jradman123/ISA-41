@@ -25,6 +25,7 @@ public class ReportMapper {
             response.setSanctioned("No");
         }
         response.setDate(report.getDate().format(formatter));
+        response.setReservationId(report.getReservation().getId().toString());
         return response;
     }
 }

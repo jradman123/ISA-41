@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.DetailsAboutReservation;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.CreateReservationDto;
 import com.example.demo.dto.ReservationDto;
@@ -50,4 +51,5 @@ public interface ReservationService {
     List<ReservationViewDto> getAllCurrentAndFutureInstructorsReservations(int instructorId);
     
     List<ReservationViewDto> getAllInstructorsReservations(int instructorId);
+    DetailsAboutReservation getDetails(Long id);
 }

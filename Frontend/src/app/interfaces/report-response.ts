@@ -4,4 +4,5 @@ export interface ReportResponse {
     appeared : string;
     sanctioned : string;
     date : string;
+    reservationId : string;
 }

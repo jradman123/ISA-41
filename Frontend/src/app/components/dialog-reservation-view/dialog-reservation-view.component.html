@@ -1,0 +1,41 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Reservation for {{data.nameOfObject}}</mat-card-title>
+        <br />
+        <mat-card-content>
+                <div class="card" style="margin: 10px; ">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="bi bi-person-circle"></i>
+                          <span> </span>
+                            <strong> Client name: </strong> {{data.clientName}}
+                        </li>
+                        <li  class="list-group-item"><i class="bi bi-person-lines-fill" style="font-size: 20px;"></i>
+                            <span></span><strong> Client email: </strong> {{data.clientEmail}} 
+                        </li>
+                        <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                            <span> </span>
+                              <strong> Reservation start: </strong> {{data.resStart}}
+                          </li>
+                          <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                            <span> </span>
+                              <strong> Reservation end: </strong> {{data.resEnd}}
+                          </li>
+    
+                        <li  class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i>
+                            <span></span><strong> Price: </strong> {{data.price}}€ 
+                        </li>
+                        <li  class="list-group-item"><i class="bi bi-people-fill" style="font-size: 20px;"></i>
+                            <span></span><strong> Number of person: </strong> {{data.numberOfPerson}} 
+                        </li> 
+                        
+                
+                    </ul>
+                </div>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="button" (click)="close()">Close</button>
+
+                </div>
+        
+        </mat-card-content>
+    </mat-card>
+</div>

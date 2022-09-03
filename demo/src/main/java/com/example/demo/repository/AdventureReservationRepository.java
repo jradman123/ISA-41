@@ -19,7 +19,10 @@ public interface AdventureReservationRepository extends JpaRepository<AdventureR
     @Query(value = "select * from reservation a where instructor_id = ?1", nativeQuery = true)
     List<AdventureReservation> getAllInstructorsReservations(int instructorId);
 
-    @Query(value = "select * from reservation a where adventure_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end", nativeQuery = true)
+    @Query(value = "select * from reservation a where adventure_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end and is_canceled = false", nativeQuery = true)
     List<AdventureReservation> getAllForAdventureInDateRange(LocalDateTime start, LocalDateTime end,int id);
+
+    @Query(value = "select * from reservation a where adventure_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end and is_canceled = true", nativeQuery = true)
+    List<AdventureReservation> getAllCancelledForAdventureInDateRange(LocalDateTime start, LocalDateTime end,int id);
 
 }

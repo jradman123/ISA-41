@@ -160,7 +160,7 @@ INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_o
 
 
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
-	VALUES (0.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 15, 5, 6);
+	VALUES (15.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 15, 5, 6);
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (0.0, false, 'Pecanje sa obale i sa rijeke.', 7, 'Magija na vodi', 20, 6, 6);
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)

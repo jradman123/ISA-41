@@ -78,7 +78,7 @@ public class AdventureQuickReservationServiceImpl implements AdventureQuickReser
         List<Adventure> adventures = adventureService.getAllForInstructor(instructorId);
         for(Adventure adventure : adventures){
             for(AdventureQuickReservation quickReservation : adventureQuickReservationRepository.findAll()){
-                if(quickReservation.getAdventure().getId() == adventure.getId()){
+                if((quickReservation.getAdventure().getId() == adventure.getId()) && !quickReservation.isDeleted()){
                     if((startTime.isAfter(quickReservation.getStartTime()) && endTime.isBefore(quickReservation.getEndTime())) ||
                             (startTime.isBefore(quickReservation.getStartTime()) && endTime.isAfter(quickReservation.getEndTime())) ||
                             (startTime.isBefore(quickReservation.getStartTime()) && endTime.isBefore(quickReservation.getEndTime()) && endTime.isAfter(quickReservation.getStartTime())) ||

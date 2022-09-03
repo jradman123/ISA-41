@@ -10,7 +10,7 @@ INSERT INTO public.address(city, country, street_name,street_number,longitude,la
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Majska','22', 20.501251, 44.743571);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50',19.844961, 45.254708);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','10',0.0, 0.0);
-
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','11',0.0, 0.0);
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address)
@@ -34,6 +34,9 @@ VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim
 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
 VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255856', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 7);
+
+INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
+VALUES ('REGISTERED_USER', false, '-----', 'testsemailpsw@gmail.com', 'Mileva', true, '2209968255856', 'Majstorovic','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066781777', 3,null, 8);
 
 --registration requests
 INSERT INTO public.registration_request(email) VALUES ('raandmjenale@gmail.com');
@@ -168,9 +171,16 @@ INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_o
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
     VALUES ('AdventureReservation',false,false,true,2,30.0,'02-09-2022 09:00','31-08-2022 08:00',6,7,1,null,null,false);
 
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',true,false,true,3,45.0,'10-05-2021 12:00','10-05-2021 08:00',6,8,1,null,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'02-06-2019 09:00','02-06-2019 08:00',6,8,1,null,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'02-06-2022 09:00','02-06-2022 08:00',6,8,1,null,null,false);
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'03-06-2022 09:00','03-06-2022 08:00',6,8,1,null,null,false);
 
---INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);
---INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 5);
+
 
 INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No smoking');
 INSERT INTO public.adventure_rules(is_deleted, rule_description) VALUES (false, 'No alcohol');
@@ -213,6 +223,15 @@ VALUES ('vrh', 5, 2);
 INSERT INTO public.adventure_users(
 	adventure_id, users_id)
 	VALUES (1, 7);
+INSERT INTO public.adventure_users(
+	adventure_id, users_id)
+	VALUES (2, 7);
+INSERT INTO public.adventure_users(
+	adventure_id, users_id)
+	VALUES (1, 8);
+INSERT INTO public.adventure_users(
+	adventure_id, users_id)
+	VALUES (2, 8);
 
 INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
 VALUES ('CottageReservation',false,false,true,2,50.0,'18-09-2022 09:00','16-09-2022 12:00',null,7,null,3,null,false);

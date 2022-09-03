@@ -148,10 +148,11 @@ cancel() {
 add() {
   const s = new Date( this.detailsForm.value.startDate.getTime() -  this.detailsForm.value.startDate.getTimezoneOffset() * 60000)
   const e = new Date( this.detailsForm.value.endDate.getTime() -  this.detailsForm.value.endDate.getTimezoneOffset() * 60000)
+  const v = new Date( this.detailsForm.value.validUntil.getTime() -  this.detailsForm.value.validUntil.getTimezoneOffset() * 60000)
   this.newAdventureQuickReservation = {
     startTime: s.toISOString(),
     endTime : e.toISOString(),
-    validUntil : this.detailsForm.get('validUntil')?.value,
+    validUntil : v.toISOString(),
     price : this.detailsForm.get('price')?.value,
     guestLimit : this.detailsForm.get('guestLimit')?.value,
     adventureId : this.id,

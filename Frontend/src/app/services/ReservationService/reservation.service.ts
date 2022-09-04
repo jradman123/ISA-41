@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { environment } from 'src/environments/environment';
 
@@ -33,6 +34,14 @@ export class ReservationService {
 
       `${this.apiServerUrl}/reservations/findPastReservationsByCottage/${id}`);
   }
+
+  geQuickCottageReservationById(id: string): Observable<AppointmentDto[]> {
+
+    return this.http.get<AppointmentDto[]>(
+
+      `${this.apiServerUrl}/appointments/getAppByCottage/${id}`);
+  }
+
 
   getCottageReservationById(id: string): Observable<CottageReservation[]> {
     return this.http.get<CottageReservation[]>(

@@ -33,6 +33,11 @@ import { CottageService } from 'src/app/services/CottageService/cottage.service'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
+import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
+import { CottageQuickReservationDto } from 'src/app/interfaces/cottage-quick-reservation';
+import { CottageQuickReservationResponse } from 'src/app/interfaces/cottage-quick-reservation-response';
+import { ShipQuickReservationResponse } from 'src/app/interfaces/ship-quick-reservation-response';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -104,12 +109,14 @@ export class CottageAvailabilityComponent implements OnInit {
   newAvailability: CottageAvailability;
   todayDate: Date = new Date();
   id!: any;
+  quickReservations: CottageQuickReservationResponse[];
   pastReservations: CottageReservation[];
   currentReservations: CottageReservation[];
 
-  constructor(private router: ActivatedRoute, private modal: NgbModal, private reservationService: ReservationService, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
+  constructor(private appointmentService: AppointmentService, private router: ActivatedRoute, private modal: NgbModal, private reservationService: ReservationService, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
     this.availabilities = [] as CottageAvailability[];
     this.pastReservations = [] as CottageReservation[];
+    this.quickReservations = [] as CottageQuickReservationResponse[];
     this.newAvailability = {} as CottageAvailability;
     this.currentReservations = [] as CottageReservation[]
     this.range = this._formBuilder.group({
@@ -126,6 +133,7 @@ export class CottageAvailabilityComponent implements OnInit {
     this.getAvailabilities();
     this.getCottagePastReservations();
     this.getCottageCurrentReservations();
+    this.getCottageQuickReservations();
 
   }
   getCottagePastReservations() {
@@ -135,7 +143,19 @@ export class CottageAvailabilityComponent implements OnInit {
         for (var i = 0; i < this.pastReservations.length; i++) {
           this.startDate = new Date(this.pastReservations[i].resStart);
           this.endDate = new Date(this.pastReservations[i].resEnd);
-          this.addPastReservationEvent(this.startDate, this.endDate, this.clientEmail, this.currentReservations[i].numberOfPerson, this.currentReservations[i].price);
+          this.addPastReservationEvent(this.startDate, this.endDate, this.clientEmail, this.pastReservations[i].numberOfPerson, this.pastReservations[i].price);
+        }
+      }
+    });
+  }
+  getCottageQuickReservations() {
+    this.appointmentService.findAppByCottage(this.id).subscribe({
+      next: (res) => {
+        this.quickReservations = res
+        for (var i = 0; i < this.quickReservations.length; i++) {
+          this.startDate = new Date(this.quickReservations[i].startTime);
+          this.endDate = new Date(this.quickReservations[i].endTime);
+          this.addQuickReservations(this.startDate, this.endDate, this.quickReservations[i].guestLimit, this.quickReservations[i].price, this.quickReservations[i].validUntil);
         }
       }
     });
@@ -250,6 +270,22 @@ export class CottageAvailabilityComponent implements OnInit {
         start: startOfDay(start),
         end: endOfDay(end),
         color: colors.yellow,
+        draggable: false,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+  addQuickReservations(start: Date, end: Date, person: any, price: any, valid: Date): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Appointmnet  ' + ' for ' + person + ' person for ' + price + ' €' + '.Valid until ' + valid + '.',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.black,
         draggable: false,
         resizable: {
           beforeStart: true,

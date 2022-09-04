@@ -10,4 +10,6 @@ export interface RegistrationRequest {
     password : string;
     typeOfRegistration : string;
     descriptionOfRegistration : string;
+    longitude : number;
+    latitude : number;
 }

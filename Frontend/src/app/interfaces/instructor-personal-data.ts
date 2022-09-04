@@ -8,4 +8,6 @@ export interface InstructorPersonalData {
     phoneNumber : string;
     email : string;
     biography : string;
+    longitude : number;
+    latitude : number;
 }

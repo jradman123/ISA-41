@@ -155,7 +155,7 @@ public class UserServiceImpl implements UserService {
 		User user = findByEmail(email);
 		return new PersonalData(user.getFirstName(),user.getLastName(),user.getAddress().getStreetNumber(),
 				user.getAddress().getStreetName(),user.getAddress().getCity(),user.getAddress().getCountry(),
-				user.getPhoneNumber(),user.getEmail());
+				user.getPhoneNumber(),user.getEmail(),user.getAddress().getLongitude(),user.getAddress().getLatitude());
 	}
 
 	@Override
@@ -168,9 +168,11 @@ public class UserServiceImpl implements UserService {
 		user.getAddress().setStreetNumber(data.getStreetNumber());
 		user.getAddress().setCity(data.getCity());
 		user.getAddress().setCountry(data.getCountry());
+		user.getAddress().setLongitude(data.getLongitude());
+		user.getAddress().setLatitude(data.getLatitude());
 		User saved = save(user);
 		return new PersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
-				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail());
+				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail(),saved.getAddress().getLongitude(),saved.getAddress().getLatitude());
 	}
 
 	@Override
@@ -216,7 +218,7 @@ public class UserServiceImpl implements UserService {
 		Instructor instructor = (Instructor) findByEmail(email);
 		return new InstructorPersonalData(instructor.getFirstName(),instructor.getLastName(),instructor.getAddress().getStreetNumber(),
 				instructor.getAddress().getStreetName(),instructor.getAddress().getCity(),instructor.getAddress().getCountry(),
-				instructor.getPhoneNumber(),instructor.getEmail(),instructor.getBiography());
+				instructor.getPhoneNumber(),instructor.getEmail(),instructor.getBiography(),instructor.getAddress().getLongitude(),instructor.getAddress().getLatitude());
 	}
 
 	@Override
@@ -229,10 +231,13 @@ public class UserServiceImpl implements UserService {
 		instructor.getAddress().setStreetNumber(data.getStreetNumber());
 		instructor.getAddress().setCity(data.getCity());
 		instructor.getAddress().setCountry(data.getCountry());
+		instructor.getAddress().setLongitude(data.getLongitude());
+		instructor.getAddress().setLatitude(data.getLatitude());
 		instructor.setBiography(data.getBiography());
 		Instructor saved = userRepository.save(instructor);
 		return new InstructorPersonalData(saved.getFirstName(),saved.getLastName(),saved.getAddress().getStreetNumber(),saved.getAddress().getStreetName(),
-				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail(),saved.getBiography());
+				saved.getAddress().getCity(),saved.getAddress().getCountry(),saved.getPhoneNumber(),saved.getEmail(),saved.getBiography(),saved.getAddress().getLongitude(),saved.getAddress().getLatitude()
+		);
 	}
 
 	public List<PersonalData> findAllUsers() {

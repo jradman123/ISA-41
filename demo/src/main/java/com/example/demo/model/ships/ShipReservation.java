@@ -18,8 +18,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-
-@Table(name = "shipReservation")
 public class ShipReservation extends Reservation{
 	
 	@ManyToOne

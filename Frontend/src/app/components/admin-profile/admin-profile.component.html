@@ -60,6 +60,20 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Longitude</mat-label>
+            <input matInput placeholder="Longitude" formControlName="longitude" [readonly]="!editMode"/>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+          <mat-form-field appearance="standard">
+            <mat-label>Latitude</mat-label>
+            <input matInput placeholder="Latitude" formControlName="latitude" [readonly]="!editMode" />
+          </mat-form-field>
+        </div>
+      </div>
       <div class="button-container" *ngIf ="!editMode else editIsOn">
       <button mat-flat-button color="primary"  class="button" (click)="editMode = true">Edit</button>
       <div class="menu-container">

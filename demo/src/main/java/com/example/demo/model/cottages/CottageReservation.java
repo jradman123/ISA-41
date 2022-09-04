@@ -21,8 +21,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "cottageReservation")
-@PrimaryKeyJoinColumn(name = "id")
 public class CottageReservation extends Reservation {
 
 	

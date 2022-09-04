@@ -16,40 +16,22 @@ import java.util.List;
 
 public interface ReservationService {
     List<ReservationViewDto> getReservationsByCottage(Long id);
-
     List<ReservationDto> getReservationsByBoat(Long id);
-
     ReservationDto getById(Long id);
-
     void createReservation(CreateReservationDto createReservationDto);
-
-
     Reservation createCottageReservation(CreateReservationDto createReservationDto);
-
     Reservation createShipReservation(CreateReservationDto createReservationDto);
-
     void notifyUserForReservation(CreateReservationDto dto);
-
     List<ReservationViewDto> getPastReservationsByCottage(Long id);
-
     List<ReservationViewDto> getReservationsByShip(Long id);
-
     List<ReservationViewDto> getPastReservationsByShip(Long id);
-
     List<ReservationViewDto> getPastReservationsForAdventure(int id);
-
     List<ReservationViewDto> getReservationsForAdventure(int id);
-
     List<ReservationViewDto> getFutureReservationsForAdventure(int id);
-
     boolean  reservationsExistForAdventure(int id);
-
     String createAdventureReservation(CreateReservationDto createReservationDto);
-
     boolean hasInstructorReservationsForRange(int id, LocalDateTime startTime, LocalDateTime endTime);
-
     List<ReservationViewDto> getAllCurrentAndFutureInstructorsReservations(int instructorId);
-    
     List<ReservationViewDto> getAllInstructorsReservations(int instructorId);
     DetailsAboutReservation getDetails(Long id);
 }

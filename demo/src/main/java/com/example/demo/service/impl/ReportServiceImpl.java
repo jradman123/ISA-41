@@ -107,8 +107,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void approveReport(Long id) {
         Report report = reportRepository.findById(id).get();
-        String type = reservationRepository.getReservationType(report.getReservation().getId());
-        if(type.equals("AdventureReservation")){
+        String type = reservationRepository.findById(report.getReservation().getId()).get().getType();
+        if(type.equals("ADVENTURE")){
             AdventureReservation res = adventureReservationRepository.findById(report.getReservation().getId()).get();
             String instructorEmail = userRepository.findById(res.getInstructorId()).get().getEmail();
             if(report.isSanctioned() && report.isAppeared()){
@@ -118,7 +118,7 @@ public class ReportServiceImpl implements ReportService {
                 sendIfNotAppeared(new DataForSendEmail(res.getRegisteredUser().getEmail(), instructorEmail,
                         res.getReservationStart(), res.getReservationEnd(), res.getRegisteredUser().getFullName()));
             }
-        }else if(type.equals("CottageReservation")){
+        }else if(type.equals("COTTAGE")){
             CottageReservation res = cottageReservationRepository.findById(report.getReservation().getId()).get();
             if(report.isSanctioned() && report.isAppeared()){
                 sendIfSanction(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getCottage().getCottageOwner().getEmail(),
@@ -127,7 +127,7 @@ public class ReportServiceImpl implements ReportService {
                 sendIfNotAppeared(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getCottage().getCottageOwner().getEmail(),
                         res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }
-        }else if(type.equals("ShipReservation")){
+        }else if(type.equals("SHIP")){
             ShipReservation res = shipReservationRepository.findById(Integer.parseInt(report.getReservation().getId().toString())).get();
             if(report.isSanctioned() && report.isAppeared()){
                 sendIfSanction(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getShip().getShipOwner().getEmail(),

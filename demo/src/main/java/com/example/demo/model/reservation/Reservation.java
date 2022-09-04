@@ -9,7 +9,6 @@ import javax.persistence.*;
 import com.example.demo.model.Report;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.ships.ShipUtility;
-import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
@@ -19,11 +18,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Reservation {
 	
 	 @Id
 	 @Column(name = "id")
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @SequenceGenerator(name = "mySeqGenV1", sequenceName = "mySeqV1", initialValue = 1, allocationSize = 1)
+	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenV1")
 	 private Long id;
 
 	@OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
@@ -61,6 +62,9 @@ public class Reservation {
 
 	@Column(name = "haveReport",nullable = false)
 	private boolean haveReport=false;
+
+	@Column(name = "type",nullable = false)
+	private String type;
 
 
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

@@ -11,11 +11,13 @@ public class InstructorPersonalData {
     private String phoneNumber;
     private String email;
     private String biography;
+    private Double longitude;
+    private Double latitude;
 
     public InstructorPersonalData() {
     }
 
-    public InstructorPersonalData(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email, String biography) {
+    public InstructorPersonalData(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email, String biography,Double longitude,Double latitude) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetNumber = streetNumber;
@@ -25,6 +27,8 @@ public class InstructorPersonalData {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.biography = biography;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public String getFirstName() {
@@ -97,5 +101,21 @@ public class InstructorPersonalData {
 
     public void setBiography(String biography) {
         this.biography = biography;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

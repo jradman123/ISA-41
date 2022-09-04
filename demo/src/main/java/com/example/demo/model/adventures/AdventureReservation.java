@@ -22,8 +22,6 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "adventureReservation")
-@PrimaryKeyJoinColumn(name = "id")
 public class AdventureReservation extends Reservation {
 	
 	   @ManyToOne

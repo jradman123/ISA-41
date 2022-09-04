@@ -65,7 +65,15 @@ export class RegistrationComponent implements OnInit {
       description: new FormControl(null, [
         Validators.required
       ]),
-      type: new FormControl(null, [Validators.required])
+      type: new FormControl(null, [Validators.required]),
+      longitude: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+      ]),
+      latitude: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+      ])
     });
 
   }
@@ -125,6 +133,8 @@ export class RegistrationComponent implements OnInit {
       this.newUser.password = this.createForm.value.password;
       this.newUser.typeOfRegistration = this.createForm.value.type;
       this.newUser.descriptionOfRegistration = this.createForm.value.description;
+      this.newUser.latitude = this.createForm.value.latitude;
+      this.newUser.longitude = this.createForm.value.longitude;
     //}
   }
 

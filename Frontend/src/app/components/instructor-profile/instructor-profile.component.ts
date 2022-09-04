@@ -56,6 +56,8 @@ export class InstructorProfileComponent implements OnInit {
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
         this.detailsForm.controls['biography'].setValue(data.biography)
+        this.detailsForm.controls['longitude'].setValue(data.longitude)
+        this.detailsForm.controls['latitude'].setValue(data.latitude)
       },
     });
   }
@@ -93,6 +95,14 @@ export class InstructorProfileComponent implements OnInit {
     Validators.required,
     Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
   ]), 
+  longitude: new FormControl(null, [
+    Validators.required,
+    Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+  ]),
+  latitude: new FormControl(null, [
+    Validators.required,
+    Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+  ])
 })
 
   cancel() {
@@ -106,6 +116,8 @@ export class InstructorProfileComponent implements OnInit {
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
     this.detailsForm.controls['biography'].setValue(this.initialDetails.biography)
+    this.detailsForm.controls['longitude'].setValue(this.initialDetails.longitude)
+    this.detailsForm.controls['latitude'].setValue(this.initialDetails.latitude)
   }
 
   edit() {
@@ -121,7 +133,10 @@ export class InstructorProfileComponent implements OnInit {
       streetNumber: this.detailsForm.get('streetNumber')?.value,
       city: this.detailsForm.get('city')?.value,
       country: this.detailsForm.get('country')?.value,
-      biography: this.detailsForm.get('biography')?.value
+      biography: this.detailsForm.get('biography')?.value,
+      latitude :  this.detailsForm.get('latitude')?.value,
+      longitude :  this.detailsForm.get('latitude')?.value
+      
     }
     this.userService.updateInstructorPersonalData(this.userDetails).subscribe((data) => {
       this.userDetails = data

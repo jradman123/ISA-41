@@ -47,6 +47,8 @@ export class AdminProfileComponent implements OnInit {
         this.detailsForm.controls['streetNumber'].setValue(data.streetNumber)
         this.detailsForm.controls['city'].setValue(data.city)
         this.detailsForm.controls['country'].setValue(data.country)
+        this.detailsForm.controls['longitude'].setValue(this.initialDetails.longitude)
+        this.detailsForm.controls['latitude'].setValue(this.initialDetails.latitude)
       },
     });
   }
@@ -78,6 +80,14 @@ export class AdminProfileComponent implements OnInit {
     Validators.required,
     Validators.pattern('^[A-ZŠĐŽČĆ][a-zšđćčžA-ZŠĐŽČĆ ]*$'),
   ]),
+  longitude: new FormControl(null, [
+    Validators.required,
+    Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+  ]),
+  latitude: new FormControl(null, [
+    Validators.required,
+    Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
+  ]),
   email: new FormControl(null, [Validators.required, Validators.email]),
   phoneNumber: new FormControl(null, [Validators.required])
 })
@@ -92,6 +102,9 @@ export class AdminProfileComponent implements OnInit {
     this.detailsForm.controls['streetNumber'].setValue(this.initialDetails.streetNumber)
     this.detailsForm.controls['city'].setValue(this.initialDetails.city)
     this.detailsForm.controls['country'].setValue(this.initialDetails.country)
+    this.detailsForm.controls['longitude'].setValue(this.initialDetails.longitude)
+    this.detailsForm.controls['latitude'].setValue(this.initialDetails.latitude)
+
   }
 
   edit() {
@@ -106,7 +119,9 @@ export class AdminProfileComponent implements OnInit {
       streetName: this.detailsForm.get('streetName')?.value,
       streetNumber: this.detailsForm.get('streetNumber')?.value,
       city: this.detailsForm.get('city')?.value,
-      country: this.detailsForm.get('country')?.value
+      country: this.detailsForm.get('country')?.value,
+      longitude : this.detailsForm.get('longitude')?.value,
+      latitude : this.detailsForm.get('latitude')?.value,
     }
     this.userService.updatePersonalData(this.userDetails).subscribe((data) => {
       this.userDetails = data

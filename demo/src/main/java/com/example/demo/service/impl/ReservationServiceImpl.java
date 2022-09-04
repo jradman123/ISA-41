@@ -76,9 +76,9 @@ public class ReservationServiceImpl implements ReservationService
     private AdventureService adventureService;
 
     @Autowired
-
     private AdventureReservationRepository adventureReservationRepository;
 
+    @Autowired
     private CottageQuickReservationServiceImpl cottageQuickReservationService;
 
 
@@ -128,6 +128,7 @@ public class ReservationServiceImpl implements ReservationService
         reservation.setPrice(createReservationDto.getPrice());
         reservation.setRegisteredUser(user);
         reservation.setHaveReport(false);
+        reservation.setType(createReservationDto.getTypeOfRes());
 
 
 
@@ -466,24 +467,20 @@ return null;
 
     @Override
     public DetailsAboutReservation getDetails(Long id) {
-        DetailsAboutReservation details = new DetailsAboutReservation();
-        String type = reservationRepository.getReservationType(id);
-        if(type.equals("AdventureReservation")){
+        String type = reservationRepository.findById(id).get().getType();
+        if(type.equals("ADVENTURE")){
             return reservationMapper.fromAdventureReservation(adventureReservationRepository.findById(id).get());
-        }else if(type.equals("ShipReservation")){
+        }else if(type.equals("SHIP")){
             return reservationMapper.fromShipReservation(shipReservationRepository.findById(Integer.parseInt(id.toString())).get());
-        }else{
+        }else if(type.equals("COTTAGE")){
             return reservationMapper.fromCottageReservation(cottageReservationRepository.findById(id).get());
         }
+        return null;
 
     }
 
     private List<AdventureReservation> getAllInstructorsAdventures(int id){
         return adventureReservationRepository.getAllCurrentAndFutureInstructorsReservations(id,LocalDateTime.now());
-    }
-
-    private List<Reservation> getCurrentAndFutureForClient(int id){
-        return reservationRepository.getCurrentAndFutureForClient(id,LocalDateTime.now());
     }
 
 

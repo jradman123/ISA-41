@@ -3,7 +3,6 @@
   <div class="container">
     <mat-card style="margin-top: 100px;">
       <mat-card-title style="text-align: center;">Registration</mat-card-title>
-      <br />
       <mat-card-content>
         <div [formGroup]="createForm">
           <br />
@@ -89,7 +88,35 @@
                 !createForm?.get('country')?.valid &&
                 createForm?.get('country')?.touched &&
                 createForm?.get('country')?.errors?.required
-              ">City is required</mat-error>
+              ">Country is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Longitude</mat-label>
+                  <input matInput formControlName="longitude" />
+                  <mat-error *ngIf="
+                !createForm?.get('longitude')?.valid &&
+                createForm?.get('longitude')?.touched &&
+                createForm?.get('longitude')?.errors?.required
+              ">Longitude is required</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm">
+              <div style="width: 100%; display: flex">
+                <mat-form-field appearance="fill">
+                  <mat-label>Latitude</mat-label>
+                  <input matInput formControlName="latitude" />
+                  <mat-error *ngIf="
+                !createForm?.get('latitude')?.valid &&
+                createForm?.get('latitude')?.touched &&
+                createForm?.get('latitude')?.errors?.required
+              ">Latitude is required</mat-error>
                 </mat-form-field>
               </div>
             </div>

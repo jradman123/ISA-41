@@ -169,7 +169,11 @@ public class AdventureServiceImpl implements AdventureService {
                 sum+=review.getMark();
             }
         }
-        return sum/numberOfRatings;
+        if(numberOfRatings>0) {
+            return sum / numberOfRatings;
+        }else{
+            return 0.0;
+        }
     }
 
 

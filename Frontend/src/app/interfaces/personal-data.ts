@@ -7,4 +7,6 @@ export interface PersonalData {
     country : string;
     phoneNumber : string;
     email : string;
+    longitude : number;
+    latitude : number;
 }

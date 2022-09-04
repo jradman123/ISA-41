@@ -12,13 +12,15 @@ public class PersonalData {
     private String country;
     private String phoneNumber;
     private String email;
+    private Double longitude;
+    private Double latitude;
 
     public PersonalData() {
     }
 
 
 
-    public PersonalData(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email) {
+    public PersonalData(String firstName, String lastName, String streetNumber, String streetName, String city, String country, String phoneNumber, String email,Double longitude,Double latitude) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetNumber = streetNumber;
@@ -27,6 +29,8 @@ public class PersonalData {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public PersonalData(User user) {
@@ -38,6 +42,8 @@ public class PersonalData {
         country=user.getAddress().getCountry();
         phoneNumber=user.getPhoneNumber();
         email=user.getEmail();
+        longitude = user.getAddress().getLongitude();
+        latitude = user.getAddress().getLatitude();
 
     }
 
@@ -103,5 +109,21 @@ public class PersonalData {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

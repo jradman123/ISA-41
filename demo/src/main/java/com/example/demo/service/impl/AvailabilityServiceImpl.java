@@ -120,13 +120,17 @@ public class AvailabilityServiceImpl implements AvailabilityService {
                 LocalDateTime endDate = availability.getEndDate();
                 shipAvailabilityRepository.delete(availability);
                 availability = calculateNewShipAvailability(startDate, endDate, shipAvailability);
-            } else if (shipAvailability.getStartDate().isBefore(availability.getStartDate())
+            }  else if (shipAvailability.getStartDate().isBefore(availability.getStartDate())
                     && shipAvailability.getEndDate().isAfter(availability.getEndDate())) {
                 availability.setStartDate(shipAvailability.getStartDate());
                 availability.setEndDate(shipAvailability.getEndDate());
+            }else if(shipAvailability.getStartDate().isAfter(availability.getStartDate())
+                    && shipAvailability.getEndDate().isAfter(availability.getEndDate())){
+                newAvailabilities.add(shipAvailability);
             }
             newAvailabilities.add(availability);
         }
+
 
         return newAvailabilities;
     }
@@ -164,6 +168,9 @@ public class AvailabilityServiceImpl implements AvailabilityService {
                     && newAvailability.getEndDate().isAfter(availability.getEndDate())) {
                 availability.setStartDate(newAvailability.getStartDate());
                 availability.setEndDate(newAvailability.getEndDate());
+            }else if(newAvailability.getStartDate().isAfter(availability.getStartDate())
+                    && newAvailability.getEndDate().isAfter(availability.getEndDate())){
+                newAvailabilities.add(newAvailability);
             }
             newAvailabilities.add(availability);
         }

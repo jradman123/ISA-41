@@ -65,10 +65,7 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         LocalDateTime startDate=LocalDateTime.parse(start,formatter);
         LocalDateTime endDate=LocalDateTime.parse(end,formatter);
-
-        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
-
-
+        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottageInDateRange(startDate,endDate,id);
         List<CottageReservation> cancelled = cottageReservationRepository.getAllCancelledForCottageInDateRange(startDate,endDate,id);
         while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
             result.put(startDate.toLocalDate().toString(), countIncome(startDate,reservations) + countIncomeForCancelled(startDate,cancelled));
@@ -76,7 +73,6 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
         }
 
         return result;
-
 
     }
 

@@ -11,6 +11,6 @@ public interface ReportService {
 
     Report findReportbyResId(Long id);
     List<Report> getAllUnseen();
-    void approveReport(Long id);
-    void rejectReport(Long id);
+    List<Report> approveReport(Long id);
+    List<Report> rejectReport(Long id);
 }

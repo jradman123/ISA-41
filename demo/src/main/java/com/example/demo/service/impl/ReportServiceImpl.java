@@ -106,7 +106,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void approveReport(Long id) {
+    public List<Report> approveReport(Long id) {
         Report report = reportRepository.findById(id).get();
         String type = reservationRepository.findById(report.getReservation().getId()).get().getType();
         if(type.equals("ADVENTURE")){
@@ -146,6 +146,7 @@ public class ReportServiceImpl implements ReportService {
         }
         report.setApprovedbyAdmin(true);
         reportRepository.save(report);
+        return getAllUnseen();
     }
 
     private void givePenalToClient(Integer id) {
@@ -156,10 +157,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void rejectReport(Long id) {
+    public List<Report> rejectReport(Long id) {
         Report report = reportRepository.findById(id).get();
         report.setUnapprovedbyAdmin(true);
         reportRepository.save(report);
+        return getAllUnseen();
     }
 
 

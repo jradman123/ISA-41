@@ -78,15 +78,23 @@ public class ReportController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @GetMapping("/approve/{id}")
-    public void approveReport(@PathVariable Long id){
-        reportService.approveReport(id);
+    public ResponseEntity<List<ReportResponse>> approveReport(@PathVariable Long id){
+        List<ReportResponse> response = new ArrayList<>();
+        for (Report report: reportService.approveReport(id)) {
+            response.add(reportMapper.mapToResponse(report));
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @GetMapping("/reject/{id}")
-    public void rejectReport(@PathVariable Long id){
-        reportService.rejectReport(id);
+    public ResponseEntity<List<ReportResponse>> rejectReport(@PathVariable Long id){
+        List<ReportResponse> response = new ArrayList<>();
+        for (Report report: reportService.rejectReport(id)) {
+            response.add(reportMapper.mapToResponse(report));
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
 }

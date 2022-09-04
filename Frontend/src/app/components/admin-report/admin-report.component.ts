@@ -15,7 +15,7 @@ import { DialogReservationViewComponent } from '../dialog-reservation-view/dialo
 })
 export class AdminReportComponent implements OnInit {
 
-  reports!: MatTableDataSource<ReportResponse>;
+  reports!: ReportResponse[];
   sub!: Subscription;
   columnsToDisplayReports: string[] = [
     'No.',
@@ -28,7 +28,7 @@ export class AdminReportComponent implements OnInit {
   details : DetailsAboutReservation;
   constructor(private reportService : ReportService,private changeDetectorRefs: ChangeDetectorRef,
     public dialog: MatDialog,private reservationService : ReservationService) { 
-    this.reports = new MatTableDataSource<ReportResponse>();
+    this.reports = [] as ReportResponse[];
     this.details = {} as DetailsAboutReservation;
   }
 
@@ -41,7 +41,7 @@ export class AdminReportComponent implements OnInit {
       .getAllUnseen()
       .subscribe({
         next: (rep: ReportResponse[]) => {
-          this.reports.data = rep;
+          this.reports = rep;
           this.changeDetectorRefs.detectChanges();
         },
       });
@@ -50,21 +50,19 @@ export class AdminReportComponent implements OnInit {
     approve(id : string){
       this.sub = this.reportService
       .approveReport(id)
-      .subscribe({
-        next: () => {
-          this.reports.data = [];
-          this.refresh();
-        }});
+      .subscribe((data) => {
+          this.reports = [];
+          this.reports=data;
+        });
     }
 
     reject(id : string){
       this.sub = this.reportService
       .rejectReport(id)
-      .subscribe({
-        next: () => {
-          this.reports.data = [];
-          this.refresh();
-        }});
+      .subscribe((data) => {
+        this.reports = [];
+        this.reports=data;
+      });
     }
 
     detailsAbouReservation(id : string): void {

@@ -41,12 +41,12 @@ export class ReportService {
 
   }
 
-  approveReport(id : string)  {
-    return this.http.get(`${this.apiServerUrl}/reports/approve/${id}`);
+  approveReport(id : string) : Observable<ReportResponse[]> {
+    return this.http.get<ReportResponse[]>(`${this.apiServerUrl}/reports/approve/${id}`);
   }
 
-  rejectReport(id : string)  {
-    return this.http.get(`${this.apiServerUrl}/reports/reject/${id}`);
+  rejectReport(id : string) :  Observable<ReportResponse[]> {
+    return this.http.get<ReportResponse[]>(`${this.apiServerUrl}/reports/reject/${id}`);
   }
 
 

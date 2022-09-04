@@ -32,6 +32,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ShipAvailability } from 'src/app/interfaces/ship-availability';
 import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
+import { AppointmentService } from 'src/app/services/AppointmentService/appointment.service';
+import { ShipQuickReservationResponse } from 'src/app/interfaces/ship-quick-reservation-response';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -104,9 +106,13 @@ export class ShipAvailabilityComponent implements OnInit {
   newAvailability: ShipAvailability;
   todayDate: Date = new Date();
   id!: any;
+  quickReservations: ShipQuickReservationResponse[];
 
-  constructor(private router: ActivatedRoute, private reservationService: ReservationService, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
+
+  constructor(private router: ActivatedRoute, private appointmentService: AppointmentService, private reservationService: ReservationService, private modal: NgbModal, private cottageAvailabilityService: AvailabilityService, private _formBuilder: FormBuilder) {
     this.availabilities = [] as ShipAvailability[];
+    this.quickReservations = [] as ShipQuickReservationResponse[];
+
     this.pastReservations = [] as CottageReservation[];
     this.reservations = [] as CottageReservation[];
     this.newAvailability = {} as ShipAvailability;
@@ -124,6 +130,7 @@ export class ShipAvailabilityComponent implements OnInit {
     this.getAvailabilities();
     this.getShipPastReservations();
     this.getShipCurrentReservations();
+    this.getCottageQuickReservations();
 
   }
   getShipPastReservations() {
@@ -134,6 +141,19 @@ export class ShipAvailabilityComponent implements OnInit {
           this.startDate = new Date(this.pastReservations[i].resStart);
           this.endDate = new Date(this.pastReservations[i].resEnd);
           this.addPastReservationEvent(this.startDate, this.endDate, this.pastReservations[0].clientEmail, this.pastReservations[0].numberOfPerson, this.pastReservations[i].price);
+        }
+      }
+    });
+  }
+
+  getCottageQuickReservations() {
+    this.appointmentService.findAppByShip(this.id).subscribe({
+      next: (res) => {
+        this.quickReservations = res
+        for (var i = 0; i < this.quickReservations.length; i++) {
+          this.startDate = new Date(this.quickReservations[i].startTime);
+          this.endDate = new Date(this.quickReservations[i].endTime);
+          this.addQuickReservations(this.startDate, this.endDate, this.quickReservations[i].guestLimit, this.quickReservations[i].price, this.quickReservations[i].validUntil);
         }
       }
     });
@@ -191,6 +211,22 @@ export class ShipAvailabilityComponent implements OnInit {
         start: startOfDay(start),
         end: endOfDay(end),
         color: colors.yellow,
+        draggable: false,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      },
+    ];
+  }
+  addQuickReservations(start: Date, end: Date, person: any, price: any, valid: Date): void {
+    this.events = [
+      ...this.events,
+      {
+        title: 'Appointment ' + ' for ' + person + ' person for ' + price + ' €' + '.Valid until ' + valid + '.',
+        start: startOfDay(start),
+        end: endOfDay(end),
+        color: colors.black,
         draggable: false,
         resizable: {
           beforeStart: true,

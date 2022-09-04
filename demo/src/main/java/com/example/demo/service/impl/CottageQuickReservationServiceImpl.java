@@ -88,12 +88,15 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
         CottageQuickReservation appointment = new CottageQuickReservation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 
-        appointment.setStartTime(LocalDateTime.parse(dto.getStartTime(), formatter));
-        appointment.setEndTime(LocalDateTime.parse(dto.getEndTime(), formatter));
+        LocalDateTime start=LocalDateTime.parse(dto.getStartTime(), formatter);
+        LocalDateTime end=LocalDateTime.parse(dto.getEndTime(), formatter);
 
-        boolean reservations=this.reservationService.checkDates(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
-        boolean availability=this.reservationService.checkAvailability(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
-        boolean app=this.checkApp(appointment.getStartTime(),appointment.getEndTime(),dto.getCottageId());
+        appointment.setStartTime(start);
+        appointment.setEndTime(end);
+
+        boolean reservations=this.reservationService.checkDates(start,end,dto.getCottageId());
+        boolean availability=this.reservationService.checkAvailability(start,end,dto.getCottageId());
+        boolean app=this.checkApp(start,end,dto.getCottageId());
 
 
         if(reservations && availability && app) {

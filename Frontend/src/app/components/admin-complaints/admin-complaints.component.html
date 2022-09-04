@@ -1,0 +1,47 @@
+<div
+  class="container"
+  style="
+    border-radius: 5rem;
+    background-color: rgb(182, 209, 226);
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  "
+>
+  <div 
+    class="container"
+    style="background-color: whitesmoke; border-radius: 5rem"
+  >
+    <section class="section-padding pb-0" id="reviews" >
+      <div class="container">
+        <h2 class="text-center mb-lg-2 mb-2">
+            Complaints
+          </h2>
+          <div *ngIf="complaints.length != 0; else emptyTable">
+        <div class="row" *ngFor="let complaint of complaints">
+            <mat-card class="example-card" style="width: 1100px;">
+              <h3 style="text-align: center;">Complaint on {{complaint.ownersName}}</h3>
+                <div style="margin-left: 100px;">
+                <mat-card-content >
+                  <p><strong>{{complaint.comment}}</strong></p>
+                  <br/>
+                </mat-card-content>
+                </div>
+                <mat-card-actions style="margin-left: 450px;">
+                  <button mat-button color="primary" (click)="approve(complaint.id)">Approve</button>
+                  <button mat-button color="warn" (click)="reject(complaint.id)">Reject</button>
+                </mat-card-actions>
+              </mat-card>
+              <br />
+            </div>
+            <br/>
+          </div>
+          <br/>
+          <ng-template #emptyTable>
+            <p style="text-align: center;">No complaints!</p>
+          </ng-template>
+          <br /><br />
+      </div>
+    </section>
+  </div>
+</div>
+

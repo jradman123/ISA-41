@@ -36,6 +36,7 @@ import { NewAdventureComponent } from './components/new-adventure/new-adventure.
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
+import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
 
@@ -79,6 +80,11 @@ const routes: Routes = [
         component: AdminReviewComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'complaints',
+        component: AdminComplaintsComponent,
+        canActivate: [AuthGuard]
+      }
     ],
   },
   {

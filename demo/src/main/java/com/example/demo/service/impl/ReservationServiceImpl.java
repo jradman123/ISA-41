@@ -23,11 +23,9 @@ import com.example.demo.service.InstructorAvailabilityService;
 
 
 import com.example.demo.service.ReservationService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -490,6 +488,19 @@ return null;
             return shipReservationRepository.findById(Integer.parseInt(reservation.getId().toString())).get().getShip().getShipOwner().getEmail();
         }else if(type.equals("COTTAGE")){
             return cottageReservationRepository.findById(reservation.getId()).get().getCottage().getCottageOwner().getEmail();
+        }
+        return "";
+    }
+
+    @Override
+    public String getOwnersName(Reservation reservation) {
+        String type = reservation.getType();
+        if(type.equals("ADVENTURE")){
+            return adventureReservationRepository.findById(reservation.getId()).get().getAdventure().getInstructor().getFullName();
+        }else if(type.equals("SHIP")){
+            return shipReservationRepository.findById(Integer.parseInt(reservation.getId().toString())).get().getShip().getShipOwner().getFullName();
+        }else if(type.equals("COTTAGE")){
+            return cottageReservationRepository.findById(reservation.getId()).get().getCottage().getCottageOwner().getFullName();
         }
         return "";
     }

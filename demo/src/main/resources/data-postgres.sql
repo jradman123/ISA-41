@@ -265,12 +265,15 @@ INSERT INTO public.ship_users(
 	VALUES (1, 7);
 
 INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
-VALUES ('I am disappointed', 1, 11,false,false);
+VALUES ('Loše', 1, 11,false,false);
 INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
-VALUES ('It could be better.', 3, 11,false,false);
+VALUES ('Prosjek.', 3, 11,false,false);
 INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
-VALUES ('Adventure is interesting.', 5, 11,true,false);
+VALUES ('Avantura je zaista bila zanimljiva.Sve pohvale.', 5, 11,true,false);
 
 INSERT INTO public.report(
 	appeared, approvedby_admin, comment, report_date, sanctioned, unapprovedby_admin, reservation_id)
 	VALUES (false, false, 'Nije se pojavio.', '22-08-2022 09:00', false, false, 1);
+
+INSERT INTO public.complaint(comment,reservation_id,answered)
+VALUES ('Instruktor je kasnio pola sata,i krajnje se neprofesionalno ponašao tokom avanture.', 11,false);

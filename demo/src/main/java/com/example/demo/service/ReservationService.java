@@ -35,4 +35,5 @@ public interface ReservationService {
     List<ReservationViewDto> getAllInstructorsReservations(int instructorId);
     DetailsAboutReservation getDetails(Long id);
     String getOwnersEmail(Reservation reservation);
+    String getOwnersName(Reservation reservation);
 }

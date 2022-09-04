@@ -91,6 +91,7 @@ import { AdventureStatisticComponent } from './components/adventure-statistic/ad
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { DialogReservationViewComponent } from './components/dialog-reservation-view/dialog-reservation-view.component';
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
+import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 
 
 @NgModule({
@@ -168,7 +169,8 @@ import { AdminReviewComponent } from './components/admin-review/admin-review.com
     AdventureStatisticComponent,
     AdminReportComponent,
     DialogReservationViewComponent,
-    AdminReviewComponent
+    AdminReviewComponent,
+    AdminComplaintsComponent
 
 
   ],

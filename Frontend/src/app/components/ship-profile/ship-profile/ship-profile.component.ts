@@ -84,7 +84,7 @@ export class ShipProfileComponent implements OnInit {
       },
     });
 
-
+    this.getImages();
     this.findAppointments();
 
 

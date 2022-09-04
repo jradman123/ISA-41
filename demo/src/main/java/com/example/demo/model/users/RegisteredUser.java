@@ -22,6 +22,9 @@ import lombok.Setter;
 @DiscriminatorValue("REGISTERED_USER")
 public class RegisteredUser extends User{
 
+		@Column
+		int penalties;
+
 	 @JsonManagedReference
 	 @OneToMany(mappedBy = "registeredUser",fetch = FetchType.EAGER)
 	 private Set<AdventureReservation> adventureReservations;

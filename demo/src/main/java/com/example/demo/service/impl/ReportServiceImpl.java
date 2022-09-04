@@ -11,6 +11,7 @@ import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.cottages.Room;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.ShipReservation;
+import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.repository.*;
 import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.ReportService;
@@ -112,33 +113,46 @@ public class ReportServiceImpl implements ReportService {
             AdventureReservation res = adventureReservationRepository.findById(report.getReservation().getId()).get();
             String instructorEmail = userRepository.findById(res.getInstructorId()).get().getEmail();
             if(report.isSanctioned() && report.isAppeared()){
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfSanction(new DataForSendEmail(res.getRegisteredUser().getEmail(),instructorEmail,
                         res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }else if((!report.isAppeared() && report.isSanctioned()) || (!report.isAppeared() && !report.isSanctioned())) {
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfNotAppeared(new DataForSendEmail(res.getRegisteredUser().getEmail(), instructorEmail,
                         res.getReservationStart(), res.getReservationEnd(), res.getRegisteredUser().getFullName()));
             }
         }else if(type.equals("COTTAGE")){
             CottageReservation res = cottageReservationRepository.findById(report.getReservation().getId()).get();
             if(report.isSanctioned() && report.isAppeared()){
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfSanction(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getCottage().getCottageOwner().getEmail(),
                         res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }else if((!report.isAppeared() && report.isSanctioned()) || (!report.isAppeared() && !report.isSanctioned())){
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfNotAppeared(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getCottage().getCottageOwner().getEmail(),
                         res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }
         }else if(type.equals("SHIP")){
             ShipReservation res = shipReservationRepository.findById(Integer.parseInt(report.getReservation().getId().toString())).get();
             if(report.isSanctioned() && report.isAppeared()){
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfSanction(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getShip().getShipOwner().getEmail(),
                                 res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }else if((!report.isAppeared() && report.isSanctioned()) || (!report.isAppeared() && !report.isSanctioned())){
+                givePenalToClient(res.getRegisteredUser().getId());
                 sendIfNotAppeared(new DataForSendEmail(res.getRegisteredUser().getEmail(),res.getShip().getShipOwner().getEmail(),
                         res.getReservationStart(),res.getReservationEnd(),res.getRegisteredUser().getFullName()));
             }
         }
         report.setApprovedbyAdmin(true);
         reportRepository.save(report);
+    }
+
+    private void givePenalToClient(Integer id) {
+        RegisteredUser client =(RegisteredUser) userRepository.findById(id).get();
+        int penalties = client.getPenalties();
+        client.setPenalties(++penalties);
+        userRepository.save(client);
     }
 
     @Override

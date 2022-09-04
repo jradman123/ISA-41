@@ -140,6 +140,7 @@ export class ShipProfileComponent implements OnInit {
         this.ship = data;
         this.images = [];
         this.getImages();
+        window.location.reload();
 
       });
     });

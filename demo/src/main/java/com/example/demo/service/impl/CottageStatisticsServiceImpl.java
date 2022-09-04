@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.repository.CottageReservationRepository;
+import com.example.demo.service.CottageService;
 import com.example.demo.service.CottageStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
 
     @Autowired
     CottageReservationRepository cottageReservationRepository;
+
+    @Autowired
+    CottageService cottageService;
 
     @Override
     public Map<String, Integer> numberOfReservationPerDaysInWeekForCottage(Long id) {
@@ -57,25 +61,44 @@ public class CottageStatisticsServiceImpl implements CottageStatisticsService {
 
     @Override
     public Map<String, Double> priceOfPeriod(String start, String end,Long id) {
-        double sum=0;
         Map<String,Double> result = new LinkedHashMap<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         LocalDateTime startDate=LocalDateTime.parse(start,formatter);
         LocalDateTime endDate=LocalDateTime.parse(end,formatter);
 
-        List<CottageReservation> reservations = cottageReservationRepository.getByDate(startDate,endDate,id);
-        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
-            for (CottageReservation res : reservations) {
-                sum += res.getPrice();
-                result.put(start.toString(), sum);
-            }
-            startDate.plusDays(1);
-        }
+        List<CottageReservation> reservations = cottageReservationRepository.getAllForCottage(id);
 
+
+        List<CottageReservation> cancelled = cottageReservationRepository.getAllCancelledForCottageInDateRange(startDate,endDate,id);
+        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+            result.put(startDate.toLocalDate().toString(), countIncome(startDate,reservations) + countIncomeForCancelled(startDate,cancelled));
+            startDate = startDate.plusDays(1);
+        }
 
         return result;
 
 
+    }
+
+    private Double countIncomeForCancelled(LocalDateTime startDate, List<CottageReservation> reservations){
+        Double income = 0.0;
+        for (CottageReservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                Integer cancellation_condition = cottageService.findCottageById(res.getCottage().getId()).getCancelationConditions();
+                Double cc=Double.valueOf(cancellation_condition);
+                income += (res.getPrice() * cc)/100;
+            }
+        }
+        return income;
+    }
+    private Double countIncome(LocalDateTime startDate, List<CottageReservation> reservations){
+        Double income = 0.0;
+        for (CottageReservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                income += res.getPrice();
+            }
+        }
+        return income;
     }
 
     private Integer countReservationsForDayInLastCoupleYears(Integer year, List<CottageReservation> reservations) {

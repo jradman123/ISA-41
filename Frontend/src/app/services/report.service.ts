@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { DateRange } from '../interfaces/daterange';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +34,8 @@ export class ReportService {
   getNumberPerMonthShip(id: string) {
     return this.http.get(`${this.apiServerUrl}/ship-statistics/per-months/${id}`);
   }
-  getPrice(start: string, end: string, id: any) {
-    return this.http.get(`${this.apiServerUrl}/cottage-statistics/price/${start}/${end}/${id}`);
+  getPrice(id: any, dateRange: DateRange) {
+    return this.http.post(`${this.apiServerUrl}/cottage-statistics/price/${id}/income`, dateRange);
   }
 
 }

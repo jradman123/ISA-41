@@ -3,9 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend, Tooltip, BarElement, BarController, PieController, ArcElement, PolarAreaController, RadialLinearScale } from 'chart.js';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+
 import { MarkDto } from 'src/app/interfaces/mark-dto';
 import { CottageService } from 'src/app/services/CottageService/cottage.service';
 import { ReportService } from 'src/app/services/report.service';
+import { DateRange } from 'src/app/interfaces/daterange';
+
+
 
 @Component({
   selector: 'app-cottage-report',
@@ -14,10 +18,13 @@ import { ReportService } from 'src/app/services/report.service';
 })
 export class CottageReportComponent implements OnInit {
   id: any;
+  show: boolean = false;
   cottageMark!: MarkDto
+  myChart!: any;
   date: string[];
   numbers!: string[];
   todayDate: Date = new Date();
+  dateRange: DateRange;
 
   range = new FormGroup({
     start: new FormControl(),
@@ -33,6 +40,7 @@ export class CottageReportComponent implements OnInit {
     this.cottageMark = {} as MarkDto;
     this.date = [] as string[];
     this.numbers = [] as string[];
+    this.dateRange = {} as DateRange;
 
 
   }
@@ -153,18 +161,27 @@ export class CottageReportComponent implements OnInit {
       });
     });
 
-    const myPriceChart = new Chart('myChart', {
+
+
+
+  }
+
+  myPrice(date: string[], numbers: string[]) {
+
+
+    this.myChart = new Chart("myChart", {
       type: 'polarArea',
       data: {
-        labels: this.date,
+        labels: date,
         datasets: [{
-          label: 'Number of reservations',
-          data: this.numbers,
+          label: 'Income for specific period',
+          data: numbers,
           backgroundColor: [
             'rgba(0, 200, 32,0.6)',
             'rgba(255, 0, 71, 1)',
             'rgba(75, 192, 192, 1)',
-
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
           ]
         }]
       },
@@ -180,17 +197,21 @@ export class CottageReportComponent implements OnInit {
 
       }
     });
-
-
-
   }
+
   addDate() {
     const s = new Date(this.range.value.start.getTime() - this.range.value.start.getTimezoneOffset() * 60000)
     const e = new Date(this.range.value.end.getTime() - this.range.value.end.getTimezoneOffset() * 60000)
-    console.log("fdfdff" + e)
-    this.statisticService.getPrice(s.toISOString(), e.toISOString(), this.id).subscribe((data) => {
+
+    this.dateRange = {
+      start: s.toISOString(),
+      end: e.toISOString()
+    }
+    this.statisticService.getPrice(this.id, this.dateRange).subscribe((data) => {
       this.date = Object.keys(data)
       this.numbers = Object.values(data)
+      this.show = true;
+      this.myPrice(this.date, this.numbers);
     });
   }
 

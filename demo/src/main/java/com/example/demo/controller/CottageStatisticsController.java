@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.dto.DateRange;
 import com.example.demo.service.impl.CottageStatisticsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,9 @@ public class CottageStatisticsController {
     }
 
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
-    @GetMapping(value = "/price/{start}/{end}/{id}")
-    public ResponseEntity<Map<String,Double>> getPrice(@PathVariable String start,String end,Long id) {
-        return new ResponseEntity<>(cottageStatisticService.priceOfPeriod(start,end,id), HttpStatus.OK);
+    @PostMapping(value = "/price/{id}/income")
+        public ResponseEntity<Map<String,Double>> getPrice(@PathVariable Long id,@RequestBody DateRange range) {
+        return new ResponseEntity<>(cottageStatisticService.priceOfPeriod(range.getStart(),range.getEnd(),id), HttpStatus.OK);
 
     }
 

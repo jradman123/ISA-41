@@ -13,6 +13,10 @@ public interface ShipReservationRepository extends JpaRepository<ShipReservation
     @Query(value = "select * from reservation where ship_id = ?1", nativeQuery = true)
     List<ShipReservation> getAllForShip(Long shipId);
 
-    @Query(value = "select * from reservation a where ship_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end", nativeQuery = true)
+    @Query(value = "select * from reservation a where ship_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start  and ?1 < reservation_end", nativeQuery = true)
     List<ShipReservation> getAllForShipInDateRange(LocalDateTime minusYears, LocalDateTime now, Long id);
+
+    @Query(value = "select * from reservation a where ship_id = ?3 and  reservation_start <= ?2 and  ?1 <= reservation_start and reservation_end <= ?2 and ?1 < reservation_end and is_canceled = true", nativeQuery = true)
+    List<ShipReservation> getAllCancelledForShipInDateRange(LocalDateTime start, LocalDateTime end,Long id);
+
 }

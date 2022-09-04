@@ -5,6 +5,8 @@ import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.repository.CottageReservationRepository;
 import com.example.demo.repository.ShipReservationRepository;
+import com.example.demo.service.CottageService;
+import com.example.demo.service.ShipService;
 import com.example.demo.service.ShipStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +15,17 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
 public class ShipStatisticsServiceImpl implements ShipStatisticsService {
     @Autowired
     ShipReservationRepository shipReservationRepository;
+
+    @Autowired
+    ShipServiceImpl shipService;
+
 
 
     @Override
@@ -55,6 +62,42 @@ public class ShipStatisticsServiceImpl implements ShipStatisticsService {
         return result;
     }
 
+    @Override
+    public Map<String, Double> priceOfPeriod(String start, String end, Long id) {
+        Map<String,Double> result = new LinkedHashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime startDate=LocalDateTime.parse(start,formatter);
+        LocalDateTime endDate=LocalDateTime.parse(end,formatter);
+        List<ShipReservation> reservations = shipReservationRepository.getAllForShipInDateRange(startDate,endDate,id);
+        List<ShipReservation> cancelled = shipReservationRepository.getAllCancelledForShipInDateRange(startDate,endDate,id);
+        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+            result.put(startDate.toLocalDate().toString(), countIncome(startDate,reservations) + countIncomeForCancelled(startDate,cancelled));
+            startDate = startDate.plusDays(1);
+        }
+
+        return result;
+    }
+    private Double countIncomeForCancelled(LocalDateTime startDate, List<ShipReservation> reservations){
+        Double income = 0.0;
+        for (ShipReservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                Integer cancellation_condition = shipService.findShipById(res.getShip().getId()).getCancelationConditions();
+                Double cc=Double.valueOf(cancellation_condition);
+                income += (res.getPrice() * cc)/100;
+            }
+        }
+        return income;
+    }
+    private Double countIncome(LocalDateTime startDate, List<ShipReservation> reservations){
+        Double income = 0.0;
+        for (ShipReservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                income += res.getPrice();
+            }
+        }
+        return income;
+    }
+
     private Integer countReservationsForDayInLastCoupleYears(Integer year, List<ShipReservation> reservations) {
         int i=0;
         for (ShipReservation r : reservations) {
@@ -75,9 +118,13 @@ public class ShipStatisticsServiceImpl implements ShipStatisticsService {
         return i;
     }
 
-    private Integer countReservationsForYear(Year year, List<ShipReservation> reservations) {
+    private Integer countReservationsForYear(Integer year, List<ShipReservation> reservations) {
         int i=0;
-
+        for (ShipReservation r : reservations) {
+            if (r.getReservationStart().getYear() == year) {
+                i++;
+            }
+        }
         return i;
     }
 

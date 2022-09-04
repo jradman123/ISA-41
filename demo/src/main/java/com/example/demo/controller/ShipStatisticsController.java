@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DateRange;
 import com.example.demo.service.impl.ShipStatisticsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class ShipStatisticsController {
     @GetMapping(value = "/per-years/{id}")
     public ResponseEntity<Map<String,Integer>> getStatisticPerYearsForShip(@PathVariable Long id) {
         return new ResponseEntity<>(shipStatisticsService.numberOfReservationPerYearsForShip(id), HttpStatus.OK);
+
+    }
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PostMapping(value = "/price/{id}/income")
+    public ResponseEntity<Map<String,Double>> getPrice(@PathVariable Long id,@RequestBody DateRange range) {
+        return new ResponseEntity<>(shipStatisticsService.priceOfPeriod(range.getStart(),range.getEnd(),id), HttpStatus.OK);
 
     }
 }

@@ -38,4 +38,8 @@ export class ReportService {
     return this.http.post(`${this.apiServerUrl}/cottage-statistics/price/${id}/income`, dateRange);
   }
 
+  getPriceShip(id: any, dateRange: DateRange) {
+    return this.http.post(`${this.apiServerUrl}/ship-statistics/price/${id}/income`, dateRange);
+  }
+
 }

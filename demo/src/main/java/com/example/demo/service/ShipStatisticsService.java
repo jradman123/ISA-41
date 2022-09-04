@@ -8,4 +8,6 @@ public interface ShipStatisticsService {
     Map<String,Integer> numberOfReservationPerMonthForShip(Long id);
 
     Map<String,Integer> numberOfReservationPerYearsForShip(Long id);
+
+    Map<String,Double> priceOfPeriod(String start, String end, Long id);
 }

@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+    <mat-form-field appearance="standard">
+        <textarea matInput [(ngModel)]="answer.answer"></textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button color="warn" (click)="onNoClick()">Give up</button>
+      <button mat-button color="primary" (click)="answerOnComplaint()" cdkFocusInitial>Continue</button>
+    </div>
+
+    

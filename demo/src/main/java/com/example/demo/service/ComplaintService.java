@@ -7,4 +7,5 @@ import java.util.List;
 public interface ComplaintService {
 
     List<ComplaintDto> getAllUnanswered();
+    void answerOnComplaint(Long id,String answer);
 }

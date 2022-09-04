@@ -84,6 +84,26 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
         return null;
     }
 
+    public boolean checkApp(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for (ShipQuickReservation ct : shipQuickReservationRepository.getAllForShip(Long.parseLong(objectId))) {
+
+            if (startDate.equals(ct.getStartTime()) ||
+                    startDate.equals(ct.getEndTime()) ||
+
+                    endDate.equals(ct.getEndTime()) ||
+                    endDate.equals(ct.getStartTime())  ||
+                    (startDate.isAfter(ct.getStartTime()) && startDate.isBefore(ct.getEndTime()) && endDate.isAfter(ct.getEndTime()))
+                    || (endDate.isAfter(ct.getStartTime()) && endDate.isBefore(ct.getEndTime()))
+                    || (startDate.isBefore(ct.getStartTime()) && endDate.isAfter(ct.getEndTime())) ||
+                    (startDate.isAfter(ct.getStartTime()) && endDate.isBefore(ct.getEndTime())))
+            {
+                return false;
+
+            }
+        }
+        return true;
+    }
+
     public void notifyUserForCottage(String email,ShipQuickReservation reservation) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         emailSenderService.sendEmail(email,"Akcija!","Za vikendicu " + reservation.getShip().getName() +

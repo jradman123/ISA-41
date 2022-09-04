@@ -37,6 +37,7 @@ import { AdventureProfileComponent } from './components/adventure-profile/advent
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
+import { AdminReviewComponent } from './components/admin-review/admin-review.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -71,6 +72,11 @@ const routes: Routes = [
       {
         path: 'reports',
         component: AdminReportComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'reviews',
+        component: AdminReviewComponent,
         canActivate: [AuthGuard]
       },
     ],

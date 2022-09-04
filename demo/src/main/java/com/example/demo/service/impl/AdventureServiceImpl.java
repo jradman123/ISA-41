@@ -1,15 +1,13 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.AdventureAverageRating;
-import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.model.Review;
 import com.example.demo.model.adventures.*;
-import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.repository.AdventureRepository;
 import com.example.demo.repository.AdventureReservationRepository;
-import com.example.demo.repository.ReviewRepository;
 import com.example.demo.service.AdventureService;
 import com.example.demo.service.ReservationService;
+import com.example.demo.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +25,7 @@ public class AdventureServiceImpl implements AdventureService {
     private ReservationService reservationService;
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewService reviewService;
 
     @Autowired
     private AdventureReservationRepository adventureReservationRepository;
@@ -164,7 +162,7 @@ public class AdventureServiceImpl implements AdventureService {
         Double sum = 0.0;
         int numberOfRatings = 0;
         for (AdventureReservation reservation : reservations) {
-            for (Review review : this.reviewRepository.findAllForReservation(reservation.getId())) {
+            for (Review review : this.reviewService.findAllApprovedForReservation(reservation.getId())) {
                 numberOfRatings++;
                 sum+=review.getMark();
             }

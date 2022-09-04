@@ -90,6 +90,7 @@ import { DialogForReservationAdventureComponent } from './components/dialog-for-
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { DialogReservationViewComponent } from './components/dialog-reservation-view/dialog-reservation-view.component';
+import { AdminReviewComponent } from './components/admin-review/admin-review.component';
 
 
 @NgModule({
@@ -166,7 +167,8 @@ import { DialogReservationViewComponent } from './components/dialog-reservation-
     DialogForDeletingAdventureComponent,
     AdventureStatisticComponent,
     AdminReportComponent,
-    DialogReservationViewComponent
+    DialogReservationViewComponent,
+    AdminReviewComponent
 
 
   ],

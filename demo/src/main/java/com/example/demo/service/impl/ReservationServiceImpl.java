@@ -169,6 +169,7 @@ public class ReservationServiceImpl implements ReservationService
                 reservation.setReservationEnd(createReservationDto.resEnd);
                 reservation.setIsReserved(false);
                 reservation.setPrice(createReservationDto.getPrice());
+                reservation.setType(createReservationDto.getTypeOfRes());
                 Set<CottageUtility> utilities = new HashSet<>();
                 for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
                     CottageUtility utility = cottageUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
@@ -245,6 +246,7 @@ return null;
                   reservation.setPrice(createReservationDto.getPrice());
                   reservation.setIsReserved(false);
                   reservation.setId(Long.parseLong(createReservationDto.getObjectId()));
+                  reservation.setType(createReservationDto.getTypeOfRes());
                   Set<ShipUtility> utilities = new HashSet<>();
                   for (ResponseUtility responseUtility : createReservationDto.getUtilities()) {
                       ShipUtility utility = shipUtilityRepository.findById(Long.parseLong(responseUtility.getId())).get();
@@ -477,6 +479,19 @@ return null;
         }
         return null;
 
+    }
+
+    @Override
+    public String getOwnersEmail(Reservation reservation) {
+        String type = reservation.getType();
+        if(type.equals("ADVENTURE")){
+            return adventureReservationRepository.findById(reservation.getId()).get().getAdventure().getInstructor().getEmail();
+        }else if(type.equals("SHIP")){
+            return shipReservationRepository.findById(Integer.parseInt(reservation.getId().toString())).get().getShip().getShipOwner().getEmail();
+        }else if(type.equals("COTTAGE")){
+            return cottageReservationRepository.findById(reservation.getId()).get().getCottage().getCottageOwner().getEmail();
+        }
+        return "";
     }
 
     private List<AdventureReservation> getAllInstructorsAdventures(int id){

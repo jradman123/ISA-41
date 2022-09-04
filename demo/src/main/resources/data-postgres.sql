@@ -226,10 +226,10 @@ VALUES ('08-20-2022 10:00', '08-15-2022  10:00', 6);
 
 
 ----review---
-INSERT INTO public.review(comment, mark, reservation_id)
-VALUES ('bad', 1, 1);
-INSERT INTO public.review(comment, mark, reservation_id)
-VALUES ('vrh', 5, 2);
+INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
+VALUES ('bad', 1, 1,true,false);
+INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
+VALUES ('vrh', 5, 2,true,false);
 
 
 INSERT INTO public.adventure_users(
@@ -264,12 +264,12 @@ INSERT INTO public.ship_users(
 	ship_id, users_id)
 	VALUES (1, 7);
 
-INSERT INTO public.review(comment, mark, reservation_id)
-VALUES ('I am disappointed', 1, 11);
-INSERT INTO public.review(comment, mark, reservation_id)
-VALUES ('It could be better.', 3, 11);
-INSERT INTO public.review(comment, mark, reservation_id)
-VALUES ('Adventure is interesting.', 5, 11);
+INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
+VALUES ('I am disappointed', 1, 11,false,false);
+INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
+VALUES ('It could be better.', 3, 11,false,false);
+INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
+VALUES ('Adventure is interesting.', 5, 11,true,false);
 
 INSERT INTO public.report(
 	appeared, approvedby_admin, comment, report_date, sanctioned, unapprovedby_admin, reservation_id)

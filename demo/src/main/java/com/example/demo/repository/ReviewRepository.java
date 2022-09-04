@@ -13,4 +13,13 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query(value = "select * from review where reservation_id = ?1", nativeQuery = true)
     List<Review> findAllForReservation(Long reservationId);
+
+    @Query(value = "select * from review where reservation_id = ?1 and approved = true", nativeQuery = true)
+    List<Review> findAllApprovedForReservation(Long reservationId);
+
+    @Query(value = "select * from review where unapproved = true", nativeQuery = true)
+    List<Review> findAllUnapproved();
+
+    @Query(value = "select * from review where unapproved = false and approved=false", nativeQuery = true)
+    List<Review> findAllUnseen();
 }

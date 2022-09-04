@@ -33,4 +33,10 @@ public class Review {
 
     @Column(name = "comment", nullable = false)
     private String comment;
+
+    @Column(name = "approved", nullable = false)
+    private boolean approved;
+
+    @Column(name = "unapproved", nullable = false)
+    private boolean unapproved;
 }

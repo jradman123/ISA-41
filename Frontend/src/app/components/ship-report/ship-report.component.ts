@@ -126,6 +126,42 @@ export class ShipReportComponent implements OnInit {
         }
       });
     });
+    this.statisticService.getNumberPerYearShip(this.id).subscribe((data) => {
+      let months = Object.keys(data)
+      let numbers = Object.values(data)
+
+      const myYearsChart = new Chart('myYearsChart', {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Number of reservations',
+            data: numbers,
+            backgroundColor: [
+              'rgba(0, 200, 32,0.6)',
+              'rgba(255, 0, 71, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ]
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            legend: {
+              display: false
+            }
+          },
+
+        }
+      });
+    });
+
+
+
 
 
   }

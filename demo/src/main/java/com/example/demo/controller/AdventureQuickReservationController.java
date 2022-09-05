@@ -71,7 +71,7 @@ public class AdventureQuickReservationController {
         }
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/all-quick-reservations-for-adventure/{id}")
     public ResponseEntity<List<AdventureQuickReservationResponse>> getAllForAdventure(@PathVariable int id) {
         List<AdventureQuickReservationResponse> reservations = new ArrayList<>();

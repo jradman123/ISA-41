@@ -33,7 +33,7 @@ export class AdventuresViewComponent implements OnInit {
   }
 
   view(id: string) {
-    this.router.navigate(['instructor/adventure-profile/' + id]);
+    this.router.navigate(['admin/adventure-view/' + id]);
     console.log(id);
   }
 

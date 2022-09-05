@@ -39,7 +39,7 @@ public class ReportController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser') || hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('ShipAdvertiser') || hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/findReportByResId/{id}")
     public ReportDto findReportbyResId(@PathVariable Long id) {
 

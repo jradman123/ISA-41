@@ -1,0 +1,30 @@
+<div *ngIf="images.length != 0; else emptyTable">
+    <mat-carousel 
+      timings="250ms ease-in"
+      color="primary"
+      maxWidth="auto"
+      maxHeight="auto"    
+      [loop]="true"
+      [hideArrows]="false"
+      [hideIndicators]="true"
+      [useKeyboard]="true"
+      [useMouseWheel]="false"
+      orientation="ltr"
+    >
+      <mat-carousel-slide style="height: 600px !important;"
+        #matCarouselSlide
+        *ngFor="let image of images; let i = index"
+      >
+      <img [src]="image.url" style="height: 400px; width: 1150px;"/>
+      </mat-carousel-slide>
+    </mat-carousel>
+
+  </div>
+  <ng-template #emptyTable>
+    <br><br><br>
+    <div class="d-flex justify-content-center ">
+        <mat-card style="background-color: transparent;">No images.</mat-card>
+    </div>
+    <br><br><br>
+    </ng-template>
+

@@ -190,7 +190,7 @@ INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,n
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)
     VALUES (16,false,false,true,2,30.0,'03-06-2022 09:00','03-06-2022 08:00',6,8,1,false,'ADVENTURE');
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)
-    VALUES (17,false,false,true,2,30.0,'02-09-2022 09:00','02-09-2022 08:00',6,8,1,false,'ADVENTURE');
+    VALUES (17,false,false,true,2,30.0,'12-09-2022 09:00','09-09-2022 08:00',6,8,1,false,'ADVENTURE');
 
 
 

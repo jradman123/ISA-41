@@ -100,7 +100,7 @@ public class ReservationController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/find-past-reservations-by-adventure/{id}")
     public ResponseEntity<List<ReservationViewDto>> getPastReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getPastReservationsForAdventure(id);
@@ -108,7 +108,7 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/find-current-reservations-by-adventure/{id}")
     public ResponseEntity<List<ReservationViewDto>> getReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getReservationsForAdventure(id);
@@ -117,7 +117,7 @@ public class ReservationController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/find-future-reservations-by-adventure/{id}")
     public ResponseEntity<List<ReservationViewDto>> getFutureReservationsByAdventure(@PathVariable int id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getFutureReservationsForAdventure(id);

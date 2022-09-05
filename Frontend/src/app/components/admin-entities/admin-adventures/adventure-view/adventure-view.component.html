@@ -1,0 +1,257 @@
+
+<div class="container">
+    <br/><br/>
+<mat-tab-group>
+        <mat-tab label="Basic info">
+            <app-basic-info></app-basic-info>
+        </mat-tab>
+    <mat-tab label="Images"> 
+        <app-images></app-images>
+    </mat-tab>
+    <mat-tab label="Rules"> 
+        <app-a-rules></app-a-rules>
+    </mat-tab>
+    <mat-tab label="Utilities">
+        <app-a-utilities></app-a-utilities>
+    </mat-tab>
+    <mat-tab label="Fishing equipment">
+        <app-a-fishing-equipments></app-a-fishing-equipments>
+    </mat-tab>
+    <mat-tab label="Promotions">
+      <div class="card-holder" style="margin-left: 100px;margin-top: 30px;">
+        <div class="row" *ngIf="quickReservations.length != 0; else emptyTable">
+            <div class="card" style="margin: 10px; " *ngFor="let reservation of quickReservations ">
+
+
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-calendar-check-fill"></i>
+                      <span> </span>
+                        <strong> From {{reservation.startTime | date:'d/M/yyyy hh:mm a' }}<br/>To {{reservation.endTime | date:'d/M/yyyy hh:mm a'}}</strong>
+                    </li>
+
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i><span> </span>{{reservation.price}} € for {{reservation.guestLimit}}
+                        person </li>
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-calendar-check-fill"></i><span> </span> Promotion valid until {{reservation.validUntil | date:'d/M/yyyy hh:mm a' }}
+                    </li>
+                    <li style="height: 70px;" class="list-group-item"> 
+                      <div *ngFor="let utility of reservation.utilities">{{utility.name}} </div><br/>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+            <ng-template #emptyTable>
+              <div class="row" style="align-items: center; margin-left: 400px;">
+              <br/><br/><br/>
+              <div class="d-flex justify-content-center ">
+                  <mat-card style="background-color: transparent; align-items: center;">No promotions.</mat-card>
+              </div>
+              <br/><br/><br/>
+            </div>
+          </ng-template>
+    </div>
+
+    </mat-tab>
+    <mat-tab label="Reservation history"> <br />
+      <h1 style="text-align: center;">Current reservations</h1>
+      <table style="display:unset; width: 600px; height: 50px; overflow-y: scroll;" *ngIf="reservations?.data?.length != 0; else emptyTable1" mat-table [dataSource]="reservations"
+          class="mat-elevation-z8">
+          <ng-container matColumnDef="No.">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ i + 1 }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="StartDate">
+              <th mat-header-cell *matHeaderCellDef>Start date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ parseStringToDate(element.resStart) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="EndDate">
+              <th mat-header-cell *matHeaderCellDef>End date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{parseStringToDate(element.resEnd) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.price }} €
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="NumberOfPerson">
+              <th mat-header-cell *matHeaderCellDef>
+                  Number of person
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.numberOfPerson }} person
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="ClientEmail">
+              <th mat-header-cell *matHeaderCellDef>Email of client</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.clientEmail }}
+              </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Buttons">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element; let i = index">
+
+                  <button mat-raised-button color="primary" style="width: 200px; "
+                      (click)="viewPersonalData(element.clientEmail)">Some
+                      informations of client</button>
+
+
+              </td>
+
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplayAdventureReservations"></tr>
+          <tr mat-row *matRowDef="
+                      let element;
+                      columns: columnsToDisplayAdventureReservations
+                    "></tr>
+      </table>
+      <br /><br /><br /><br />
+      <h1 style="text-align: center;">Future reservations</h1>
+      <table *ngIf="futureAdventureReservations.data.length != 0; else emptyTable1" mat-table [dataSource]="futureAdventureReservations"
+          class="mat-elevation-z8">
+          <ng-container matColumnDef="No.">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ i + 1 }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="StartDate">
+              <th mat-header-cell *matHeaderCellDef>Start date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ parseStringToDate(element.resStart) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="EndDate">
+              <th mat-header-cell *matHeaderCellDef>End date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ parseStringToDate(element.resEnd) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.price }} €
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="NumberOfPerson">
+              <th mat-header-cell *matHeaderCellDef>
+                  Number of person
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.numberOfPerson }} person
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="ClientEmail">
+              <th mat-header-cell *matHeaderCellDef>Email of client</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.clientEmail }}
+              </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Buttons">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  <button mat-raised-button color="primary" style="width: 200px; "
+                      (click)="viewPersonalData(element.clientEmail)">Some
+                      informations of client</button>
+              </td>
+
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplayAdventureReservations"></tr>
+          <tr mat-row *matRowDef="
+                  let element;
+                  columns: columnsToDisplayAdventureReservations
+                "></tr>
+      </table>
+      <br /><br /><br /><br />
+      <h1 style="text-align: center;">Past reservations</h1>
+      <table *ngIf="pastAdventureReservations.data.length != 0; else emptyTable1" mat-table [dataSource]="pastAdventureReservations"
+          class="mat-elevation-z8">
+          <ng-container matColumnDef="No.">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ i + 1 }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="StartDate">
+              <th mat-header-cell *matHeaderCellDef>Start date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ parseStringToDate(element.resStart) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="EndDate">
+              <th mat-header-cell *matHeaderCellDef>End date</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ parseStringToDate(element.resEnd) | date:'d/M/yyyy, h:mm a' }}
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.price }} €
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="NumberOfPerson">
+              <th mat-header-cell *matHeaderCellDef>
+                  Number of person
+              </th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.numberOfPerson }} person
+              </td>
+          </ng-container>
+          <ng-container matColumnDef="ClientEmail">
+              <th mat-header-cell *matHeaderCellDef>Email of client</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                  {{ element.clientEmail }}
+              </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Buttons">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element; let i = index">
+
+                  <button mat-raised-button color="warn" style="width: 200px; " *ngIf="element.haveReport"
+                      (click)="dialogViewReport(element.id)">View
+                      report</button>
+
+
+                  <button mat-raised-button color="primary" style="width: 200px; "
+                      (click)="viewPersonalData(element.clientEmail)">Some
+                      informations of client</button>
+
+
+
+              </td>
+
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplayAdventureReservations"></tr>
+          <tr mat-row *matRowDef="
+                  let element;
+                  columns: columnsToDisplayAdventureReservations
+                "></tr>
+      </table>
+
+      <ng-template #emptyTable1>
+          <br><br><br><br>
+          <div class="d-flex justify-content-center ">
+              <mat-card style="background-color: transparent;">No reservations for adventure.</mat-card>
+          </div>
+      </ng-template>
+
+      <br /><br /><br /><br /> <br /><br /><br /><br />
+      <br /><br /><br /><br /> <br /><br /><br /><br /> </mat-tab>
+   
+  </mat-tab-group>
+  </div>
+

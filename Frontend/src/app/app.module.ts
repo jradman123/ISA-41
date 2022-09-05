@@ -94,6 +94,13 @@ import { AdminReviewComponent } from './components/admin-review/admin-review.com
 import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 import { AnswerComplaintDialogComponent } from './components/answer-complaint-dialog/answer-complaint-dialog.component';
 import { AdventuresViewComponent } from './components/admin-entities/admin-adventures/adventures-view/adventures-view.component';
+import { AdventureViewComponent } from './components/admin-entities/admin-adventures/adventure-view/adventure-view.component';
+import { BasicInfoComponent } from './components/admin-entities/admin-adventures/basic-info/basic-info.component';
+import { ImagesComponent } from './components/admin-entities/admin-adventures/images/images.component';
+import { ARulesComponent } from './components/admin-entities/admin-adventures/a-rules/a-rules.component';
+import { AFishingEquipmentsComponent } from './components/admin-entities/admin-adventures/a-fishing-equipments/a-fishing-equipments.component';
+import { AUtilitiesComponent } from './components/admin-entities/admin-adventures/a-utilities/a-utilities.component';
+import { CottagesViewComponent } from './components/admin-entities/admin-cottages/cottages-view/cottages-view.component';
 
 
 @NgModule({
@@ -174,7 +181,14 @@ import { AdventuresViewComponent } from './components/admin-entities/admin-adven
     AdminReviewComponent,
     AdminComplaintsComponent,
     AnswerComplaintDialogComponent,
-    AdventuresViewComponent
+    AdventuresViewComponent,
+    AdventureViewComponent,
+    BasicInfoComponent,
+    ImagesComponent,
+    ARulesComponent,
+    AFishingEquipmentsComponent,
+    AUtilitiesComponent,
+    CottagesViewComponent
 
 
   ],

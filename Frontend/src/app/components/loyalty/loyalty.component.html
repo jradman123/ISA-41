@@ -1,1 +1,52 @@
-<p>loyalty works!</p>
+<div
+  class="container"
+  style="
+    border-radius: 5rem;
+    background-color: rgb(182, 209, 226);
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+  "
+>
+  <div 
+    class="container"
+    style="background-color: whitesmoke; border-radius: 5rem"
+  >
+    <section class="section-padding pb-0" id="categories" >
+      <div class="container">
+        <h2 class="text-center mb-lg-2 mb-2">
+            Users categories
+          </h2>
+          <div *ngIf="categories.length != 0; else emptyTable">
+        <div class="row" >
+            <div class="col" *ngFor="let category of categories">
+                <mat-card  style="margin: 10px; ">
+    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <mat-card-title>{{category.name}}</mat-card-title>
+                        </li>
+                        <li style="height: 70px;" class="list-group-item"><strong>Minimum points :</strong>{{category.min}}</li>
+                        <li style="height: 70px;" class="list-group-item"><strong>Maximum points :</strong>{{category.max}}</li>
+                        <li style="height: 70px;" class="list-group-item"><strong>Discount :</strong>{{category.discount}}%</li>
+                        <li class="list-group-item">
+                            <button mat-button color="primary" (click)="edit(this.category)">Edit</button>
+                        </li>
+                    </ul>
+        
+                </mat-card>
+            </div>
+          <br/>
+        </div>
+        <div class="row" style="align-items: center;">
+            <br/>
+            <button mat-raised-button color="primary" style="margin-left: 420px" (click)="openDialog()">Add</button>
+        </div>
+          </div>
+          <ng-template #emptyTable>
+            <p style="text-align: center;">No reviews!</p>
+          </ng-template>
+          <br /><br />
+      </div>
+    </section>
+  </div>
+</div>

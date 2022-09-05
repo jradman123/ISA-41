@@ -113,6 +113,8 @@ import { BAvailabilityComponent } from './components/admin-entities/admin-boats/
 import { BReservationsComponent } from './components/admin-entities/admin-boats/b-reservations/b-reservations.component';
 import { BUtilitiesComponent } from './components/admin-entities/admin-boats/b-utilities/b-utilities.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { DialogForAddCategoryComponent } from './components/dialog-for-add-category/dialog-for-add-category.component';
+import { DialogForEditCategoryComponent } from './components/dialog-for-edit-category/dialog-for-edit-category.component';
 
 
 @NgModule({
@@ -212,7 +214,9 @@ import { LoyaltyComponent } from './components/loyalty/loyalty.component';
     BAvailabilityComponent,
     BReservationsComponent,
     BUtilitiesComponent,
-    LoyaltyComponent
+    LoyaltyComponent,
+    DialogForAddCategoryComponent,
+    DialogForEditCategoryComponent
 
 
   ],

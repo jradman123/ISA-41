@@ -1,0 +1,39 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>Add new user category</mat-card-title>
+        <br />
+        <mat-card-content>
+            <form class="form-container" [formGroup]="detailsForm">
+                <div class="row">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Name of category</mat-label>
+                            <input matInput placeholder="Name of category" formControlName="name" />
+                        </mat-form-field>
+                </div>
+                <div class="row">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Minimum points</mat-label>
+                            <input matInput placeholder="Minimum points" min="0" type="number" formControlName="minimum"  />
+                        </mat-form-field>
+                    </div>
+                <div class="row">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Maximum points</mat-label>
+                            <input matInput placeholder="Maximum points"  type="number" formControlName="maximum" />
+                        </mat-form-field>
+                </div>
+                <div class="row">
+                        <mat-form-field appearance="standard">
+                            <mat-label>Discount</mat-label>
+                            <input matInput placeholder="Discount" type="number" formControlName="discount"/>
+                        </mat-form-field>
+                </div>
+                <div class="button-container">
+                    <button mat-button color="warn" (click)="onNoClick()">Close</button>
+                    <button mat-button color="primary" (click)="add()">Add</button>
+
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CategoryDto;
 import com.example.demo.dto.CategoryResponse;
 import com.example.demo.dto.CottageAvailabilityDto;
 import com.example.demo.model.Category;
@@ -31,6 +32,30 @@ public class CategoryController {
         for (Category category : categoryService.findAll()) {
             response.add(new CategoryResponse(category));
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/update/{id}")
+    public ResponseEntity<CategoryResponse> update(@PathVariable Long id,@RequestBody CategoryDto categoryDto) {
+        Category saved = categoryService.update(id,categoryDto);
+        if(saved == null){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }else {
+            return new ResponseEntity<>(new CategoryResponse(saved), HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping()
+    public ResponseEntity<CategoryResponse> addNew(@RequestBody CategoryDto categoryDto) {
+        Category saved = categoryService.save(categoryDto);
+        if(saved == null){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }else {
+            return new ResponseEntity<>(new CategoryResponse(saved), HttpStatus.OK);
+        }
     }
 }

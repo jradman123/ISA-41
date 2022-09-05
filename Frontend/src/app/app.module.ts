@@ -101,6 +101,11 @@ import { ARulesComponent } from './components/admin-entities/admin-adventures/a-
 import { AFishingEquipmentsComponent } from './components/admin-entities/admin-adventures/a-fishing-equipments/a-fishing-equipments.component';
 import { AUtilitiesComponent } from './components/admin-entities/admin-adventures/a-utilities/a-utilities.component';
 import { CottagesViewComponent } from './components/admin-entities/admin-cottages/cottages-view/cottages-view.component';
+import { CottageViewComponent } from './components/admin-entities/admin-cottages/cottage-view/cottage-view.component';
+import { CUtilitiesComponent } from './components/admin-entities/admin-cottages/c-utilities/c-utilities.component';
+import { CRulesComponent } from './components/admin-entities/admin-cottages/c-rules/c-rules.component';
+import { CAvailabilityComponent } from './components/admin-entities/admin-cottages/c-availability/c-availability.component';
+import { BoatsViewComponent } from './components/admin-entities/admin-boats/boats-view/boats-view.component';
 
 
 @NgModule({
@@ -188,7 +193,12 @@ import { CottagesViewComponent } from './components/admin-entities/admin-cottage
     ARulesComponent,
     AFishingEquipmentsComponent,
     AUtilitiesComponent,
-    CottagesViewComponent
+    CottagesViewComponent,
+    CottageViewComponent,
+    CUtilitiesComponent,
+    CRulesComponent,
+    CAvailabilityComponent,
+    BoatsViewComponent
 
 
   ],

@@ -33,4 +33,5 @@ public interface CottageService {
     Cottage create(Cottage cottage);
 
     AverageMarkDto getCottageReport(Long id);
+    List<CottageDto> findAllUndeleted();
 }

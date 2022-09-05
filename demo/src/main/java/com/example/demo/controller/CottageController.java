@@ -47,6 +47,13 @@ public class CottageController {
         return this.cottageService.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
+    @GetMapping(value = "/all-undeleted")
+    public List<CottageDto> findAllUndeleted() {
+        return this.cottageService.findAllUndeleted();
+    }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('CottageAdvertiser')")
@@ -56,14 +63,14 @@ public class CottageController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value = "/findCottage/{id}")
     public CottageDto findCottage(@PathVariable Long id) {
         return this.cottageService.findCottage(id);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value = "/findRoomsById/{id}")
     public List<RoomDto> findRoomsByCotttage(@PathVariable Long id) {
         return this.cottageService.findRoomsByCottage(id);
@@ -97,7 +104,7 @@ public class CottageController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @DeleteMapping(value = "/deleteCottage/{id}")
     public ResponseEntity<Long> deleteCottage(@PathVariable Long id) {
         return this.cottageService.deleteCottage(id);
@@ -141,7 +148,7 @@ public class CottageController {
       , HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/images")
     public ResponseEntity<ImagesResponse> getCottageImages(@PathVariable Long id) {
         Cottage cottage = this.cottageService.findCottageById(id);

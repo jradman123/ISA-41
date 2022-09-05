@@ -38,7 +38,7 @@ public class RuleController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/findRulesByCottage/{id}")
     public List<RuleDto> getRulesByCottage(@PathVariable Long id) {
         return ruleService.getRulesByCottage(id);
@@ -58,7 +58,7 @@ public class RuleController {
     }
 
     @GetMapping(value="/findRulesByBoat/{id}")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     public List<RuleDto> getRulesByBoat(@PathVariable Long id)
     {
         return ruleService.getRulesByBoat(id);

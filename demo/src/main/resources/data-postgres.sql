@@ -46,9 +46,9 @@ INSERT INTO public.request_for_deleting_account(email,reason) VALUES ('raandmjen
 
 ---cottage---
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
-	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,false,5.0);
+	VALUES ('Good cottage on the river', 'CotLux', 100, 1,20,2,true,5.0);
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
-	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,false,5.0);
+	VALUES ('Big and good cottage with pool', 'LuxVil', 200, 1,10,2,true,5.0);
 INSERT INTO public.cottage(description, name, price, address,number_of_person, cottage_owner,is_deleted,cancelation_conditions)
     	VALUES ('Small  cottage', 'Vila', 50, 2,2,3,false,0.0);
 

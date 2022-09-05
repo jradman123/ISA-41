@@ -52,15 +52,21 @@ public class ShipController {
     @PostMapping(value = "/createShip")
     public Ship createShip(@RequestBody CreateShipDto newShip) {
         return this.shipService.createShip(newShip);
+    }*/
+     @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
+    @GetMapping(value = "/all-undeleted")
+    public List<ShipDto> findAllUndeleted() {
+        return this.shipService.findAllUndeleted();
     }
-*/
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value = "/findShip/{id}")
     public ShipDto findShip(@PathVariable Long id) {
         return this.shipService.findShip(id);
     }
 
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @DeleteMapping(value = "/deleteShip/{id}")
     public ResponseEntity<Long> deleteShip(@PathVariable Long id) {
         return this.shipService.deleteShip(id);
@@ -101,7 +107,7 @@ public class ShipController {
                 , HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/images")
     public ResponseEntity<ImagesResponse> getShipImages(@PathVariable Long id) {
         Ship ship = this.shipService.findShipById(id);

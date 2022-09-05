@@ -55,5 +55,10 @@ export class ShipService {
       `${this.apiServerUrl}/ships/${id}/images`);
   }
 
+  findAllUndeleted(): Observable<ShipDto[]> {
+    return this.http.get<ShipDto[]>(
+      `${this.apiServerUrl}/ships/all-undeleted`);
+  }
+
 }
 

@@ -27,4 +27,6 @@ public interface ShipService {
     Ship findShipById(Long objectId);
 
     Ship create(Ship ship);
+
+    List<ShipDto> findAllUndeleted();
 }

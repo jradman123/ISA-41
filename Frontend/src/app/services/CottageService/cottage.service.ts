@@ -75,6 +75,12 @@ export class CottageService {
       `${this.apiServerUrl}/cottages/getCottageReport/${id}`);
   }
 
+  findAllUndeleted(): Observable<CottageDto[]> {
+    return this.http.get<CottageDto[]>(
+      `${this.apiServerUrl}/cottages/all-undeleted`);
+  }
+
+
 
 }
 

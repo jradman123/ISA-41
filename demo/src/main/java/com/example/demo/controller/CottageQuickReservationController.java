@@ -30,7 +30,7 @@ public class CottageQuickReservationController {
     private CottageQuickReservationService cottageQuickReservationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/getAppByCottage/{id}")
     public List<CottageQuickReservationResponse> getAllByCottage(@PathVariable Long id) {
         return this.cottageQuickReservationService.findApp(id);

@@ -81,6 +81,15 @@ public class ShipServiceImpl  implements ShipService {
         return shipRepository.save(ship);
     }
 
+    @Override
+    public List<ShipDto> findAllUndeleted() {
+        List<ShipDto> ships = new ArrayList<>();
+        for(Ship ship : shipRepository.getAllUndeleted()){
+            ships.add(new ShipDto(ship));}
+
+        return ships;
+    }
+
 
     @Override
     public List<ShipDto> findAll() {

@@ -41,6 +41,8 @@ import { AdminReportComponent } from './components/admin-report/admin-report.com
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
 import { AdventuresViewComponent } from './components/admin-entities/admin-adventures/adventures-view/adventures-view.component';
 import { AdventureViewComponent } from './components/admin-entities/admin-adventures/adventure-view/adventure-view.component';
+import { CottagesViewComponent } from './components/admin-entities/admin-cottages/cottages-view/cottages-view.component';
+import { CottageViewComponent } from './components/admin-entities/admin-cottages/cottage-view/cottage-view.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -96,7 +98,17 @@ const routes: Routes = [
         path: 'adventure-view/:id',
         component: AdventureViewComponent,
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'cottages',
+        component: CottagesViewComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'cottage-view/:id',
+        component: CottageViewComponent,
+        canActivate: [AuthGuard]
+      },
     ],
   },
   {

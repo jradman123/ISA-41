@@ -37,7 +37,7 @@ public class ReservationController {
     private UserService userService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin') ")
     @GetMapping(value = "/findReservationsByCottage/{id}")
     public List<ReservationViewDto> getReservationsByCottage(@PathVariable Long id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getReservationsByCottage(id);
@@ -45,7 +45,7 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin') ")
     @GetMapping(value = "/findPastReservationsByCottage/{id}")
     public List<ReservationViewDto> getPastReservationsByCottage(@PathVariable Long id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getPastReservationsByCottage(id);
@@ -55,7 +55,7 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin') ")
     @GetMapping(value = "/findReservationsByShip/{id}")
     public List<ReservationViewDto> getReservationsByShip(@PathVariable Long id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getReservationsByShip(id);
@@ -63,7 +63,7 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin') ")
     @GetMapping(value = "/findPastReservationsByShip/{id}")
     public List<ReservationViewDto> getPastReservationsByShip(@PathVariable Long id) {
         List<ReservationViewDto> reservationDtos = this.reservationService.getPastReservationsByShip(id);
@@ -74,7 +74,7 @@ public class ReservationController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin') ")
     @GetMapping(value = "/findReservationsByBoat/{id}")
     public List<ReservationDto> getReservationsByBoat(@PathVariable Long id) {
         List<ReservationDto> reservationDtos = this.reservationService.getReservationsByBoat(id);

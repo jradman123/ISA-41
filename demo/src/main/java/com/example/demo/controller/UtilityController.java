@@ -37,7 +37,7 @@ public class UtilityController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/findUtilitiesByCottage/{id}")
     public List<CottageUtilityDto> getUtilitesByCottage(@PathVariable Long id) {
 
@@ -46,7 +46,7 @@ public class UtilityController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/findUtilitiesByBoat/{id}")
     public List<ShipUtilityDto> getUtilitiesbyBoat(@PathVariable Long id) {
 

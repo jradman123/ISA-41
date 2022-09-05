@@ -1,0 +1,19 @@
+<div class="container" style="margin-top:20px">
+  <div class="container">
+      <div class="container" *ngIf="rules.length != 0; else emptyTable">
+          <h1 style="text-align: center;">Rules of cottage</h1>
+          <hr />
+          <mat-list role="list">
+            <mat-list-item *ngFor="let rule of rules" role="listitem">{{ rule.ruleDescription}}</mat-list-item>
+          </mat-list>
+      </div>
+      <ng-template #emptyTable>
+          <br/><br/><br/>
+          <div class="d-flex justify-content-center ">
+              <mat-card style="background-color: transparent;">No rules.</mat-card>
+          </div>
+          </ng-template>
+  </div>
+</div>
+<br /><br /><br />
+

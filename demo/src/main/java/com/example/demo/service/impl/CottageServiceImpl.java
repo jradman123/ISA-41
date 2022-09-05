@@ -57,6 +57,15 @@ public class CottageServiceImpl implements CottageService {
     }
 
     @Override
+    public List<CottageDto> findAllUndeleted() {
+        List<CottageDto> cottages = new ArrayList<>();
+        for(Cottage cottage : cottageRepository.getAllUndeleted()){
+            cottages.add(new CottageDto(cottage));}
+
+        return cottages;
+    }
+
+    @Override
     public Cottage createCottage(CottageDto newCottage) {
         User user = this.userRepository.findByEmail(newCottage.getOwnerEmail());
         for (CottageOwner owner : this.cottageOwnerRepository.findAll()) {

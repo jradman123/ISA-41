@@ -8,6 +8,8 @@ import { AdventureUtilityDto } from 'src/app/interfaces/adventure-utility-dto';
 import { ResponseUtility } from 'src/app/interfaces/response-utility';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
 import { AdventureUtilityService } from 'src/app/services/AdventureUtilityService/adventure-utility.service';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import Swal from 'sweetalert2';
 import { EditUtilityDialogComponent } from '../edit-utility-dialog/edit-utility-dialog.component';
 
 @Component({
@@ -26,10 +28,10 @@ export class AdventureUtilitiesComponent implements OnInit {
     'Buttons'
   ];
 
-
+  reservationsExist! : string;
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,
     private adventureUtilityService : AdventureUtilityService,public dialog: MatDialog,
-    private _snackBar : MatSnackBar) {
+    private _snackBar : MatSnackBar,private reservationService : ReservationService) {
     this.newAdventureUtility = {} as AdventureUtilityDto;
     this.utilities = new MatTableDataSource<ResponseUtility>();
    }
@@ -37,6 +39,15 @@ export class AdventureUtilitiesComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.getUtilities();
+    this.checkReservations();
+  }
+  checkReservations() {
+    this.reservationService.reservationsExistForAdventure(this.id)
+    .subscribe({
+      next: (result: any) => {
+        this.reservationsExist = result;
+      },
+    });
   }
 
   getUtilities() {
@@ -53,6 +64,15 @@ export class AdventureUtilitiesComponent implements OnInit {
   });
 
   deleteUtility(id : string){
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The utility cannot be deleted because adventure has a reservation!',
+      })
+      return;
+
+    }
     this.adventureUtilityService.deleteAdventureUtility(id).subscribe((data) => {
         this.utilities.data = [];
         this.getUtilities();
@@ -60,6 +80,15 @@ export class AdventureUtilitiesComponent implements OnInit {
   }
 
   edit(utility : ResponseUtility) {
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The utility cannot be edited because adventure has a reservation!',
+      })
+      return;
+
+    }
     console.log(utility);
     const dialogConfig = new MatDialogConfig();
  
@@ -95,6 +124,15 @@ export class AdventureUtilitiesComponent implements OnInit {
         {duration : 3000,panelClass: ['snack-bar']}
       );
       return;
+    }
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The utility cannot be added because adventure has a reservation!',
+      })
+      return;
+
     }
     this.newAdventureUtility = {
       adventureId : this.id,

@@ -2,10 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AdventureReservation } from 'src/app/interfaces/adventure-reservation';
 import { AdventureRuleDto } from 'src/app/interfaces/adventure-rule-dto';
 import { ResponseRules } from 'src/app/interfaces/response-rules';
 import { AdventureRuleService } from 'src/app/services/AdventureRuleService/adventure-rule.service';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adventure-rules',
@@ -17,16 +20,29 @@ export class AdventureRulesComponent implements OnInit {
   id : any;
   newAdventureRule : AdventureRuleDto;
   rules : ResponseRules[];
+  reservationsExist! : string;
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,
-    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar) { 
+    private adventureRuleService : AdventureRuleService,private _snackBar : MatSnackBar,
+    private reservationService : ReservationService) { 
     this.newAdventureRule = {} as AdventureRuleDto;
     this.rules = [] as ResponseRules[];
+
   }
 
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.getRules();
+    this.checkReservations();
   }
+  checkReservations() {
+    this.reservationService.reservationsExistForAdventure(this.id)
+    .subscribe({
+      next: (result: any) => {
+        this.reservationsExist = result;
+      },
+    });
+  }
+  
 
   getRules() {
     this.adventureService.getAdventuresRules(this.id).subscribe({
@@ -45,6 +61,15 @@ export class AdventureRulesComponent implements OnInit {
       );
       return;
     }
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The rule cannot be added because adventure has a reservation!',
+      })
+      return;
+
+    }
     this.newAdventureRule = {
       adventureId : this.id,
       ruleDescription: this.ruleDescriptionForm.get('description')?.value
@@ -57,7 +82,15 @@ export class AdventureRulesComponent implements OnInit {
   }
 
   deleteRule(ruleId: string) {
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The rule cannot be deleted because adventure has a reservation!',
+      })
+      return;
 
+    }
     this.adventureRuleService.deleteAdventureRule(ruleId)
       .subscribe((data) => {
         this.rules = [];

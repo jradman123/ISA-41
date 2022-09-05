@@ -6,6 +6,8 @@ import { FishingEquipmentDto } from 'src/app/interfaces/fishing-equipment-dto';
 import { ResponseFishingEquipment } from 'src/app/interfaces/response-fishing-equipment';
 import { AdventureService } from 'src/app/services/AdventureService/adventure.service';
 import { FishingEquipmentService } from 'src/app/services/FishingEquipmentService/fishing-equipment.service';
+import { ReservationService } from 'src/app/services/ReservationService/reservation.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adventure-fishing-equipments',
@@ -17,8 +19,10 @@ export class AdventureFishingEquipmentsComponent implements OnInit {
   id : any;
   newFishingEquipment : FishingEquipmentDto;
   equipments : ResponseFishingEquipment[];
+  reservationsExist! : string;
   constructor(private adventureService : AdventureService,private router: ActivatedRoute,
-    private fishingEquipmentService : FishingEquipmentService,private _snackBar : MatSnackBar) { 
+    private fishingEquipmentService : FishingEquipmentService,private _snackBar : MatSnackBar,
+    private reservationService : ReservationService) { 
     this.newFishingEquipment = {} as FishingEquipmentDto;
     this.equipments = [] as ResponseFishingEquipment[];
   }
@@ -26,6 +30,16 @@ export class AdventureFishingEquipmentsComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.getEquipments();
+    this.checkReservations();
+  }
+
+  checkReservations() {
+    this.reservationService.reservationsExistForAdventure(this.id)
+    .subscribe({
+      next: (result: any) => {
+        this.reservationsExist = result;
+      },
+    });
   }
 
   getEquipments() {
@@ -51,6 +65,15 @@ export class AdventureFishingEquipmentsComponent implements OnInit {
       );
       return;
     }
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The fishing equipment cannot be added because adventure has a reservation!',
+      })
+      return;
+
+    }
     this.newFishingEquipment = {
       adventureId : this.id,
       fishingEquipmentName: this.fishingEquipmentForm.get('name')?.value
@@ -63,7 +86,15 @@ export class AdventureFishingEquipmentsComponent implements OnInit {
   }
 
   deleteFishingEquipment(equipmentId: string) {
+    if (this.reservationsExist === 'TRUE') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'The fishing equipment cannot be deleted because adventure has a reservation!',
+      })
+      return;
 
+    }
     this.fishingEquipmentService.deleteFishingEquipment(equipmentId)
       .subscribe((data) => {
         this.equipments = [];

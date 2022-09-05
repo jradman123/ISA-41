@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 		ShipOwner shipOwner = new ShipOwner();
 		shipOwner.setFirstName(userRequest.getFirstName());
 		shipOwner.setLastName(userRequest.getLastName());
-		shipOwner.setAddress(new Address(userRequest.getStreetName(),userRequest.getStreetNumber(),userRequest.getCity(),userRequest.getCountry(),userRequest.getLongitude(),userRequest.getLatitude()));
+		shipOwner.setAddress(new Address(userRequest.getStreetName(),userRequest.getStreetNumber(),userRequest.getCity(),userRequest.getCountry(),0,0));
 		shipOwner.setEmail(userRequest.getEmail());
 		shipOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		shipOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		CottageOwner cottageOwner = new CottageOwner();
 		cottageOwner.setFirstName(userRequest.getFirstName());
 		cottageOwner.setLastName(userRequest.getLastName());
-		cottageOwner.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry(),userRequest.getLongitude(),userRequest.getLatitude()));
+		cottageOwner.setAddress(new Address(userRequest.getStreetName(), userRequest.getStreetNumber(), userRequest.getCity(), userRequest.getCountry(),0,0));
 		cottageOwner.setEmail(userRequest.getEmail());
 		cottageOwner.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		cottageOwner.setDescriptionOfRegistration(userRequest.getDescriptionOfRegistration());

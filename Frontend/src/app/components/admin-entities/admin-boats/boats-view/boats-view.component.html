@@ -1,1 +1,36 @@
-<p>boats-view works!</p>
+<div>
+    <div class="card-holder" style="margin-left: 15px;margin-top: 0px;">
+        <div class="search-bar" style="margin-left: 650px;margin-top: 50px;">
+            <form class="search-form d-flex align-items-center">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput type="search" placeholder="Search..." (input)="emitMe($event)">
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="card" style="margin: 10px; " *ngFor="let ship of ships | shipSearch : searchText ">
+                <img :src="assets/images/{{ship.name}}.jpg" class="card-img-top" sty alt="image of cottage">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-geo-alt" style="font-size: 20px;"></i>
+                        <strong>{{ship.name}}</strong>
+                    </li>
+                    <li style="height: 70px;" class="list-group-item">
+                        {{this.ship.streetName}},{{this.ship.streetNumber}},{{this.ship.city}},{{this.ship.country}}
+                    </li>
+                    <li style="height: 70px;" class="list-group-item">{{ship.description}}
+                    </li>
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack" style="font-size: 20px;"></i><span> </span>{{this.ship.price}} € per day for
+                        {{this.ship.capacity}} people</li>
+
+                    <li class="list-group-item">
+                        <button mat-button color="primary" (click)="view(ship.id)">View</button>
+                        <button mat-button color="warn" (click)="delete(ship.id)">Delete</button>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+
+    </div>

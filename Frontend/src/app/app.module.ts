@@ -106,6 +106,12 @@ import { CUtilitiesComponent } from './components/admin-entities/admin-cottages/
 import { CRulesComponent } from './components/admin-entities/admin-cottages/c-rules/c-rules.component';
 import { CAvailabilityComponent } from './components/admin-entities/admin-cottages/c-availability/c-availability.component';
 import { BoatsViewComponent } from './components/admin-entities/admin-boats/boats-view/boats-view.component';
+import { BoatViewComponent } from './components/admin-entities/admin-boats/boat-view/boat-view.component';
+import { BRulesComponent } from './components/admin-entities/admin-boats/b-rules/b-rules.component';
+import { BEquipmentsComponent } from './components/admin-entities/admin-boats/b-equipments/b-equipments.component';
+import { BAvailabilityComponent } from './components/admin-entities/admin-boats/b-availability/b-availability.component';
+import { BReservationsComponent } from './components/admin-entities/admin-boats/b-reservations/b-reservations.component';
+import { BUtilitiesComponent } from './components/admin-entities/admin-boats/b-utilities/b-utilities.component';
 
 
 @NgModule({
@@ -198,7 +204,13 @@ import { BoatsViewComponent } from './components/admin-entities/admin-boats/boat
     CUtilitiesComponent,
     CRulesComponent,
     CAvailabilityComponent,
-    BoatsViewComponent
+    BoatsViewComponent,
+    BoatViewComponent,
+    BRulesComponent,
+    BEquipmentsComponent,
+    BAvailabilityComponent,
+    BReservationsComponent,
+    BUtilitiesComponent
 
 
   ],

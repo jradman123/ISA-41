@@ -43,6 +43,8 @@ import { AdventuresViewComponent } from './components/admin-entities/admin-adven
 import { AdventureViewComponent } from './components/admin-entities/admin-adventures/adventure-view/adventure-view.component';
 import { CottagesViewComponent } from './components/admin-entities/admin-cottages/cottages-view/cottages-view.component';
 import { CottageViewComponent } from './components/admin-entities/admin-cottages/cottage-view/cottage-view.component';
+import { BoatsViewComponent } from './components/admin-entities/admin-boats/boats-view/boats-view.component';
+import { BoatViewComponent } from './components/admin-entities/admin-boats/boat-view/boat-view.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -109,6 +111,16 @@ const routes: Routes = [
         component: CottageViewComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'boats',
+        component: BoatsViewComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'boat-view/:id',
+        component: BoatViewComponent,
+        canActivate: [AuthGuard]
+      }
     ],
   },
   {

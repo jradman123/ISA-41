@@ -40,7 +40,7 @@ public class AvailabilityController {
     }
 
 
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/getByShip/{id}")
     public List<ShipAvailabilityDto> getbyShip(@PathVariable Long id) {

@@ -22,7 +22,7 @@ public class ShipQuickResevationController {
     private ShipQuickReservationService shipQuickReservationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/getAppByShip/{id}")
     public List<ShipQuickReservationResponse> getAllShip(@PathVariable Long id) {
         return this.shipQuickReservationService.findApp(id);

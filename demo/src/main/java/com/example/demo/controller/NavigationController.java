@@ -23,7 +23,7 @@ public class NavigationController {
     private NavigationService navigationService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/findNavigationbyBoat/{id}")
     public List<NavigationDto> findNavigationbyBoat(@PathVariable Long id) {
 

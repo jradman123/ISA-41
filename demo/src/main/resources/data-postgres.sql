@@ -65,7 +65,7 @@ INSERT INTO public.ships(
     	VALUES ('Zvijezda', 10, 'boat',5.2, 5, 200, 15, 120, 1, 'Big boat', 4, false,20.0,'stap');
 INSERT INTO public.ships(
        	 name, capacity, ship_type, ship_length, number_of_engine, strength_of_engine, max_speed, price,address,description, ship_owner, deleted,cancelation_conditions,fishing_equipment)
-       	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, false,5.0,'');
+       	VALUES ('More', 4, 'boat',5.4, 5, 100, 15, 120, 1, 'Small boat', 5, true,5.0,'');
 
 ---cottage-rules----
 INSERT INTO public.rules(rule_description,is_deleted_by_cottage,is_deleted_by_ship,cottage_id,ship_id) VALUES ('No drinking',false,false,1,1);

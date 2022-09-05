@@ -24,7 +24,7 @@ public class AppointmentController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('CottageAdvertiser')")
+    @PreAuthorize("hasAuthority('CottageAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/getAppByCottage/{id}")
     public List<AppointmentDto> getAllByCottage(@PathVariable Long id) {
        return this.appointmentService.findApp(id);
@@ -32,7 +32,7 @@ public class AppointmentController {
 
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('ShipAdvertiser')")
+    @PreAuthorize("hasAuthority('ShipAdvertiser') || hasAuthority('Admin')")
     @GetMapping(value="/getAppByShip/{id}")
     public List<AppointmentDto> getAllByShip(@PathVariable Long id) {
         return this.appointmentService.findAppbyShip(id);

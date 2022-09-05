@@ -17,16 +17,20 @@
                     <li class="list-group-item">
                         <strong>{{ship.name}}</strong>
                     </li>
-                    <li style="height: 70px;" class="list-group-item">
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-geo-alt"
+                            style="font-size: 20px;"></i>
                         {{this.ship.streetName}},{{this.ship.streetNumber}},{{this.ship.city}},{{this.ship.country}}
                     </li>
                     <li style="height: 70px;" class="list-group-item">{{ship.description}}
                     </li>
-                    <li style="height: 70px;" class="list-group-item">{{this.ship.price}} € per day for
+                    <li style="height: 70px;" class="list-group-item"><i class="bi bi-cash-stack"
+                            style="font-size: 20px;"></i><span> </span>{{this.ship.price}} € per day for
                         {{this.ship.capacity}} people</li>
 
                     <li class="list-group-item">
                         <button class="btn btn-primary" (click)="view(ship.id)">View</button>
+                        <button class="btn btn-primary" (click)="statistics(ship.id)">Statistics</button>
+
                         <button class="btn btn-primary" (click)="delete(ship.id)">Delete</button>
 
                     </li>

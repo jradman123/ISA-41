@@ -1,15 +1,21 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.AverageMarkDto;
 import com.example.demo.dto.CottageDto;
 import com.example.demo.dto.ReservationViewDto;
 import com.example.demo.dto.ShipDto;
 import com.example.demo.model.Address;
+import com.example.demo.model.Review;
 import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.ShipOwner;
 import com.example.demo.model.users.User;
+import com.example.demo.repository.ReviewRepository;
 import com.example.demo.repository.ShipOwnerRepository;
 import com.example.demo.repository.ShipRepository;
+import com.example.demo.repository.ShipReservationRepository;
 import com.example.demo.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -29,10 +35,17 @@ public class ShipServiceImpl  implements ShipService {
     private UserServiceImpl userRepository;
 
     @Autowired
+    private ShipReservationRepository shipReservationRepository;
+
+    @Autowired
     private ShipOwnerRepository shipOwnerRepository;
 
     @Autowired
     private ReservationServiceImpl reservationService;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
 
 
 
@@ -79,6 +92,32 @@ public class ShipServiceImpl  implements ShipService {
     @Override
     public Ship create(Ship ship) {
         return shipRepository.save(ship);
+    }
+
+    @Override
+    public AverageMarkDto getShipReport(Long id) {
+        AverageMarkDto report=new AverageMarkDto();
+        Double marks=getAverageMarkByShip(id);
+        report.setCottageMark(marks.toString());
+        return report;
+    }
+
+    public Double getAverageMarkByShip(Long id) {
+        List<ShipReservation> reservations=this.shipReservationRepository.getAllForShip(id);
+        Double sum = 0.0;
+        for (Review review : this.reviewRepository.findAll()) {
+            for (ShipReservation reservation : reservations) {
+                if(reservation.getId()==review.getReservation().getId()) {
+                    sum+=review.getMark();
+                }
+
+            }
+
+        }
+        if(this.reviewRepository.findAll().size()==0) {
+            return sum=0.0;
+        }
+        return sum/this.reviewRepository.findAll().size();
     }
 
 

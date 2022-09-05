@@ -5,8 +5,8 @@
             <h1>Utilities of ship</h1>
             <hr />
             <div *ngFor="let utility of utilities" class="containter">
-                <h3> {{ utility.name}} {{utility.price}} € <button color="warn" class="btn" style="margin-left:900px"
-                        (click)="deleteUtility(utility.id)">Delete</button>
+                <h3> {{ utility.name}} {{utility.price}} €<button style="margin-left:900px;width: 100px;"
+                        mat-flat-button color="warn" (click)="deleteUtility(utility.id)">Delete</button>
                     <hr />
                 </h3>
 
@@ -19,24 +19,27 @@
 
 
 
-<div class="container" style="margin-top:20px">
+<div class="container" style="text-align: center;margin-top: 20px;">
     <div class="containter">
         <div>
             <h1> Add utility of ship</h1>
             <hr />
             <div>
-                <input class="form-control" type="text" placeholder="Enter your utility" [(ngModel)]="utilityy.name" />
+                <input class="form-control" style="width: 400px;margin-left: 345px;" type="text"
+                    placeholder="Enter your utility" [(ngModel)]="utilityy.name" />
             </div>
             <div>
-                <input class="form-control" type="number" placeholder="Enter price of utility"
-                    [(ngModel)]="utilityy.price" />
+                <input class="form-control" style="width: 400px;margin-left: 345px;" type="number"
+                    placeholder="Enter price of utility" [(ngModel)]="utilityy.price" />
             </div>
         </div>
 
     </div>
     <div class="container">
         <div>
-            <button class="btn" style="margin-left:400px;width: 120px;" (click)="addUtility()">Add</button>
+            <button mat-flat-button color="primary" style="width:150px;margin-top:20px"
+                (click)="addUtility()">Add</button>
         </div>
+        <br /> <br />
     </div>
 </div>

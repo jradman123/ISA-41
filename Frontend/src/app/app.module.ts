@@ -84,6 +84,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-date-and-time-pic
 import { ShipAvailabilityComponent } from './components/ship-availability/ship-availability.component';
 
 import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
+
 import { DialogForDeletingAdventureComponent } from './components/dialog-for-deleting-adventure/dialog-for-deleting-adventure.component';
 import { DatePipe } from '@angular/common';
 import { DialogForReservationAdventureComponent } from './components/dialog-for-reservation-adventure/dialog-for-reservation-adventure.component';
@@ -91,6 +92,14 @@ import { AdventureStatisticComponent } from './components/adventure-statistic/ad
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { DialogReservationViewComponent } from './components/dialog-reservation-view/dialog-reservation-view.component';
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
+
+import { ShipReportComponent } from './components/ship-report/ship-report.component';
+
+
+
+
+
+
 
 
 @NgModule({
@@ -164,11 +173,15 @@ import { AdminReviewComponent } from './components/admin-review/admin-review.com
     DialogForReservationAdventureComponent,
     ShipAvailabilityComponent,
     CottageReportComponent,
+
     DialogForDeletingAdventureComponent,
     AdventureStatisticComponent,
     AdminReportComponent,
     DialogReservationViewComponent,
-    AdminReviewComponent
+    AdminReviewComponent,
+
+    ShipReportComponent
+
 
 
   ],
@@ -191,7 +204,7 @@ import { AdminReviewComponent } from './components/admin-review/admin-review.com
 
   ],
   providers: [HttpClientModule,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },DatePipe],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

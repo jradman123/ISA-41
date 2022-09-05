@@ -9,3 +9,12 @@
 .inner form {
     width: 100%;
 }
+
+.button {
+    margin-top: 30px;
+    width: 145px;
+    height: 40px;
+    font-size: 15px;
+    margin-left: 420px;
+    margin-right: 100px;
+}

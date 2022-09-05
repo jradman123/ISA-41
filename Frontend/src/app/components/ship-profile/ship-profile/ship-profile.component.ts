@@ -84,7 +84,7 @@ export class ShipProfileComponent implements OnInit {
       },
     });
 
-
+    this.getImages();
     this.findAppointments();
 
 
@@ -140,6 +140,7 @@ export class ShipProfileComponent implements OnInit {
         this.ship = data;
         this.images = [];
         this.getImages();
+        window.location.reload();
 
       });
     });

@@ -8,6 +8,7 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -24,4 +25,12 @@ body {
   background-size: cover;
   width: auto;
   background-image: url("assets/images/background1.jpg");
+}
+
+
+.image3 {
+  height: -webkit-fill-available;
+  background-size: cover;
+  width: auto;
+  background-image: url("assets/images/report.png");
 }

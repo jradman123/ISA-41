@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CottageDto;
-import com.example.demo.dto.ImageRequest;
-import com.example.demo.dto.ImagesResponse;
-import com.example.demo.dto.ShipDto;
+import com.example.demo.dto.*;
 import com.example.demo.mapper.ImageMapper;
 import com.example.demo.model.Image;
 import com.example.demo.model.cottages.Cottage;
@@ -54,6 +51,13 @@ public class ShipController {
         return this.shipService.createShip(newShip);
     }
 */
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value = "/getShipReport/{id}")
+    public AverageMarkDto getShipReport(@PathVariable Long id) {
+        return this.shipService.getShipReport(id);
+    }
+
     @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @GetMapping(value = "/findShip/{id}")
     public ShipDto findShip(@PathVariable Long id) {

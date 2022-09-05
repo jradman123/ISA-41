@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { AdventureReservation } from 'src/app/interfaces/adventure-reservation';
+
+import { AppointmentDto } from 'src/app/interfaces/appointment-dto';
+
 import { CottageReservation } from 'src/app/interfaces/cottage-reservation';
 import { DetailsAboutReservation } from 'src/app/interfaces/details-about-reservation';
 import { environment } from 'src/environments/environment';
@@ -35,6 +39,14 @@ export class ReservationService {
 
       `${this.apiServerUrl}/reservations/findPastReservationsByCottage/${id}`);
   }
+
+  geQuickCottageReservationById(id: string): Observable<AppointmentDto[]> {
+
+    return this.http.get<AppointmentDto[]>(
+
+      `${this.apiServerUrl}/appointments/getAppByCottage/${id}`);
+  }
+
 
   getCottageReservationById(id: string): Observable<CottageReservation[]> {
     return this.http.get<CottageReservation[]>(
@@ -85,7 +97,7 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/all-instructors`);
   }
 
-  getDetails(id : string): Observable<DetailsAboutReservation> {
+  getDetails(id: string): Observable<DetailsAboutReservation> {
     return this.http.get<DetailsAboutReservation>(
       `${this.apiServerUrl}/reservations/${id}/details`);
   }

@@ -82,6 +82,7 @@ public class ReservationServiceImpl implements ReservationService
     private CottageQuickReservationServiceImpl cottageQuickReservationService;
 
 
+
     @Autowired
     private AdventureUtilityRepository adventureUtilityRepository;
 
@@ -93,6 +94,12 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private ReservationMapper reservationMapper;
+
+
+    @Autowired
+    private ShipQuickReservationServiceImpl shipQuickReservationService;
+
+
 
     @Override
     public List<ReservationViewDto> getReservationsByCottage(Long id) {
@@ -232,9 +239,10 @@ return null;
 
           boolean reservations=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
         boolean availability=checkAvailability(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+        boolean app=this.shipQuickReservationService.checkApp(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
 
 
-        if(reservations && availability) {
+        if(reservations && availability && app) {
 
               if (createReservationDto.getResStart().isAfter(LocalDateTime.now()) && createReservationDto.getResEnd().isAfter(createReservationDto.getResStart())) {
                   Reservation reservation = typeOfReservation(createReservationDto);

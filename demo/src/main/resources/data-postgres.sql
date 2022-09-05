@@ -31,6 +31,8 @@ VALUES ('SHIP_OWNER', false, 'imam vise brodova na izdavanje', 'milica@gmail.com
 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
 VALUES ('INSTRUCTOR', false, 'Želim da se registrujem kako bih mogla da ponudim svoje usluge instruktora pecanja', 'raandmjenale@gmail.com', 'Jelena', true, '2209999155856', 'Radman','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066782777', 2,0, 3);
+INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
+VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255800', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 1);
 
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address,penalties)
 VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255856', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 7,0);
@@ -172,6 +174,7 @@ INSERT INTO public.ship_reservation(id,is_canceled,is_deleted,is_reserved,number
 VALUES (10,false,false,true,2,50.0,'10-09-2022 09:00','05-09-2022 12:00',3,1,false,'SHIP');
 
 
+
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
 	VALUES (15.0, false, 'Vožnja čamcem uz pecanje na rijeci.', 5, 'Riječni raj', 15, 5, 6);
 INSERT INTO public.adventure(cancellation_conditions, deleted, description, guest_limit, name, price, address, instructor)
@@ -191,6 +194,14 @@ INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,n
     VALUES (16,false,false,true,2,30.0,'03-06-2022 09:00','03-06-2022 08:00',6,8,1,false,'ADVENTURE');
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)
     VALUES (17,false,false,true,2,30.0,'02-09-2022 09:00','02-09-2022 08:00',6,8,1,false,'ADVENTURE');
+
+
+
+INSERT INTO public.reservation(dtype,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,cottage_id,ship_id,have_report)
+    VALUES ('AdventureReservation',false,false,true,2,30.0,'09-02-2022 09:00','08-31-2022 08:00',6,7,1,null,null,false);
+
+--INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 4);
+--INSERT INTO public.adventure_images(adventure_id, image_id) VALUES (1, 5);
 
 
 
@@ -225,6 +236,7 @@ VALUES ('08-20-2022 10:00', '08-15-2022  10:00', 6);
 
 
 
+
 ----review---
 INSERT INTO public.review(comment, mark, reservation_id,approved,unapproved)
 VALUES ('bad', 1, 1,true,false);
@@ -254,6 +266,15 @@ VALUES (19,false,false,true,2,50.0,'23-09-2022 09:00','20-09-2022 12:00',7,1,fal
 INSERT INTO public.adventure_quick_reservation(
 end_time, guest_limit, is_deleted, is_reserved, price, start_time, valid_until, adventure_id)
 	VALUES ('22-09-2022 17:00', 3, false, false, 20.0, '22-09-2022 12:00', '21-09-2022 23:59', 1);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('vrh', 5, 6);
+INSERT INTO public.review(comment, mark, reservation_id)
+VALUES ('vrh', 5, 5);
+
+
+INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,type,address)
+VALUES ('REGISTERED_USER', false, '-----', 'psw.company2@gmail.com', 'Marko', true, '2209999255856', 'Marković','$2a$10$5s0fl1WYytSVxo0/ve85oe5R6G4MupNWoetyGDQF/xNhgZbvZzypC' , '066787777', 3,null, 1);
+
 
 INSERT INTO public.cottage_users(
 	cottage_id, users_id)

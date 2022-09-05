@@ -35,9 +35,14 @@ import { AdventuresListComponent } from './components/adventures-list/adventures
 import { NewAdventureComponent } from './components/new-adventure/new-adventure.component';
 import { AdventureProfileComponent } from './components/adventure-profile/adventure-profile.component';
 import { InstructorAvailabilityComponent } from './components/instructor-availability/instructor-availability.component';
+
 import { AdventureStatisticComponent } from './components/adventure-statistic/adventure-statistic.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
+
+import { CottageReportComponent } from './components/cottage-report/cottage-report.component';
+import { ShipReportComponent } from './components/ship-report/ship-report.component';
+
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -101,6 +106,12 @@ const routes: Routes = [
       {
         path: 'cottage-profile/:id',
         component: CottageProfileComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'cottage-statistics/:id',
+        component: CottageReportComponent,
         canActivate: [AuthGuard]
 
       },
@@ -184,6 +195,12 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'ship-statistics/:id',
+        component: ShipReportComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
         path: 'profile',
         component: ShipOwnerProfileComponent,
         canActivate: [AuthGuard]
@@ -251,12 +268,12 @@ const routes: Routes = [
       {
         path: 'report/:id',
         component: AdventureStatisticComponent,
-        canActivate : [AuthGuard]
+        canActivate: [AuthGuard]
       }
     ],
 
   },
-  
+
 
 
 ];

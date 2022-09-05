@@ -63,6 +63,7 @@ export class ShipProfileComponent implements OnInit {
     this.id = +this.router.snapshot.paramMap.get('id')!;
     this.shipService.findbyId(this.id).subscribe({
       next: (data: ShipDto) => {
+        console.log("Boyeeeee" + data.longitude)
         this.ship = data
         this.initialDetails = JSON.parse(JSON.stringify(data));
         this.detailsForm.controls['name'].setValue(data.name)

@@ -7,6 +7,12 @@ mat-tab-group {
   background-color: white;
 }
 
+agm-map {
+  height: 300px !important;
+  width: 100%;
+  /* This is really important*/
+}
+
 .adventurePhoto {
   width: 150px;
   height: 100px;

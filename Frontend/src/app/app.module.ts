@@ -183,7 +183,7 @@ import { ShipReportComponent } from './components/ship-report/ship-report.compon
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
 
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDjkYy-y0-wlKYTQC0cMskJm9DuCWMmvVE' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDZcAYODCD4-sWd-jV_surbC0v1ChTY-PY' }),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
 
   ],

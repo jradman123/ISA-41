@@ -44,6 +44,10 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
     @Autowired
     private UserServiceImpl userService;
 
+
+    @Autowired
+    private ReservationServiceImpl reservationService;
+
     @Autowired
     private ShipUtilityRepository shipUtilityRepository;
 
@@ -55,9 +59,21 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
         ShipQuickReservation appointment = new ShipQuickReservation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 
-        appointment.setStartTime(LocalDateTime.parse(dto.getStartTime(), formatter));
-        appointment.setEndTime(LocalDateTime.parse(dto.getEndTime(), formatter));
-        appointment.setGuestLimit(Integer.parseInt(dto.getGuestLimit()));
+        LocalDateTime start=LocalDateTime.parse(dto.getStartTime(), formatter);
+        LocalDateTime end=LocalDateTime.parse(dto.getEndTime(), formatter);
+
+        appointment.setStartTime(start);
+        appointment.setEndTime(end);
+
+
+
+        boolean reservations=this.reservationService.checkDates(start,end,dto.getShipId());
+        boolean availability=this.reservationService.checkAvailability(start,end,dto.getShipId());
+        boolean app=this.checkApp(start,end,dto.getShipId());
+
+        if(reservations && availability && app) {
+
+            appointment.setGuestLimit(Integer.parseInt(dto.getGuestLimit()));
         appointment.setPrice(Double.parseDouble(dto.getPrice()));
         appointment.setValidUntil(LocalDateTime.parse(dto.getValidUntil(), formatter));
 
@@ -80,6 +96,7 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
 
             return appointment;
 
+        }else {return null;}
         }
         return null;
     }

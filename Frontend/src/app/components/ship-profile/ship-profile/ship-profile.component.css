@@ -8,7 +8,7 @@ mat-tab-group {
 }
 
 agm-map {
-  height: 300px !important;
+  height: 500px !important;
   width: 100%;
   /* This is really important*/
 }

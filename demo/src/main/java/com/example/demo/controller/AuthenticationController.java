@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,38 +46,43 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, HttpServletResponse response) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 
-        // Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
-        // AuthenticationException
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                authenticationRequest.getEmail(), authenticationRequest.getPassword()));
 
-        User userDb = userService.findByEmail(authenticationRequest.getEmail());
-        if(userDb.isDeleted()) {
-            return new ResponseEntity<>("Profile is deleted!", HttpStatus.BAD_REQUEST);
+            User userDb = userService.findByEmail(authenticationRequest.getEmail());
+            if (userDb.isDeleted()) {
+                return new ResponseEntity<>("Profile is deleted!", HttpStatus.BAD_REQUEST);
+            }
+
+            if (!userDb.getActivated()) {
+                return new ResponseEntity<>("Profile is not activated!", HttpStatus.BAD_REQUEST);
+            }
+            // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
+            // kontekst
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Kreiraj token za tog korisnika
+            UserType role = userService.findByEmail(authenticationRequest.getEmail()).getUserType();
+            AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto();
+            boolean firstLogin = false;
+            boolean predefAdmin = false;
+            if (role.equals(UserType.Admin)) {
+                firstLogin = userService.isFirstLogin(authenticationRequest.getEmail());
+                predefAdmin = userService.isPredefAdmin(authenticationRequest.getEmail());
+            }
+            UserDetails user = (UserDetails) authentication.getPrincipal();
+            String jwt = tokenUtils.generateToken(user.getUser().getEmail());
+            int expiresIn = tokenUtils.getExpiredIn();
+            authenticatedUserDto.setRole(role.toString());
+            authenticatedUserDto.setEmail(authenticationRequest.getEmail());
+            authenticatedUserDto.setToken(new UserTokenState(jwt, expiresIn));
+            authenticatedUserDto.setFirstLogin(firstLogin);
+            authenticatedUserDto.setPredefAdmin(predefAdmin);
+            return ResponseEntity.ok(authenticatedUserDto);
+        }catch (AuthenticationException e){
+            return new ResponseEntity<>("Bad credentials!", HttpStatus.BAD_REQUEST);
         }
-        // Ukoliko je autentifikacija uspesna, ubaci korisnika u trenutni security
-        // kontekst
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        // Kreiraj token za tog korisnika
-        UserType role = userService.findByEmail(authenticationRequest.getEmail()).getUserType();
-        AuthenticatedUserDto authenticatedUserDto = new AuthenticatedUserDto();
-        boolean firstLogin = false;
-        boolean predefAdmin = false;
-        if(role.equals(UserType.Admin)){
-            firstLogin= userService.isFirstLogin(authenticationRequest.getEmail());
-            predefAdmin = userService.isPredefAdmin(authenticationRequest.getEmail());
-        }
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUser().getEmail());
-        int expiresIn = tokenUtils.getExpiredIn();
-        authenticatedUserDto.setRole(role.toString());
-        authenticatedUserDto.setEmail(authenticationRequest.getEmail());
-        authenticatedUserDto.setToken(new UserTokenState(jwt,expiresIn));
-        authenticatedUserDto.setFirstLogin(firstLogin);
-        authenticatedUserDto.setPredefAdmin(predefAdmin);
-        // Vrati token kao odgovor na uspesnu autentifikaciju
-        return ResponseEntity.ok(authenticatedUserDto);
     }
 
     // Endpoint za registraciju novog korisnika

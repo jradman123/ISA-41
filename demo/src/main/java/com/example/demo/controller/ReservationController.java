@@ -174,4 +174,12 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.getDetails(id),HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PreAuthorize("hasAuthority('Instructor')")
+    @PostMapping(value = "/calculate-price")
+    public Double calculatePriceForAdventure(@RequestBody CreateReservationDto createReservationDto) {
+        return reservationService.calculatePriceForAdventure(createReservationDto);
+    }
+
+
 }

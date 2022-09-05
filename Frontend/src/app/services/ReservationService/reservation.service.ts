@@ -90,6 +90,11 @@ export class ReservationService {
       `${this.apiServerUrl}/reservations/${id}/details`);
   }
 
+  calculatePrice(reservation : AdventureReservation) {
+    return this.http.post(
+      `${this.apiServerUrl}/reservations/calculate-price`,reservation);
+  }
+
 
 
 

@@ -53,6 +53,9 @@ public class User {
 	
 	 @Column(name = "deleted")
 	 private boolean deleted = false;
+
+	@Column(name = "scoredPoints")
+	private int scoredPoints = 0;
 	 
 	 public String getFullName() {
 	        return this.firstName + " " + this.lastName;
@@ -65,7 +68,7 @@ public class User {
 	
 	public User(Integer id, String firstName, String lastName,String password,
 			String email, String phoneNumber, Address address, String jmbg, UserType userType,
-			String descriptionOfRegistration, Boolean isActivated, boolean deleted) {
+			String descriptionOfRegistration, Boolean isActivated, boolean deleted,int scoredPoints) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -79,6 +82,7 @@ public class User {
 		this.descriptionOfRegistration = descriptionOfRegistration;
 		this.isActivated = isActivated;
 		this.deleted = deleted;
+		this.scoredPoints = scoredPoints;
 	}
 
 	public User(Integer id, String firstName, String lastName,String password,
@@ -192,5 +196,13 @@ public class User {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public int getScoredPoints() {
+		return scoredPoints;
+	}
+
+	public void setScoredPoints(int scoredPoints) {
+		this.scoredPoints = scoredPoints;
 	}
 }

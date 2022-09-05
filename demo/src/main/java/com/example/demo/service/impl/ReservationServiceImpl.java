@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
 import com.example.demo.mapper.ReservationMapper;
+import com.example.demo.model.Category;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.adventures.AdventureUtility;
@@ -17,12 +18,9 @@ import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.*;
 
-import com.example.demo.service.AdventureQuickReservationService;
-import com.example.demo.service.AdventureService;
-import com.example.demo.service.InstructorAvailabilityService;
+import com.example.demo.service.*;
 
 
-import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,6 +89,12 @@ public class ReservationServiceImpl implements ReservationService
 
     @Autowired
     private ReservationMapper reservationMapper;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private PointsForSuccessReservationRepository pointsRepository;
 
     @Override
     public List<ReservationViewDto> getReservationsByCottage(Long id) {
@@ -346,7 +350,7 @@ return null;
     @Override
     public List<ReservationViewDto> getFutureReservationsForAdventure(int id) {
         List<ReservationViewDto> reservationDtos=new ArrayList<>();
-        for(AdventureReservation r : adventureReservationRepository.findAll()) {
+        for(AdventureReservation r : adventureReservationRepository.getAllFutureAdventureReservations(id,LocalDateTime.now())) {
             if(r.getAdventure().getId()==id  && (LocalDateTime.now().isBefore(r.getReservationEnd()) && LocalDateTime.now().isBefore(r.getReservationStart()))) {
                 reservationDtos.add(new ReservationViewDto(r));
             }
@@ -503,6 +507,38 @@ return null;
             return cottageReservationRepository.findById(reservation.getId()).get().getCottage().getCottageOwner().getFullName();
         }
         return "";
+    }
+
+    @Override
+    public Double calculatePriceForAdventure(CreateReservationDto createReservationDto) {
+        Adventure adventure = adventureService.findAdventure(Integer.parseInt(createReservationDto.getObjectId()));
+        Double price = adventure.getPrice() * createReservationDto.getNumberOfPerson();
+        if(createReservationDto.getUtilities() != null) {
+            for (ResponseUtility utility : createReservationDto.getUtilities()) {
+                price+=adventureUtilityRepository.findById(Long.parseLong(utility.getId())).get().getPrice();
+            }
+        }
+        Double priceWithDiscount = calculatePriceWithDiscount(createReservationDto.clientEmail,price);
+        return price - priceWithDiscount;
+    }
+
+    private Double calculatePriceWithDiscount(String clientEmail, Double price) {
+        User updated = updatePoints(userService.findByEmail(clientEmail));
+        Double discount = categoryService.getCategoryForUser(updated.getEmail()).getDiscount();
+        return (price*discount)/100;
+    }
+
+    private User updatePoints(User user) {
+        int numberOfSuccessResrevations= 0;
+        for (Reservation reservation: reservationRepository.findAll()) {
+            if(reservation.getRegisteredUser().getId()==user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()){
+                numberOfSuccessResrevations++;
+            }
+        }
+        int clientPoints = pointsRepository.findAll().stream().findFirst().get().getClient();
+        int newPoints = numberOfSuccessResrevations * clientPoints;
+        user.setScoredPoints(newPoints);
+        return userService.save(user);
     }
 
     private List<AdventureReservation> getAllInstructorsAdventures(int id){

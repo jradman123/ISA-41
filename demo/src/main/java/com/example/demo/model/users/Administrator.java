@@ -24,7 +24,7 @@ public class Administrator extends User {
 	}
 
 	public Administrator(Integer id, String firstName, String lastName, String password, String email, String phoneNumber, Address address, String jmbg, UserType userType, String descriptionOfRegistration, Boolean isActivated, boolean deleted, AdminType type,boolean firstLogin) {
-		super(id, firstName, lastName, password, email, phoneNumber, address, jmbg, userType, descriptionOfRegistration, isActivated, deleted);
+		super(id, firstName, lastName, password, email, phoneNumber, address, jmbg, userType, descriptionOfRegistration, isActivated, deleted,0);
 		this.type = type;
 		this.firstLogin = firstLogin;
 	}

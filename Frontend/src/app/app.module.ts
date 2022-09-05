@@ -112,6 +112,7 @@ import { BEquipmentsComponent } from './components/admin-entities/admin-boats/b-
 import { BAvailabilityComponent } from './components/admin-entities/admin-boats/b-availability/b-availability.component';
 import { BReservationsComponent } from './components/admin-entities/admin-boats/b-reservations/b-reservations.component';
 import { BUtilitiesComponent } from './components/admin-entities/admin-boats/b-utilities/b-utilities.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 
 
 @NgModule({
@@ -210,7 +211,8 @@ import { BUtilitiesComponent } from './components/admin-entities/admin-boats/b-u
     BEquipmentsComponent,
     BAvailabilityComponent,
     BReservationsComponent,
-    BUtilitiesComponent
+    BUtilitiesComponent,
+    LoyaltyComponent
 
 
   ],

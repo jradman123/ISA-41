@@ -20,4 +20,6 @@ public class Instructor extends User {
 	@Column(name = "biography")
     private String biography;
 
+
+
 }

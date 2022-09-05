@@ -17,9 +17,6 @@ public class CreateReservationDto {
    public String clientEmail;
    public String typeOfRes;
    public String objectId;
-
-  
-
    private List<ResponseUtility> utilities;
 
 

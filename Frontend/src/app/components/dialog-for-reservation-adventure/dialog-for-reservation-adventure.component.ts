@@ -29,7 +29,7 @@ export class DialogForReservationAdventureComponent implements OnInit {
   id: any;
   adventuresUtilities = new FormControl();
   utilities: ResponseUtility[];
-  fullPrice: number = 0;
+  fullPrice: any;
   price!: any;
   guestLimit! : number;
   constructor(private adventureService: AdventureService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, 
@@ -141,10 +141,57 @@ export class DialogForReservationAdventureComponent implements OnInit {
 
 
   total() {
-    this.fullPrice = this.form.value.numberOfPerson * this.price; 
+    this.re();
+
+    if (this.form.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You must fill in all fields!',
+      })
+      return;
+    }
+
+
+    if (this.newReservation.resStart > this.newReservation.resEnd) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date is greater or equal then end date!',
+      })
+      return;
+    }
+    else if (this.newReservation.resStart < new Date()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Start date must be greater then today!',
+      })
+      return;
+    }
+    /*this.fullPrice = this.form.value.numberOfPerson * this.price; 
     for(let i=0; i < this.adventuresUtilities.value?.length; i++){
       this.fullPrice += Number(this.adventuresUtilities.value[i].price);
-    }
+    }*/
+
+    this.reservationService.calculatePrice(this.newReservation).subscribe((data)=>{
+      this.fullPrice=data;
+    })
+  }
+
+  re(): void {
+    const s = new Date( this.form.value.resStart.getTime() -  this.form.value.resStart.getTimezoneOffset() * 60000)
+    const e = new Date( this.form.value.resEnd.getTime() -  this.form.value.resEnd.getTimezoneOffset() * 60000)
+    this.newReservation.resStart = s,
+    this.newReservation.resEnd = e,
+    this.newReservation.numberOfPerson = this.form.value.numberOfPerson;
+    this.newReservation.price = '0';
+    this.newReservation.clientEmail = this.data.clientEmail;
+    this.newReservation.objectId = this.data.id;
+    this.newReservation.typeOfRes = 'ADVENTURE';
+    this.newReservation.utilities = this.adventuresUtilities.value;
+    console.log(this.form.value)
+
   }
 
 }

@@ -27,4 +27,7 @@ public interface AdventureReservationRepository extends JpaRepository<AdventureR
 
     @Query(value = "select * from adventure_reservation a where adventure_id = ?1 ", nativeQuery = true)
     List<AdventureReservation> getAllForAdventure(int id);
+
+    @Query(value = "select * from adventure_reservation a where adventure_id = ?1 and reservation_end > ?2", nativeQuery = true)
+    List<AdventureReservation> getAllFutureAdventureReservations(int id,LocalDateTime now);
 }

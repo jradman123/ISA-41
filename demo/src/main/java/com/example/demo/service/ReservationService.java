@@ -36,4 +36,5 @@ public interface ReservationService {
     DetailsAboutReservation getDetails(Long id);
     String getOwnersEmail(Reservation reservation);
     String getOwnersName(Reservation reservation);
+    Double calculatePriceForAdventure(CreateReservationDto createReservationDto);
 }

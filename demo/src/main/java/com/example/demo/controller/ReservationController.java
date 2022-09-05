@@ -125,7 +125,7 @@ public class ReservationController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/reservations-exist-for-adventure/{id}")
     public ResponseEntity<String> reservationsExistForAdventure(@PathVariable int id) {
         if(reservationService.reservationsExistForAdventure(id)){

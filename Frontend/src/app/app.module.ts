@@ -93,6 +93,7 @@ import { DialogReservationViewComponent } from './components/dialog-reservation-
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
 import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 import { AnswerComplaintDialogComponent } from './components/answer-complaint-dialog/answer-complaint-dialog.component';
+import { AdventuresViewComponent } from './components/admin-entities/admin-adventures/adventures-view/adventures-view.component';
 
 
 @NgModule({
@@ -172,7 +173,8 @@ import { AnswerComplaintDialogComponent } from './components/answer-complaint-di
     DialogReservationViewComponent,
     AdminReviewComponent,
     AdminComplaintsComponent,
-    AnswerComplaintDialogComponent
+    AnswerComplaintDialogComponent,
+    AdventuresViewComponent
 
 
   ],

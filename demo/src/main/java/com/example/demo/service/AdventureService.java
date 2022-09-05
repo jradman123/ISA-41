@@ -28,5 +28,6 @@ public interface AdventureService {
     Set<AdventureUtility> getUtilitiesByAdventure(Adventure adventure);
     Adventure deleteAdventure(int id);
     AdventureAverageRating getRatingForAdventure(int id);
+    List<Adventure> getAllUndeleted();
 
 }

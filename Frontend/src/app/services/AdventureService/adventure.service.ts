@@ -74,4 +74,9 @@ export class AdventureService {
       `${this.apiServerUrl}/adventures/${id}/average-rating`);
   }
 
+  getAll(): Observable<AdventureDto[]> {
+    return this.http.get<AdventureDto[]>(
+      `${this.apiServerUrl}/adventures`);
+  }
+
 }

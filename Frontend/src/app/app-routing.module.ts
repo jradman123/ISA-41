@@ -39,6 +39,7 @@ import { AdventureStatisticComponent } from './components/adventure-statistic/ad
 import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 import { AdminReportComponent } from './components/admin-report/admin-report.component';
 import { AdminReviewComponent } from './components/admin-review/admin-review.component';
+import { AdventuresViewComponent } from './components/admin-entities/admin-adventures/adventures-view/adventures-view.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -83,6 +84,11 @@ const routes: Routes = [
       {
         path: 'complaints',
         component: AdminComplaintsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adventures',
+        component: AdventuresViewComponent,
         canActivate: [AuthGuard]
       }
     ],

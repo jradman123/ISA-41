@@ -157,6 +157,11 @@ public class AdventureServiceImpl implements AdventureService {
         return averageRating;
     }
 
+    @Override
+    public List<Adventure> getAllUndeleted() {
+        return adventureRepository.getAllUndeleted();
+    }
+
     private Double calculateAverageRating(int id) {
         List<AdventureReservation> reservations=adventureReservationRepository.getAllForAdventure(id);
         Double sum = 0.0;

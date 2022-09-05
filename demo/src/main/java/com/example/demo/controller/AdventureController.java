@@ -73,7 +73,7 @@ public class AdventureController {
         return new ResponseEntity<>(adventureService.createAdventure(adventure), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/find-adventure/{id}")
     public ResponseEntity<AdventureDto> findAdventure(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
@@ -93,7 +93,7 @@ public class AdventureController {
         return new ResponseEntity<>(this.adventureService.createAdventure(adventure),HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/images")
     public ResponseEntity<ImagesResponse> getAdventuresImages(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
@@ -110,7 +110,7 @@ public class AdventureController {
         return new ResponseEntity<>(this.adventureMapper.mapAdventureToAdventureDto(updated),HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/rules")
     public ResponseEntity<Set<ResponseRules>> getAdventureRules(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
@@ -118,7 +118,7 @@ public class AdventureController {
         return new ResponseEntity<>(this.adventureRuleMapper.mapRulesToResponseRules(adventureRules),HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/fishing-equipments")
     public ResponseEntity<Set<ResponseFishingEquipment>> getFishingEquipments(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
@@ -127,7 +127,7 @@ public class AdventureController {
                                     HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @GetMapping(value = "/{id}/utilities")
     public ResponseEntity<Set<ResponseUtility>> getUtilities(@PathVariable int id) {
         Adventure adventure = this.adventureService.findAdventure(id);
@@ -136,7 +136,7 @@ public class AdventureController {
                 HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('Instructor')")
+    @PreAuthorize("hasAuthority('Instructor') || hasAuthority('Admin')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteAdventure(@PathVariable int id) {
         Adventure adventure = this.adventureService.deleteAdventure(id);
@@ -151,6 +151,16 @@ public class AdventureController {
     @GetMapping(value = "/{id}/average-rating")
     public ResponseEntity<AdventureAverageRating> getAdventureAverageRating(@PathVariable int id) {
         return new ResponseEntity<>(adventureService.getRatingForAdventure(id), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping()
+    public ResponseEntity<List<AdventureDto>> getAll() {
+        List<AdventureDto> adventureDtos = new ArrayList<>();
+        for (Adventure adventure : adventureService.getAllUndeleted()) {
+            adventureDtos.add(adventureMapper.mapAdventureToAdventureDto(adventure));
+        }
+        return new ResponseEntity<>(adventureDtos, HttpStatus.OK);
     }
 
 }

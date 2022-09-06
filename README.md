@@ -1,7 +1,7 @@
 # <p align="center"> ADVENTURE  </p> 
 
 ADVENTURE is a web application for displaying boats,cottages and adventures where clients can book all of these entities.
-Access to the system have owners of cottages,boats and adventures.
+Access to the system have owners of cottages and boats as well as istructors and admins.
 
 ## Authors
 

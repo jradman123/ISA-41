@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDb.setName(category.getName());
         categoryDb.setMinPoints(Integer.parseInt(category.getMin()));
         categoryDb.setMaxPoints(Integer.parseInt(category.getMax()));
-        categoryDb.setDiscount(Double.parseDouble(category.getMax()));
+        categoryDb.setDiscount(Double.parseDouble(category.getDiscount()));
         return categoryRepository.save(categoryDb);
     }
 

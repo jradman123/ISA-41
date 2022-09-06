@@ -13,18 +13,18 @@ Access to the system have owners of cottages,boats and adventures.
 ## Starting the Application
 
 ### Instalations
-- IntelliJ
 - Maven
-- Java 17
 - PostgreSQL
+- IntelliJ
+- Java 17
 - Angular CLI 8.3.29
 - Node JS 8.8.0
 
 ### Tools 
--Spring Boot
--PostgreSQL
+- Spring Boot
+- PostgreSQL
 -Angular
-
+ 
 
 ### Running
 You need to start backend application first.It is connected to the posgres database called isa41 then frontend application with command

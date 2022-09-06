@@ -10,10 +10,7 @@ import com.example.demo.model.ships.ShipQuickReservation;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
-import com.example.demo.repository.CottageQuickReservationRepository;
-import com.example.demo.repository.CottageUtilityRepository;
-import com.example.demo.repository.ShipQuickReservationRepository;
-import com.example.demo.repository.ShipUtilityRepository;
+import com.example.demo.repository.*;
 import com.example.demo.service.CottageService;
 import com.example.demo.service.ShipQuickReservationService;
 import com.example.demo.service.ShipService;
@@ -21,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,9 +49,13 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
     @Autowired
     private ShipUtilityRepository shipUtilityRepository;
 
+    @Autowired
+    private ShipRepository shipRepository;
+
 
 
     @Override
+    @Transactional
     public ShipQuickReservation createAppointment(ShipQuickReservationDto dto) {
 
         ShipQuickReservation appointment = new ShipQuickReservation();
@@ -85,7 +87,7 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
 
 
         if (dto.getShipId() != null) {
-            Ship ship = shipService.findShipById(Long.parseLong(dto.getShipId()));
+            Ship ship = shipRepository.findShipById(Long.parseLong(dto.getShipId()));
             appointment.setShip(ship);
             Set<RegisteredUser> subscribers = ship.getSubscribers();
             for (RegisteredUser client : subscribers) {

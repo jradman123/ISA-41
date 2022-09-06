@@ -34,6 +34,7 @@ export class DialogForReservationShipComponent implements OnInit {
   id: any;
   constructor(private shipService: ShipService, private utilityService: UtilityService, @Inject(MAT_DIALOG_DATA) public data: DataForDialogEmail, private reservationService: ReservationService, public dialog: MatDialog, private router: ActivatedRoute, public dialogRef: MatDialogRef<DialogForReservationShipComponent>) {
     this.newReservation = {} as CottageReservation;
+    this.utilities = [] as UtilityDto[];
   }
   ngOnInit(): void {
 
@@ -53,6 +54,7 @@ export class DialogForReservationShipComponent implements OnInit {
       resStart: new FormControl('', Validators.required),
       resEnd: new FormControl('', Validators.required),
       capacity: new FormControl('', Validators.required),
+      numberOfPerson: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required),
     })
   }

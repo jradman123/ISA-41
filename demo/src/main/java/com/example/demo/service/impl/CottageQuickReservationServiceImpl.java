@@ -10,17 +10,21 @@ import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.cottages.CottageUtility;
 import com.example.demo.model.reservation.Appointment;
 import com.example.demo.model.ships.Ship;
+import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.ships.ShipUtility;
 import com.example.demo.model.users.RegisteredUser;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.CottageQuickReservationRepository;
+import com.example.demo.repository.CottageRepository;
 import com.example.demo.repository.CottageUtilityRepository;
+import com.example.demo.repository.ShipRepository;
 import com.example.demo.service.CottageQuickReservationService;
 import com.example.demo.service.CottageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -46,6 +50,11 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
     @Autowired
     private ReservationServiceImpl reservationService;
+
+    @Autowired
+    private CottageRepository cottageRepository;
+
+
 
     @Autowired
     private CottageUtilityRepository cottageUtilityRepository;
@@ -84,6 +93,7 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
     }
 
     @Override
+    @Transactional
     public CottageQuickReservation createAppointment(CottageQuickReservationDto dto) {
         CottageQuickReservation appointment = new CottageQuickReservation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
@@ -112,7 +122,7 @@ public class CottageQuickReservationServiceImpl implements CottageQuickReservati
 
 
         if (dto.getCottageId() != null) {
-            Cottage cottage = cottageService.findCottageById(Long.parseLong(dto.getCottageId()));
+            Cottage cottage = cottageRepository.findCottageById(Long.parseLong(dto.getCottageId()));
             appointment.setCottage(cottage);
 
             Set<RegisteredUser> subscribers = cottage.getSubscribers();

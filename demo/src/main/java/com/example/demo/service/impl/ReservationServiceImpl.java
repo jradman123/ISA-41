@@ -16,6 +16,7 @@ import com.example.demo.service.ReservationService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +30,12 @@ public class ReservationServiceImpl implements ReservationService
 {
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Autowired
+    private CottageRepository cottageRepository;
+
+    @Autowired
+    private ShipRepository shipRepository;
 
     @Autowired
     private UserServiceImpl userService;
@@ -128,6 +135,7 @@ public class ReservationServiceImpl implements ReservationService
     }
 
     @Override
+    @Transactional
     public Reservation createCottageReservation(CreateReservationDto createReservationDto) {
 
         User user=userService.findByEmail(createReservationDto.clientEmail);
@@ -173,7 +181,7 @@ public class ReservationServiceImpl implements ReservationService
 
 return null;
     }
-
+    @Transactional
     public boolean checkAvailability(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
         for(CottageAvailability ca:this.cottageAvailabilityRepository.getAllForCottage(Long.parseLong(objectId))) {
             if(startDate.isAfter(ca.getStartDate()) && endDate.isBefore(ca.getEndDate())) {
@@ -183,6 +191,7 @@ return null;
         return false;
     }
 
+    @Transactional
     public boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
         for (CottageReservation ct : cottageReservationRepository.getAllForCottage(Long.parseLong(objectId))) {
 
@@ -204,6 +213,7 @@ return null;
     }
 
     @Override
+    @Transactional
     public Reservation createShipReservation(CreateReservationDto createReservationDto) {
 
         User user=userService.findByEmail(createReservationDto.clientEmail);
@@ -300,6 +310,7 @@ return null;
         return reservationDtos;
     }
 
+    @Transactional
     private Reservation typeOfReservation(CreateReservationDto createReservationDto) {
         if(createReservationDto.typeOfRes.equals("COTTAGE")) {
            CottageReservation cottageReservation=new CottageReservation();

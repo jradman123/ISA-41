@@ -283,10 +283,10 @@ INSERT INTO public.category(
 	VALUES (0, 10, 0, 'REGULAR');
 INSERT INTO public.category(
     	discount, max_points, min_points, name)
-    	VALUES (25, 30, 11, 'SILVER');
+    	VALUES (10, 80, 11, 'SILVER');
    INSERT INTO public.category(
        	discount, max_points, min_points, name)
-       	VALUES (50, 500, 31, 'GOLD');
+       	VALUES (20, 240, 81, 'GOLD');
 
  INSERT INTO public.points(
  	client,owner,keeps_app)

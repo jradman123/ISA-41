@@ -161,9 +161,10 @@ public class StatisticServiceImpl implements StatisticService {
 
     private Double countIncome(LocalDateTime startDate, List<AdventureReservation> reservations){
         Double income = 0.0;
+        Double keepsApp = pointsService.get().getKeepsApp();
         for (AdventureReservation res : reservations) {
             if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
-                income += res.getPrice();
+                income += res.getPrice() - ((res.getPrice() * keepsApp)/100);
             }
         }
         return income;

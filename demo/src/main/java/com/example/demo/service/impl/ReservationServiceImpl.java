@@ -2,7 +2,6 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
 import com.example.demo.mapper.ReservationMapper;
-import com.example.demo.model.Category;
 import com.example.demo.model.adventures.Adventure;
 import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.adventures.AdventureUtility;
@@ -10,6 +9,7 @@ import com.example.demo.model.cottages.Cottage;
 import com.example.demo.model.cottages.CottageAvailability;
 import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.cottages.CottageUtility;
+import com.example.demo.model.enumeration.UserType;
 import com.example.demo.model.reservation.Reservation;
 import com.example.demo.model.ships.Ship;
 import com.example.demo.model.ships.ShipAvailability;
@@ -531,16 +531,96 @@ return null;
     @Override
     public User updatePoints(User user) {
         int numberOfSuccessResrevations= 0;
-        for (Reservation reservation: reservationRepository.findAll()) {
-            if(reservation.getRegisteredUser().getId()==user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()){
-                numberOfSuccessResrevations++;
+        if(user.getUserType().equals(UserType.Client)) {
+            for (Reservation reservation : reservationRepository.findAll()) {
+                if (reservation.getRegisteredUser().getId() == user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()) {
+                    numberOfSuccessResrevations++;
+                }
+            }
+            int clientPoints = pointsRepository.findAll().stream().findFirst().get().getClient();
+            int newPoints = numberOfSuccessResrevations * clientPoints;
+
+            user.setScoredPoints(newPoints);
+            return userService.save(user);
+        }else if(user.getUserType().equals(UserType.Instructor)){
+            for (AdventureReservation reservation : adventureReservationRepository.findAll()) {
+                if (reservation.getAdventure().getInstructor().getId() == user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()) {
+                    numberOfSuccessResrevations++;
+                }
+            }
+            int owners = pointsRepository.findAll().stream().findFirst().get().getOwner();
+            int newPoints = numberOfSuccessResrevations * owners;
+
+            user.setScoredPoints(newPoints);
+            return userService.save(user);
+
+        }
+        else if(user.getUserType().equals(UserType.CottageAdvertiser)){
+            for (CottageReservation reservation : cottageReservationRepository.findAll()) {
+                if (reservation.getCottage().getCottageOwner().getId() == user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()) {
+                    numberOfSuccessResrevations++;
+                }
+            }
+            int owners = pointsRepository.findAll().stream().findFirst().get().getOwner();
+            int newPoints = numberOfSuccessResrevations * owners;
+
+            user.setScoredPoints(newPoints);
+            return userService.save(user);
+
+        }else{
+            user.setScoredPoints(0);
+            return userService.save(user);
+        }
+    }
+
+    @Override
+    public List<Reservation> getByUser(int id) {
+        List<Reservation> reservations = new ArrayList<>();
+        for (Reservation res : reservationRepository.findAll()) {
+            if(res.getRegisteredUser().getId() == id){
+                reservations.add(res);
+
             }
         }
-        int clientPoints = pointsRepository.findAll().stream().findFirst().get().getClient();
-        int newPoints = numberOfSuccessResrevations * clientPoints;
-        user.setScoredPoints(newPoints);
-        return userService.save(user);
+        return reservations;
     }
+
+    @Override
+    public List<AdventureReservation> getByInstructor(int id) {
+        List<AdventureReservation> reservations = new ArrayList<>();
+        for (AdventureReservation res : adventureReservationRepository.findAll()) {
+            if(res.getAdventure().getInstructor().getId() == id){
+                reservations.add(res);
+
+            }
+        }
+        return reservations;
+    }
+
+    @Override
+    public List<CottageReservation> getByCottageOwner(int id) {
+        List<CottageReservation> reservations = new ArrayList<>();
+        for (CottageReservation res : cottageReservationRepository.findAll()) {
+            if(res.getCottage().getCottageOwner().getId() == id){
+                reservations.add(res);
+
+            }
+        }
+        return reservations;
+    }
+
+    @Override
+    public List<ShipReservation> getByShipOwner(int id) {
+        List<ShipReservation> reservations = new ArrayList<>();
+        for (ShipReservation res : shipReservationRepository.findAll()) {
+            if(res.getShip().getShipOwner().getId() == id){
+                reservations.add(res);
+
+            }
+        }
+        return reservations;
+    }
+
 
     private List<AdventureReservation> getAllInstructorsAdventures(int id){
         return adventureReservationRepository.getAllCurrentAndFutureInstructorsReservations(id,LocalDateTime.now());
@@ -558,6 +638,8 @@ return null;
         }
         return false;
     }
+
+
 
 
 }

@@ -9,8 +9,8 @@ INSERT INTO public.address(city, country, street_name,street_number,longitude,la
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','22',19.844961, 45.254708);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Beograd', 'Srbija', 'Majska','22', 20.501251, 44.743571);
 INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','50',19.844961, 45.254708);
-INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','10',0.0, 0.0);
-INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','11',0.0, 0.0);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','10',19.844961, 45.254708);
+INSERT INTO public.address(city, country, street_name,street_number,longitude,latitude) VALUES ('Novi Sad', 'Srbija', 'Fruškogorska','11',19.844961, 45.254708);
 ----users---
 --PREDEFINISANI ADMIN,LOZINKA JE admin123
 INSERT INTO public.users(d_type, deleted, description_of_registration, email, first_name, is_activated, jmbg, last_name, password, phone_number, user_type,first_login, type,address,scored_points)
@@ -182,7 +182,7 @@ INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,n
     VALUES (12,false,false,true,2,30.0,'05-09-2022 09:00','04-09-2022 08:00',6,7,1,false,'ADVENTURE');
 
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)
-    VALUES (13,true,false,true,3,45.0,'10-05-2021 12:00','10-05-2021 08:00',6,8,1,false,'ADVENTURE');
+    VALUES (13,false,false,true,3,45.0,'10-05-2021 12:00','10-05-2021 08:00',6,8,1,false,'ADVENTURE');
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)
     VALUES (14,false,false,true,2,30.0,'02-06-2019 09:00','02-06-2019 08:00',6,8,1,false,'ADVENTURE');
 INSERT INTO public.adventure_reservation(id,is_canceled,is_deleted,is_reserved,number_of_person,price,reservation_end,reservation_start,instructor_id,user_id,adventure_id,have_report,type)

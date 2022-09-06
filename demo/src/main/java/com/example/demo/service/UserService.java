@@ -43,6 +43,6 @@ public interface UserService {
 
 
     List<PersonalData> findAllUsers();
-
-
+    List<User> getAll();
+    User deleteUser(int id);
 }

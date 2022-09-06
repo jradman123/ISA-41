@@ -1,23 +1,29 @@
 package com.example.demo.service.impl;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.demo.dto.*;
 import com.example.demo.model.Address;
+import com.example.demo.model.adventures.Adventure;
+import com.example.demo.model.adventures.AdventureReservation;
+import com.example.demo.model.cottages.Cottage;
+import com.example.demo.model.cottages.CottageReservation;
 import com.example.demo.model.enumeration.AdminType;
 import com.example.demo.model.enumeration.UserType;
+import com.example.demo.model.reservation.Reservation;
+import com.example.demo.model.ships.Ship;
+import com.example.demo.model.ships.ShipReservation;
 import com.example.demo.model.users.*;
-import com.example.demo.repository.RegistrationRequestRepository;
-import com.example.demo.service.UserService;
+import com.example.demo.repository.*;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.repository.UserRepository;
 
 
 @Service
@@ -34,6 +40,24 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RegistrationForClientsServiceImpl registrationForClientsService;
+
+	@Autowired
+	private ReservationService reservationService;
+	@Autowired
+	private ReservationRepository reservationRepository;
+	@Autowired
+	private CottageService cottageService;
+	@Autowired
+	private AdventureService adventureService;
+	@Autowired
+	private ShipService shipService;
+	@Autowired
+	private CottageRepository cottageRepository;
+	@Autowired
+	private ShipRepository shipRepository;
+	@Autowired
+	private AdventureRepository adventureRepository;
+
 
 	@Override
 	public List<User> findAll() {
@@ -206,9 +230,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(User user) {
-		User userDb = userRepository.findByEmail(user.getEmail());
-		userDb.setDeleted(true);
-		userRepository.save(userDb);
+		deleteUser(userRepository.findByEmail(user.getEmail()));
 
 	}
 
@@ -244,8 +266,59 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public List<User> getAll() {
+		List<User> all = new ArrayList<>();
+		for(User user : userRepository.findAllUndeleted()){
+			all.add(reservationService.updatePoints(user));
+		}
+		return all;
+	}
 
+	@Override
+	public User deleteUser(int id) {
+		UserType type = userRepository.findById(id).get().getUserType();
+		if(type.equals(UserType.CottageAdvertiser)){
+			for(CottageReservation res : reservationService.getByCottageOwner(id)) {
+				res.setDeleted(true);
+				reservationRepository.save(res);
+			}
+			for(CottageDto cottageDto : cottageService.getOwnerCottages(userRepository.findById(id).get().getEmail())){
+				Cottage cottage = cottageRepository.findById(Long.parseLong(cottageDto.getId())).get();
+				cottage.setDeleted(true);
+				cottageRepository.save(cottage);
+			}
+		}
+		else if(type.equals(UserType.ShipAdvertiser)){
+			for(ShipReservation res : reservationService.getByShipOwner(id)){
+				res.setDeleted(true);
+				reservationRepository.save(res);
+			}
 
+			for(ShipDto shipDto : shipService.getOwnerShips(userRepository.findById(id).get().getEmail())){
+				Ship ship = shipRepository.findById(Long.parseLong(shipDto.getId())).get();
+				ship.setDeleted(true);
+				shipRepository.save(ship);
+			}
+		}else if(type.equals(UserType.Instructor)){
+			for(AdventureReservation res : reservationService.getByInstructor(id)){
+				res.setDeleted(true);
+				reservationRepository.save(res);
+			}
+			for(Adventure adventure : adventureRepository.getAllInstructors(userRepository.findById(id).get().getId())){
+				adventureService.deleteAdventure(adventure.getId());
+			}
+		}else if(type.equals(UserType.Client)){
+			for(Reservation res : reservationService.getByUser(id)){
+				res.setDeleted(true);
+				reservationRepository.save(res);
+			}
+		}
+
+		User userDb = userRepository.findById(id).get();
+		userDb.setDeleted(true);
+		return userRepository.save(userDb);
+	}
 
 
 }

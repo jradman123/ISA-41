@@ -101,5 +101,26 @@ public class UserController {
 
     }
 
+    @PreAuthorize("hasAuthority('Admin')")
+    @GetMapping()
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
+        List<UserResponse> response = new ArrayList<>();
+        for(User user : userService.getAll()){
+            response.add(new UserResponse(user));
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<List<UserResponse>> delete(@PathVariable int id) {
+       userService.deleteUser(id);
+        List<UserResponse> response = new ArrayList<>();
+        for(User user : userService.getAll()){
+            response.add(new UserResponse(user));
+        }
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
 
 }

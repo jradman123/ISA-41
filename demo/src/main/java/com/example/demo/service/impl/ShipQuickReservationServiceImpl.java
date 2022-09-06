@@ -69,8 +69,8 @@ public class ShipQuickReservationServiceImpl implements ShipQuickReservationServ
 
 
 
-        boolean reservations=this.reservationService.checkDates(start,end,dto.getShipId());
-        boolean availability=this.reservationService.checkAvailability(start,end,dto.getShipId());
+        boolean reservations=this.reservationService.checkDatesForShip(start,end,dto.getShipId());
+        boolean availability=this.reservationService.checkAvailabilityForShip(start,end,dto.getShipId());
         boolean app=this.checkApp(start,end,dto.getShipId());
 
         if(reservations && availability && app) {

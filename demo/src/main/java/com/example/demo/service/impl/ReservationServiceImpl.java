@@ -190,6 +190,16 @@ return null;
         }
         return false;
     }
+    @Transactional
+    public boolean checkAvailabilityForShip(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for(ShipAvailability ca:this.shipAvailabilityRepository.getAllForShip(Long.parseLong(objectId))) {
+            if(startDate.isAfter(ca.getStartDate()) && endDate.isBefore(ca.getEndDate())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Transactional
     public boolean checkDates(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
@@ -212,6 +222,28 @@ return null;
         return true;
     }
 
+    @Transactional
+    public boolean checkDatesForShip(LocalDateTime startDate,LocalDateTime endDate,String objectId) {
+        for (ShipReservation ct : shipReservationRepository.getAllForShip(Long.parseLong(objectId))) {
+
+            if (startDate.equals(ct.getReservationStart()) ||
+                    startDate.equals(ct.getReservationEnd()) ||
+
+                    endDate.equals(ct.getReservationEnd()) ||
+                    endDate.equals(ct.getReservationStart())  ||
+                    (startDate.isAfter(ct.getReservationStart()) && startDate.isBefore(ct.getReservationEnd()) && endDate.isAfter(ct.getReservationEnd()))
+                    || (endDate.isAfter(ct.getReservationStart()) && endDate.isBefore(ct.getReservationEnd()))
+                    || (startDate.isBefore(ct.getReservationStart()) && endDate.isAfter(ct.getReservationEnd())) ||
+                    (startDate.isAfter(ct.getReservationStart()) && endDate.isBefore(ct.getReservationEnd())))
+            {
+                return false;
+
+            }
+        }
+        return true;
+    }
+
+
     @Override
     @Transactional
     public Reservation createShipReservation(CreateReservationDto createReservationDto) {
@@ -219,8 +251,8 @@ return null;
         User user=userService.findByEmail(createReservationDto.clientEmail);
 
 
-          boolean reservations=checkDates(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
-        boolean availability=checkAvailability(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+          boolean reservations=checkDatesForShip(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
+        boolean availability=checkAvailabilityForShip(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
         boolean app=this.shipQuickReservationService.checkApp(createReservationDto.getResStart(),createReservationDto.getResEnd(),createReservationDto.getObjectId());
 
 

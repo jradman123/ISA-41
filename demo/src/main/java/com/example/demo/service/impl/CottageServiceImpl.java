@@ -126,8 +126,7 @@ public class CottageServiceImpl implements CottageService {
     @Override
     @Transactional
     public CottageDto editCottage(CottageDto cottageDto) {
-        for (Cottage cottage : cottageRepository.findAll()) {
-            if (cottageDto.getId().equals(cottage.getId().toString())) {
+      Cottage cottage=this.cottageRepository.findCottageById(Long.parseLong(cottageDto.getId()));
                 cottage.setName(cottageDto.getName());
                 cottage.setDescription(cottageDto.getDescription());
                 cottage.setPrice(Double.parseDouble(cottageDto.getPrice()));
@@ -141,10 +140,7 @@ public class CottageServiceImpl implements CottageService {
                 cottageRepository.save(cottage);
                 return new CottageDto(cottage);
 
-            }
 
-        }
-        return null;
     }
 
     @Override

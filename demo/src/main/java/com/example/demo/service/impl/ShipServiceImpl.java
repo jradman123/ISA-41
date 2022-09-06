@@ -22,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +53,9 @@ public class ShipServiceImpl  implements ShipService {
 
 
     @Override
+    @Transactional
     public ShipDto editShip(ShipDto shipDto) {
-        for (Ship ship : shipRepository.findAll()) {
-            if (shipDto.getId().equals(ship.getId().toString())) {
+       Ship ship=this.shipRepository.findShipById(Long.parseLong(shipDto.getId()));
                 ship.setName(shipDto.getName());
                 ship.setDescription(shipDto.getDescription());
                 ship.setPrice(Double.parseDouble(shipDto.getPrice()));
@@ -77,10 +78,7 @@ public class ShipServiceImpl  implements ShipService {
                 shipRepository.save(ship);
                 return new ShipDto(ship);
 
-            }
 
-        }
-        return null;
     }
 
     @Override

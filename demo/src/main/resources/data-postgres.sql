@@ -273,7 +273,10 @@ VALUES ('Avantura je zaista bila zanimljiva.Sve pohvale.', 5, 11,true,false);
 
 INSERT INTO public.report(
 	appeared, approvedby_admin, comment, report_date, sanctioned, unapprovedby_admin, reservation_id)
-	VALUES (false, false, 'Nije se pojavio.', '22-08-2022 09:00', false, false, 1);
+	VALUES (false, false, 'Nije se pojavio.', '22-08-2022 09:00', false, false, 11);
+	INSERT INTO public.report(
+    	appeared, approvedby_admin, comment, report_date, sanctioned, unapprovedby_admin, reservation_id)
+    	VALUES (true, false, 'Rezervacija je protekla u najboljem redu.Klijent se primjereno ponašao', '22-08-2022 09:00', false, false, 1);
 
 INSERT INTO public.complaint(comment,reservation_id,answered)
 VALUES ('Instruktor je kasnio pola sata,i krajnje se neprofesionalno ponašao tokom avanture.', 11,false);

@@ -112,34 +112,6 @@
         </div>
         <div class="row">
           <div class="col-sm">
-            <div style="width: 100%; display: flex">
-              <mat-form-field appearance="fill">
-                <mat-label>Longitude</mat-label>
-                <input matInput formControlName="longitude" />
-                <mat-error *ngIf="
-              !createForm?.get('longitude')?.valid &&
-              createForm?.get('longitude')?.touched &&
-              createForm?.get('longitude')?.errors?.required
-            ">Longitude is required</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-sm">
-            <div style="width: 100%; display: flex">
-              <mat-form-field appearance="fill">
-                <mat-label>Latitude</mat-label>
-                <input matInput formControlName="latitude" />
-                <mat-error *ngIf="
-              !createForm?.get('latitude')?.valid &&
-              createForm?.get('latitude')?.touched &&
-              createForm?.get('latitude')?.errors?.required
-            ">Latitude is required</mat-error>
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm">
           <div style="width: 100%; display: flex">
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>

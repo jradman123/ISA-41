@@ -64,14 +64,6 @@ export class AdminRegistrationComponent implements OnInit {
       passConfirmed: new FormControl(null, [
         Validators.required,
         Validators.minLength(8),
-      ]),
-      longitude: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
-      ]),
-      latitude: new FormControl(null, [
-        Validators.required,
-        Validators.pattern('^\\d{1,3}.?\\d{1,7}$'),
       ])
   })
 
@@ -88,10 +80,8 @@ export class AdminRegistrationComponent implements OnInit {
       city: this.createForm.get('city')?.value,
       country: this.createForm.get('country')?.value,
       password: this.createForm.get('password')?.value,
-      longitude : this.createForm.get('longitude')?.value,
-      latitude : this.createForm.get('latitude')?.value
-      
-
+      longitude : 0.0,
+      latitude : 0.0
     }
     this.authService.addAdmin(this.adminInformations).subscribe((res) => {
       this._snackBar.open(

@@ -8,6 +8,7 @@ import com.example.demo.repository.AdventureQuickReservationRepository;
 import com.example.demo.repository.AdventureReservationRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.service.AdventureService;
+import com.example.demo.service.PointsService;
 import com.example.demo.service.StatisticService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Autowired
     private AdventureService adventureService;
+
+    @Autowired
+    private PointsService pointsService;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Override
     public Map<String, Integer> numberOfReservationPerDaysInWeekForAdventure(int id) {
@@ -77,6 +84,44 @@ public class StatisticServiceImpl implements StatisticService {
         }
 
         return result;
+    }
+
+    @Override
+    public Map<String, Double> getIncomeForWebsiteInPeriod(String start, String end) {
+        Map<String,Double> result = new LinkedHashMap<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        LocalDateTime startDate=LocalDateTime.parse(start,formatter);
+        LocalDateTime endDate=LocalDateTime.parse(end,formatter);
+        List<Reservation> reservations = findAll(startDate,endDate);
+        while (startDate.isBefore(endDate) || startDate.isEqual(endDate)) {
+            result.put(startDate.toLocalDate().toString(), countIncomeForWebsite(startDate,reservations));
+            startDate = startDate.plusDays(1);
+        }
+
+        return result;
+    }
+
+    private List<Reservation> findAll(LocalDateTime startDate, LocalDateTime endDate) {
+        List<Reservation> reservations = new ArrayList<>();
+        for(Reservation res : reservationRepository.findAll()){
+            if(res.getReservationStart().isAfter(startDate) && res.getReservationStart().isBefore(endDate)
+            && res.getReservationEnd().isAfter(startDate) && res.getReservationEnd().isBefore(endDate) && !res.getIsCanceled()){
+                reservations.add(res);
+            }
+        }
+        return reservations;
+    }
+
+    private Double countIncomeForWebsite(LocalDateTime startDate,List<Reservation> reservations) {
+        Double income = 0.0;
+        Double keepsApp = pointsService.get().getKeepsApp();
+        for (Reservation res : reservations) {
+            if(res.getReservationStart().toLocalDate().isEqual(startDate.toLocalDate())) {
+                income += (res.getPrice() * keepsApp) / 100;
+            }
+        }
+        return income;
+
     }
 
     private Integer countReservationsForDayInLastWeek(DayOfWeek day,int id){

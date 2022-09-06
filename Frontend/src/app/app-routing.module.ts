@@ -46,6 +46,7 @@ import { CottageViewComponent } from './components/admin-entities/admin-cottages
 import { BoatsViewComponent } from './components/admin-entities/admin-boats/boats-view/boats-view.component';
 import { BoatViewComponent } from './components/admin-entities/admin-boats/boat-view/boat-view.component';
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
+import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -125,6 +126,11 @@ const routes: Routes = [
       {
         path: 'loyalty',
         component: LoyaltyComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'income',
+        component: AdminStatisticComponent,
         canActivate: [AuthGuard]
       }
     ],

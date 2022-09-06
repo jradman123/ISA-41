@@ -42,6 +42,7 @@
         <a mat-button class="nav-link"  [routerLink]="['/admin/profile']"> Profile </a>
         <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/add-new-admin']"> Add new administrator </a>
         <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/loyalty']"> Loyalty program </a>
+        <a mat-button class="nav-link"  *ngIf="predef" [routerLink]="['/admin/income']"> Income </a>
           <button
             mat-button
             *ngIf="authService.isLoggedIn"

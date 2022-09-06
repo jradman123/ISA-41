@@ -28,4 +28,8 @@ export class StatisticService {
   getIncome(id: any,dateRange : DateRange) {
     return this.http.post(`${this.apiServerUrl}/statistics/adventure/${id}/income`,dateRange);
   }
+
+  getWebsiteIncome(dateRange : DateRange) {
+    return this.http.post(`${this.apiServerUrl}/statistics/website-income`,dateRange);
+  }
 }

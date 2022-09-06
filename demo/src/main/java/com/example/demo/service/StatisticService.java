@@ -9,4 +9,5 @@ public interface StatisticService {
     Map<String,Integer> numberOfReservationPerMonthForAdventure(int id);
     Map<String,Integer> numberOfReservationPerYearForAdventure(int id);
     Map<String,Double> getIncomeForPeriod(String start,String end,int id);
+    Map<String,Double> getIncomeForWebsiteInPeriod(String start, String end);
 }

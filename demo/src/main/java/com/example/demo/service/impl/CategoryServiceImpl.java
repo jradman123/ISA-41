@@ -54,4 +54,5 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDb.setDiscount(Double.parseDouble(category.getMax()));
         return categoryRepository.save(categoryDb);
     }
+
 }

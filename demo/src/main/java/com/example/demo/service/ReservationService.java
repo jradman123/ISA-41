@@ -10,6 +10,7 @@ import com.example.demo.model.adventures.AdventureReservation;
 import com.example.demo.model.cottages.CottageReservation;
 
 import com.example.demo.model.reservation.Reservation;
+import com.example.demo.model.users.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,4 +38,5 @@ public interface ReservationService {
     String getOwnersEmail(Reservation reservation);
     String getOwnersName(Reservation reservation);
     Double calculatePriceForAdventure(CreateReservationDto createReservationDto);
+    User updatePoints(User user);
 }

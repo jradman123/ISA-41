@@ -528,7 +528,8 @@ return null;
         return (price*discount)/100;
     }
 
-    private User updatePoints(User user) {
+    @Override
+    public User updatePoints(User user) {
         int numberOfSuccessResrevations= 0;
         for (Reservation reservation: reservationRepository.findAll()) {
             if(reservation.getRegisteredUser().getId()==user.getId() && reservation.getReservationEnd().isBefore(LocalDateTime.now()) && !reservation.getIsCanceled()){
@@ -544,7 +545,6 @@ return null;
     private List<AdventureReservation> getAllInstructorsAdventures(int id){
         return adventureReservationRepository.getAllCurrentAndFutureInstructorsReservations(id,LocalDateTime.now());
     }
-
 
     private boolean hasClientReservations(int clientId,LocalDateTime startTime,LocalDateTime endTime) {
         List<AdventureReservation> reservations = adventureReservationRepository.getAllReservationsForClient(clientId,LocalDateTime.now());

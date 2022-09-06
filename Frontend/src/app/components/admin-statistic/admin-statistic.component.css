@@ -1,0 +1,6 @@
+.report-background {
+    height: -webkit-fill-available;
+    background-size: cover;
+    width: auto;
+    background-color : white !important;
+  }

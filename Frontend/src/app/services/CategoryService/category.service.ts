@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoryDto } from 'src/app/interfaces/category-dto';
 import { CategoryResponse } from 'src/app/interfaces/category-response';
+import { PointsDto } from 'src/app/interfaces/points-dto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -26,5 +27,15 @@ export class CategoryService {
 
   edit(id : string,category : CategoryDto)  {
     return this.http.post(`${this.apiServerUrl}/categories/update/${id}`,category);
+  }
+
+  editPoints(points : PointsDto)  {
+    return this.http.post(`${this.apiServerUrl}/categories/update-points`,points);
+  }
+
+  get() : Observable<PointsDto> {
+    return this.http.get<PointsDto>(
+      `${this.apiServerUrl}/categories/points`);
+
   }
 }

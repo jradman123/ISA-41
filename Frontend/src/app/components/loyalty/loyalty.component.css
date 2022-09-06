@@ -1,0 +1,27 @@
+.button-holder {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    margin: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    width: 200px;
+}
+
+tr {
+    font-style: italic;
+    height: 40px;
+}
+
+table {
+    align-self: center;
+}
+

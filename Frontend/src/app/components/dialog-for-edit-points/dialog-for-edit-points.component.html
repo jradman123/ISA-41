@@ -1,31 +1,25 @@
 <div class="container">
     <mat-card>
-        <mat-card-title>Edit user category</mat-card-title>
+        <mat-card-title>Edit points for success reservation</mat-card-title>
         <br />
         <mat-card-content>
             <form class="form-container" [formGroup]="detailsForm">
                 <div class="row">
                         <mat-form-field appearance="standard">
-                            <mat-label>Name of category</mat-label>
-                            <input matInput placeholder="Name of category" formControlName="name" />
-                        </mat-form-field>
-                </div>
-                <div class="row">
-                        <mat-form-field appearance="standard">
-                            <mat-label>Minimum points</mat-label>
-                            <input matInput placeholder="Minimum points" min="0" type="number" formControlName="minimum"  />
+                            <mat-label>Client points</mat-label>
+                            <input matInput placeholder="Client points" min="0" type="number" formControlName="client"  />
                         </mat-form-field>
                     </div>
                 <div class="row">
                         <mat-form-field appearance="standard">
-                            <mat-label>Maximum points</mat-label>
-                            <input matInput placeholder="Maximum points"  type="number" formControlName="maximum" />
+                            <mat-label>Owner points</mat-label>
+                            <input matInput placeholder="Owner points"  type="number" formControlName="owner" />
                         </mat-form-field>
                 </div>
                 <div class="row">
                         <mat-form-field appearance="standard">
-                            <mat-label>Discount</mat-label>
-                            <input matInput placeholder="Discount" type="number" formControlName="discount"/>
+                            <mat-label>Discount for website</mat-label>
+                            <input matInput placeholder="Discount for website" type="number" formControlName="discount"/>
                         </mat-form-field>
                 </div>
                 <div class="button-container">
@@ -37,4 +31,5 @@
         </mat-card-content>
     </mat-card>
 </div>
+
 

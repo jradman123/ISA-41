@@ -55,4 +55,11 @@ public class StatisticController {
         return new ResponseEntity<>(statisticService.getIncomeForPeriod(range.getStart(),range.getEnd(),id), HttpStatus.OK);
 
     }
+
+    @PreAuthorize("hasAuthority('Admin')")
+    @PostMapping(value = "/website-income")
+    public ResponseEntity<Map<String,Double>> getIncomeForWebsite(@RequestBody DateRange range) {
+        return new ResponseEntity<>(statisticService.getIncomeForWebsiteInPeriod(range.getStart(),range.getEnd()), HttpStatus.OK);
+
+    }
 }

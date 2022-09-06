@@ -29,7 +29,7 @@
                         <li style="height: 70px;" class="list-group-item"><strong>Maximum points :</strong>{{category.max}}</li>
                         <li style="height: 70px;" class="list-group-item"><strong>Discount :</strong>{{category.discount}}%</li>
                         <li class="list-group-item">
-                            <button mat-button color="primary" (click)="edit(this.category)">Edit</button>
+                            <button mat-button color="primary" (click)="editCategory(this.category)">Edit</button>
                         </li>
                     </ul>
         
@@ -41,7 +41,29 @@
             <br/>
             <button mat-raised-button color="primary" style="margin-left: 420px" (click)="openDialog()">Add</button>
         </div>
+        
           </div>
+          <br/><br/>
+          <div class="row" >
+            <mat-card class="example-card" style="width: 1100px;">
+              <h2 class="text-center mb-lg-2 mb-2" style="text-align: center;">
+                Points for success reservation
+              </h2>
+              <br/>
+              <div style="margin-left: 400px;">
+              <mat-card-content >
+                <p><strong>Client points :</strong> {{points.client}}</p>
+                <p><strong>Owner points :</strong> {{points.owner}}</p>
+                <p><strong>Discount for website :</strong> {{points.keepsApp}}%</p>
+          
+              </mat-card-content>
+              </div>
+              <mat-card-actions style="margin-left: 420px;">
+                <button mat-button color="primary" (click)="editPoints(points)">Edit</button>
+              </mat-card-actions>
+            </mat-card>
+          <br/>
+        </div>
           <ng-template #emptyTable>
             <p style="text-align: center;">No reviews!</p>
           </ng-template>

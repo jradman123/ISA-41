@@ -115,6 +115,8 @@ import { BUtilitiesComponent } from './components/admin-entities/admin-boats/b-u
 import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 import { DialogForAddCategoryComponent } from './components/dialog-for-add-category/dialog-for-add-category.component';
 import { DialogForEditCategoryComponent } from './components/dialog-for-edit-category/dialog-for-edit-category.component';
+import { DialogForEditPointsComponent } from './components/dialog-for-edit-points/dialog-for-edit-points.component';
+import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
 
 
 @NgModule({
@@ -216,7 +218,9 @@ import { DialogForEditCategoryComponent } from './components/dialog-for-edit-cat
     BUtilitiesComponent,
     LoyaltyComponent,
     DialogForAddCategoryComponent,
-    DialogForEditCategoryComponent
+    DialogForEditCategoryComponent,
+    DialogForEditPointsComponent,
+    AdminStatisticComponent
 
 
   ],

@@ -105,23 +105,32 @@ export class ShipAddActionComponent implements OnInit {
 
     else {
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully added a appointment!',
-      })
-
       this.sub = this.appointmentService.createAppbyShip(this.newAppointment)
         .subscribe({
-          next: () => {
-            window.location.reload();
+          next: (response) => {
+
+            if (response == "NO!") {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'This appointment is already reserved or cottage is not available during a period!',
+              })
+            } else {
+              Swal.fire({
+                icon: 'success',
+                title: 'Good job!',
+                text: 'You have successfully added new appointment!',
+              })
+              window.location.reload();
+
+            }
 
           }
         });
     }
-
-
   }
+
+
   onNoClick(): void {
     window.location.reload();
 

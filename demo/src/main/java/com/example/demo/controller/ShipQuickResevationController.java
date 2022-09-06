@@ -3,10 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.dto.CottageQuickReservationDto;
 import com.example.demo.dto.ShipQuickReservationDto;
 import com.example.demo.dto.ShipQuickReservationResponse;
+import com.example.demo.model.cottages.CottageQuickReservation;
 import com.example.demo.model.ships.ShipQuickReservation;
 import com.example.demo.service.ShipQuickReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +41,12 @@ public class ShipQuickResevationController {
 
     @PreAuthorize("hasAuthority('ShipAdvertiser')")
     @PostMapping(value="/createApp")
-    public ShipQuickReservation createApp(@RequestBody ShipQuickReservationDto dto) {
-        return this.shipQuickReservationService.createAppointment(dto);
+    public ResponseEntity<String>  createApp(@RequestBody ShipQuickReservationDto dto) {
+        ShipQuickReservation shipQuickReservation=shipQuickReservationService.createAppointment(dto);
+        if(shipQuickReservation==null) {
+            return new ResponseEntity<String>("NO!", HttpStatus.CREATED);
+        }
+        return new ResponseEntity<String>("SUCCESS!", HttpStatus.CREATED);
     }
 
 }

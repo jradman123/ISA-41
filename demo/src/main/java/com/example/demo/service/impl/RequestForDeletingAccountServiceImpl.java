@@ -63,7 +63,7 @@ public class RequestForDeletingAccountServiceImpl implements RequestForDeletingA
 
     @Override
     public RequestForDeletingAccount saveRequest(DeleteAccountRequest deleteAccountRequest) {
-        RequestForDeletingAccount existRequest = requestForDeletingAccountRepository.findRequestByEmail(deleteAccountRequest.getEmail());
+        RequestForDeletingAccount existRequest = requestForDeletingAccountRepository.findByEmail(deleteAccountRequest.getEmail());
         if(existRequest != null){
             requestForDeletingAccountRepository.delete(existRequest);
         }

@@ -19,4 +19,5 @@ public interface RequestForDeletingAccountRepository extends JpaRepository<Reque
     @Query(value = "select r from RequestForDeletingAccount r where r.email = :email")
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
     RequestForDeletingAccount findRequestByEmail(@Param("email") String email);
+    RequestForDeletingAccount findByEmail(String email);
 }

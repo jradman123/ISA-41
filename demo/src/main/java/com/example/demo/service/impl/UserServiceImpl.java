@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -159,6 +160,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
 	public PersonalData updatePersonalData(PersonalData data,String email) {
 		User user = findByEmail(email);
 		user.setFirstName(data.getFirstName());

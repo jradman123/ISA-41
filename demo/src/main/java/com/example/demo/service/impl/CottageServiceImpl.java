@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +124,7 @@ public class CottageServiceImpl implements CottageService {
 
 
     @Override
+    @Transactional
     public CottageDto editCottage(CottageDto cottageDto) {
         for (Cottage cottage : cottageRepository.findAll()) {
             if (cottageDto.getId().equals(cottage.getId().toString())) {
@@ -133,6 +135,8 @@ public class CottageServiceImpl implements CottageService {
                 cottage.getAddress().setStreetName(cottageDto.getStreetName());
                 cottage.getAddress().setCity(cottageDto.getCity());
                 cottage.getAddress().setCountry(cottageDto.getCountry());
+                cottage.setNumberOfPerson(Integer.parseInt(cottageDto.getNumberOfPeople()));
+                cottage.setCancelationConditions(cottageDto.getCancelled_conditions());
 
                 cottageRepository.save(cottage);
                 return new CottageDto(cottage);

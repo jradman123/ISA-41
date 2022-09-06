@@ -21,7 +21,8 @@ public class RequestForDeletingAccountController {
 
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/delete/{email}")
-    public ResponseEntity<List<RequestForDeletingAccountDto>> deleteAccount(@PathVariable String email, @RequestBody String response) {
+    public ResponseEntity<List<RequestForDeletingAccountDto>> deleteAccount
+            (@PathVariable String email, @RequestBody String response) {
         requestForDeletingAccountService.deleteAccount(email,response);
         return new ResponseEntity<>(requestForDeletingAccountService.findAll(), HttpStatus.OK);
 

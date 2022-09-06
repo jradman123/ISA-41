@@ -9,6 +9,7 @@ import com.example.demo.service.EmailSenderService;
 import com.example.demo.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +35,10 @@ public class ComplaintServiceImpl implements ComplaintService {
         return complaintDtos;
     }
 
+    @Transactional
     @Override
     public void answerOnComplaint(Long id,String answer) {
-        Complaint complaint = complaintRepository.findById(id).get();
+        Complaint complaint = complaintRepository.findComplaintById(id);
         complaint.setAnswered(true);
         complaintRepository.save(complaint);
         notifyOwnerAndClient(complaint.getReservation(),answer,complaint.getComment());

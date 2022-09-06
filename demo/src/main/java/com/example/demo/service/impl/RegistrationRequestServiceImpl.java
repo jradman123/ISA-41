@@ -9,6 +9,7 @@ import com.example.demo.service.RegistrationRequestService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +39,20 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
         return requestsView;
     }
 
+    @Transactional
     @Override
     public void approveRequest(String email) {
-        RegistrationRequest request = registrationRequestRepository.findByEmail(email);
+        RegistrationRequest request = registrationRequestRepository.findRequestByEmail(email);
         userService.activateAccount(email);
         registrationRequestRepository.delete(request);
         emailSenderService.sendEmail(email,"Aktivacija naloga","Vaš zahtjev za registraciju je prihvaćen." +
                 "Sada se možete prijaviti na naš sajt sa vašim kredencijalima.");
     }
 
+    @Transactional
     @Override
     public void rejectRequest(String email,String reason) {
-        RegistrationRequest request = registrationRequestRepository.findByEmail(email);
+        RegistrationRequest request = registrationRequestRepository.findRequestByEmail(email);
         registrationRequestRepository.delete(request);
         emailSenderService.sendEmail(email,"Aktivacija naloga","Vaš zahtjev za registraciju je odbijen.\n " +
                 "Razlog za odbijanje: " + reason);

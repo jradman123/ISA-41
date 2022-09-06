@@ -16,7 +16,7 @@ Access to the system have owners of cottages and boats as well as istructors and
 - Maven
 - PostgreSQL
 - IntelliJ
-- Java 17
+- Java 11
 - Angular CLI 8.3.29
 - Node JS 8.8.0
 

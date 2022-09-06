@@ -7,6 +7,7 @@ import com.example.demo.model.Report;
 import com.example.demo.service.ComplaintService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +36,7 @@ public class ComplaintController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PreAuthorize("hasAuthority('Admin')")
     @PostMapping("/{id}/answer")
-    public void answerOnComplaint(@PathVariable Long id,@RequestBody Answer answer){
+    public void answerOnComplaint(@PathVariable Long id,@RequestBody Answer answer)  {
         complaintService.answerOnComplaint(id,answer.getAnswer());
     }
 }

@@ -10,6 +10,7 @@ import com.example.demo.service.RequestForDeletingAccountService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,19 +37,20 @@ public class RequestForDeletingAccountServiceImpl implements RequestForDeletingA
         return requestsView;
     }
 
+    @Transactional
     @Override
     public void deleteAccount(String email, String response) {
-        RequestForDeletingAccount request = requestForDeletingAccountRepository.findByEmail(email);
+        RequestForDeletingAccount request = requestForDeletingAccountRepository.findRequestByEmail(email);
         User user = userService.findByEmail(email);
         userService.deleteUser(user);
         deleteRequest(request);
         emailSenderService.sendEmail(email,"Brisanje naloga","Vaš zahtjev za brisanjem naloga je prihvaćen.\n" +
                 "Odgovor admina na zahtjev: " + response);
     }
-
+    @Transactional
     @Override
     public void rejectDeleting(String email, String response) {
-        RequestForDeletingAccount request = requestForDeletingAccountRepository.findByEmail(email);
+        RequestForDeletingAccount request = requestForDeletingAccountRepository.findRequestByEmail(email);
         deleteRequest(request);
         emailSenderService.sendEmail(email,"Brisanje naloga","Vaš zahtjev za brisanjem naloga je odbijen.\n" +
                 "Odgovor admina na zahtjev: " + response);
@@ -61,7 +63,7 @@ public class RequestForDeletingAccountServiceImpl implements RequestForDeletingA
 
     @Override
     public RequestForDeletingAccount saveRequest(DeleteAccountRequest deleteAccountRequest) {
-        RequestForDeletingAccount existRequest = requestForDeletingAccountRepository.findByEmail(deleteAccountRequest.getEmail());
+        RequestForDeletingAccount existRequest = requestForDeletingAccountRepository.findRequestByEmail(deleteAccountRequest.getEmail());
         if(existRequest != null){
             requestForDeletingAccountRepository.delete(existRequest);
         }

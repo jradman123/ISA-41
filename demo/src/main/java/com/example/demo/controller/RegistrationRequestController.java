@@ -20,7 +20,8 @@ public class RegistrationRequestController {
 
     @PreAuthorize("hasAuthority('Admin')")
     @PutMapping(value = "/approve/{email}")
-    public ResponseEntity<List<RegistrationRequestViewDto>> approveRequest(@PathVariable String email) {
+    public ResponseEntity<List<RegistrationRequestViewDto>>
+    approveRequest(@PathVariable String email) {
         registrationRequestService.approveRequest(email);
         return new ResponseEntity<>(registrationRequestService.findAll(), HttpStatus.OK);
 

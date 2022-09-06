@@ -34,17 +34,17 @@ You need to start backend application first.It is connected to the posgres datab
 ### Test info
 
 Cottage owner:
--email: vecaaa5@gmail.com	
--password:admin123
+email: vecaaa5@gmail.com	
+password:admin123
 
 Boat owner:
--email: milan@gmail.com
--password: admin123
+email: milan@gmail.com
+password: admin123
 
 Instructor: 
--email: raandmjenale@gmail.com
--password:admin123
+email: raandmjenale@gmail.com
+password:admin123
 
 Admin:
--email:admin123@gmail.com	
--password:admin123
+email:admin123@gmail.com	
+password:admin123

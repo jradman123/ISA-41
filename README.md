@@ -23,7 +23,7 @@ Access to the system have owners of cottages,boats and adventures.
 ### Tools 
 - Spring Boot
 - PostgreSQL
--Angular
+- Angular
  
 
 ### Running

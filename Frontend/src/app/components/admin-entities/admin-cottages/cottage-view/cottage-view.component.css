@@ -3,6 +3,11 @@
     width: 1500px;
   }
   
+  agm-map {
+    height: 500px !important;
+    width: 100%;
+    /* This is really important*/
+  }
   mat-tab-group {
     background-color: white;
   }

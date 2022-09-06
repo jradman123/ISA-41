@@ -5,6 +5,11 @@
         <mat-tab label="Basic info">
            <app-adventure-basic-info></app-adventure-basic-info>
         </mat-tab>
+        <mat-tab label="Maps"> 
+          <agm-map [latitude]="adventure.latitude" [longitude]="adventure.longitude">
+            <agm-marker [latitude]="adventure.latitude" [longitude]="adventure.longitude"></agm-marker>
+        </agm-map>
+        </mat-tab>
     <mat-tab label="Previous adventures"> 
       <app-adventure-images></app-adventure-images>
     </mat-tab>

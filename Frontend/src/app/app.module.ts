@@ -117,6 +117,7 @@ import { DialogForAddCategoryComponent } from './components/dialog-for-add-categ
 import { DialogForEditCategoryComponent } from './components/dialog-for-edit-category/dialog-for-edit-category.component';
 import { DialogForEditPointsComponent } from './components/dialog-for-edit-points/dialog-for-edit-points.component';
 import { AdminStatisticComponent } from './components/admin-statistic/admin-statistic.component';
+import { UsersComponent } from './components/admin-entities/admin-users/users/users.component';
 
 
 @NgModule({
@@ -220,7 +221,8 @@ import { AdminStatisticComponent } from './components/admin-statistic/admin-stat
     DialogForAddCategoryComponent,
     DialogForEditCategoryComponent,
     DialogForEditPointsComponent,
-    AdminStatisticComponent
+    AdminStatisticComponent,
+    UsersComponent
 
 
   ],
@@ -238,7 +240,7 @@ import { AdminStatisticComponent } from './components/admin-statistic/admin-stat
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
 
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDjkYy-y0-wlKYTQC0cMskJm9DuCWMmvVE' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDZcAYODCD4-sWd-jV_surbC0v1ChTY-PY' }),
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
 
   ],

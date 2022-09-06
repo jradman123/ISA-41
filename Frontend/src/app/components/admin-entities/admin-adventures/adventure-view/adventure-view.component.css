@@ -20,6 +20,11 @@ mat-tab-group{
     font-weight: bold;
   }
   
+  agm-map {
+  height: 500px !important;
+  width: 100%;
+  /* This is really important*/
+}
   
   .button-container {
     display: flex;

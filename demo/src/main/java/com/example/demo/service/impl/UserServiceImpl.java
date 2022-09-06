@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		shipOwner.setActivated(false);
 		shipOwner.setDeleted(false);
 		shipOwner.setPhoneNumber(userRequest.getPhoneNumber());
-		shipOwner.setUserType(UserType.Instructor);
+		shipOwner.setUserType(UserType.ShipAdvertiser);
 		ShipOwner saved = userRepository.save(shipOwner);
 		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
         return saved;
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 		cottageOwner.setActivated(false);
 		cottageOwner.setDeleted(false);
 		cottageOwner.setPhoneNumber(userRequest.getPhoneNumber());
-		cottageOwner.setUserType(UserType.Instructor);
+		cottageOwner.setUserType(UserType.CottageAdvertiser);
 		CottageOwner saved = userRepository.save(cottageOwner);
 		RegistrationRequest request = registrationRequestRepository.save(new RegistrationRequest(userRequest.getEmail()));
 		return saved;

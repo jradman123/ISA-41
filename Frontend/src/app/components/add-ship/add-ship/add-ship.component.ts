@@ -110,44 +110,31 @@ export class AddShipComponent implements OnInit {
   onSubmit(): void {
     this.createShip();
 
-    if (this.newShip.name == '' || this.newShip.city == '' ||
-      this.newShip.country == '' || this.newShip.description == ''
-      || this.newShip.cancelationConditions == '' || this.newShip.streetName == '' ||
-      this.newShip.price == '' || this.newShip.capacity == '' || this.newShip.streetName == '' ||
-      this.newShip.length == '' || this.newShip.strengthOfEngine == '' ||
-      this.newShip.type == '' || this.newShip.fishingEquipment == '' || this.newShip.numberOfEngine == '' ||
-      this.newShip.maxSpeed == '') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'You must fill in all fields!',
-      })
-
-    } else {
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'You have successfully added a new ship!',
-      })
 
 
-      console.log(this.createShip);
-      this.shipService.saveShip(this.newShip).subscribe(
-        (res) => {
-          this.router.navigate(['/shipOwner']);
+    Swal.fire({
+      icon: 'success',
+      title: 'Good job!',
+      text: 'You have successfully added a new ship!',
+    })
 
-        },
-        (err) => {
-          let parts = err.error.split(':');
-          let mess = parts[parts.length - 1];
-          let description = mess.substring(1, mess.length - 4);
 
-        }
-      );
-    }
+    console.log(this.createShip);
+    this.shipService.saveShip(this.newShip).subscribe(
+      (res) => {
+        this.router.navigate(['/shipOwner']);
 
+      },
+      (err) => {
+        let parts = err.error.split(':');
+        let mess = parts[parts.length - 1];
+        let description = mess.substring(1, mess.length - 4);
+
+      }
+    );
   }
+
+
 
   createShip(): void {
     this.newShip.name = this.createForm.value.name;

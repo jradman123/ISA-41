@@ -23,7 +23,7 @@ public abstract class Reservation {
 	
 	 @Id
 	 @Column(name = "id")
-	 @SequenceGenerator(name = "mySeqGenV1", sequenceName = "mySeqV1", initialValue = 1, allocationSize = 1)
+	 @SequenceGenerator(name = "mySeqGenV1", sequenceName = "mySeqV1", initialValue = 200, allocationSize = 1)
 	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mySeqGenV1")
 	 private Long id;
 

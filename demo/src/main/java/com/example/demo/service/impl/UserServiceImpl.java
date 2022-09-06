@@ -230,7 +230,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(User user) {
-		deleteUser(userRepository.findByEmail(user.getEmail()));
+		deleteUser(userRepository.findByEmail(user.getEmail()).getId());
 
 	}
 
